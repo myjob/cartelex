@@ -1,0 +1,10 @@
+ Extract triplex:
+ **Entity Types:**       
+ [EVENT, TIME]  
+ **Predicates:**       
+ ["USES","SCORES"]
+ **Text:**   
+(1) Secrétama is a company constituted under civil law in 1954 for the purpose of providing services in connection with' the operation of agreements between shipping companies. The company, whose registered office is at 167 rue de Courcelles, Paris, France, was appointed to carry out various coordinating, executive and monitoring tasks within the framework of the Shipowners' Committees representing shipping companies operating between France and various African States.
+
+(2) By letters dated 3 and 22 July 1987, the Association of Danish Shipowners and the Danish Government respectively lodged complaints on the basis of Article i0 of Regulation (EEC) No 4056/86 against the practices carried out, notably in France, by the abovementioned Shipowners' Committes and Secrétama which were allegedly aimed at restricting or closing access to competition in the trade. By letters dated 15 June and 5 October 1988, the Commission sent Secrétama a request for information pursuant to Article 16 of Regulation (EEC) No 4056/86.
+

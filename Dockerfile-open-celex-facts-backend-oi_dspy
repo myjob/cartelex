@@ -1,0 +1,184 @@
+# syntax=docker/dockerfile:1
+#
+# celex-facts backend -- OpenAI-compatible DSPy server (src/ui/backend_server/oi_dspy.py).
+#
+# Containerised equivalent of scripts/run_oi_server.sh:
+#     cd src/ui/backend_server
+#     PYTHONPATH=<repo>/src uvicorn oi_dspy:app --host 0.0.0.0 --port 7777
+#
+# Build:
+#     docker compose build celex-facts-backend-oi_dspy
+#     docker build -f Dockerfile-open-celex-facts-backend-oi_dspy -t celex-facts-backend-oi_dspy .
+#
+# Runtime requirements (supplied by the caller, not baked in):
+#   - DATABASE_URL pointing at the populated celex_facts schema. Inside compose
+#     that is the postgres_db service (host "postgres_db", port 5432), not the
+#     5433 host mapping.
+#   - OLLAMA_HOST reachable from the container (a host-local Ollama needs
+#     http://host.docker.internal:11434 plus an extra_hosts host-gateway entry),
+#     or UI_LLM_PROVIDER=deepseek with DEEPSEEK_API_KEY.
+#   - CELEX_DOCS_DIR mounted read-only so the /doc PDF+markdown viewer routes
+#     can serve the source documents (host dir from CELEX_DOCS_DIR in .env, mounted at /celex_docs).
+#   - config_main/.env is copied at build time when present; any variable set in
+#     the environment wins over it (settings.py loads dotenv non-overriding).
+#   - No GPU. The default image has no torch, so the in-process reranker is
+#     FlashRank on CPU (onnxruntime) and settings.RERANKER_DEVICE is inert.
+#     A GPU is only relevant to a REQUIREMENTS_FILE=requirements.txt build,
+#     which restores BgeReranker and then needs nvidia-container-toolkit on the
+#     host plus a deploy reservation on the compose service.
+#
+# Every variant comes from this one Dockerfile; REQUIREMENTS_FILE selects which
+# lock is installed (see the ARG below):
+#     requirements-ui.txt   no torch at all, 2.09GB image -- what compose builds
+#     requirements-cpu.txt  torch +cpu,      2.67GB image -- docker-compose.cpu.yml
+#     requirements.txt      torch +cu126,    8.48GB image -- bge on a GPU
+# The choice is not cosmetic: it decides which reranker *backends exist* in the
+# image. requirements-ui.txt omits torch and sentence-transformers entirely,
+# because BgeReranker is their only importer in the tree, so that image can run
+# the FlashRank backend and nothing else -- UI_RERANKER_BACKEND=bge becomes a
+# rebuild rather than an env flip. That is the right trade for the chat service,
+# whose ui profile is FlashRank by default; build one of the other two when the
+# container must be free to load the cross-encoder.
+# The +cu126 wheels do run on a CPU-only host, so requirements-cpu.txt is a size
+# optimisation, not a correctness fix -- but it drops ~4.8GB of nvidia-*-cu12
+# libraries that such a host can never load.
+#
+# Why not a nvidia/cuda base image: torch's own wheels already vendor the whole
+# CUDA 12.6 runtime (the nvidia-*-cu12 packages pinned in requirements.txt,
+# ~3GB of this image). A CUDA base would ship those libraries a second time for
+# no benefit -- the only thing that must come from outside is the *driver*, and
+# nvidia-container-toolkit injects that at run time. So this stays a slim
+# Python base and remains a CUDA image in every way that matters. It would also
+# make the CPU variant impossible from this same file.
+
+ARG PYTHON_VERSION=3.12
+# Pre-download the cross-encoder reranker weights into the image instead of on
+# first request. Off by default -- BAAI/bge-reranker-v2-m3 is ~2.3GB; leaving it
+# off and mounting a persistent HF_HOME volume is usually the better trade.
+# Requires a lock that actually carries sentence-transformers, i.e. NOT the
+# default requirements-ui.txt; the build fails with a named error otherwise.
+ARG PREFETCH_RERANKER=false
+# Pre-download FlashRank's ONNX model (ms-marco-MiniLM-L-12-v2, ~35MB) into the
+# image. Off by default for the same reason, but it is the one to switch on for
+# an air-gapped host: FlashRanker fetches the model with plain `requests` during
+# oi_dspy import, so HF_HUB_OFFLINE / RERANKER_LOCAL_FILES_ONLY cannot stop it,
+# and a host without egress gets a ConnectionError and a restart loop on the
+# first start against an empty hf_cache volume. The prefetch lands under
+# CACHE_DIR below, the mount path of that volume, so docker seeds a *new* volume
+# from it on first mount; an already-populated volume is never re-seeded
+# (`docker volume rm celex-facts_hf_cache` first, or seed it by hand -- see the
+# README troubleshooting table).
+ARG PREFETCH_FLASHRANK=false
+# Which dependency lock to install. All three are compiled from the same
+# pyproject.toml and share every pin they have in common; they differ only in
+# whether torch is present and which build of it. The default is the lean
+# serving tree -- see the block above for when to pick another.
+ARG REQUIREMENTS_FILE=requirements-ui.txt
+
+FROM python:${PYTHON_VERSION}-slim-bookworm AS base
+
+ARG PREFETCH_RERANKER
+ARG PREFETCH_FLASHRANK
+ARG REQUIREMENTS_FILE
+ENV REQUIREMENTS_FILE=${REQUIREMENTS_FILE}
+
+# Alpine is deliberately avoided: torch/sentence-transformers publish no musl
+# wheels, so it would mean building them from source.
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+# App root mirrors the host layout so settings.PROJECT_ROOT (three levels up
+# from src/config/settings.py) resolves to /app and finds /app/config_main.
+WORKDIR /app
+
+# curl is used by the healthcheck; build-essential/python3-dev cover source-only
+# wheels in requirements.txt; libpq is not needed (psycopg-binary is pinned).
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    curl \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Dependencies first: this layer only rebuilds when the pin file changes.
+# Each lock carries its own PyTorch index URL near the top (cu126 for
+# requirements.txt, cpu for requirements-cpu.txt), so pip resolves the right
+# torch build with no flags here -- plain `torch` from PyPI is the CUDA 13
+# build, which dropped Pascal, and must never be what wins.
+# Runtime locks only: dev tooling (ruff, pip-tools, playwright, build) lives in
+# requirements-dev.txt and must never be installed here -- this image serves the
+# FastAPI app and nothing else.
+COPY ${REQUIREMENTS_FILE} ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Non-root runtime user, created before the COPYs below so --chown can name it.
+RUN useradd --create-home --uid 10001 celex
+
+# Application code and configuration (config_main holds FACT_EXTRACTOR.yaml,
+# logging_config.yaml, master_sheet.json and the optional .env).
+COPY src ./src
+# --chown is required, not cosmetic: COPY preserves the host file mode, and
+# config_main/.env is 0600, so a root-owned copy is unreadable to uid 10001 and
+# settings.py dies with "PermissionError: /app/config_main/.env" at import time.
+# Chowning rather than chmodding keeps the secret owner-only inside the image.
+COPY --chown=celex:celex config_main ./config_main
+
+
+# Hugging Face / sentence-transformers cache. Mount a volume here to keep the
+# reranker weights across container rebuilds.
+# HF_HUB_DISABLE_TELEMETRY: no usage pings from a batch/service container. It
+# does not stop model resolution reaching the network -- for that, either point
+# RERANKER_MODEL_ID at a mounted weights directory or set
+# RERANKER_LOCAL_FILES_ONLY=true once the cache volume is populated.
+# CACHE_DIR is FlashRank's model directory (settings.CACHE_DIR), kept inside
+# the same tree so the hf_cache volume covers it too; compose repeats the same
+# literal on the service. Not ~/.cache/flashrank, which is on no volume.
+ENV HF_HOME=/app/data/cache/huggingface \
+    SENTENCE_TRANSFORMERS_HOME=/app/data/cache/huggingface \
+    HF_HUB_DISABLE_TELEMETRY=1 \
+    CACHE_DIR=/app/data/cache/huggingface/flashrank
+
+ENV PYTHONPATH=/app/src \
+    OI_DSPY_PORT=7777 \
+    CELEX_DOCS_DIR=/celex_docs
+
+# Read by nvidia-container-toolkit when the container is started with a GPU
+# reservation; ignored entirely on a host without it, so the image still runs
+# CPU-only. "compute" is CUDA itself, "utility" brings nvidia-smi along for
+# debugging. Video/graphics capabilities are deliberately not requested.
+ENV NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+# The FlashRank model name must match the default pinned in
+# src/extract/rag/ranker/flash_ranker.py (FlashRanker.__init__); flashrank's
+# own default is the smaller TinyBERT model, so it cannot be left implicit.
+# Constructing Ranker is the download: it fetches and unzips the model into
+# CACHE_DIR/<model_name> and then opens the ONNX session, which doubles as a
+# check that the download is loadable. The application module is not imported
+# here on purpose -- that would pull config.settings and the DB layer into the
+# build.
+RUN mkdir -p "$HF_HOME" "$CACHE_DIR" /app/logs && \
+    if [ "$PREFETCH_RERANKER" = "true" ]; then \
+    python -c "import importlib.util, sys; sys.exit(0) if importlib.util.find_spec('sentence_transformers') else sys.exit('PREFETCH_RERANKER=true needs a bge-capable lock; REQUIREMENTS_FILE is $REQUIREMENTS_FILE, which has no sentence-transformers. Use requirements-cpu.txt or requirements.txt.')" && \
+    python -c "import os; from sentence_transformers import CrossEncoder; CrossEncoder(os.getenv('RERANKER_MODEL_ID', 'BAAI/bge-reranker-v2-m3'))"; \
+    fi && \
+    if [ "$PREFETCH_FLASHRANK" = "true" ]; then \
+    python -c "import os; from flashrank import Ranker; Ranker(model_name='ms-marco-MiniLM-L-12-v2', cache_dir=os.environ['CACHE_DIR'])"; \
+    fi
+
+# The runtime user owns the writable cache/log directories; the rest of /app
+# stays root-owned and read-only to it.
+RUN chown -R celex:celex /app/data /app/logs
+USER celex
+
+EXPOSE 7777
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD curl --silent --fail http://localhost:${OI_DSPY_PORT:-7777}/v1/models || exit 1
+
+# Same entry point as scripts/run_oi_server.sh: the module is imported as the
+# top-level "oi_dspy" from its own directory, with PYTHONPATH=/app/src.
+WORKDIR /app/src/ui/backend_server
+CMD ["sh", "-c", "exec uvicorn oi_dspy:app --host 0.0.0.0 --port ${OI_DSPY_PORT:-7777}"]

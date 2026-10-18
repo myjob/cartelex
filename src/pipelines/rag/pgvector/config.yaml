@@ -1,0 +1,6 @@
+# Non-secret vector-store defaults. The connection string is NOT kept here --
+# it is owned by settings.DATABASE_URL (process env, then config_main/.env),
+# which is gitignored. See vector_config.py.
+collection_name: "celex_doc_chunks"
+schema: "celex_facts"
+search_path: "celex_facts,public"

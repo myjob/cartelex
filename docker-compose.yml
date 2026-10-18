@@ -1,0 +1,315 @@
+services:
+  postgres_db:
+    image: pgvector/pgvector:pg18-trixie
+    # image: pgvector/pgvector:pg17-trixie
+    ports:
+      - "5433:5432"
+    shm_size: '4gb'
+    volumes:
+      # THE live 9GB cluster, absolute on purpose. A relative ./pg-data resolves
+      # against *this* directory, where it silently initdb'd an empty cluster
+      # and took port 5433 from the real one. Only one compose project may own
+      # this path -- keep the postgres-docker project's postgres_db stopped.
+      - ~/a/postgres-docker/pg-data:/var/lib/postgresql
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
+    environment:
+      # Credentials come from the OS environment (shell export or ./.env);
+      # never literals in this file. These only take effect on initdb of an
+      # empty data directory -- for the existing cluster above they are inert,
+      # and the roles/database it already contains win.
+      POSTGRES_USER: "${POSTGRES_USER-celex_facts}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in the environment}"
+      POSTGRES_DB: "${POSTGRES_DB-celex}"
+
+  pgadmin:
+    image: 'dpage/pgadmin4'
+    # user: root  
+    environment:
+      PGADMIN_CONFIG_MAX_LOGIN_ATTEMPTS: 0
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD:?set PGADMIN_DEFAULT_PASSWORD in the environment}"
+    ports:
+      - 15080:80
+    volumes:
+      # 1. The Named Volume (Keeps the app working/secure)
+      #    Declared external below: it is the pgadmin volume the postgres-docker
+      #    project created, carrying the registered servers and the job@me.com
+      #    account. A project-local volume would start empty -- and its
+      #    root-owned storage/ mountpoint for the bind below breaks startup.
+      - pgadmin_data:/var/lib/pgadmin
+      # 2. The Host Mount (For your backups)
+      # We map your host folder to a visible folder inside the container
+      - ~/a/postgres-docker/backups:/var/lib/pgadmin/storage/job_me.com:z
+
+  # https://github.com/open-webui/open-webui/pkgs/container/open-webui
+  # docker pull ghcr.io/open-webui/open-webui:git-8faaf2c-ollama
+  open-webui:
+    # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
+    # image: ghcr.io/open-webui/open-webui:git-8faaf2c-ollama
+    image: ghcr.io/open-webui/open-webui:v0.11.1
+    container_name: open-webui
+    volumes:
+      - open-webui:/app/backend/data
+      # Open WebUI logs to stdout only -- confirmed no log files exist under
+      # /app/backend/data. `command:` below tees that stream into this
+      # bind mount so the app log lands on the host at ./logs/open-webui/
+      # instead of only being reachable via `docker logs open-webui`.
+      - ./logs/open-webui:/var/log/open-webui
+    # The vendored entrypoint (bash start.sh) `exec`s uvicorn as the final
+    # step for clean PID-1 signal handling. Piping through tee here puts a
+    # shell back in front of it, so `docker compose stop` forwards SIGTERM
+    # through that shell instead of replacing PID 1 directly -- shutdown
+    # still works, just a beat slower. Container runs as root (see `docker
+    # inspect --format '{{.Config.User}}'`), so no permission issue writing
+    # into the bind mount.
+    command: ["sh", "-c", "/app/backend/start.sh 2>&1 | tee -a /var/log/open-webui/open-webui.log"]
+    ports:
+      - ${OPEN_WEBUI_PORT-3000}:8080
+    environment:
+      - 'OLLAMA_BASE_URL=http://localhost:11434'
+      - 'WEBUI_SECRET_KEY='
+      # Pre-register the celex-facts backend as an OpenAI-compatible connection
+      # so a fresh open-webui volume needs no Admin > Settings > Connections
+      # setup. In-network address: the published host port is irrelevant here.
+      # The key is unused (oi_dspy does no auth) but must be non-empty --
+      # OPENAI_API_KEYS falls back to OPENAI_API_KEY when blank.
+      - 'ENABLE_OPENAI_API=true'
+      - 'OPENAI_API_BASE_URLS=http://celex-facts-backend-oi_dspy:7777/v1'
+      - 'OPENAI_API_KEYS=celex-local'
+      # These are PersistentConfig values: read from the environment on first
+      # boot, then owned by the config DB in the open-webui volume, so later
+      # edits here are ignored. Uncomment to make the environment authoritative
+      # on every boot -- note it does that for *all* PersistentConfig settings,
+      # so anything tuned in the UI reverts to its env value or default.
+      # - 'ENABLE_PERSISTENT_CONFIG=false'
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      - celex-facts-backend-oi_dspy
+    restart: unless-stopped
+
+  # OpenAI-compatible DSPy backend (src/ui/backend_server/oi_dspy.py), the
+  # containerised form of scripts/run_oi_server.sh. Point Open WebUI at it with
+  # an OpenAI connection on http://celex-facts-backend-oi_dspy:7777/v1.
+  celex-facts-backend-oi_dspy:
+    build:
+      context: .
+      dockerfile: Dockerfile-open-celex-facts-backend-oi_dspy
+      args:
+        # The serving-path lock: no torch, no sentence-transformers, therefore
+        # no BgeReranker in the image at all (2.09GB instead of 8.48GB). This
+        # service runs the ui reranker profile, which is FlashRank, and
+        # FlashRank's whole runtime is onnxruntime + tokenizers. The cost of
+        # the trade is that UI_RERANKER_BACKEND=bge below is now a *rebuild*
+        # (docker-compose.cpu.yml, or REQUIREMENTS_FILE=requirements.txt for
+        # bge on a GPU) rather than an env flip.
+        REQUIREMENTS_FILE: requirements-ui.txt
+        # Bake the reranker models into the image so the first start makes no
+        # network call. Both default off; set them in ./.env (or on the build
+        # command line) for an air-gapped host. FlashRank is the one that
+        # matters with the default UI_RERANKER_BACKEND=flashrank below: its
+        # ~35MB ONNX model is fetched with plain `requests` during oi_dspy
+        # import, outside every HF offline switch, and a host without egress
+        # restart-loops on the first start against an empty hf_cache volume.
+        # The prefetch seeds a *new* hf_cache volume only; an existing one is
+        # left as it is (see the Dockerfile ARG comment).
+        PREFETCH_RERANKER: ${PREFETCH_RERANKER-false}
+        PREFETCH_FLASHRANK: ${PREFETCH_FLASHRANK-false}
+    # Tag names the variant, like :local-cpu on the override: a host must not
+    # be able to start a torch-less image believing it can load the cross-encoder.
+    image: celex-facts-backend-oi_dspy:local-ui
+    container_name: celex-facts-backend-oi_dspy
+    # uid stays the image's non-root celex (10001); only the gid is overridden,
+    # to the host's owning group for ./logs (job = 1000). Without this the tee
+    # below cannot write: the bind mount arrives with its host ownership
+    # (1000:1000, mode 775), the image's own chown of /app/logs is masked by the
+    # mount, and uid 10001 matches neither owner nor group -- "Permission
+    # denied", silently, because tee's stderr goes to the same broken pipe.
+    # Group membership is the fix that needs no root on the host; the
+    # alternative is `sudo chown 10001 ./logs/backend-server`. open-webui above
+    # needs none of this only because that image runs as root.
+    user: "10001:${HOST_LOG_GID-1000}"
+    # The Dockerfile CMD, with stdout+stderr teed to the bind mount below so the
+    # log lands on the host as well as in `docker logs`. `$$` escapes compose's
+    # own interpolation so the port is resolved by the shell from the image ENV,
+    # exactly as the Dockerfile CMD does.
+    #
+    # Process substitution, not a `| tee` pipeline: `exec` still replaces the
+    # shell, so uvicorn is PID 1 with direct SIGTERM delivery and its own exit
+    # status. The pipeline form used for open-webui above puts a shell in front
+    # of PID 1 and reports tee's status instead of the app's -- which would mask
+    # a crash-looping backend behind exit 0. bash, not sh: /bin/sh in the
+    # python:slim base is dash, which has no >(...).
+    command:
+      - bash
+      - -c
+      - exec uvicorn oi_dspy:app --host 0.0.0.0 --port $${OI_DSPY_PORT:-7777} > >(tee -a /app/logs/backend-server.log) 2>&1
+    ports:
+      - ${OI_DSPY_PORT-7777}:7777
+    environment:
+      # Credentials come from the OS environment, same POSTGRES_* variables the
+      # postgres_db service uses -- nothing secret is written in this file.
+      # CELEX_DB_PASSWORD, not POSTGRES_PASSWORD: ~/.bashrc exports the latter
+      # globally (the cluster superuser), and the process environment beats
+      # ./.env in compose, so reusing that name silently authenticated
+      # celex_facts with the superuser's password. Set it in ./.env.
+      #
+      # CELEX_DB_URL_OVERRIDE, not DATABASE_URL, for exactly the same reason --
+      # this one cost a 22-hour crash loop on 20260827. DATABASE_URL has a
+      # canonical value on this host (config_main/.env: localhost:5433), which
+      # is right for a .venv run and ALWAYS wrong in a container, where
+      # localhost is the container's own loopback. While it was interpolated
+      # here, any shell that had sourced that file -- or exported the variable
+      # for a local run -- silently baked the unreachable address into the
+      # container at creation time, and `docker compose restart` then replayed
+      # that frozen snapshot forever. Under the new name the in-network default
+      # below cannot be clobbered by accident; set CELEX_DB_URL_OVERRIDE
+      # deliberately to reach a database outside this compose project.
+      - 'DATABASE_URL=${CELEX_DB_URL_OVERRIDE-postgresql+psycopg://${CELEX_DB_USER-celex_facts}:${CELEX_DB_PASSWORD:?set CELEX_DB_PASSWORD in ./.env}@${CELEX_DB_HOST-postgres_db}:${CELEX_DB_PORT-5432}/${POSTGRES_DB-celex}}'
+      # Ollama runs on the LAN, not in this compose project and not on the
+      # docker host -- same address the open-webui service above points at.
+      # UI_LLM_PROVIDER defaults to "ollama", so this is the endpoint the UI
+      # planner uses; set UI_LLM_PROVIDER=deepseek to route to the cloud API
+      # instead (DEEPSEEK_API_KEY comes from the baked config_main/.env).
+      - 'OLLAMA_HOST=${OLLAMA_HOST-http://localhost:11434}'
+      - 'UI_LLM_PROVIDER=${UI_LLM_PROVIDER-ollama}'
+      # Whether the planners are told about the graph_search traversal tool
+      # (multi-hop company -> case -> company adjacency over entity_edges) and
+      # dispatch it. Named here rather than left to the settings.py default so
+      # it is a ./.env value plus a restart: config_main/.env is COPYed at build
+      # time, so toggling it there would cost a rebuild -- which defeats the
+      # point of a switch that exists to A/B the tool against live questions.
+      # Deliberately independent of GRAPH_QA_ENABLED (the flat relation views):
+      # the views answer projection and counting, graph_search answers adjacency,
+      # and each surface is worth measuring on its own.
+      - 'GRAPH_SEARCH_ENABLED=${GRAPH_SEARCH_ENABLED-true}'
+      # LiteLLM fetches its model price map from raw.githubusercontent.com at
+      # import time, which on a host without egress costs a connect timeout on
+      # every start before it falls back to the bundled copy. The bundled copy
+      # is what this project wants anyway: the local models are priced by
+      # config.llm_usage.register_local_model_costs, not by that file. It must
+      # be set here rather than in config_main/.env -- litellm is imported (via
+      # dspy) before load_dotenv runs, so a dotenv value arrives too late.
+      - 'LITELLM_LOCAL_MODEL_COST_MAP=${LITELLM_LOCAL_MODEL_COST_MAP-True}'
+      # Chunk and document links handed to the browser, so this is the
+      # published host port -- not the in-network service name.
+      - 'CHUNK_VIEW_BASE_URL=http://localhost:${OI_DSPY_PORT-7777}'
+      # Container clock for log timestamps. The image runs UTC, so entries in
+      # ./logs/backend-server/application.log read two hours behind the host's
+      # own logs/application.log and look stale next to it. The slim image
+      # ships tzdata, so this is a recreate, not a rebuild. Timestamps only:
+      # nothing in the application does date arithmetic off local time.
+      - 'TZ=${TZ-Europe/Berlin}'
+      # Which reranker this service loads. Its own variable, not
+      # RERANKER_BACKEND, for the same reason CELEX_DB_URL_OVERRIDE is not
+      # DATABASE_URL: the batch CLIs on this host run the bge profile, and a
+      # shell that exported RERANKER_BACKEND for one of them would re-point
+      # the container at creation time. flashrank answers from a ~35MB ONNX
+      # model on CPU and leaves the GPU to a concurrent ingestion run.
+      #
+      # Setting this to bge needs a bge-capable image as well: the default
+      # requirements-ui.txt build has no sentence-transformers, so the factory
+      # raises a named RuntimeError at import instead of loading a reranker.
+      # Rebuild with docker-compose.cpu.yml first, then set it.
+      - 'UI_RERANKER_BACKEND=${UI_RERANKER_BACKEND-flashrank}'
+      # Blank follows RERANKER_MODEL_ID; only read when the backend is bge.
+      - 'UI_RERANKER_MODEL_ID=${UI_RERANKER_MODEL_ID-}'
+      # FlashRank stores its model under settings.CACHE_DIR, which defaults to
+      # ~/.cache/flashrank -- /home/celex/.cache inside the container, on no
+      # volume, so it would be re-fetched on every recreate. A subdirectory of
+      # the hf_cache volume rather than a volume of its own: that mount point
+      # already exists in the image and is owned by uid 10001, whereas a fresh
+      # named volume at a path the image lacks arrives root-owned and the
+      # download fails with EACCES. Literal, not ${CACHE_DIR-...}: the name is
+      # generic enough to exist in a host shell. The image ENV carries the same
+      # path, which is where PREFETCH_FLASHRANK (build args above) lands the
+      # model; keep the two in step.
+      - 'CACHE_DIR=/app/data/cache/huggingface/flashrank'
+      # All five RERANKER_* variables below are inert on the default image,
+      # which has no BgeReranker to configure. They are kept, and kept correct,
+      # so that a docker-compose.cpu.yml rebuild needs no edits here.
+      #
+      # Only when UI_RERANKER_BACKEND=bge -- BgeReranker passes
+      # cache_folder=settings.RERANKER_CACHE_DIR explicitly, which defaults to
+      # ~/.cache/huggingface and so ignores HF_HOME. Without this the ~2.3GB
+      # weights land outside the hf_cache volume below and are re-downloaded
+      # on every container recreate.
+      - 'RERANKER_CACHE_DIR=/app/data/cache/huggingface'
+      # Only when UI_RERANKER_BACKEND=bge -- where the cross-encoder weights
+      # come from. A repo id resolves against
+      # huggingface.co on every container start (cheap once cached, but a hard
+      # dependency on egress and on the Hub being up); a *directory* path
+      # resolves purely from disk. To take the Hub out of the startup path,
+      # populate a host directory once --
+      #   .venv/bin/hf download BAAI/bge-reranker-v2-m3 \
+      #       --local-dir /opt/models/bge-reranker-v2-m3
+      # -- uncomment the models bind mount under volumes: below, and set
+      # RERANKER_MODEL_ID=/app/models/bge-reranker-v2-m3 in ./.env. BgeReranker
+      # infers local_files_only from the directory, so nothing else changes.
+      # Alternative for the hf_cache volume below: keep the repo id and set
+      # RERANKER_LOCAL_FILES_ONLY=true once the volume holds the weights.
+      - 'RERANKER_MODEL_ID=${RERANKER_MODEL_ID-BAAI/bge-reranker-v2-m3}'
+      - 'RERANKER_LOCAL_FILES_ONLY=${RERANKER_LOCAL_FILES_ONLY-false}'
+      # Only when UI_RERANKER_BACKEND=bge -- "auto" lets sentence-transformers
+      # pick CUDA when a device is visible and fall back to CPU by itself. This
+      # service no longer reserves a GPU (see below), so "auto" resolves to CPU
+      # unless a reservation is added back. That is deliberate: two ~2.3GB
+      # copies of the cross-encoder on one 6GB card, this container's and a
+      # batch CLI's, is what OOMed on 20260813.
+      - 'RERANKER_DEVICE=${RERANKER_DEVICE-auto}'
+      # Only when UI_RERANKER_BACKEND=bge -- pairs scored per cross-encoder
+      # forward pass, the knob that bounds peak
+      # VRAM without dropping candidates. 32 is the sentence-transformers
+      # default; drop to 8 if this service must share the card.
+      - 'RERANKER_BATCH_SIZE=${RERANKER_BATCH_SIZE-32}'
+    # No GPU reservation, and no `deploy:` key at all. The image this service
+    # builds has no torch in it, so there is nothing here that could use a
+    # device -- and a reservation is not free to leave behind: it REQUIRES
+    # nvidia-container-toolkit on the host, and without it the service refuses
+    # to start at all ("could not select device driver"). Keeping an idle
+    # reservation would mean a CPU-only image that only runs on GPU hosts.
+    #
+    # To give this service the cross-encoder on a GPU again, three things go
+    # together and none of them work alone: REQUIREMENTS_FILE=requirements.txt
+    # (so torch exists), UI_RERANKER_BACKEND=bge (so it is selected), and a
+    # deploy.resources.reservations.devices block restored here (so CUDA is
+    # visible). The install and verify commands for the toolkit are in
+    # docs/dev/Docker Cheat Sheet.md.
+    volumes:
+      # Source PDFs and mineru markdown for the /doc/{celex_id} viewer routes.
+      - ${CELEX_DOCS_DIR:-${HOME}/a/celex_docs}:/celex_docs:ro
+      # Keeps the reranker weights across rebuilds: the ~2.3GB bge
+      # cross-encoder under hub/, the FlashRank ONNX model under flashrank/.
+      - hf_cache:/app/data/cache/huggingface
+      # Pre-downloaded reranker weights, for a start with no Hub call at all.
+      # Uncomment together with RERANKER_MODEL_ID=/app/models/<dir> above; the
+      # host directory must already exist (see the `hf download --local-dir`
+      # command in that comment), otherwise docker creates it root-owned and
+      # empty and the container fails to resolve the model.
+      # - ${RERANKER_MODELS_DIR-/opt/models}:/app/models:ro
+      # Host-visible copy of the container log, written by the tee in `command:`
+      # above. The mount alone never produced a file: this service logs to
+      # stdout/stderr only (the console handler of config_main/logging_config.yaml,
+      # applied by config.settings at import) and its CMD had no
+      # tee, so nothing inside the container ever opened a path under the mount.
+      # /app/logs, not the /var/log/open-webui this was first copy-pasted to --
+      # that is the *other* service's path, and the image already creates
+      # /app/logs for exactly this.
+      - ./logs/backend-server:/app/logs
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      - postgres_db
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  # Adopted from the postgres-docker project rather than created here, so the
+  # server list and the job@me.com login survive the move. external means
+  # compose never creates or removes it -- `docker compose down -v` leaves it.
+  pgadmin_data:
+    name: postgres-docker_pgadmin_data
+    external: true
+  open-webui: {}
+  hf_cache: {}
+  celex-facts-backend-oi_dspy: {}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "target_fact_name": {
+        "type": "string",
+        "description": "The unique identifier for this fact."
+      },
+      "question": { "type": "string" },
+      "output_schema": { "type": "string" },
+      "pipeline": { "type": "string" },
+      "force_override": { "type": "boolean" },
+      "run_state_active": { "type": "boolean" }
+    },
+    "required": ["target_fact_name"]
+  }
+}

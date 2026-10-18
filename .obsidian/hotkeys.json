@@ -1,0 +1,28 @@
+{
+  "editor:insert-codeblock": [
+    {
+      "modifiers": [
+        "Meta"
+      ],
+      "key": "C"
+    }
+  ],
+  "obsidian-link-converter:convert-wikis-to-md-in-vault": [
+    {
+      "modifiers": [],
+      "key": "F11"
+    }
+  ],
+  "creases:crease-current-folds": [
+    {
+      "modifiers": [],
+      "key": "F1"
+    }
+  ],
+  "creases:decrease-fold-level": [
+    {
+      "modifiers": [],
+      "key": "F2"
+    }
+  ]
+}

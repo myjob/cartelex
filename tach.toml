@@ -1,0 +1,439 @@
+interfaces = []
+exclude = [
+    "**/*__pycache__",
+    "**/*egg-info",
+    "**/docs",
+    "**/tests",
+    "**/venv",
+]
+source_roots = [
+    "src",
+]
+
+[[modules ]]
+path = "pipelines"
+depends_on = []
+
+[[modules ]]
+path = "extract"
+depends_on = []
+
+[[modules ]]
+path = "reporting"
+depends_on = []
+
+[[modules ]]
+path = "config"
+depends_on = []
+
+[[modules ]]
+path = "tools"
+depends_on = []
+
+[[modules ]]
+path = "batch"
+depends_on = []
+
+[[modules ]]
+path = "ui"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rule_engine.condition_checker"
+depends_on = ["pipelines.legal"]
+
+[[modules ]]
+path = "batch.Main_ingest_case_markdown2pgvector"
+depends_on = ["config.settings", "batch.BatchJobRunner", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "batch.utils", "pipelines.rag.pgvector.embeddings.celex_chunks2pgvector"]
+
+[[modules ]]
+path = "batch.Main_LLM_corp_index_searcher"
+depends_on = ["pipelines.corp_index"]
+
+[[modules ]]
+path = "reporting.report_company_name_address_pollution"
+depends_on = ["batch.Main_ingest_company_investigated2celex", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "reporting.utils.markdown2text"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.chunk_repository"
+depends_on = ["pipelines.rag.pgvector.vector_config", "config.settings", "pipelines.rag.pgvector.session", "extract.rag.models.chunk_vo"]
+
+[[modules ]]
+path = "batch.Main_audit_chunk_language"
+depends_on = ["pipelines.rag.pgvector.chunk_repository", "config.settings", "pipelines.legal"]
+
+[[modules ]]
+path = "batch.Main_materialize_entity_graph"
+depends_on = ["pipelines.rag.pgvector.provision_repository", "pipelines.graph", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.entity_graph_repository", "pipelines.rag.pgvector.session", "pipelines.legal", "config.settings"]
+
+[[modules ]]
+path = "extract.rag.models"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.db"
+depends_on = ["pipelines.rag.pgvector.fact_repository"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.handelsregister_loader"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "extract.rag"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.book_tree"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.heideltime_ingestor"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.event_repository", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.models"
+depends_on = ["pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "extract.rag.ranker.ranker_factory"
+depends_on = ["extract.rag.ranker.flash_ranker", "config.settings", "extract.rag.models.chunk_vo", "pipelines.nace", "extract.rag.ranker.bge_reranker"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.query_embedding_repository"
+depends_on = ["pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "batch.Main_ingest_opencorp_index_companies"
+depends_on = ["pipelines.corp_index", "pipelines.rag.pgvector.company_investigated_repository", "config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.fact_repository"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.session", "pipelines.agent_dspy", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "extract.rag.hybrid_search"
+depends_on = ["extract.rag.ranker.ranker_factory", "extract.rag.models.chunk_vo", "pipelines.agent_dspy", "config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.company_repository"
+depends_on = ["pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "tools.celex_checker"
+depends_on = ["pipelines.rag.pgvector.celex_identity_repository", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.knowledge_ingestor"
+depends_on = ["pipelines.agent_dspy", "pipelines.rag.pgvector.knowledge_repository", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "pipelines.rag.pgvector.models"]
+
+[[modules ]]
+path = "pipelines.graph"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.utils"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.celex_case_id_loader"
+depends_on = ["pipelines.rag.pgvector.session", "config.settings"]
+
+[[modules ]]
+path = "batch.verify_chunk_lookup"
+depends_on = ["pipelines.rag.pgvector.chunk_repository", "config.settings"]
+
+[[modules ]]
+path = "batch.Main_classify_sections"
+depends_on = ["extract.rag.models.chunk_vo", "pipelines.legal", "pipelines.rag.pgvector.chunk_repository", "config.settings", "config.llm_factory"]
+
+[[modules ]]
+path = "pipelines.nace"
+depends_on = []
+
+[[modules ]]
+path = "extract.rag.enumeration_search"
+depends_on = ["config.settings", "pipelines.agent_dspy", "extract.rag.models.chunk_vo", "extract.rag.ranker.ranker_factory"]
+
+[[modules ]]
+path = "pipelines.legal"
+depends_on = ["config.settings", "extract.rag.models.chunk_vo"]
+
+[[modules ]]
+path = "reporting.utils"
+depends_on = []
+
+[[modules ]]
+path = "batch.BatchJobRunner"
+depends_on = ["batch.utils", "config.llm_usage", "config.ollama_health_gate", "config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.vector_config"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "config.ollama_health_gate"
+depends_on = ["config.settings", "config.dgx_clock_control"]
+
+[[modules ]]
+path = "batch.Main_verify_facts_backfill"
+depends_on = ["pipelines.agent_dspy", "pipelines.rag.pgvector.fact_repository", "pipelines.rag.pgvector.vector_config", "config.settings", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.chunk_repository", "pipelines.rag.pgvector.query_embedding_repository", "pipelines.rag.pgvector.fact_evidence_repository", "config.llm_factory"]
+
+[[modules ]]
+path = "config.dgx_thermal_probe"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rule_engine"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.utils.search_facts"
+depends_on = ["pipelines.rag.pgvector.query_embedding_repository", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "pipelines.rag.pgvector.chunk_repository"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.celex_chunks2pgvector"
+depends_on = ["config.settings", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "pipelines.rag.pgvector.celex_pgvector", "pipelines.rag.pgvector.vector_config", "pipelines.utils.TokenSizeTargetMarkdownSplitter"]
+
+[[modules ]]
+path = "reporting.retrieve_case_summary_md2disk"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "pipelines.utils.search_cli"
+depends_on = ["extract.rag.hybrid_search", "extract.rag.models.chunk_vo", "extract.rag.ranker.ranker_factory", "config.settings", "pipelines.rag.pgvector.chunk_repository", "pipelines.rag.pgvector.query_embedding_repository", "extract.rag.key_word_search", "pipelines.rag.pgvector.embeddings.qwen3_embedding"]
+
+[[modules ]]
+path = "pipelines.rag"
+depends_on = []
+
+[[modules ]]
+path = "config.settings"
+depends_on = []
+
+[[modules ]]
+path = "tools.PipelineFactIngestor"
+depends_on = ["pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.chunk_repository", "pipelines.rag.pgvector.models", "pipelines.rag.pgvector.fact_repository", "tools.markdown_utils", "pipelines.rag.pgvector.lineage_repository"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.corp_lei_index_ingestor"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.fact_evidence_repository"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.book_chunks2pgvector"
+depends_on = ["pipelines.utils.TokenSizeTargetMarkdownSplitter", "pipelines.rag.pgvector.embeddings.book_tree", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.celex_pgvector", "pipelines.rag.pgvector.embeddings.qwen3_embedding"]
+
+[[modules ]]
+path = "pipelines.translate"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.session"
+depends_on = ["pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "extract.rag.regex_retriever"
+depends_on = ["pipelines.agent_dspy"]
+
+[[modules ]]
+path = "batch.Main_ingest_generic_facts"
+depends_on = ["pipelines.rag.pgvector.chunk_repository", "extract.rag.hybrid_search", "tools.PipelineFactIngestor", "pipelines.heideltime", "extract.rag.hybrid_book_search", "pipelines.nace", "extract.rag.ranker.ranker_factory", "pipelines.rag.pgvector.heideltime_ingestor", "pipelines.rag.pgvector.embeddings.fact_embedding_loader_qwen", "pipelines.agent_dspy", "batch.BatchJobRunner", "config.llm_factory", "pipelines.rag.pgvector.fact_repository", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.session", "extract.rag.key_word_search", "config.settings", "tools.celex_tools", "extract.rag.regex_retriever", "pipelines.rag.pgvector.book_chunk_repository", "extract.rag.enumeration_search"]
+
+[[modules ]]
+path = "config.llm_factory"
+depends_on = ["config.llm_usage", "config.llm_thinking", "config.settings"]
+
+[[modules ]]
+path = "pipelines.legacy_rule_engine"
+depends_on = ["pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "extract.rag.ranker.position_boost"
+depends_on = ["extract.rag.models.chunk_vo", "config.settings"]
+
+[[modules ]]
+path = "pipelines.utils.TokenSizeTargetMarkdownSplitter"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.company_investigated_repository"
+depends_on = ["pipelines.corp_index", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "tools.markdown_utils"
+depends_on = []
+
+[[modules ]]
+path = "extract.rag.hybrid_book_search"
+depends_on = ["pipelines.rag.pgvector.book_chunk_repository", "extract.rag.models.chunk_vo", "tools.celex_tools", "pipelines.rag.pgvector.vector_config", "extract.rag.ranker.ranker_factory", "pipelines.rag.pgvector.query_embedding_repository"]
+
+[[modules ]]
+path = "pipelines.utils.load_company_standard_alias"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.company_repository"]
+
+[[modules ]]
+path = "extract.rag.ranker.corp_ranker"
+depends_on = ["extract.rag.ranker.ranker_factory", "extract.rag.models.chunk_vo"]
+
+[[modules ]]
+path = "extract.rag.ranker"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.knowledge_repository"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.utils"
+depends_on = []
+
+[[modules ]]
+path = "reporting.report_celex_facts"
+depends_on = ["config.settings", "reporting.utils.markdown2text", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.data_sanity.qa_product_comparison"
+depends_on = ["pipelines.rag.pgvector.session", "config.llm_factory", "config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.data_sanity"
+depends_on = []
+
+[[modules ]]
+path = "extract.rag.key_word_search"
+depends_on = ["extract.rag.models.chunk_vo", "pipelines.agent_dspy", "config.settings", "extract.rag.ranker.ranker_factory"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.entity_graph_repository"
+depends_on = ["pipelines.graph", "pipelines.rag.pgvector.models", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config", "config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.fact_embedding_loader_qwen"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.embeddings.qwen3_embedding"]
+
+[[modules ]]
+path = "batch.Main_ingest_company_investigated2celex"
+depends_on = ["batch.BatchJobRunner", "pipelines.rag.pgvector.company_investigated_repository", "pipelines.rag.pgvector.fact_repository", "pipelines.corp_index"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.celex_identity_repository"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.vector_config", "config.settings", "pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.provision_repository"
+depends_on = ["pipelines.legal", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "batch.fact_dependency_manager"
+depends_on = []
+
+[[modules ]]
+path = "batch.Main_cross_check_facts_vs_book"
+depends_on = ["pipelines.rag.pgvector.fact_repository", "pipelines.rag.pgvector.fact2book_check_repository", "pipelines.rag.pgvector.lineage_repository", "pipelines.agent_dspy", "config.settings", "extract.rag.hybrid_book_search", "config.llm_factory", "extract.rag.ranker.ranker_factory", "pipelines.rag.pgvector.book_chunk_repository", "pipelines.rag.pgvector.celex_identity_repository", "tools.celex_tools"]
+
+[[modules ]]
+path = "pipelines.corp_index"
+depends_on = ["config.llm_factory", "tools.country_normalizer", "config.settings"]
+
+[[modules ]]
+path = "pipelines.agent_dspy"
+depends_on = ["pipelines.nace", "extract.rag.ranker.ranker_factory", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "extract.rag.enumeration_search", "pipelines.rag.pgvector.session", "extract.rag.models.chunk_vo", "config.settings", "pipelines.rag.pgvector.fact_repository", "pipelines.legal", "pipelines.rag.pgvector.book_chunk_repository", "tools.PipelineFactIngestor", "extract.rag.hybrid_search", "tools.markdown_utils", "pipelines.graph", "tools.country_normalizer", "pipelines.rule_engine.condition_checker", "pipelines.rag.pgvector.embeddings.fact_embedding_loader_qwen", "tools.celex_checker", "config.llm_factory", "pipelines.rag.pgvector.fact_evidence_repository", "pipelines.rag.pgvector.knowledge_ingestor", "pipelines.rag.pgvector.fact2book_check_repository", "tools.celex_tools"]
+
+[[modules ]]
+path = "batch.Main_ingest_knowledge"
+depends_on = ["config.settings", "pipelines.rag.pgvector.models", "config.llm_factory", "pipelines.rag.pgvector.knowledge_ingestor", "pipelines.rag.pgvector.knowledge_repository", "pipelines.rag.pgvector.session", "pipelines.agent_dspy"]
+
+[[modules ]]
+path = "pipelines.markdown"
+depends_on = []
+
+[[modules ]]
+path = "config.llm_thinking"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.fact2book_check_repository"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.lineage_repository"
+depends_on = ["pipelines.rag.pgvector.models", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.embeddings.qwen3_embedding"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "tools.country_normalizer"
+depends_on = []
+
+[[modules ]]
+path = "pipelines.rag.pgvector.book_chunk_repository"
+depends_on = ["pipelines.rag.pgvector.vector_config", "extract.rag.models.chunk_vo", "pipelines.rag.pgvector.session"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.celex_pgvector"
+depends_on = []
+
+[[modules ]]
+path = "extract.rag.models.chunk_vo"
+depends_on = []
+
+[[modules ]]
+path = "extract.rag.ranker.bge_reranker"
+depends_on = ["config.settings", "extract.rag.models.chunk_vo", "extract.rag.ranker.position_boost", "pipelines.nace"]
+
+[[modules ]]
+path = "batch.Main_enrich_chunk_context"
+depends_on = ["pipelines.rag.pgvector.chunk_repository", "pipelines.legal", "config.settings", "config.llm_factory", "pipelines.rag.pgvector.embeddings.qwen3_embedding"]
+
+[[modules ]]
+path = "config.llm_usage"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "config.dgx_clock_control"
+depends_on = ["config.ollama_health_gate", "config.settings"]
+
+[[modules ]]
+path = "extract.rag.ranker.flash_ranker"
+depends_on = ["extract.rag.ranker.position_boost", "extract.rag.models.chunk_vo", "config.settings", "pipelines.nace"]
+
+[[modules ]]
+path = "tools.celex_tools"
+depends_on = ["pipelines.rag.pgvector.celex_pgvector", "pipelines.rag.pgvector.chunk_repository", "pipelines.rag.pgvector.query_embedding_repository", "config.settings", "pipelines.rag.pgvector.fact_repository", "pipelines.rag.pgvector.embeddings.qwen3_embedding", "extract.rag.models.chunk_vo"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector"
+depends_on = ["pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "ui.backend_server"
+depends_on = ["pipelines.rag.pgvector.fact_repository", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.models", "tools.celex_tools", "pipelines.rag.pgvector.knowledge_repository", "pipelines.rag.pgvector.fact_evidence_repository", "extract.rag.enumeration_search", "pipelines.rag.pgvector.session", "config.llm_factory", "pipelines.agent_dspy", "extract.rag.hybrid_search", "config.settings", "extract.rag.ranker.ranker_factory", "pipelines.rag.pgvector.entity_graph_repository"]
+
+[[modules ]]
+path = "batch.utils"
+depends_on = ["config.settings"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.event_repository"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.models", "config.settings"]
+
+[[modules ]]
+path = "pipelines.heideltime"
+depends_on = ["pipelines.agent_dspy", "pipelines.rag.pgvector.models", "pipelines.rag.pgvector.vector_config", "pipelines.rag.pgvector.lineage_repository", "pipelines.rag.pgvector.event_repository", "pipelines.rag.pgvector.session", "tools.PipelineFactIngestor", "config.settings", "pipelines.rag.pgvector.heideltime_ingestor"]
+
+[[modules ]]
+path = "pipelines.utils.loader_celex_id2case_id"
+depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.celex_identity_repository", "pipelines.rag.pgvector.vector_config"]

@@ -1,0 +1,255 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "celex-facts"
+version = "0.1.0"
+# Dual-licensed: a recipient may choose either license.
+license = "Apache-2.0 OR MIT"
+license-files = ["LICENSE", "LICENSE-MIT"]
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+
+# Declared intent only -- loose ranges. The exact resolved tree (including
+# transitive packages) lives in the generated lock files, which are what the
+# container installs. torch is not in `dependencies`; it is selected by the
+# `gpu` / `cpu` extra below, so each lock is compiled against the matching
+# PyTorch index. Regenerate all three with:
+#     .venv/bin/pip-compile --extra=gpu \
+#         --extra-index-url=https://download.pytorch.org/whl/cu126 \
+#         --output-file=requirements.txt pyproject.toml
+#     .venv/bin/pip-compile --extra=cpu \
+#         --extra-index-url=https://download.pytorch.org/whl/cpu \
+#         --output-file=requirements-cpu.txt pyproject.toml
+#     .venv/bin/pip-compile --extra=dev --extra=gpu \
+#         --extra-index-url=https://download.pytorch.org/whl/cu126 \
+#         --output-file=requirements-dev.txt pyproject.toml
+#     .venv/bin/pip-compile --output-file=requirements-ui.txt pyproject.toml
+#
+# The fourth lock, requirements-ui.txt, takes NO extra and NO PyTorch index: it
+# is the serving-path tree for the oi_dspy chat image, with the whole bge stack
+# (torch, sentence-transformers, transformers, safetensors, networkx) absent.
+#
+# pip-compile reuses the pins already in its --output-file, so regenerating an
+# *existing* lock only moves what it has to. Deleting requirements-cpu.txt and
+# recompiling therefore re-resolves the entire tree to latest and silently
+# desyncs the CPU image from the GPU one (first attempt drifted dspy 3.1.3 ->
+# 3.3.0 and 60+ other packages). If it ever has to be rebuilt from scratch,
+# seed it first so only torch moves:
+#     cp requirements.txt requirements-cpu.txt   # then run the --extra=cpu command
+# The two locks must stay identical apart from torch and the nvidia-*/triton
+# packages that only the cu126 build pulls in.
+dependencies = [
+    # --- LLM / extraction ---------------------------------------------------
+    "dspy>=3.1.3,<4",
+    "flashrank>=0.2.10,<0.3",
+    "ollama>=0.6.1,<0.7",
+    "tiktoken>=0.12,<0.13",
+    # Neither torch NOR sentence-transformers is listed here -- both belong to
+    # the `gpu`/`cpu` extras below, because both exist solely for the BgeReranker
+    # backend (src/extract/rag/ranker/bge_reranker.py is their only importer in
+    # this tree). A lock compiled with *no* extra therefore has no torch at all,
+    # which is what the oi_dspy chat image installs: it runs the FlashRank
+    # backend, whose whole runtime is onnxruntime + tokenizers.
+
+    # --- LangChain (only the three sub-packages that are actually imported) --
+    "langchain-core>=1.2.5,<2",
+    "langchain-postgres>=0.0.16,<0.1",
+    "langchain-text-splitters>=1.1,<2",
+
+    # --- Database -----------------------------------------------------------
+    "pgvector>=0.3.6,<0.4",
+    "psycopg[binary]>=3.3.2,<4",
+    "psycopg-pool>=3.3,<4",
+    "SQLAlchemy>=2.0.45,<2.1",
+
+    # --- Data / numerics ----------------------------------------------------
+    # polars declares its engines as extras, not hard dependencies, so every
+    # optional backend we actually call has to be named here:
+    #   connectorx -> `pl.read_database_uri` (src/reporting/*)
+    #   pyarrow    -> the Arrow hand-off connectorx returns to polars
+    #   xlsxwriter -> `DataFrame.write_excel` (listed under reporting below)
+    # `pl.read_database` (src/pipelines/heideltime/qa/scan_dates.py) rides the
+    # SQLAlchemy cursor path, which needs no further extra.
+    "connectorx>=0.4.5,<0.5",
+    "numpy>=2.4,<3",
+    "polars>=1.39,<2",
+    "pyarrow>=25.0,<26",
+
+    # --- Web service (uvicorn is not imported; it is the Dockerfile CMD) -----
+    "fastapi>=0.136,<1",
+    "uvicorn>=0.46,<1",
+    "httpx>=0.28,<1",
+    "requests>=2.32,<3",
+
+    # --- Text / documents / reporting ---------------------------------------
+    "langdetect>=1.0.9,<2",
+    "markdown-it-py>=4,<5",
+    "mistune>=3.2,<4",
+    "py-heideltime>=1.0.6,<2",
+    "pycountry>=24.6",
+    "weasyprint>=68,<69",
+    "xlsxwriter>=3.2,<4",
+
+    # --- Core plumbing ------------------------------------------------------
+    "pydantic>=2.12,<3",
+    "python-dotenv>=1.2,<2",
+    "PyYAML>=6.0.3,<7",
+    "rule-engine>=4.5,<5",
+    "tqdm>=4.67,<5",
+
+]
+
+[project.optional-dependencies]
+# Torch build selection -- exactly one of these belongs in any given lock.
+# The `==` pins are the only ones left in this file, and they are deliberate.
+#
+# Plain `torch` on PyPI is now the CUDA 13 build, which dropped Pascal (sm_6x);
+# the workstation GPU is sm_61, so that build loads but every kernel launch
+# fails. The `+cu126` wheel carries sm_50..sm_90 and lives only on the PyTorch
+# index, so requirements.txt is compiled with
+#   --extra-index-url https://download.pytorch.org/whl/cu126
+# A range does not work here: with both indexes visible the resolver picks
+# PyPI's plain 2.13.0 over 2.13.0+cu126.
+#
+# `cpu` exists for hosts with no GPU (and no nvidia-container-toolkit). The
+# +cu126 wheels do run on CPU, they just drag ~4.8GB of nvidia-*-cu12 CUDA
+# libraries that are never loaded there; requirements-cpu.txt drops them and
+# takes the backend image from ~8.25GB to ~3.5GB. See docker-compose.cpu.yml.
+#
+# Because torch now arrives transitively via sentence-transformers, a bare
+# `pip install -e .` resolves the wrong (PyPI CUDA-13) build. NEVER provision an
+# environment that way -- always install from one of the generated lock files.
+# Each of these is "the BgeReranker backend, built for this device". They carry
+# sentence-transformers as well as torch: sentence-transformers would otherwise
+# drag in the wrong (PyPI CUDA-13) torch on its own, and there is no reason to
+# install one without the other -- nothing else in the tree imports either.
+# Omitting both extras yields the FlashRank-only tree in requirements-ui.txt.
+gpu = ["torch==2.13.0+cu126", "sentence-transformers>=5.6,<6"]
+cpu = ["torch==2.13.0+cpu", "sentence-transformers>=5.6,<6"]
+dev = [
+    "build>=1.4,<2",
+    # pip 26.2 dropped `pip._internal.utils.compat.stdlib_pkgs`, which
+    # pip-tools 7.6.0 still imports -- every pip-compile run dies with
+    # ImportError. Keep pip below that until pip-tools catches up, otherwise the
+    # locks cannot be regenerated. pip-compile treats pip as "unsafe" and never
+    # writes it into the lock, so this bound only applies to `pip install -e .[dev]`
+    # and has to be held manually in an existing venv.
+    "pip<26.2",
+    "pip-tools>=7.5,<8",
+    "playwright>=1.60,<2",
+    "ruff>=0.15,<1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:pkg_resources is deprecated as an API:UserWarning",
+    "ignore::DeprecationWarning:pkg_resources",
+]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+extraPaths = ["src"]
+typeCheckingMode = "basic"
+
+[tool.skylos]
+complexity = 10
+nesting = 3
+max_args = 5
+max_lines = 50
+god_file_max_lines = 500
+god_file_max_definitions = 40
+god_file_max_top_level_definitions = 25
+duplicate_strings = 3
+model = "gpt-4.1"
+exclude = []
+ignore = []
+
+[tool.skylos.masking]
+names = []
+decorators = []
+bases = []
+
+[tool.skylos.templates]
+# security = ".skylos/templates/security.md"
+# quality = ".skylos/templates/quality.md"
+# security_audit = ".skylos/templates/security_audit.md"
+# review = ".skylos/templates/review.md"
+
+[tool.skylos.vibe]
+extra_phantom_names = []
+extra_phantom_decorators = []
+extra_credential_names = []
+extra_sensitive_file_keywords = []
+extra_network_timeout_calls = []
+
+[tool.skylos.architecture]
+strict = false
+# Q802/Q803 are file-level I/A/D architecture signals by default. Set this to
+# true only if those signals should block strict gates in this project.
+enforce_iad = false
+
+# [[tool.skylos.architecture.layers]]
+# name = "api"
+# patterns = ["app.api", "app.routes"]
+#
+# [[tool.skylos.architecture.layers]]
+# name = "domain"
+# patterns = ["app.domain", "app.models"]
+#
+# [[tool.skylos.architecture.rules]]
+# from = "domain"
+# deny = ["api"]
+
+[tool.skylos.whitelist]
+names = [
+  # dspy.Signature subclasses — instantiated dynamically by DSPy at runtime;
+  # never called by name in application code, so static analysis flags them as dead.
+  "ContextQuestion",
+  "ContextQuestionSimple",
+  "ClassifyAliasSignature",
+  "GenericExtractionSignature",
+  "GenericVerificationSignature",
+  "DetermineSupportingChunksSignature",
+  "DependentFactExtractionSignature",
+  "FactComparisonSignature",
+  "NaceCodeSignature",
+  "CaseSummarySignature",
+  "FactCaseTitleSignature",
+  "TimelineExtractionSignature",
+  "HeidelTimeEventSignature",
+  "HeidelTimeEventAggregateSignature",
+  "HeideltimeCartelPeriodSignature",
+  "QAPlannerSignature",
+  "QASynthesizerSignature",
+  "EntityExtractionSignature",
+  "EntityAggregationSignature",
+  "EvidenceSupportSignature",
+  "BooleanPolaritySignature",
+  "KnowHowExtractionSignature",
+  "QuestionVariantSignature",
+  "KnowHowJudgeSignature",
+  "CorpIndexLookupSignature",
+  "ProductSemanticComparisonSignature",
+]
+
+[tool.skylos.whitelist.documented]
+
+[tool.skylos.whitelist.temporary]
+
+[tool.skylos.gate]
+fail_on_critical = true
+max_critical = 0 
+max_high = 5
+max_security = 0
+max_quality = 10
+strict = false

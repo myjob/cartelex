@@ -1,0 +1,37 @@
+{
+
+  "files.associations": {
+    "Dockerfile-*": "dockerfile"
+  },
+  
+  "python.defaultInterpreterPath": "~/a/celex-facts/.venv/bin/python",
+  "python.venvPath": ".venv",
+  "python.locator": "js",
+  "python.experiments.optOutFrom": ["All"],
+  "python.envFile": "${workspaceFolder}/config_main/.env",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.useEnvFile": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "terminal.integrated.confirmOnExit": "hasChildProcesses",
+  "terminal.integrated.confirmOnKill": "never",
+  "python.analysis.extraPaths": ["${workspaceFolder}/src"],
+  "python.autoComplete.extraPaths": ["${workspaceFolder}/src"],
+  "git.autofetch": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#4D4D0F",
+    "titleBar.activeBackground": "#6C6C15",
+    "titleBar.activeForeground": "#FBFBEA",
+    "titleBar.inactiveBackground": "#4D4D0F",
+    "titleBar.inactiveForeground": "#FBFBEA",
+    "statusBar.background": "#4D4D0F",
+    "statusBar.foreground": "#FBFBEA",
+    "statusBar.debuggingBackground": "#4D4D0F",
+    "statusBar.debuggingForeground": "#FBFBEA",
+    "statusBar.noFolderBackground": "#4D4D0F",
+    "statusBar.noFolderForeground": "#FBFBEA"
+  },
+  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.smoothScrolling": false,
+  "terminal.integrated.scrollback": 5000,
+}

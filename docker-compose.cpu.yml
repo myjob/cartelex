@@ -1,0 +1,33 @@
+# Override that puts the BGE cross-encoder back in the backend image, on CPU.
+#
+# The base docker-compose.yml builds requirements-ui.txt, which has no torch and
+# no sentence-transformers at all, so BgeReranker does not exist in that image
+# and UI_RERANKER_BACKEND=bge fails fast with a named error. This file swaps in
+# the CPU torch lock, which restores the backend:
+#
+#     docker compose -f docker-compose.yml -f docker-compose.cpu.yml up -d --build
+#
+# Or set it once in that host's gitignored ./.env so the plain command works and
+# every documented `docker compose ...` invocation stays copy-pasteable:
+#
+#     COMPOSE_FILE=docker-compose.yml:docker-compose.cpu.yml
+#
+# Building this is necessary but not sufficient: also set UI_RERANKER_BACKEND=bge
+# in ./.env, or the ui profile still resolves to FlashRank and the ~2.3GB of
+# torch is installed for nothing. settings.RERANKER_DEVICE is already "auto" and
+# resolves to CPU here, since neither this file nor the base reserves a device.
+#
+# The name is historical. It once existed for hosts with no nvidia-container-
+# toolkit, which the base file needed because it reserved a GPU; the base no
+# longer reserves anything, so that is not what this is for any more.
+services:
+  celex-facts-backend-oi_dspy:
+    # Distinct tag so a host that switches between the variants cannot start a
+    # torch-less image believing it can load the cross-encoder.
+    image: celex-facts-backend-oi_dspy:local-cpu
+    build:
+      args:
+        # torch 2.13.0+cpu plus sentence-transformers, transformers, safetensors
+        # and networkx -- the five packages requirements-ui.txt omits. Takes the
+        # image from 2.09GB to 2.67GB, which is the price of the better reranker.
+        REQUIREMENTS_FILE: requirements-cpu.txt

@@ -1,0 +1,657 @@
+# yaml-language-server: $schema=schema.json
+
+# YAML 1.2 (stricter, used by newer parsers like ruamel.yaml): Only true and false
+# pipeline: universal, fact_context, keyword_search, hybrid_search,  fact_comparison
+# book pipelines: book_keywords, book_infringement_type, book_universal
+# heideltime pipelines: heideltime_raw (JAR extraction), heideltime_event (LLM enrichment)
+# output_schema: "str" means the output is a string even if the LLM returns a dictionary or list; empty string goes to MD of dict or list in value_md
+#!! could add topic groups which allows to run multiple facts in one go
+# concerning runtime, if a dependency is set to run_state and force_override = true, those will be re computed as well
+
+# --------- Summary  --------------
+# filter for 'Article 85', 'Article 86', 'Article 90', 'Article 81', 'Article 82', 'Article 86', 'Article 101', 'Article 102', 'Article 106'
+
+# context_facts is the summary's input allow-list, in reading order. Unlike
+# predecessors it never gates: an absent fact (e.g. leniency_granted in a
+# non-leniency case) is skipped. Every name must be a target_fact_name of this
+# catalog (test_fact_extractor_yaml_integrity), so a retired fact can no longer
+# leak into the summary from stale DB rows. A stored summary is rebuilt when
+# any of these facts was written after it. Raw/intermediate facts
+# (heideltime_raw, heideltime_event, court_list_raw, companies_address,
+# leniency_case_match) are left out on purpose.
+- target_fact_name: case_summary
+  question: "Summarize the case into topics"
+  output_schema: ""
+  pipeline: case_summary
+  context_facts:
+    - celex_case_id
+    - case_title
+    - eu_commisssion_decision_date
+    - case_commissioner
+    - companies_investigated
+    - companies_country
+    - companies_industry
+    - products
+    - services
+    - OECD_sector
+    - NACE_group_code
+    - NACE_class_code
+    - market_geographical
+    - market_outside_eu
+    - market_oligopoly
+    - market_turbulence
+    - law_article_operative
+    - law_article_all_relevant
+    - infringement_concept
+    - infringement_category_procedural
+    - infringement_category_member_states
+    - infringement_category_abuse_of_dominance
+    - infringement_category_hor_vert_lic_joint
+    - infringement_subcategory_horizontal_restraints
+    - infringement_subcategory_vertical_restraints
+    - infringement_gravity
+    - heideltime_cartel_period
+    - heideltime_event_agg
+    - exemption_case
+    - exemption_applicants
+    - leniency_case
+    - leniency_applicants
+    - leniency_granted
+    - leniency_rejected
+    - fines
+    - decision_remedies
+    - company_recidivism
+    - case_commission_info_request
+    - case_commission_no_action
+    - case_commission_decision
+    - is_court_involved
+    - court_list
+    - case_is_in_book
+    - case_is_landmark_in_book
+    - case_infringement_type_book
+    - case_infringement_book
+  force_override: true
+  run_state_active: true
+
+# --------- Law --------------
+# filter for 'Article 85', 'Article 86', 'Article 90', 'Article 81', 'Article 82', 'Article 86', 'Article 101', 'Article 102', 'Article 106'
+- target_fact_name: law_article_all_relevant
+  question: 'Article \d+'
+  output_schema: ""
+  pipeline: keyword_regex
+  force_override: false
+  run_state_active: false
+
+# The articles the decision actually applies: the same regex restricted to
+# chunks classified as the operative part ("HAS ADOPTED THIS DECISION ...
+# Article 1"). The classification conditions below read this fact first and
+# fall back to law_article_all_relevant, so a passing narrative mention of
+# Article 85 in an Article 86 abuse case no longer asks the cartel questions.
+- target_fact_name: law_article_operative
+  question: 'Article \d+'
+  output_schema: ""
+  pipeline: keyword_regex
+  section_scope: [operative]
+  force_override: false
+  run_state_active: false
+
+# Canonical infringement concept(s) derived deterministically from
+# law_article_all_relevant, mapped across the EU treaty renumbering (EEC/EC/TFEU)
+# using the decision date with a CELEX-year fallback. Materialized for the book
+# cross-check and audit; the same normalizer backs the same_concept(...) gating
+# conditions below. No predecessors by design: the inputs are read best-effort so
+# a non-competition document never halts the pipeline.
+- target_fact_name: infringement_concept
+  question: "Canonical EU infringement concept(s) per treaty renumbering, derived from law_article_all_relevant"
+  output_schema: ""
+  output_type: str
+  pipeline: infringement_concept
+  force_override: false
+  run_state_active: false
+
+# --------- infringements --------------
+
+- target_fact_name: infringement_category_procedural
+  question: |
+    Task: Classify the provided text based on the legal concept of "Failure to Supply Information."
+    Definition: This occurs when the Commission requests information under its legal authority, but the undertaking refuses to provide it, provides incomplete data, or provides misleading information.
+    Classification Rules:
+    * Reply 'True' if the text describes an undertaking refusing or failing to provide accurate/complete information to the Commission.
+    * Reply 'False' if the text describes full cooperation or a situation unrelated to a refusal of information.
+    * Reply 'NA' if there is no mention of a request for information or the behavior of an undertaking.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: |
+    exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_category_member_states
+  question: |
+    Task: Determine if the legal action described is brought against an EU Member State regarding the overruling of EU competition law.
+    Definition: Cases where a Member State is the subject of the proceeding because its national laws or actions interfere with, overrule, or conflict with EU competition rules.
+    Decision Logic:
+      True: The case is specifically against a Member State (or national authority) for failing to comply with or overruling EU law.
+      False: The case is against a private company (undertaking) or involves a different legal issue.
+      NA: The provided text contains no information about the parties involved or the nature of the legal action.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: |
+    exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_category_abuse_of_dominance
+  question: |
+    Task: Classify the following case based on the definition of "Abuse of Dominance."
+    Definition: A company with significant market power unfairly exploits its position to restrict competition, eliminate rivals, or harm consumers, rather than competing fairly on the merits of its products or services.
+    Constraint: reply with 'True' or 'False', or 'NA' if no information is provided. Do not include any other text or the category name.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: |
+    exists("law_article_all_relevant") and same_concept('abuse_of_dominance', 'law_article_operative')
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_category_hor_vert_lic_joint
+  question: |
+    Is this case about: 
+    * agreements between competing firms operating at the same market level? reply 'horizontal', 
+    * or transfer of rights to exploit Intellectual Property Rights? reply 'license',
+    * or agreements between companies at different levels of the supply chain? reply 'vertical'
+    * or joint ventures and alliances involving coordination of activities? reply 'joint venture'.
+    Constraint: Reply with only the best fitting category name or 'NA'. Do not include introductory text or punctuation.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: |
+    exists("law_article_all_relevant") and same_concept('anticompetitive_agreement', 'law_article_operative')
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_subcategory_horizontal_restraints
+  question: |
+    Task: Classify the business behavior provided below into the correct subcategory of Horizontal Restraints.
+    Definition: Horizontal restraints are agreements between companies operating at the same level of the supply chain.  
+    Select the matching subcategories 
+    * price fixing collusion
+    * market sharing, quota cartels, and specialization agreements
+    * bid-rigging and tender fixing
+    * structural crisis cartels
+    * export cartels
+    * trade associations
+    * marketing and advertising agreements
+    * agreements on standards 
+    * exchange of information on prices and sales
+    Constraint: Your final answer must be the matching category name(s) on one line, separated by "; ", or "NA" if no restraint is found. Do not use a table, a list or any other text.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: "'horizontal' in infringement_category_hor_vert_lic_joint"
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_subcategory_vertical_restraints
+  question: |
+    Task: Classify the business behavior provided below into the correct subcategory of vertical restraint.
+    # Categories:
+    * Exclusive Dealing / Market Foreclosure: Obligations requiring a buyer to purchase only from one supplier.
+    * Territorial Exclusivity / Parallel Trade Bans: Restricting where a buyer can sell or preventing cross-border trade.
+    * Resale Price Maintenance (RPM): Establishing fixed or minimum resale prices.
+    * Bundling and Tying: Making the sale of one product conditional on the purchase of another.
+    * Selective Distribution: Restricting sales to authorized distributors based on specific criteria.
+    * Franchising: Licenses for IP/business models combined with vertical restrictions.
+    * Discounts and Rebates: Financial incentives that may result in loyalty or exclusivity.
+    Constraint: Your final answer must be the matching category name(s) on one line, separated by "; ", or "NA" if no restraint is found. Do not use a table, a list or any other text.
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  condition: "'vertical' in infringement_category_hor_vert_lic_joint"
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: market_oligopoly
+  question: |
+    Is the market dominated by a small number of large players (oligopoly) in the market?  
+    # Constraint: reply with 'True' or 'False' or 'NA' in no info is provided .
+  output_schema: ""
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: decision_remedies
+  question: "What orders did the Commission issue to terminate the infringement? List all remedies and orders, such as cease and desist orders, structural remedies (e.g., divestitures), behavioral remedies (e.g., commitments to change business practices) per company."
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: infringement_gravity
+  question: "How severe is the infringement? respond with one of the following categories: low, medium, high, NA. Consider factors such as the duration of the infringement, the market share of the involved companies, and the potential harm to consumers."
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+# --------- book --------------
+- target_fact_name: case_is_in_book
+  question: "case id's is mentioned in the book"
+  output_schema: ""
+  output_type: str
+  predecessors: []
+  pipeline: book_keywords
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_is_landmark_in_book
+  question: "case id's is mentioned in the book"
+  output_schema: ""
+  output_type: str
+  predecessors: []
+  condition: 'exists("case_is_in_book") '
+  pipeline: book_landmark
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_infringement_type_book
+  question: "cut from input the numbers and special characters from the and return as the infringement of case"
+  output_schema: ""
+  output_type: str
+  predecessors: [case_is_in_book]
+  condition: 'exists("case_is_in_book")'
+  pipeline: book_infringement_type
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_infringement_book
+  question: "infringement of case"
+  output_schema: ""
+  output_type: str
+  predecessors: [case_is_in_book]
+  condition: 'exists("case_is_in_book")'
+  pipeline: book_universal
+  force_override: false
+  run_state_active: false
+
+# --------- NACE --------------
+- target_fact_name: NACE_class_code
+  question: "determine NACE class code for given product and NACE group code"
+  output_schema: ""
+  output_type: str
+  predecessors: ["products", "NACE_group_code"]
+  pipeline: nace_class_code
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: NACE_group_code
+  question: |
+    Task: Match the product list to one single matching NACE group code and title from the provided list. \n 
+    return a matching row formatted STRICTLY as: [NACE-code]:[group_title]
+    Example:
+      Product: Mining of hard coal
+    Output: 05.1:Mining of hard coal
+    === NACE LIST ===:   \n Extraction of natural gas \n === \n NACE \n 01.1:Growing of non-perennial crops\n01.2:Growing of perennial crops\n01.3:Plant propagation\n01.4:Animal production\n01.5:Mixed farming\n01.6:Support activities to agriculture and post-harvest crop activities\n01.7:Hunting, trapping and related service activities\n02.1:Silviculture and other forestry activities\n02.2:Logging\n02.3:Gathering of wild growing non-wood products\n02.4:Support services to forestry\n03.1:Fishing\n03.2:Aquaculture\n05.1:Mining of hard coal\n05.2:Mining of lignite\n06.1:Extraction of crude petroleum\n06.2:Extraction of natural gas\n07.1:Mining of iron ores\n07.2:Mining of non-ferrous metal ores\n08.1:Quarrying of stone, sand and clay\n08.9:Mining and quarrying n.e.c.\n09.1:Support activities for petroleum and natural gas extraction\n09.9:Support activities for other mining and quarrying\n10.1:Processing and preserving of meat and production of meat products\n10.2:Processing and preserving of fish, crustaceans and molluscs\n10.3:Processing and preserving of fruit and vegetables\n10.4:Manufacture of vegetable and animal oils and fats\n10.5:Manufacture of dairy products\n10.6:Manufacture of grain mill products, starches and starch products\n10.7:Manufacture of bakery and farinaceous products\n10.8:Manufacture of other food products\n10.9:Manufacture of prepared animal feeds\n11.0:Manufacture of beverages\n12.0:Manufacture of tobacco products\n13.1:Preparation and spinning of textile fibres\n13.2:Weaving of textiles\n13.3:Finishing of textiles\n13.9:Manufacture of other textiles\n14.1:Manufacture of wearing apparel, except fur apparel\n14.2:Manufacture of articles of fur\n14.3:Manufacture of knitted and crocheted apparel\n15.1:Tanning and dressing of leather; manufacture of luggage, handbags, saddlery and harness; dressing and dyeing of fur\n15.2:Manufacture of footwear\n16.1:Sawmilling and planing of wood\n16.2:Manufacture of products of wood, cork, straw and plaiting materials\n17.1:Manufacture of pulp, paper and paperboard\n17.2:Manufacture of articles of paper and paperboard\n18.1:Printing and service activities related to printing\n18.2:Reproduction of recorded media\n19.1:Manufacture of coke oven products\n19.2:Manufacture of refined petroleum products\n20.1:Manufacture of basic chemicals, fertilisers and nitrogen compounds, plastics and synthetic rubber in primary forms\n20.2:Manufacture of pesticides and other agrochemical products\n20.3:Manufacture of paints, varnishes and similar coatings, printing ink and mastics\n20.4:Manufacture of soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations\n20.5:Manufacture of other chemical products\n20.6:Manufacture of man-made fibres\n21.1:Manufacture of basic pharmaceutical products\n21.2:Manufacture of pharmaceutical preparations\n22.1:Manufacture of rubber products\n22.2:Manufacture of plastics products\n23.1:Manufacture of glass and glass products\n23.2:Manufacture of refractory products\n23.3:Manufacture of clay building materials\n23.4:Manufacture of other porcelain and ceramic products\n23.5:Manufacture of cement, lime and plaster\n23.6:Manufacture of articles of concrete, cement and plaster\n23.7:Cutting, shaping and finishing of stone\n23.9:Manufacture of abrasive products and non-metallic mineral products n.e.c.\n24.1:Manufacture of basic iron and steel and of ferro-alloys\n24.2:Manufacture of tubes, pipes, hollow profiles and related fittings, of steel\n24.3:Manufacture of other products of first processing of steel\n24.4:Manufacture of basic precious and other non-ferrous metals\n24.5:Casting of metals\n25.1:Manufacture of structural metal products\n25.2:Manufacture of tanks, reservoirs and containers of metal\n25.3:Manufacture of steam generators, except central heating hot water boilers\n25.4:Manufacture of weapons and ammunition\n25.5:Forging, pressing, stamping and roll-forming of metal; powder metallurgy\n25.6:Treatment and coating of metals; machining\n25.7:Manufacture of cutlery, tools and general hardware\n25.9:Manufacture of other fabricated metal products\n26.1:Manufacture of electronic components and boards\n26.2:Manufacture of computers and peripheral equipment\n26.3:Manufacture of communication equipment\n26.4:Manufacture of consumer electronics\n26.5:Manufacture of instruments and appliances for measuring, testing and navigation; watches and clocks\n26.6:Manufacture of irradiation, electromedical and electrotherapeutic equipment\n26.7:Manufacture of optical instruments and photographic equipment\n26.8:Manufacture of magnetic and optical media\n27.1:Manufacture of electric motors, generators, transformers and electricity distribution and control apparatus\n27.2:Manufacture of batteries and accumulators\n27.3:Manufacture of wiring and wiring devices\n27.4:Manufacture of electric lighting equipment\n27.5:Manufacture of domestic appliances\n27.9:Manufacture of other electrical equipment\n28.1:Manufacture of general — purpose machinery\n28.2:Manufacture of other general-purpose machinery\n28.3:Manufacture of agricultural and forestry machinery\n28.4:Manufacture of metal forming machinery and machine tools\n28.9:Manufacture of other special-purpose machinery\n29.1:Manufacture of motor vehicles\n29.2:Manufacture of bodies (coachwork) for motor vehicles; manufacture of trailers and semi-trailers\n29.3:Manufacture of parts and accessories for motor vehicles\n30.1:Building of ships and boats\n30.2:Manufacture of railway locomotives and rolling stock\n30.3:Manufacture of air and spacecraft and related machinery\n30.4:Manufacture of military fighting vehicles\n30.9:Manufacture of transport equipment n.e.c.\n31.0:Manufacture of furniture\n32.1:Manufacture of jewellery, bijouterie and related articles\n32.2:Manufacture of musical instruments\n32.3:Manufacture of sports goods\n32.4:Manufacture of games and toys\n32.5:Manufacture of medical and dental instruments and supplies\n32.9:Manufacturing n.e.c.\n33.1:Repair of fabricated metal products, machinery and equipment\n33.2:Installation of industrial machinery and equipment\n35.1:Electric power generation, transmission and distribution\n35.2:Manufacture of gas; distribution of gaseous fuels through mains\n35.3:Steam and air conditioning supply\n36.0:Water collection, treatment and supply\n37.0:Sewerage\n38.1:Waste collection\n38.2:Waste treatment and disposal\n38.3:Materials recovery\n39.0:Remediation activities and other waste management services\n41.1:Development of building projects\n41.2:Construction of residential and non-residential buildings\n42.1:Construction of roads and railways\n42.2:Construction of utility projects\n42.9:Construction of other civil engineering projects\n43.1:Demolition and site preparation\n43.2:Electrical, plumbing and other construction installation activities\n43.3:Building completion and finishing\n43.9:Other specialised construction activities\n45.1:Sale of motor vehicles\n45.2:Maintenance and repair of motor vehicles\n45.3:Sale of motor vehicle parts and accessories\n45.4:Sale, maintenance and repair of motorcycles and related parts and accessories\n46.1:Wholesale on a fee or contract basis\n46.2:Wholesale of agricultural raw materials and live animals\n46.3:Wholesale of food, beverages and tobacco\n46.4:Wholesale of household goods\n46.5:Wholesale of information and communication equipment\n46.6:Wholesale of other machinery, equipment and supplies\n46.7:Other specialised wholesale\n46.9:Non-specialised wholesale trade\n47.1:Retail sale in non-specialised stores\n47.2:Retail sale of food, beverages and tobacco in specialised stores\n47.3:Retail sale of automotive fuel in specialised stores\n47.4:Retail sale of information and communication equipment in specialised stores\n47.5:Retail sale of other household equipment in specialised stores\n47.6:Retail sale of cultural and recreation goods in specialised stores\n47.7:Retail sale of other goods in specialised stores\n47.8:Retail sale via stalls and markets\n47.9:Retail trade not in stores, stalls or markets\n49.1:Passenger rail transport, interurban\n49.2:Freight rail transport\n49.3:Other passenger land transport\n49.4:Freight transport by road and removal services\n49.5:Transport via pipeline\n50.1:Sea and coastal passenger water transport\n50.2:Sea and coastal freight water transport\n50.3:Inland passenger water transport\n50.4:Inland freight water transport\n51.1:Passenger air transport\n51.2:Freight air transport and space transport\n52.1:Warehousing and storage\n52.2:Support activities for transportation\n53.1:Postal activities under universal service obligation\n53.2:Other postal and courier activities\n55.1:Hotels and similar accommodation\n55.2:Holiday and other short-stay accommodation\n55.3:Camping grounds, recreational vehicle parks and trailer parks\n55.9:Other accommodation\n56.1:Restaurants and mobile food service activities\n56.2:Event catering and other food service activities\n56.3:Beverage serving activities\n58.1:Publishing of books, periodicals and other publishing activities\n58.2:Software publishing\n59.1:Motion picture, video and television programme activities\n59.2:Sound recording and music publishing activities\n60.1:Radio broadcasting\n60.2:Television programming and broadcasting activities\n61.1:Wired telecommunications activities\n61.2:Wireless telecommunications activities\n61.3:Satellite telecommunications activities\n61.9:Other telecommunications activities\n62.0:Computer programming, consultancy and related activities\n63.1:Data processing, hosting and related activities; web portals\n63.9:Other information service activities\n64.1:Monetary intermediation\n64.2:Activities of holding companies\n64.3:Trusts, funds and similar financial entities\n64.9:Other financial service activities, except insurance and pension funding\n65.1:Insurance\n65.2:Reinsurance\n65.3:Pension funding\n66.1:Activities auxiliary to financial services, except insurance and pension funding\n66.2:Activities auxiliary to insurance and pension funding\n66.3:Fund management activities\n68.1:Buying and selling of own real estate\n68.2:Renting and operating of own or leased real estate\n68.3:Real estate activities on a fee or contract basis\n69.1:Legal activities\n69.2:Accounting, bookkeeping and auditing activities; tax consultancy\n70.1:Activities of head offices\n70.2:Management consultancy activities\n71.1:Architectural and engineering activities and related technical consultancy\n71.2:Technical testing and analysis\n72.1:Research and experimental development on natural sciences and engineering\n72.2:Research and experimental development on social sciences and humanities\n73.1:Advertising\n73.2:Market research and public opinion polling\n74.1:Specialised design activities\n74.2:Photographic activities\n74.3:Translation and interpretation activities\n74.9:Other professional, scientific and technical activities n.e.c.\n75.0:Veterinary activities\n77.1:Renting and leasing of motor vehicles\n77.2:Renting and leasing of personal and household goods\n77.3:Renting and leasing of other machinery, equipment and tangible goods\n77.4:Leasing of intellectual property and similar products, except copyrighted works\n78.1:Activities of employment placement agencies\n78.2:Temporary employment agency activities\n78.3:Other human resources provision\n79.1:Travel agency and tour operator activities\n79.9:Other reservation service and related activities\n80.1:Private security activities\n80.2:Security systems service activities\n80.3:Investigation activities\n81.1:Combined facilities support activities\n81.2:Cleaning activities\n81.3:Landscape service activities\n82.1:Office administrative and support activities\n82.2:Activities of call centres\n82.3:Organisation of conventions and trade shows\n82.9:Business support service activities n.e.c.\n84.1:Administration of the State and the economic and social policy of the community\n84.2:Provision of services to the community as a whole\n84.3:Compulsory social security activities\n85.1:Pre-primary education\n85.2:Primary education\n85.3:Secondary education\n85.4:Higher education\n85.5:Other education\n85.6:Educational support activities\n86.1:Hospital activities\n86.2:Medical and dental practice activities\n86.9:Other human health activities\n87.1:Residential nursing care activities\n87.2:Residential care activities for mental retardation, mental health and substance abuse\n87.3:Residential care activities for the elderly and disabled\n87.9:Other residential care activities\n88.1:Social work activities without accommodation for the elderly and disabled\n88.9:Other social work activities without accommodation\n90.0:Creative, arts and entertainment activities\n91.0:Libraries, archives, museums and other cultural activities\n92.0:Gambling and betting activities\n93.1:Sports activities\n93.2:Amusement and recreation activities\n94.1:Activities of business, employers and professional membership organisations\n94.2:Activities of trade unions\n94.9:Activities of other membership organisations\n95.1:Repair of computers and communication equipment\n95.2:Repair of personal and household goods\n96.0:Other personal service activities\n97.0:Activities of households as employers of domestic personnel\n98.1:Undifferentiated goods-producing activities of private households for own use\n98.2:Undifferentiated service-producing activities of private households for own use \n
+  output_schema: ""
+  output_type: str
+  predecessors: ["products"]
+  pipeline: fact_context
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: OECD_sector
+  question: "Which economic sector is involved? Choose the most fitting out of the following 10 OECD sectors:\nagriculture; \nmining;\nmanufacturing; \nelectricity and gas; \nconstruction; \ntrade (wholesaling and retailing) and hotels; \ntransport; \nbanking and insurance (including real estate); \ncommunication;\npublic service"
+  output_schema: ""
+  output_type: str
+  predecessors: ["products"]
+  # Classifies the sector FROM the products list (like its sibling
+  # NACE_group_code). The `universal` pipeline ignores predecessors and does a
+  # doc search instead, so the products context never reaches the LLM;
+  # `fact_context` feeds it directly.
+  pipeline: fact_context
+  force_override: false
+  run_state_active: false
+
+# --------- market --------------
+- target_fact_name: market_turbulence
+  question: list market turbulence and uncertainties, if mentioned in the document. This includes any references to market volatility, economic instability, or other factors that could impact the competitive landscape. reply with "NA" if no market turbulence or uncertainties are mentioned.
+  output_schema: "market_turbulence"
+  output_type: str
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: market_geographical
+  question: In which countries is the geographical market located?
+  output_schema: "country"
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: market_outside_eu
+  question: Is the geographical market including non European community members?
+  predecessors: ["market_geographical"]
+  output_schema: "bool"
+  pipeline: "fact_context"
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: products
+  question: list all products 
+  output_schema: products
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: services
+  question: list all services
+  output_schema: products
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+#-- LENIENCY
+
+- target_fact_name: exemption_case
+  question: exemption
+  output_schema: ""
+  pipeline: keyword_search
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: exemption_applicants
+  question: Which companies applied for exemption?
+  output_schema: "company"
+  pipeline: universal
+  predecessors: ["companies_investigated", "exemption_case"]
+  condition: 'exists("exemption_case") and exemption_case == true'
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: leniency_case
+  question: leniency
+  output_schema: ""
+  pipeline: keyword_search
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: leniency_case_match
+  question: Are both facts similar? Ignore formatting differences, abbreviations, unit placements, casing, and minor stylistic variations.
+  output_schema: bool
+  predecessors: ["leniency_case"]
+  pipeline: fact_comparison
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: leniency_applicants
+  question: Which companies submitted a leniency application?
+  output_schema: "company"
+  pipeline: universal
+  predecessors: ["companies_investigated", "leniency_case"]
+  condition: 'exists("leniency_case") and leniency_case == true'
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: leniency_granted
+  question: Which companies got which amount fine reduction?
+  output_schema: "company, amount"
+  pipeline: universal
+  predecessors: ["companies_investigated", "leniency_case", "leniency_applicants"]
+  condition: 'exists("leniency_case") and leniency_case == true'
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: leniency_rejected
+  question: Identify which companies from the leniency_applicants list are NOT present in the leniency_granted list. Ignore company names suffixes like "S.A.", "SA", "AG", "GmbH", etc. ?
+  output_schema: "company"
+  pipeline: "hybrid_search"
+  predecessors:
+    ["companies_investigated", "leniency_case", "leniency_applicants", "leniency_granted"]
+  force_override: false
+  condition: 'exists("leniency_case") and leniency_case == true'
+  run_state_active: false
+
+# -- Fines --
+- target_fact_name: fines
+  question: List all fines
+  output_schema: company, amount
+  # Golden list for verification: resolved by fact NAME against the facts table,
+  # unlike output_schema above, which names the JSON row key. The retired
+  # `company` fact resolved empty, silently disabling verification.
+  verify_fact_name: companies_investigated
+  pipeline: universal
+  predecessors: ["companies_investigated"]
+  # Restrict retrieval to the sections where amounts and orders live
+  # (section_type metadata from Main_classify_sections.py).
+  section_scope: [fines, operative]
+  run_state_active: false
+
+# -- companies --
+- target_fact_name: companies_investigated
+  # Frame as "parties/addressees whose conduct the Commission assessed" rather
+  # than "under investigation": the latter deterministically excludes the party
+  # in exemption / negative-clearance / notification decisions and biases the
+  # model against trade or professional associations (e.g. CELEX-31987D0013,
+  # CELEX-31985D0564), yielding a spurious NA.
+  question: |
+    List the undertakings, companies, or associations named as parties of this
+    decision (the entities whose conduct or agreements the Commission assessed).
+    Include trade or professional associations.
+    Output rules:
+    - Emit ONE row per individual legal entity. Never combine several entities
+      into one row. Where the text names a parent "and its subsidiaries: X, Y, Z",
+      emit a separate row for the parent and one for each of X, Y and Z.
+    - The `companies` value is the legal name ONLY. Copy it exactly as written
+      and STOP at the end of the name. Do not append street, postal code, city,
+      region or country, and do not append a country parenthetical:
+      "Hansa Metallwerke AG (Germany)" -> "Hansa Metallwerke AG"
+      "Astral, Société de Peintures, Vernis et Encres d'Imprimerie, Paris, France"
+      -> "Astral, Société de Peintures, Vernis et Encres d'Imprimerie"
+    - Keep a comma that belongs to the name itself; drop a comma that introduces
+      an address.
+    - Keep the legal-form suffix (AG, GmbH, S.A., B.V., Ltd) and any parenthesised
+      acronym that is the entity's own abbreviation, e.g. "(ACIMIT)".
+    - Put any location text in `location`; use "NA" when the text gives none.
+  output_schema: companies, location
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+
+
+- target_fact_name: company_recidivism
+  question: |
+    Analyze this behavior under EU competition law (Articles 101, 102, or 106 TFEU, or their predecessors). 
+    Has this specific undertaking engaged in similar anti-competitive behavior in the past, constituting recidivism?
+    Constraint: Reply strictly with 'True', 'False', or 'NA' (if no public information is available).
+  output_schema: companies,recidivism
+  pipeline: universal
+  predecessors: ["companies_investigated"]
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: companies_country
+  question: for all companies, what is their ISO country code ?
+  output_schema: "companies_investigated, country"
+  predecessors: ["companies_investigated"]
+  # Dependent fact: the ISO country code is derived per company from the
+  # authoritative companies_investigated list. The `universal` (hybrid-search)
+  # pipeline ignores predecessors and re-derives companies from retrieved
+  # chunks, so a retrieval miss silently drops companies (and their country).
+  # `fact_context` feeds companies_investigated straight to the extractor.
+  pipeline: fact_context
+  # ISO 3166-1 is a closed vocabulary; canonicalize the extracted country
+  # deterministically (Germany/de/DEU/Deutschland -> DE) instead of trusting
+  # the LLM to format the code. Unresolvable values are kept as-is.
+  normalize_iso_country: true
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: companies_address
+  question: What is the registered address of this company ?
+  # detail_retriever: per-entity enrichment. The companies_investigated rows
+  # define the entity roster; each company gets its own targeted search
+  # (keyword first, hybrid fallback) plus its own extraction call, so no
+  # company is silently dropped by a retrieval miss. The FIRST schema key
+  # carries the entity name; missing details come back as 'NA'.
+  output_schema: "company,  address"
+  predecessors: ["companies_investigated"]
+  pipeline: detail_retriever
+  # Registered/postal addresses live in the decision's addressee block
+  # (the operative section), not the "undertakings concerned" recitals which
+  # only give a city. Scope per-entity retrieval there so the full address is
+  # surfaced instead of a narrative "based in <city>" mention.
+  section_scope: [operative]
+  force_override: false
+  run_state_active: false
+
+  
+- target_fact_name: companies_industry
+  question: list the industries
+  output_schema: "industry"
+  pipeline: universal
+  run_state_active: false
+
+#-- Events 
+  # currently celex_facts.heideltime_extractions
+- target_fact_name: heideltime_raw
+  question: "Create a chronological, deduplicated timeline of case-specific events"
+  output_schema: ""
+  pipeline: heideltime_raw
+  force_override: false
+  run_state_active: false
+
+# -- HeidelTime Event Enrichment --------------
+- target_fact_name: heideltime_event
+  question: "Extract structured events (actor, predicate-object) for each canonical HeidelTime date found in the document"
+  output_schema: "event, actor, predicate_object"
+  pipeline: heideltime_event
+  predecessors:
+    - heideltime_raw
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: heideltime_event_agg
+  question: "Analyze the following input and extract up to 12 critical events spanning the whole case: always the earliest conduct event (agreement concluded, cartel creation), the last conduct event, and the final outcome (decision, fines). skip any trivia"
+  output_schema: "event, actor, predicate_object"
+  pipeline: heideltime_event_agg
+  predecessors:
+    - heideltime_event
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: heideltime_cartel_period
+  question: "Analyze the provided event text to find the **global start date** and **global end date** of the company's infringement (cartel period)."
+  output_schema: "start_date, end_date"
+  pipeline: heideltime_cartel_period
+  predecessors:
+    - heideltime_event
+  force_override: false
+  run_state_active: false
+
+# -- events --
+- target_fact_name: eu_commisssion_decision_date
+  question: "When did the EU commission decided this case? Reply with date format YYYY-MM-DD or NA"
+  predecessors: ["heideltime_event_agg"]
+  output_schema: "str"
+  pipeline: "fact_context"
+  force_override: false
+  run_state_active: false
+
+
+# ----------------------------------------------------------------------------------
+# --------- Courts --------------
+- target_fact_name: is_court_involved
+  question: Court
+  output_schema: ""
+  pipeline: keyword_search
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: court_list_raw
+  question: List all courts with assessment, order, ruling, decision or judgement?
+  output_schema: "court, country, jurisdiction"
+  pipeline: "router"
+  predecessors:
+    - is_court_involved
+  condition: 'is_court_involved == true'
+  force_override: false
+  run_state_active: false
+
+
+- target_fact_name: court_list
+  question: |
+    ### Strict Normalization Rules:
+    1. Identify and Resolve Hierarchy: Look past typos, informal shorthand, and generic descriptions (e.g., "Danish court"). If an entry is a generic reference or a distinct subdivision of another court in the list (e.g., "High Court of Justice" vs. "High Court of Justice, Chancery Division"), merge them into the most specific, accurate institutional name provided.
+    2. Standardize Court Names: Output the official, formal name of the court for the final row. Remove extraneous contextual words (e.g., "litigation", "case", or specific party names like "Lagap").
+    3. Normalize Country and Jurisdiction: Ensure absolute consistency in these columns. Resolve synonyms and variations to a single, standardized format (e.g., standardize "Great Britain", "England", and "UK" to Country: "United Kingdom" / Jurisdiction: "UK" or "England & Wales" depending on your target schema).
+    4. Smart Deduplication (Do Not Over-Merge): Merge entries ONLY if they represent the exact same judicial body. Do not merge courts of different judicial levels (e.g., Trial/District courts vs. Appellate/Supreme courts) simply because they share a jurisdiction. When resolving duplicates, favor merging up to the correct specific division rather than collapsing entirely different courts together.
+  output_schema: "court, country, jurisdiction"
+  pipeline: fact_context
+  predecessors:
+    - court_list_raw
+  condition: "'court' in court_list_raw"
+  force_override: false
+  run_state_active: false
+
+# ----------------------------------------------------------------------------------
+# -- base --
+- target_fact_name: case_commission_info_request
+  question: |
+    Is this a information request of the EU commission? 
+    # Constraint: reply with 'True' or 'False' or 'NA' in no info is provided .
+  output_schema: ""
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_commission_no_action
+  question: |
+    the Commission need not take action or Articles are hereby declared inapplicable
+    # Constraint: reply with 'True' or 'False' or 'NA' in no info is provided .
+  output_schema: ""
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_commission_decision
+  question: |
+    The EU commission has taken a decision? The text contains chapter "HAS ADOPTED THIS DECISION" and "Article 1","Article 2","Article 3", and so on
+    # Constraint: reply with 'True' or 'False' or 'NA' in no info is provided .
+  output_schema: ""
+  pipeline: universal
+  force_override: false
+  run_state_active: false
+
+- target_fact_name: case_commissioner
+  question:  |
+    Who was the commissioner? 
+    The commissioner name is typically found within the following format: 
+    "Done at Brussels, <date>, For the Commission / <name> / Member of the Commission"
+  output_schema: ""
+  output_type: str
+  pipeline: universal
+  predecessors: []
+  force_override: true
+  run_state_active: true
+
+- target_fact_name: celex_case_id
+  question: ingest celex_id and case_id
+  pipeline: celex_case_id
+  run_state_active: false
+
+- target_fact_name: case_title
+  question: |
+    Extract the case id and the full title of the legal case from the input text.
+  pipeline: case_title
+  force_override: false
+  run_state_active: false

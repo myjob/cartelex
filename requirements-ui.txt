@@ -1,0 +1,398 @@
+#
+# Serving-path lock for the oi_dspy chat image: NO extra, therefore no torch,
+# no sentence-transformers, and no BgeReranker. The reranker in this tree is
+# FlashRank, whose entire runtime is onnxruntime + tokenizers.
+#
+# Regenerate with (note: no --extra and no PyTorch index):
+#
+#    pip-compile --output-file=requirements-ui.txt pyproject.toml
+#
+# Maintained by hand in step with requirements.txt / requirements-cpu.txt, the
+# same way those two are: a from-scratch pip-compile re-resolves the whole tree
+# and silently desyncs the images. This file is requirements-cpu.txt minus
+# exactly ten packages -- torch, sentence-transformers, transformers,
+# safetensors, networkx, scikit-learn, scipy, narwhals, joblib, threadpoolctl
+# -- which is the closure of "things only BgeReranker needs", computed from
+# the via-annotations. Every shared pin is identical.
+#
+aiohappyeyeballs==2.6.1
+    # via aiohttp
+aiohttp==3.13.3
+    # via litellm
+aiosignal==1.4.0
+    # via aiohttp
+alembic==1.18.4
+    # via optuna
+annotated-doc==0.0.4
+    # via fastapi
+annotated-types==0.7.0
+    # via pydantic
+anyio==4.12.1
+    # via
+    #   asyncer
+    #   dspy
+    #   httpx
+    #   openai
+    #   starlette
+asyncer==0.0.8
+    # via dspy
+asyncpg==0.31.0
+    # via langchain-postgres
+attrs==25.4.0
+    # via
+    #   aiohttp
+    #   jsonschema
+    #   referencing
+brotli==1.2.0
+    # via fonttools
+cachetools==7.0.5
+    # via dspy
+certifi==2026.2.25
+    # via
+    #   httpcore
+    #   httpx
+    #   requests
+cffi==2.0.0
+    # via weasyprint
+charset-normalizer==3.4.5
+    # via requests
+click==8.3.1
+    # via
+    #   litellm
+    #   typer
+    #   uvicorn
+cloudpickle==3.1.2
+    # via dspy
+colorlog==6.10.1
+    # via optuna
+connectorx==0.4.5
+    # via celex-facts (pyproject.toml)
+cssselect2==0.9.0
+    # via weasyprint
+diskcache==5.6.3
+    # via dspy
+distro==1.9.0
+    # via openai
+dspy==3.1.3
+    # via celex-facts (pyproject.toml)
+emoji==2.0.0
+    # via py-heideltime
+fastapi==0.136.1
+    # via celex-facts (pyproject.toml)
+fastuuid==0.14.0
+    # via litellm
+filelock==3.25.2
+    # via huggingface-hub
+flashrank==0.2.10
+    # via celex-facts (pyproject.toml)
+flatbuffers==25.12.19
+    # via onnxruntime
+fonttools[woff]==4.62.1
+    # via weasyprint
+frozenlist==1.8.0
+    # via
+    #   aiohttp
+    #   aiosignal
+fsspec==2026.3.0
+    # via huggingface-hub
+gepa[dspy]==0.0.26
+    # via dspy
+greenlet==3.3.2
+    # via sqlalchemy
+h11==0.16.0
+    # via
+    #   httpcore
+    #   uvicorn
+hf-xet==1.4.3
+    # via huggingface-hub
+httpcore==1.0.9
+    # via httpx
+httpx==0.28.1
+    # via
+    #   celex-facts (pyproject.toml)
+    #   huggingface-hub
+    #   langsmith
+    #   litellm
+    #   ollama
+    #   openai
+huggingface-hub==1.10.1
+    # via tokenizers
+idna==3.11
+    # via
+    #   anyio
+    #   httpx
+    #   requests
+    #   yarl
+importlib-metadata==9.0.0
+    # via litellm
+jinja2==3.1.6
+    # via litellm
+jiter==0.13.0
+    # via openai
+json-repair==0.58.7
+    # via dspy
+jsonpatch==1.33
+    # via langchain-core
+jsonpointer==3.0.0
+    # via jsonpatch
+jsonschema==4.26.0
+    # via litellm
+jsonschema-specifications==2025.9.1
+    # via jsonschema
+langchain-core==1.2.5
+    # via
+    #   celex-facts (pyproject.toml)
+    #   langchain-postgres
+    #   langchain-text-splitters
+langchain-postgres==0.0.16
+    # via celex-facts (pyproject.toml)
+langchain-text-splitters==1.1.0
+    # via celex-facts (pyproject.toml)
+langdetect==1.0.9
+    # via celex-facts (pyproject.toml)
+langsmith==0.6.0
+    # via langchain-core
+litellm==1.82.6
+    # via dspy
+mako==1.3.10
+    # via alembic
+markdown-it-py==4.0.0
+    # via
+    #   celex-facts (pyproject.toml)
+    #   rich
+markupsafe==3.0.3
+    # via
+    #   jinja2
+    #   mako
+mdurl==0.1.2
+    # via markdown-it-py
+mistune==3.2.0
+    # via celex-facts (pyproject.toml)
+mpmath==1.3.0
+    # via sympy
+multidict==6.7.1
+    # via
+    #   aiohttp
+    #   yarl
+numpy==2.4.3
+    # via
+    #   celex-facts (pyproject.toml)
+    #   dspy
+    #   flashrank
+    #   langchain-postgres
+    #   onnxruntime
+    #   optuna
+    #   pgvector
+    #   scikit-learn
+    #   scipy
+ollama==0.6.1
+    # via celex-facts (pyproject.toml)
+onnxruntime==1.24.4
+    # via flashrank
+openai==2.14.0
+    # via
+    #   dspy
+    #   litellm
+optuna==4.8.0
+    # via dspy
+orjson==3.11.7
+    # via
+    #   dspy
+    #   langsmith
+packaging==25.0
+    # via
+    #   huggingface-hub
+    #   langchain-core
+    #   langsmith
+    #   onnxruntime
+    #   optuna
+pgvector==0.3.6
+    # via
+    #   celex-facts (pyproject.toml)
+    #   langchain-postgres
+pillow==12.2.0
+    # via weasyprint
+ply==3.11
+    # via rule-engine
+polars==1.39.3
+    # via celex-facts (pyproject.toml)
+polars-runtime-32==1.39.3
+    # via polars
+propcache==0.4.1
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==6.33.5
+    # via onnxruntime
+psycopg[binary]==3.3.2
+    # via
+    #   celex-facts (pyproject.toml)
+    #   langchain-postgres
+psycopg-binary==3.3.2
+    # via psycopg
+psycopg-pool==3.3.0
+    # via
+    #   celex-facts (pyproject.toml)
+    #   langchain-postgres
+py-heideltime==1.0.6
+    # via celex-facts (pyproject.toml)
+pyarrow==25.0.1
+    # via celex-facts (pyproject.toml)
+pycountry==24.6.1
+    # via celex-facts (pyproject.toml)
+pycparser==3.0
+    # via cffi
+pydantic==2.12.5
+    # via
+    #   celex-facts (pyproject.toml)
+    #   dspy
+    #   fastapi
+    #   langchain-core
+    #   langsmith
+    #   litellm
+    #   ollama
+    #   openai
+pydantic-core==2.41.5
+    # via pydantic
+pydyf==0.12.1
+    # via weasyprint
+pygments==2.19.2
+    # via rich
+pyphen==0.17.2
+    # via weasyprint
+python-dateutil==2.9.0.post0
+    # via rule-engine
+python-dotenv==1.2.1
+    # via
+    #   celex-facts (pyproject.toml)
+    #   litellm
+pyyaml==6.0.3
+    # via
+    #   celex-facts (pyproject.toml)
+    #   huggingface-hub
+    #   langchain-core
+    #   optuna
+referencing==0.37.0
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
+regex==2026.2.28
+    # via
+    #   dspy
+    #   tiktoken
+requests==2.32.5
+    # via
+    #   celex-facts (pyproject.toml)
+    #   dspy
+    #   flashrank
+    #   langsmith
+    #   requests-toolbelt
+    #   tiktoken
+requests-toolbelt==1.0.0
+    # via langsmith
+rich==14.2.0
+    # via typer
+rpds-py==0.30.0
+    # via
+    #   jsonschema
+    #   referencing
+rule-engine==4.5.3
+    # via celex-facts (pyproject.toml)
+shellingham==1.5.4
+    # via typer
+six==1.17.0
+    # via
+    #   langdetect
+    #   python-dateutil
+sniffio==1.3.1
+    # via openai
+sqlalchemy[asyncio]==2.0.45
+    # via
+    #   alembic
+    #   celex-facts (pyproject.toml)
+    #   langchain-postgres
+    #   optuna
+starlette==1.0.0
+    # via fastapi
+sympy==1.14.0
+    # via onnxruntime
+tenacity==9.1.4
+    # via
+    #   dspy
+    #   langchain-core
+tiktoken==0.12.0
+    # via
+    #   celex-facts (pyproject.toml)
+    #   litellm
+tinycss2==1.5.1
+    # via
+    #   cssselect2
+    #   weasyprint
+tinyhtml5==2.1.0
+    # via weasyprint
+tokenizers==0.22.2
+    # via
+    #   flashrank
+    #   litellm
+tqdm==4.67.1
+    # via
+    #   celex-facts (pyproject.toml)
+    #   dspy
+    #   flashrank
+    #   huggingface-hub
+    #   openai
+    #   optuna
+typer==0.21.0
+    # via huggingface-hub
+typing-extensions==4.15.0
+    # via
+    #   aiosignal
+    #   alembic
+    #   anyio
+    #   fastapi
+    #   huggingface-hub
+    #   langchain-core
+    #   openai
+    #   psycopg
+    #   psycopg-pool
+    #   pydantic
+    #   pydantic-core
+    #   referencing
+    #   sqlalchemy
+    #   starlette
+    #   typer
+    #   typing-inspection
+typing-inspection==0.4.2
+    # via
+    #   fastapi
+    #   pydantic
+urllib3==2.6.3
+    # via requests
+uuid-utils==0.14.1
+    # via
+    #   langchain-core
+    #   langsmith
+uvicorn==0.46.0
+    # via celex-facts (pyproject.toml)
+weasyprint==68.1
+    # via celex-facts (pyproject.toml)
+webencodings==0.5.1
+    # via
+    #   cssselect2
+    #   tinycss2
+    #   tinyhtml5
+xlsxwriter==3.2.9
+    # via celex-facts (pyproject.toml)
+xxhash==3.6.0
+    # via dspy
+yarl==1.23.0
+    # via aiohttp
+zipp==3.23.0
+    # via importlib-metadata
+zopfli==0.4.1
+    # via fonttools
+zstandard==0.25.0
+    # via langsmith
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

@@ -1,0 +1,24 @@
+{
+  "attachPath": {
+    "attachmentRoot": "",
+    "saveAttE": "obsFolder",
+    "attachmentPath": "${notepath}/${notename}",
+    "attachFormat": "IMG-${date}",
+    "type": "GLOBAL"
+  },
+  "dateFormat": "YYYYMMDDHHmmssSSS",
+  "excludeExtensionPattern": "py|pyi|toml|txt|lock|cfg|ini|sh|bash|sql|json|ya?ml|ipynb|csv|tsv|env|dockerfile|js|ts|html|css|md",
+  "autoRenameAttachment": true,
+  "excludedPaths": "src;scripts;tests;.obsidian;.venv",
+  "excludePathsArray": [
+    "src",
+    "scripts",
+    "tests",
+    ".obsidian",
+    ".venv"
+  ],
+  "excludeSubpaths": true,
+  "originalNameStorage": [],
+  "overridePath": {},
+  "disableNotification": false
+}

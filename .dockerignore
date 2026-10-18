@@ -1,0 +1,14 @@
+# Keep the build context small: .venv alone is ~8GB and is never copied.
+.venv/
+node_modules/
+pg-data/
+.git/
+logs/
+docs/
+reports/
+playwright-report/
+dist/
+**/__pycache__/
+**/*.pyc
+*.log
+**/tests/*

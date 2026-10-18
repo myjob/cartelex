@@ -1,0 +1,12 @@
+{
+  "readableLineLength": false,
+  "showUnsupportedFiles": true,
+  "promptDelete": false,
+  "newFileLocation": "folder",
+  "attachmentFolderPath": "./images",
+  "newFileFolderPath": "docs",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "alwaysUpdateLinks": true,
+  "showLineNumber": false
+}

@@ -1,0 +1,597 @@
+{
+  "main": {
+    "id": "c9339fbc4c2e94f2",
+    "type": "split",
+    "children": [
+      {
+        "id": "0af527c687536cd0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6489c6f6b388e7b4",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ISSUES.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "ISSUES"
+            }
+          },
+          {
+            "id": "215dfb147b02cca2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Open WebUI Quest  Message Thread.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Open WebUI Quest  Message Thread"
+            }
+          },
+          {
+            "id": "4ddf2c40a42c5bf7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/knowledge_extraction_queue rubbish prevention.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "knowledge_extraction_queue rubbish prevention"
+            }
+          },
+          {
+            "id": "9cf6f51af42fed96",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/features/Feature list.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Feature list"
+            }
+          },
+          {
+            "id": "955cea51d3c8e0f5",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Questions.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Questions"
+            }
+          },
+          {
+            "id": "7de178e86e279d2f",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/qa/Improvement Plan Fable-20260610.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Improvement Plan Fable-20260610"
+            }
+          },
+          {
+            "id": "16eadbea7a9a2641",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/qa/Fable Knowledge Representation Review.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Fable Knowledge Representation Review"
+            }
+          },
+          {
+            "id": "448fd5c55c21ccb3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "QuickCapture.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "QuickCapture"
+            }
+          },
+          {
+            "id": "43c919b540719f40",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/qa/Data Quality Checks.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Data Quality Checks"
+            }
+          },
+          {
+            "id": "bc75b9bda69e721b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Performance of LLM with MTP.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Performance of LLM with MTP"
+            }
+          },
+          {
+            "id": "42f78861cbd91ee9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design Fact Verifier.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Design Fact Verifier"
+            }
+          },
+          {
+            "id": "ffb4d4fc6f93530a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Issue & Runbook — Black screen after unlock — job-server"
+            }
+          },
+          {
+            "id": "711d0d336080d2a5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Black Screen Ubuntu.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Black Screen Ubuntu"
+            }
+          },
+          {
+            "id": "a0b78e338e0aad98",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "d50d35f51b002b3e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design Heideltime Events.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Design Heideltime Events"
+            }
+          },
+          {
+            "id": "ed89452c42bb5543",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Issue & Runbook — Black screen after unlock — job-server"
+            }
+          },
+          {
+            "id": "e949e6b0a77f9e7d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/dev/Build.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Build"
+            }
+          },
+          {
+            "id": "20a4ff081746c447",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/dev/Build.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Build"
+            }
+          },
+          {
+            "id": "6691ddd5e897cc58",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Issue & Runbook — Black screen after unlock — job-server"
+            }
+          },
+          {
+            "id": "6ccf266608f384f3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Issue & Runbook — Black screen after unlock — job-server"
+            }
+          },
+          {
+            "id": "93fde71b861690b8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design KnowledgeIngestModule.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Design KnowledgeIngestModule"
+            }
+          },
+          {
+            "id": "cc2dea63f2d827f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/dev/ISSUES.md doctor.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ISSUES.md doctor"
+            }
+          },
+          {
+            "id": "f81576beb7449402",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/claude/plans/phase3-decision-structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "phase3-decision-structure"
+            }
+          },
+          {
+            "id": "08e84293ed7aee9f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/answer-a-question vs. enumerate- all-instances of X.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "answer-a-question vs. enumerate- all-instances of X"
+            }
+          },
+          {
+            "id": "7cc48f9d92e47b7e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/cartelex release.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "cartelex release"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "821a0dc51ae6c0be",
+    "type": "split",
+    "children": [
+      {
+        "id": "2918a8511791f2ac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "155448cc9544d44c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "048a86a17ef49e44",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "19f6f1cbf9549141",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 489.5
+  },
+  "right": {
+    "id": "24f29991c9f89d7b",
+    "type": "split",
+    "children": [
+      {
+        "id": "e997d25a791522a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37dd257532670d22",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ISSUES.md",
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for ISSUES"
+            }
+          },
+          {
+            "id": "a129efcd92fe478e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "ISSUES.md",
+                "linksCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from ISSUES"
+            }
+          },
+          {
+            "id": "a05226ad225d4893",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "8f79659c18855235",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d0750476cb5d3861",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "ISSUES.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "d9d68612151b5803",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "docs/claude/plans/drop-events-extraction.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "vscode-editor:Create Code File": false,
+      "code-files:Create Code File": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-task-progress-bar:Open Task Genius view": false
+    }
+  },
+  "active": "6489c6f6b388e7b4",
+  "lastOpenFiles": [
+    "docs/cartelex release.md",
+    "ISSUES.md",
+    "docs/Design KnowledgeIngestModule.md",
+    "docs/dev/Docker Cheat Sheet.md",
+    "docs/UI Walkthrough with Screen Shots.md",
+    "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+    "docs/claude/plans/heideltime-temporal-graph.md",
+    "docs/answer-a-question vs. enumerate- all-instances of X.md",
+    "docs/Design Russo-Schinkel-Book vs Facts Reconciliation.md",
+    "docs/claude/Claude OAuth Issues in vscode.md",
+    "docs/claude/plans/fact2book_processed_log_load.md",
+    "docs/Design Fact 2 Book Reconcilation.md",
+    "docs/qa/SKYLOS_REPORT-20260615.md",
+    "docs/celex-facts goes cartelex.md",
+    "logs/application.log.2026-10-17",
+    "scripts/release_cartelex.sh.tmp.2777555.7556eef1961f",
+    "scripts/release_cartelex.sh",
+    "scripts/release_cartelex.sh.tmp.2777555.74187afeb851",
+    "docs/infra/caddy and etc hosts.md",
+    "logs/backend-server/application.log.2026-10-15",
+    "README.md",
+    "docs/infra/unix 101 cheat sheet.md",
+    "src/reporting/AI_USAGE.md",
+    "logs/application.log.2026-10-16",
+    "src/reporting/__pycache__/retrieve_case_summary_md2disk.cpython-312.pyc",
+    "docs/infra/Disk Mnt.md",
+    "docs/GitHub Cheat Sheet.md",
+    "src/pipelines/agent_dspy/tests/test_fact_summary_module.py.tmp.805102.989f41c42b0e",
+    "docs/claude/plans/case-summary-context-facts-reconcile.md",
+    "docs/claude/plans/case-summary-context-facts-reconcile.md.tmp.805102.080d4c64d1bb",
+    "ISSUES.md.tmp.805102.6bc9d668b5f9",
+    "docs/Data fact2book_case_discrepancy.md",
+    "docs/Data  Quest Infringement Articles.md",
+    "docs/Design Book.md",
+    "docs/claude/plans/chat-completions-stream-flag-20260920.md",
+    "docs/claude/plans/fact2book-mismatch-cross-check.md",
+    "docs/assets/Design KnowledgeIngestModule/Pasted image 20260522193315.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260907200508041.png",
+    "docs/desloppify-20260228.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180549732.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180439598.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180256894.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260829175736370.png",
+    "docs/assets/UI Walkthrough with Screen Shots/file-20260829175650294.png",
+    "docs/infra/assets/OI Open WebUi/file-20260827193951211.png",
+    "docs/assets/Data Model Companies/file-20260802162456268.png"
+  ]
+}

@@ -1,0 +1,127 @@
+celex_id	name	fact_id	value	all_relevant	operative
+33708_6_7	infringement_category_abuse_of_dominance	5f16fc38-a786-41f3-b4f7-3c3da0e094f2	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+34579_1889_2	infringement_category_abuse_of_dominance	66fca22c-85e8-47fe-97fe-d27bb15355c8	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+36571_222_1	infringement_category_member_states	250a014d-bf67-44a6-9c26-618a069d8720	NA	| law_article   | |:--------------| | Article 81    | | Article 86    |	Article 81
+36571_222_1	infringement_category_procedural	4eb3da36-0454-44f2-a968-4cc1b2623f54	NA	| law_article   | |:--------------| | Article 81    | | Article 86    |	Article 81
+36623_320_1	infringement_category_abuse_of_dominance	fd9c2b01-e2cc-4b5e-a216-b484448a31a2	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+37396_45_3	infringement_category_abuse_of_dominance	60b65211-6fdc-4a0d-9128-2fe5e9d043b3	True	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    | | Article 86    |	Article 81
+37507_193_6	infringement_category_hor_vert_lic_joint	319d6562-85cc-4125-87f0-51ddc5c6e673	license	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 82
+37685_66_1	infringement_category_hor_vert_lic_joint	98eb10d8-1480-4d8f-81e4-f7bce1c023d8	vertical	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 82
+37685_66_1	infringement_category_member_states	c8e01444-e51c-478b-9caa-c6d18e555190	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 82
+37685_66_1	infringement_category_procedural	bc1c2704-12e2-4ade-aaa9-41d47a247293	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 82
+37685_66_1	infringement_subcategory_vertical_restraints	824402e2-1280-4fe1-9f8b-c5f5469e27aa	Exclusive Dealing / Market Foreclosure;Territorial Exclusivi	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 82
+37784_8_4	infringement_category_abuse_of_dominance	db1df9d8-0861-4aa9-a465-5c9598be91d7	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    | | Article 86    |	Article 81
+37784_8_4	infringement_category_member_states	baf3b27d-020c-4d6e-ac9d-3962ff2d36b8	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    | | Article 86    |	Article 81
+37784_8_4	infringement_category_procedural	887eb8d1-f6ab-4225-82f6-e7bff526b6cb	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    | | Article 86    |	Article 81
+37966_639_3	infringement_category_hor_vert_lic_joint	4813bb15-3903-4751-9fb2-063d5e40efbe	vertical	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 82
+37966_639_3	infringement_subcategory_vertical_restraints	aa3f9a79-ca25-4200-846b-8a99c0ff7f71	Market Foreclosure;Selective Distribution	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 82
+38338_332_2	infringement_category_abuse_of_dominance	1cc5575d-e36e-43c3-8207-9b9e9a5d898f	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+38354_527_4	infringement_category_abuse_of_dominance	50493603-e7f6-4e45-a177-d98ef115b6e6	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+38381_1065_1	infringement_category_hor_vert_lic_joint	a0b024fb-7e88-4daa-a19a-3f86c69a1161	horizontal	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 82
+38381_1065_1	infringement_subcategory_horizontal_restraints	ebe2298f-4e0b-426d-8671-114096686e77	market sharing, quota cartels, and specialization agreements	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 82
+38456_792_2	infringement_category_abuse_of_dominance	0942c536-4816-4f3a-85a2-c0e04a40efad	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+38549_72_1	infringement_category_abuse_of_dominance	f86bc9fa-f077-44bf-ada0-f41d130480d7	NA	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 81
+38636_1203_1	infringement_category_hor_vert_lic_joint	dd9d7541-e707-4ce7-b764-667ede95a8db	license	| law_article   | |:--------------| | Article 102   | | Article 81    |	Article 102
+38698_4567_1	infringement_category_abuse_of_dominance	a3a1af39-46f7-4edc-9e22-af32e14c0611	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+38698_4567_1	infringement_category_member_states	9a84cb36-a3d0-4513-9205-a22bf92a8183	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+38698_4567_1	infringement_category_procedural	c2fb340f-22de-49ac-9273-fee90c59f2b1	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+39180_1315_4	infringement_category_abuse_of_dominance	76b5bced-c958-485c-8d0f-554e7ae8f30e	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+39226_8310_11	infringement_category_abuse_of_dominance	33891635-e93d-49dc-b4e0-7138dcdc0f98	NA	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    | | Article 85    | | Article 90    |	| law_article | | --- | | Article 101 | | Article 90 |
+39610_9899_5	infringement_category_abuse_of_dominance	3772ff51-2421-42be-8b18-454814af4066	NA	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    | | Article 90    |	| law_article | | --- | | Article 101 | | Article 90 |
+39686_4072_5	infringement_category_abuse_of_dominance	b9a024b2-0a6d-42a4-9228-175e2e0951ef	NA	| law_article   | |:--------------| | Article 101   | | Article 102   |	Article 101
+39759_3071_5	infringement_category_hor_vert_lic_joint	e815fa0a-9133-4256-b531-ea7955b070f4	vertical	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    | | Article 90    |	| law_article | | --- | | Article 102 | | Article 90 |
+39759_3071_5	infringement_subcategory_vertical_restraints	406669c7-caa4-4b2f-83d7-7b7fe50689c6	Exclusive Dealing / Market Foreclosure	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    | | Article 90    |	| law_article | | --- | | Article 102 | | Article 90 |
+39767_2018_3	infringement_category_hor_vert_lic_joint	1cb2520e-4070-4dd8-8ed1-dee4dbfc8ec1	vertical	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    | | Article 85    | | Article 86    |	Article 102
+39767_2018_3	infringement_subcategory_vertical_restraints	cecf156f-adca-4575-b409-8c9bd7330d21	Territorial Exclusivity / Parallel Trade Bans	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    | | Article 85    | | Article 86    |	Article 102
+39849_2692_4	infringement_category_hor_vert_lic_joint	04c118cf-a6f3-4d41-90a8-f5b32f701d7c	vertical	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    |	Article 102
+39849_2692_4	infringement_subcategory_vertical_restraints	e0d4ecd8-1419-402f-9148-1a7ac40016fe	Exclusive Dealing / Market Foreclosure	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    |	Article 102
+39939_1501_5	infringement_category_hor_vert_lic_joint	0c3d441f-a171-41d3-88f9-a36002557658	horizontal	| law_article   | |:--------------| | Article 101   | | Article 102   |	Article 102
+39939_1501_5	infringement_subcategory_horizontal_restraints	9a3474dd-e9b9-423e-bdb8-feb4842fb3ab	NA	| law_article   | |:--------------| | Article 101   | | Article 102   |	Article 102
+39985_928_16	infringement_category_hor_vert_lic_joint	a3251521-d6dd-4c7d-b35d-ad51a2a32f83	license	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    |	Article 102
+40099_9993_3	infringement_category_hor_vert_lic_joint	7d29d745-dcd4-490b-a712-60d4bb38ba45	vertical	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 90    |	Article 102
+40099_9993_3	infringement_subcategory_vertical_restraints	5f6a4109-80ef-4298-a4c6-64180c56d64d	Bundling and Tying	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 90    |	Article 102
+40134_2872_5	infringement_category_hor_vert_lic_joint	ed8d9834-cfb0-4054-8b88-27b67eea9fbd	vertical	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    | | Article 85    |	Article 102
+40134_2872_5	infringement_subcategory_vertical_restraints	7b0522ca-5954-4401-b826-dff76e067379	Territorial Exclusivity / Parallel Trade Bans	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 82    | | Article 85    |	Article 102
+40208_1579_5	infringement_category_abuse_of_dominance	24a6a670-acd5-4c41-b4f5-9f54cd663e7a	NA	| law_article   | |:--------------| | Article 101   | | Article 102   |	Article 101
+40410_1654_6	infringement_category_abuse_of_dominance	6b0abb76-e72e-4fb3-8b3d-912f72c82a6d	NA	| law_article   | |:--------------| | Article 101   | | Article 102   | | Article 81    |	Article 101
+AT_40577_10333580_3473_8	infringement_category_hor_vert_lic_joint	f6443f9a-bda4-4205-9b04-fcb722a318ce	NA	| law_article   | |:--------------| | Article 101   | | Article 102   |	Article 102
+CELEX-31975D0077	infringement_category_abuse_of_dominance	db40760c-3e81-4ecf-8fe1-d8cef022fdd4	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31975D0095	infringement_category_abuse_of_dominance	3690b746-2a03-4946-b157-9572041519f7	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31975D0497	infringement_category_abuse_of_dominance	42c1dd0e-df72-4cd6-a7a9-7e59e12f3673	False	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31975D0570	infringement_category_abuse_of_dominance	f96adebb-14bb-40b5-b5ae-6b593849402a	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31976D0353	infringement_category_hor_vert_lic_joint	d17c347d-ff7a-452a-b3de-6e0aaa3478d8	horizontal	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31976D0353	infringement_subcategory_horizontal_restraints	edbd04e0-dee8-478c-adb4-3c92835128f2	market sharing, quota cartels, and specialization agreements	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31977D0327	infringement_category_hor_vert_lic_joint	2a7a576c-42b7-4aec-ad57-8fb7bd429108	vertical	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31977D0327	infringement_subcategory_vertical_restraints	ecd925a4-2c66-436d-b4c6-d47d97b36bc6	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31978D0068	infringement_category_hor_vert_lic_joint	3a759383-44f3-4081-b1e9-55d9c82b8a04	horizontal	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31978D0068	infringement_subcategory_horizontal_restraints	af9aeee0-5ae9-479b-85bf-a63c7205de00	export cartels	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31978D0823	infringement_category_member_states	94573797-db9f-428d-b70b-be56eacb6177	False	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31978D0823	infringement_category_procedural	7e4d488f-e764-4f47-879e-f87242e6a03d	False	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31981D1030	infringement_category_member_states	214f1236-5ecb-4f2b-b55a-3d6c559c5ea5	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31981D1030	infringement_category_procedural	bb8aa2da-8304-461a-a466-eb82b21c24cd	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31982D0371	infringement_category_member_states	5b53c58a-ede3-497f-a838-c02f3e4b1b40	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31982D0371	infringement_category_procedural	5a4cf91a-dbf0-4413-bb9c-24a5fa82c7e4	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31982D0861	infringement_category_member_states	2d83b8cd-7536-48d5-97de-97492de28270	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31982D0861	infringement_category_procedural	5020a0dc-82d3-4e6c-a5d5-3b434b2e17d1	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31985D0077	infringement_category_member_states	4f35cd02-11f0-4135-bc67-8944ca855be6	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31985D0077	infringement_category_procedural	cb2289e1-8daa-42ad-a495-3f6178fef250	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31985D0609	infringement_category_hor_vert_lic_joint	a504f101-08ad-4f9d-8cd0-2d467ac2d6ca	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31988D0084	infringement_category_abuse_of_dominance	5168aa71-a6b1-4efb-8891-7de4ebc8b4be	False	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31988D0501	infringement_category_hor_vert_lic_joint	7dd5c26f-81af-4798-9e18-788881163951	license	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31988D0518	infringement_category_hor_vert_lic_joint	fd509b43-a180-4e7f-b2a6-4e66a4fb21d6	horizontal	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31988D0518	infringement_subcategory_horizontal_restraints	6fc09054-5ee4-4a60-9a38-11f55e2f4011	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31988D0587	infringement_category_abuse_of_dominance	0df2982f-6f5d-480a-9f78-10fc83076894	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31988D0589	infringement_category_hor_vert_lic_joint	8ef2a5d0-7983-479a-992a-95cc684ea1a5	vertical	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31988D0589	infringement_subcategory_vertical_restraints	b7a2ac1b-1f07-427e-ada5-0ee3ce1b490e	Bundling and Tying	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31989D0022	infringement_category_hor_vert_lic_joint	69a3d5e0-beb2-43ed-a249-97b4e910f904	vertical	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31989D0022	infringement_subcategory_vertical_restraints	fbbae8d8-6a78-4e33-8d4f-9f8e2f6c9590	Exclusive Dealing / Market Foreclosure	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31989D0113	infringement_category_member_states	87d29209-de10-40ee-bdc2-423d6c214272	NA	| law_article   | |:--------------| | Article 85    | | Article 86    | | Article 90    |	| law_article | | --- | | Article 85 | | Article 86 |
+CELEX-31989D0113	infringement_category_procedural	8393d070-9752-4adb-9295-697620422f17	NA	| law_article   | |:--------------| | Article 85    | | Article 86    | | Article 90    |	| law_article | | --- | | Article 85 | | Article 86 |
+CELEX-31989D0205	infringement_category_member_states	9f012677-9af2-4e80-9f07-6c08068778b8	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31989D0205	infringement_category_procedural	34faefb3-d8f9-401f-a462-e44ddac2c1da	False	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31989D0536	infringement_category_member_states	3f64c4cc-a572-4bca-bf80-5d01cd305b94	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31989D0536	infringement_category_procedural	2558948b-c830-4ccb-9491-ff79e32ee9cc	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31990D0456	infringement_category_member_states	be00e5ba-5a17-42e5-ad63-f0c07744290f	True	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31990D0456	infringement_category_procedural	c46b95c9-9c63-42cb-bc0f-94992006bc6f	False	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31991D0050	infringement_category_member_states	4375ca59-9e5b-4d3a-9fe0-9d82bd5c9ba0	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31991D0050	infringement_category_procedural	e5dbdaec-5400-4a58-908b-e0c46cb1bd60	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31991D0130	infringement_category_member_states	6f9a9595-2d77-498e-a6bb-06a16b312a9e	False	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31991D0130	infringement_category_procedural	337c48ec-0888-403d-bc44-a33d89e4cb26	False	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31991D0297	infringement_category_abuse_of_dominance	d8408e80-4db8-4d17-9a50-62a112d46956	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31991D0298	infringement_category_abuse_of_dominance	75ee4c97-0b67-4264-a42e-67f4879baa3c	False	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31991D0299	infringement_category_hor_vert_lic_joint	bacc67fe-b01f-4da1-a49e-0aba99cbcaac	vertical	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31991D0299	infringement_subcategory_vertical_restraints	338abe09-f06c-4c5f-b90a-4b393104ec89	Exclusive Dealing / Market Foreclosure; Discounts and Rebate	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31992D0261	infringement_category_abuse_of_dominance	a9400bbc-8f00-4c64-b08b-9a421f6bd51a	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31993D0049	infringement_category_abuse_of_dominance	011ba14a-afb2-4198-ab1b-5a2cf80a0893	False	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31993D0050	infringement_category_abuse_of_dominance	0e8a31df-88b3-4078-a4f7-a6616941bab5	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31993D0126	infringement_category_member_states	e411d676-4b84-4beb-8e2f-cb1d691d6c4d	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31993D0126	infringement_category_procedural	9eebff00-a637-4aef-8c24-6f39c9475548	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31993D0174	infringement_category_abuse_of_dominance	7d1f93f1-6ccb-4534-8eb4-55dd6590cc8d	False	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31993D0403	infringement_category_member_states	f52fdd69-2810-4692-866c-7962491f84f0	NA	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31993D0403	infringement_category_procedural	7a9db9de-2b8e-4e0a-8af7-d2b4a8de8583	False	| law_article   | |:--------------| | Article 85    | | Article 90    |	Article 85
+CELEX-31993D0668	infringement_category_abuse_of_dominance	6e61b1f1-684e-4adc-b268-c21ad8a5a3ac	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31994D0663	infringement_category_abuse_of_dominance	57ae0db1-7bbe-454a-9f58-617b6d9a3a61	True	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31994D0980	infringement_category_abuse_of_dominance	bbb2a9e4-83c1-4df3-9b90-97304f5263a3	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31996D0478	infringement_category_abuse_of_dominance	2a0693d4-dd47-46ba-a844-5135e5b18124	True	| law_article   | |:--------------| | Article 82    | | Article 85    |	Article 85
+CELEX-31996D0547	infringement_category_hor_vert_lic_joint	b02c14d4-0a86-4c8e-9598-48d0ed16848a	joint venture	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 86
+CELEX-31997D0123	infringement_category_abuse_of_dominance	6ddc4280-389d-468c-8acb-fb8bc7b3cdc2	NA	| law_article   | |:--------------| | Article 85    | | Article 86    |	Article 85
+CELEX-31999D0198	infringement_category_member_states	52cd60d1-a429-4bef-a757-382f05246817	False	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31999D0198	infringement_category_procedural	761f75bb-c39c-4c94-ab89-8318094bb07d	False	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+CELEX-31999D0695	infringement_category_abuse_of_dominance	5b4dfd41-1a92-4601-a381-f4537f8d65af	False	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-31999D0695	infringement_category_member_states	c7c522c9-8f0d-4c64-bcfd-e28e54e00d81	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-31999D0695	infringement_category_procedural	224eea13-5caa-4928-94ff-c15cb5b88b3d	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-32001D0354	infringement_category_member_states	e67e87ee-347d-49bd-a33c-ba5e7e62b0fb	False	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+CELEX-32001D0354	infringement_category_procedural	9c97af7c-6aea-4c29-93d8-1354d554013a	NA	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+CELEX-32001D0663	infringement_category_abuse_of_dominance	9f7fdc86-0c06-42c8-8460-c6a1a84e6918	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-32001D0663	infringement_category_member_states	88eabdff-7f25-4948-b406-0b83aca943ab	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-32001D0663	infringement_category_procedural	1ca1c404-9fba-4a4b-aad5-29ea17d6ecb0	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 86    |	Article 81
+CELEX-32001D0791	infringement_category_abuse_of_dominance	4592cee2-6674-4984-823e-9fb3ac6d4114	NA	| law_article   | |:--------------| | Article 81    | | Article 82    | | Article 85    |	Article 81
+CELEX-32001D0892	infringement_category_member_states	a8cc625d-7988-408a-bd58-61c3f7424f75	NA	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+CELEX-32001D0892	infringement_category_procedural	8078ad47-06f8-44e8-b0af-d771f37925b4	NA	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+CELEX-32003D0300	infringement_category_member_states	84a83b04-c8ff-4641-92b7-9edd6a0d8b2f	NA	| law_article   | |:--------------| | Article 81    | | Article 86    |	Article 81
+CELEX-32003D0300	infringement_category_procedural	53d41492-2af2-4e5f-8842-b59e8bb46230	NA	| law_article   | |:--------------| | Article 81    | | Article 86    |	Article 81
+CELEX-32003D0569	infringement_category_abuse_of_dominance	d257dd56-b73f-4d29-a298-3edb6dd6c9a5	True	| law_article   | |:--------------| | Article 81    | | Article 82    |	Article 81
+CELEX-32003D0707	infringement_category_member_states	77eb07f1-d917-4591-a36d-2feb782fb193	NA	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+CELEX-32003D0707	infringement_category_procedural	8f322541-c415-4aca-bcfd-b281e043eb64	False	| law_article   | |:--------------| | Article 82    | | Article 86    |	Article 82
+iv34801_en	infringement_category_member_states	e08cca88-c0fc-466e-801b-0e581fcee901	False	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86
+iv34801_en	infringement_category_procedural	09841c17-7b73-4449-9baa-6f38c4874dfb	NA	| law_article   | |:--------------| | Article 86    | | Article 90    |	Article 86

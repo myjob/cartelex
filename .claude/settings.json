@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python -m ruff check src/tools/tests/run_unittest_suite.py)",
+      "Read(//home/job/.claude/**)",
+      "Bash(ls -1 ~/a/celex-facts/src/agents/*.py)",
+      "Read(/~/a/celex-facts/**)",
+      "Edit(/~/a/celex-facts/**)",
+      "Write(/~/a/celex-facts/**)",
+      "Read(/~/a/celex_docs/**)",
+      "Edit(/~/a/celex_docs/**)",
+      "Write(/~/a/celex_docs/**)"
+    ],
+    "additionalDirectories": [
+      "~/a/celex_docs"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  simple:
+    format: "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: simple
+    filename: logs/application.log
+    when: midnight
+    interval: 1
+    backupCount: 30
+    encoding: utf8
+
+loggers:
+  # Our source modules will log at DEBUG level and propagate to root
+  ingest:
+    level: DEBUG
+  extract:
+    level: DEBUG
+  batch:
+    level: DEBUG
+  config:
+    level: DEBUG
+  tools:
+    level: DEBUG
+  agents:
+    level: DEBUG
+  ui:
+    level: DEBUG
+  reporting:
+    level: DEBUG
+
+  # Ensure noisy third-party modules are quiet
+  # LiteLLM logs its transport setup, enterprise-import misses and logging
+  # worker at DEBUG. Registering config.llm_usage.PromptUsageLogger activates
+  # that path, which would otherwise flood logs/application.log over a long
+  # batch run; the usage lines themselves come from config.llm_usage, not here.
+  LiteLLM:
+    level: WARNING
+  LiteLLM Proxy:
+    level: WARNING
+  LiteLLM Router:
+    level: WARNING
+  urllib3:
+    level: WARNING
+  httpx:
+    level: WARNING
+  httpcore:
+    level: WARNING
+  # The root level below is DEBUG, which only reaches libraries that are not
+  # listed here -- every source package above is pinned explicitly. These are
+  # the ones that drown a unittest report: asyncio emits "Using selector:
+  # EpollSelector" per event loop (once per FastAPI TestClient), markdown_it
+  # traces every block rule it registers, and psycopg narrates connection
+  # attempts on each pool checkout.
+  asyncio:
+    level: WARNING
+  markdown_it:
+    level: WARNING
+  psycopg:
+    level: WARNING
+  psycopg_pool:
+    level: WARNING
+
+root:
+  level: DEBUG
+  handlers: [console, file]

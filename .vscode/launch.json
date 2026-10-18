@@ -1,0 +1,103 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+
+
+    "inputs": [
+        {
+            "id": "testName",
+            "type": "promptString",
+            "description": "Enter the test name (e.g. test_search_knowledge)",
+            "default": "test_search_knowledge"
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Playwright: unittest (headed)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PLAYWRIGHT_HEADLESS": "false"
+            }
+        },
+        {
+            "name": "Debug: ingest_generic_facts",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/batch/Main_ingest_generic_facts.py",
+            "args": [
+                // "--filter-celex-id", "39530_2671_5",
+                "--filter-celex-id", "CELEX-31972D0468",
+                "--filter-fact", "heideltime_cartel_period",
+                // "--filter-fact", "eu_commisssion_decision_date",
+                // "--filter-fact", "infringement_category_hor_vert_lic_joint",
+                // "--filter-fact", "infringement_category_abuse_of_dominance",
+                "--limit", "1",
+                "--overwrite"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "env": { "PYTHONPATH": "${workspaceFolder}/src" }
+        },
+        {
+            "name": "FORCE CORRECT VENV",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "~/a/celex-facts/.venv/bin/python",
+            "env": { "PYTHONPATH": "~/a/celex-facts/src" }
+        },
+        {
+            "name": "Python: Pytest Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${file}",
+                "-s"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "~/a/celex-facts/.venv/bin/python",
+            "env": { "PYTHONPATH": "~/a/celex-facts/src" }
+        },
+        {
+            "name": "Debug: test_search_document_chunk",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${workspaceFolder}/src/tools/tests/test_celex_tools.py::test_search_document_chunk",
+                "-s"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "env": { "PYTHONPATH": "${workspaceFolder}/src" }
+        },
+        {
+            "name": "Python: Pytest Specific Test",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${file}::${input:testName}",
+                "-s"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "python": "~/a/celex-facts/.venv/bin/python",
+            "env": { "PYTHONPATH": "~/a/celex-facts/src" }
+        }
+    ]
+}

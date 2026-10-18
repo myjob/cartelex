@@ -1,0 +1,2587 @@
+{
+    "extractions": [
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 629,
+                "end_pos": 638
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "legal_form": "company constituted under civil law",
+                "establishment_date": "1954",
+                "purpose": "providing services in connection with' the operation of agreements between shipping companies"
+            }
+        },
+        {
+            "extraction_class": "regulation",
+            "extraction_text": "Council Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 148,
+                "end_pos": 183
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "date": "22 December 1986",
+                "subject": "laying down detailed rules for the application of Articles 85 and 86 of the Treaty to maritime transport"
+            }
+        },
+        {
+            "extraction_class": "article",
+            "extraction_text": "Article 19",
+            "char_interval": {
+                "start_pos": 134,
+                "end_pos": 144
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "regulation": "Council Regulation (EEC) No 4056/86"
+            }
+        },
+        {
+            "extraction_class": "article",
+            "extraction_text": "Articles 85 and 86",
+            "char_interval": {
+                "start_pos": 490,
+                "end_pos": 508
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "treaty": "Treaty establishing the European Economic Community"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "19 December 1990",
+            "char_interval": {
+                "start_pos": 583,
+                "end_pos": 585
+            },
+            "alignment_status": "match_lesser",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "decision_date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 1395,
+                "end_pos": 1404
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "167 rue de Courcelles, Paris, France"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "Article i0 of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 1251,
+                "end_pos": 1292
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Association of Danish Shipowners",
+            "char_interval": {
+                "start_pos": 1145,
+                "end_pos": 1177
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Danish Government",
+            "char_interval": {
+                "start_pos": 1186,
+                "end_pos": 1203
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "3 and 22 July 1987",
+            "char_interval": {
+                "start_pos": 1121,
+                "end_pos": 1139
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "Article 16 of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 1607,
+                "end_pos": 1648
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "15 June and 5 October 1988",
+            "char_interval": {
+                "start_pos": 1511,
+                "end_pos": 1537
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 1836,
+                "end_pos": 1845
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 19 of the Regulation",
+            "char_interval": {
+                "start_pos": 1718,
+                "end_pos": 1746
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "law",
+                "description": "concerning the supply of incorrect information in response to a request for information"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "13 July and 7 November 1988",
+            "char_interval": {
+                "start_pos": 1886,
+                "end_pos": 1913
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "22 December 1988",
+            "char_interval": {
+                "start_pos": 1935,
+                "end_pos": 1951
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 19 (1) (b) of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 2195,
+                "end_pos": 2244
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "law",
+                "description": "basis of fine"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "6 February 1989",
+            "char_interval": {
+                "start_pos": 2262,
+                "end_pos": 2277
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 23 of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 2373,
+                "end_pos": 2414
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "law",
+                "description": "requested a hearing"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "20 June 1989",
+            "char_interval": {
+                "start_pos": 2443,
+                "end_pos": 2455
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "28 February i990",
+            "char_interval": {
+                "start_pos": 2470,
+                "end_pos": 2486
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 9,
+            "group_index": 8,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 2622,
+                "end_pos": 2631
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "29 March 1990",
+            "char_interval": {
+                "start_pos": 2608,
+                "end_pos": 2621
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "13 July 1988",
+            "char_interval": {
+                "start_pos": 2838,
+                "end_pos": 2850
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "entity",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 2919,
+                "end_pos": 2941
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "entity",
+            "extraction_text": "Commission",
+            "char_interval": {
+                "start_pos": 3010,
+                "end_pos": 3020
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 3858,
+                "end_pos": 3867
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "authorization",
+            "extraction_text": "loading authorization",
+            "char_interval": {
+                "start_pos": 3589,
+                "end_pos": 3610
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "permit"
+            }
+        },
+        {
+            "extraction_class": "quota",
+            "extraction_text": "freight tonnes quota",
+            "char_interval": {
+                "start_pos": 3966,
+                "end_pos": 3986
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "limit"
+            }
+        },
+        {
+            "extraction_class": "route",
+            "extraction_text": "between the French and African ports concerned",
+            "char_interval": {
+                "start_pos": 4018,
+                "end_pos": 4064
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "location"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 4152,
+                "end_pos": 4174
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "15 June 1988",
+            "char_interval": {
+                "start_pos": 4379,
+                "end_pos": 4391
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "request_date"
+            }
+        },
+        {
+            "extraction_class": "decree",
+            "extraction_text": "Senegalese interMinisterial Decree",
+            "char_interval": {
+                "start_pos": 4412,
+                "end_pos": 4446
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "law",
+                "status": "draft"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "13 July",
+            "char_interval": {
+                "start_pos": 4522,
+                "end_pos": 4529
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "type": "letter_date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 4710,
+                "end_pos": 4719
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "country",
+            "extraction_text": "Republic of Senegal",
+            "char_interval": {
+                "start_pos": 4602,
+                "end_pos": 4621
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "country"
+            }
+        },
+        {
+            "extraction_class": "reference_number",
+            "extraction_text": "32450-146 to 155",
+            "char_interval": {
+                "start_pos": 4677,
+                "end_pos": 4693
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "document_reference"
+            }
+        },
+        {
+            "extraction_class": "enclosure",
+            "extraction_text": "enclosure 3",
+            "char_interval": {
+                "start_pos": 4695,
+                "end_pos": 4706
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "document_part"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 4996,
+                "end_pos": 5017
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "joint French-Senegalese Committee",
+            "char_interval": {
+                "start_pos": 4890,
+                "end_pos": 4923
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "role",
+            "extraction_text": "Secretary for France to the Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 4968,
+                "end_pos": 5017
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "position"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 5677,
+                "end_pos": 5686
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 5445,
+                "end_pos": 5467
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "cargo",
+            "extraction_text": "cargoes",
+            "char_interval": {
+                "start_pos": 5592,
+                "end_pos": 5599
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "goods"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "13 July 1988",
+            "char_interval": {
+                "start_pos": 5663,
+                "end_pos": 5675
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "location",
+            "extraction_text": "France",
+            "char_interval": {
+                "start_pos": 5762,
+                "end_pos": 5768
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "country"
+            }
+        },
+        {
+            "extraction_class": "location",
+            "extraction_text": "West and Central African States",
+            "char_interval": {
+                "start_pos": 5775,
+                "end_pos": 5806
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "region"
+            }
+        },
+        {
+            "extraction_class": "quota",
+            "extraction_text": "quotas",
+            "char_interval": {
+                "start_pos": 5877,
+                "end_pos": 5883
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "regulation"
+            }
+        },
+        {
+            "extraction_class": "port",
+            "extraction_text": "French ports",
+            "char_interval": {
+                "start_pos": 6085,
+                "end_pos": 6097
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "type": "location"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 6189,
+                "end_pos": 6198
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "13 July 1988",
+            "char_interval": {
+                "start_pos": 6217,
+                "end_pos": 6229
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 6339,
+                "end_pos": 6361
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "rule",
+            "extraction_text": "rules of the Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 6326,
+                "end_pos": 6361
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "regulation"
+            }
+        },
+        {
+            "extraction_class": "point",
+            "extraction_text": "point 4 (i)",
+            "char_interval": {
+                "start_pos": 6592,
+                "end_pos": 6602
+            },
+            "alignment_status": "match_lesser",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "reference"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 7110,
+                "end_pos": 7119
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Committees",
+            "char_interval": {
+                "start_pos": 7082,
+                "end_pos": 7092
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 7591,
+                "end_pos": 7613
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "advantage",
+            "extraction_text": "absence of a penalties' system",
+            "char_interval": {
+                "start_pos": 7040,
+                "end_pos": 7070
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "benefit"
+            }
+        },
+        {
+            "extraction_class": "cargo",
+            "extraction_text": "cargo quota",
+            "char_interval": {
+                "start_pos": 7514,
+                "end_pos": 7525
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "shipment"
+            }
+        },
+        {
+            "extraction_class": "cargo",
+            "extraction_text": "cargo",
+            "char_interval": {
+                "start_pos": 7537,
+                "end_pos": 7542
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "shipment"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 7967,
+                "end_pos": 7976
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "barrier",
+            "extraction_text": "laws and regulations",
+            "char_interval": {
+                "start_pos": 7856,
+                "end_pos": 7876
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "regulation"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Shipowners Committees",
+            "char_interval": {
+                "start_pos": 7944,
+                "end_pos": 7965
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "regulation",
+            "extraction_text": "Franco-Senegalese trade",
+            "char_interval": {
+                "start_pos": 8170,
+                "end_pos": 8193
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "trade"
+            }
+        },
+        {
+            "extraction_class": "decree",
+            "extraction_text": "Decree",
+            "char_interval": {
+                "start_pos": 8369,
+                "end_pos": 8375
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "date": "without any date",
+                "reference": "without any reference",
+                "signature": "without any signature"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 8687,
+                "end_pos": 8696
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "role": "providing the secretariat for the France-Senegal Shipowners' Committee"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "France-Senegal Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 8756,
+                "end_pos": 8792
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "function": "secretariat provided by Secrétama"
+            }
+        },
+        {
+            "extraction_class": "legal_document",
+            "extraction_text": "Decree",
+            "char_interval": {
+                "start_pos": 8998,
+                "end_pos": 9004
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "decree",
+                "content": "provisions contained in the Decree"
+            }
+        },
+        {
+            "extraction_class": "cargo_system",
+            "extraction_text": "cargo-sharing system",
+            "char_interval": {
+                "start_pos": 9172,
+                "end_pos": 9192
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "applicability": "entire trade",
+                "penalties": "substantial penalties imposed on shipping lines"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 9337,
+                "end_pos": 9346
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "awareness": "aware of considerable interest to the Commission"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 9478,
+                "end_pos": 9487
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 9517,
+                "end_pos": 9539
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "responsibility": "imposing penalties"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "incorrect information",
+            "char_interval": {
+                "start_pos": 9837,
+                "end_pos": 9858
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "rule",
+                "liability": "lead the Commission to draw incorrect conclusions"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 9478,
+                "end_pos": 9487
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "responsibility": "stamping the cargo manifests"
+            }
+        },
+        {
+            "extraction_class": "state",
+            "extraction_text": "Senagalese",
+            "char_interval": {
+                "start_pos": 10374,
+                "end_pos": 10384
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "rules": "referred to in the Commission letter"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "15 June 1988",
+            "char_interval": {
+                "start_pos": 10434,
+                "end_pos": 10446
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 9690,
+                "end_pos": 9712
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "trade_with": "France",
+                "transport": "liner transport"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Shippers' Council",
+            "char_interval": {
+                "start_pos": 10576,
+                "end_pos": 10593
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 10702,
+                "end_pos": 10711
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "country",
+            "extraction_text": "France",
+            "char_interval": {
+                "start_pos": 10786,
+                "end_pos": 10792
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "location"
+            }
+        },
+        {
+            "extraction_class": "country",
+            "extraction_text": "African countries",
+            "char_interval": {
+                "start_pos": 10803,
+                "end_pos": 10820
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "location",
+                "number": "11"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "failure to comply with quotas",
+            "char_interval": {
+                "start_pos": 11179,
+                "end_pos": 11208
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "penalty",
+            "extraction_text": "penalties",
+            "char_interval": {
+                "start_pos": 10979,
+                "end_pos": 10988
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "legal"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 11994,
+                "end_pos": 12003
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "maritime_administration",
+            "extraction_text": "maritime administration of an African State",
+            "char_interval": {
+                "start_pos": 11287,
+                "end_pos": 11330
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "address": "Unknown",
+                "country": "African State"
+            }
+        },
+        {
+            "extraction_class": "trade_partner",
+            "extraction_text": "France",
+            "char_interval": {
+                "start_pos": 11427,
+                "end_pos": 11433
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "country"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Service Committee (Shipowners' Committee)",
+            "char_interval": {
+                "start_pos": 11476,
+                "end_pos": 11517
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "organization"
+            }
+        },
+        {
+            "extraction_class": "national_shippers_council",
+            "extraction_text": "National Shippers' Council of another African State",
+            "char_interval": {
+                "start_pos": 11644,
+                "end_pos": 11695
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "address": "Unknown",
+                "country": "African State"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "breach of the rules on cargo-sharing",
+            "char_interval": {
+                "start_pos": 11743,
+                "end_pos": 11779
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "trade_partner",
+            "extraction_text": "France",
+            "char_interval": {
+                "start_pos": 11938,
+                "end_pos": 11944
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "type": "country"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 12301,
+                "end_pos": 12310
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Freight loaded without the Secrétama stamp",
+            "char_interval": {
+                "start_pos": 12274,
+                "end_pos": 12316
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "infringements",
+            "char_interval": {
+                "start_pos": 12581,
+                "end_pos": 12594
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "end of 1985",
+            "char_interval": {
+                "start_pos": 12785,
+                "end_pos": 12796
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "beginning of November 1985",
+            "char_interval": {
+                "start_pos": 12898,
+                "end_pos": 12924
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 13099,
+                "end_pos": 13120
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 13138,
+                "end_pos": 13147
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "address": "French territory"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "21 November 1988",
+            "char_interval": {
+                "start_pos": 13294,
+                "end_pos": 13310
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Shippers's Council of the African State",
+            "char_interval": {
+                "start_pos": 13318,
+                "end_pos": 13357
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "imposition of a fine for loading 'without the Secrétama stamp' in Marseilles",
+            "char_interval": {
+                "start_pos": 13442,
+                "end_pos": 13518
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "penalty"
+            }
+        },
+        {
+            "extraction_class": "rule",
+            "extraction_text": "prior to loading in a French port, the line must apply to the Secrétama representatives for a loading permit validated by the affixing of a stamp on the manifest",
+            "char_interval": {
+                "start_pos": 13540,
+                "end_pos": 13701
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "regulation"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 13933,
+                "end_pos": 13942
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "role": "provides the secretariat for the Shipowners'Committees",
+                "description": "consultancy company in the maritime transport sector"
+            }
+        },
+        {
+            "extraction_class": "countries",
+            "extraction_text": "France",
+            "char_interval": {
+                "start_pos": 14142,
+                "end_pos": 14148
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "trade_relation": "trade with"
+            }
+        },
+        {
+            "extraction_class": "countries",
+            "extraction_text": "11 West and Central African countries",
+            "char_interval": {
+                "start_pos": 14337,
+                "end_pos": 14374
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "trade_relation": "trade between"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 15009,
+                "end_pos": 15018
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "role": "body responsible for running the cargo-sharing system",
+                "operated_by": "Shipowners' Committees"
+            }
+        },
+        {
+            "extraction_class": "regulation",
+            "extraction_text": "regulations adopted by African States",
+            "char_interval": {
+                "start_pos": 14951,
+                "end_pos": 14988
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "reference": "explicitly refer to Secrétama"
+            }
+        },
+        {
+            "extraction_class": "penalty",
+            "extraction_text": "penalties in the event of goods being unloaded without the Secrétama approval stamp",
+            "char_interval": {
+                "start_pos": 15148,
+                "end_pos": 15231
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "financial"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 15334,
+                "end_pos": 15343
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "claim": "claims to have no knowledge"
+            }
+        },
+        {
+            "extraction_class": "decree",
+            "extraction_text": "Senegalese Decree",
+            "char_interval": {
+                "start_pos": 15451,
+                "end_pos": 15468
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "reference": "refers in several of its Articles to Secrétama"
+            }
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "France-Senegal Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 15672,
+                "end_pos": 15708
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "meeting_date": "11 December 1987",
+                "representation": "Secrétama was represented by the delegates"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 15738,
+                "end_pos": 15747
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "action": "distributed the minutes to the member companies"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 16149,
+                "end_pos": 16158
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "decree",
+            "extraction_text": "Decree",
+            "char_interval": {
+                "start_pos": 15868,
+                "end_pos": 15874
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "publication",
+            "extraction_text": "Official Journal of the Republic of Senegal",
+            "char_interval": {
+                "start_pos": 15982,
+                "end_pos": 16025
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "journal"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "1981",
+            "char_interval": {
+                "start_pos": 16283,
+                "end_pos": 16287
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "year"
+            }
+        },
+        {
+            "extraction_class": "trade",
+            "extraction_text": "Franco-Senegalese trade",
+            "char_interval": {
+                "start_pos": 16319,
+                "end_pos": 16342
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "trade"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "July 1981",
+            "char_interval": {
+                "start_pos": 16601,
+                "end_pos": 16610
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "meeting_date",
+            "extraction_text": "16 September",
+            "char_interval": {
+                "start_pos": 16661,
+                "end_pos": 16673
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": null
+        },
+        {
+            "extraction_class": "committee",
+            "extraction_text": "Shipowners'Committee",
+            "char_interval": {
+                "start_pos": 16624,
+                "end_pos": 16644
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "type": "committee"
+            }
+        },
+        {
+            "extraction_class": "years",
+            "extraction_text": "seven years",
+            "char_interval": {
+                "start_pos": 16468,
+                "end_pos": 16479
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 9,
+            "group_index": 8,
+            "description": null,
+            "attributes": {
+                "type": "duration"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 16834,
+                "end_pos": 16843
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "17 September 1981",
+            "char_interval": {
+                "start_pos": 16878,
+                "end_pos": 16895
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Compagnie Sénégalaise de Navigation Maritime",
+            "char_interval": {
+                "start_pos": 16987,
+                "end_pos": 17031
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "30 June 1981",
+            "char_interval": {
+                "start_pos": 16945,
+                "end_pos": 16957
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Senegalese Decree",
+            "char_interval": {
+                "start_pos": 17429,
+                "end_pos": 17446
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "19 November 1981",
+            "char_interval": {
+                "start_pos": 17319,
+                "end_pos": 17335
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Senegalese Decree",
+            "char_interval": {
+                "start_pos": 17429,
+                "end_pos": 17446
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "18 November 1986",
+            "char_interval": {
+                "start_pos": 17566,
+                "end_pos": 17582
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétasen",
+            "char_interval": {
+                "start_pos": 17592,
+                "end_pos": 17602
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 9,
+            "group_index": 8,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "Interministerial Decree No 6678 of 8 July 1981",
+            "char_interval": {
+                "start_pos": 17705,
+                "end_pos": 17751
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 10,
+            "group_index": 9,
+            "description": null,
+            "attributes": {
+                "type": "decree"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "8 July 1981",
+            "char_interval": {
+                "start_pos": 17740,
+                "end_pos": 17751
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 11,
+            "group_index": 10,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 17833,
+                "end_pos": 17842
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "25 February 1984",
+            "char_interval": {
+                "start_pos": 17891,
+                "end_pos": 17907
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Usina, Dakar",
+            "char_interval": {
+                "start_pos": 17911,
+                "end_pos": 17923
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "Interministerial Decree of 8 July 1981 regulating the Franco-Senegal maritime trade",
+            "char_interval": {
+                "start_pos": 18043,
+                "end_pos": 18126
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "decree"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 18135,
+                "end_pos": 18144
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "France-Niger Shipowners' Committee",
+            "char_interval": {
+                "start_pos": 18219,
+                "end_pos": 18253
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Niger",
+            "char_interval": {
+                "start_pos": 18276,
+                "end_pos": 18281
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 18327,
+                "end_pos": 18336
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Shipowners' Committees",
+            "char_interval": {
+                "start_pos": 18493,
+                "end_pos": 18515
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 9,
+            "group_index": 8,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 17833,
+                "end_pos": 17842
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 10,
+            "group_index": 9,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "three African States",
+            "char_interval": {
+                "start_pos": 18565,
+                "end_pos": 18585
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 11,
+            "group_index": 10,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 18819,
+                "end_pos": 18828
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "agreement",
+            "extraction_text": "shipowners' agreements",
+            "char_interval": {
+                "start_pos": 19032,
+                "end_pos": 19054
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "clause": "all cases of non-application of the practical trade organization arrangements would be notified to the parties concerned"
+            }
+        },
+        {
+            "extraction_class": "authority",
+            "extraction_text": "Shippers' Councils",
+            "char_interval": {
+                "start_pos": 19270,
+                "end_pos": 19288
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "local regulations"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "non-application",
+            "char_interval": {
+                "start_pos": 19082,
+                "end_pos": 19097
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 19584,
+                "end_pos": 19593
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "exposing the infringing company to a possible fine",
+            "char_interval": {
+                "start_pos": 19611,
+                "end_pos": 19661
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 19800,
+                "end_pos": 19809
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "legal_statement",
+            "extraction_text": "any legal barriers which may exist are not in any way the result of practices of the Shipowners'Committees",
+            "char_interval": {
+                "start_pos": 19995,
+                "end_pos": 20101
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "legal claim"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "deliberately supplied the Commission with incorrect information in reply to the questionnaire sent to it",
+            "char_interval": {
+                "start_pos": 20219,
+                "end_pos": 20323
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "seeking to reject all responsibility on the part of the Shipowners'Committees for the application of such systems",
+            "char_interval": {
+                "start_pos": 20379,
+                "end_pos": 20492
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 21195,
+                "end_pos": 21204
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "123 Main St, Anytown, USA"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 16 (1) and (4) of Regulation (EEC) No ${ 4 0 5 6 } / { 8 6 }",
+            "char_interval": {
+                "start_pos": 20500,
+                "end_pos": 20568
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 19 (1) (b) of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 20841,
+                "end_pos": 20890
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "supplying incorrect information",
+            "char_interval": null,
+            "alignment_status": null,
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "intentionally or negligently they supply incorrect information",
+            "char_interval": {
+                "start_pos": 21033,
+                "end_pos": 21095
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secré-tama",
+            "char_interval": {
+                "start_pos": 21503,
+                "end_pos": 21514
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 19 of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 21671,
+                "end_pos": 21712
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "competition rules"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 16 (4) of Regulation (EEC) No 4056/86",
+            "char_interval": {
+                "start_pos": 21972,
+                "end_pos": 22017
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "Article 16 (3)",
+            "char_interval": {
+                "start_pos": 22095,
+                "end_pos": 22109
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "infringement",
+            "extraction_text": "supplying incorrect information",
+            "char_interval": {
+                "start_pos": 22021,
+                "end_pos": 22052
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "type": "rule"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 21948,
+                "end_pos": 21957
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 6,
+            "group_index": 5,
+            "description": null,
+            "attributes": {
+                "address": "Unknown"
+            }
+        },
+        {
+            "extraction_class": "fine",
+            "extraction_text": "ECU ${ \bf 5 . 0 0 0 }$",
+            "char_interval": {
+                "start_pos": 22154,
+                "end_pos": 22160
+            },
+            "alignment_status": "match_lesser",
+            "extraction_index": 7,
+            "group_index": 6,
+            "description": null,
+            "attributes": {
+                "currency": "ECU"
+            }
+        },
+        {
+            "extraction_class": "bank",
+            "extraction_text": "Banque Bruxelles-Lambert",
+            "char_interval": {
+                "start_pos": 22390,
+                "end_pos": 22414
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 8,
+            "group_index": 7,
+            "description": null,
+            "attributes": {
+                "address": "5 Rond-Point Robert Schuman, B-1040 Brussels",
+                "account_number": "No 310- 0933000-43",
+                "agency": "Agence Européenne"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "within three months of the date of notification",
+            "char_interval": {
+                "start_pos": 22243,
+                "end_pos": 22290
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 9,
+            "group_index": 8,
+            "description": null,
+            "attributes": {
+                "type": "deadline"
+            }
+        },
+        {
+            "extraction_class": "company",
+            "extraction_text": "Secrétama",
+            "char_interval": {
+                "start_pos": 22792,
+                "end_pos": 22801
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 1,
+            "group_index": 0,
+            "description": null,
+            "attributes": {
+                "address": "167 rue de Courcelles, F-75017 Paris"
+            }
+        },
+        {
+            "extraction_class": "legal_information",
+            "extraction_text": "Article 192 of the EEC Treaty",
+            "char_interval": {
+                "start_pos": 22889,
+                "end_pos": 22918
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 2,
+            "group_index": 1,
+            "description": null,
+            "attributes": {
+                "type": "law"
+            }
+        },
+        {
+            "extraction_class": "date",
+            "extraction_text": "19 December 1990",
+            "char_interval": {
+                "start_pos": 22939,
+                "end_pos": 22955
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 3,
+            "group_index": 2,
+            "description": null,
+            "attributes": {
+                "type": "date"
+            }
+        },
+        {
+            "extraction_class": "place",
+            "extraction_text": "Brussels",
+            "char_interval": {
+                "start_pos": 22929,
+                "end_pos": 22937
+            },
+            "alignment_status": "match_fuzzy",
+            "extraction_index": 4,
+            "group_index": 3,
+            "description": null,
+            "attributes": {
+                "type": "city"
+            }
+        },
+        {
+            "extraction_class": "person",
+            "extraction_text": "Leon BRITTAN",
+            "char_interval": {
+                "start_pos": 22980,
+                "end_pos": 22992
+            },
+            "alignment_status": "match_exact",
+            "extraction_index": 5,
+            "group_index": 4,
+            "description": null,
+            "attributes": {
+                "title": "Vice-President"
+            }
+        }
+    ],
+    "text": "# II\n\n(Acts wbose publication is not obligatory)\n\n# COMMISSION\n\n# COMMISSION DECISION of 19 December 1990 imposing a fine pursuant to Article 19 of Council Regulation (EEC) No 4056/86 (IV/32.450)\n\n(Only the French text is authentic)\n\n(91/55/EEC)\n\nTHE COMMISSION OF THE EUROPEAN COMMUNITIES,\n\nHaving regard to the Treaty establishing the European Economic Community,\n\nHaving regard to Council Regulation (EEC) No 4056/86 of 22 December 1986 laying down detailed rules for the application of Articles 85 and 86 of the Treaty to maritime transport (), and in particular Articles 16 and 19 thereof,\n\n# Whereas :\n\n# I. THE FACTS\n\n(1) Secrétama is a company constituted under civil law in 1954 for the purpose of providing services in connection with' the operation of agreements between shipping companies. The company, whose registered office is at 167 rue de Courcelles, Paris, France, was appointed to carry out various coordinating, executive and monitoring tasks within the framework of the Shipowners' Committees representing shipping companies operating between France and various African States.\n\n(2) By letters dated 3 and 22 July 1987, the Association of Danish Shipowners and the Danish Government respectively lodged complaints on the basis of Article i0 of Regulation (EEC) No 4056/86 against the practices carried out, notably in France, by the abovementioned Shipowners' Committes and Secrétama which were allegedly aimed at restricting or closing access to competition in the trade. By letters dated 15 June and 5 October 1988, the Commission sent Secrétama a request for information pursuant to Article 16 of Regulation (EEC) No 4056/86.\n\nThe Commission drew attention in both letters to the provisions of Article 19 of the Regulation concerning the supply of incorrect information in response to a request for information. Secrétama replied to the requests by leters dated 13 July and 7 November 1988.\n\n3) By letter dated 22 December 1988, the Commission informed Secrétama in a statement of objections that some of the information contained in the letters referred to in paragraph 2 appeared to be incorrect and that it therefore reserved be right to impose a fine on the basis of Article 19 (1) (b) of Regulation (EEC) No 4056/86. By letter dated 6 February 1989 Secrétama submitted its comments on the statement of objections, and requested a hearing under Article 23 of Regulation (EEC) No 4056/86. This hearing took place on 20 June 1989. By letter of 28 February i990, the Commission sent Secrétama new documents in support of its statement of objections asking for comments. By letter of 29 March 1990 Secrétama submitted its comments but did not, however, request a new hearing.\n\n(4) The information provided by Secrétama, which forms the subject of this Decision, is as follows :\n\n(i) pages 5 and 6 of its letter of 13 July 1988: Secrétama first describes the cargo-sharing system operated by the Shipowners' Committees then, as part of a 'general reply' to the questionnaire sent by the Commission:\n\n'This formula, to which the shipping lines as well as the shippers and forwarders are accustomed, naturally makes for flexible management compared with the unilateral systems applied in certain other trades and in most Euro-African relations. It also has certain other advantages, notably the fact that although it resembles the pooling distribution system, it does not have the latter's disadvantages (financial regulations, penalties, etc.).\"\n\n(ii Page 8, in reply to the following question by the Commission :\n\n'Is it possible for a company not benefiting from a loading authorization or a quota nevertheless to provide a liner transport service on the routes in question? If not, describe the nature of barriers to such an activity (laws or regulations in the States in question, inter-State agreements, or any other measure).'\n\n# Secrétama replied :\n\n'It is possible for a company not benefiting from a loading authorization or without a freight tonnes quota to operate a transport service between the French and African ports concerned.\n\nAny legal barriers which may exist are not in any way the result of practices of the Shipowners' Committees and naturally we are not for our part in a position to assess the application of such public policy measures.'\n\n(ii) On being presented by the Commission (as an Annex to the request for information dated 15 June 1988) with the text of a Senegalese interMinisterial Decree (text presented as a draft), Secrétama replied (page i0 of the leter dated 13 July) that :\n\n'We had no knowledge until now of the official document of the Republic of Senegal of which you sent us two copies under reference number 32450-146 to 155, enclosure 3.'\n\nSecrétama added, in reply to a question from the Commission concerning the content of the Decree:\n\n'It was with surprise that we noted that reference was made on the one hand to a joint French-Senegalese Committee and on the other hand to our appointment as Secretary for France to the Shipowners' Committee.'\n\n# I. LEGAL ASSESSMENT\n\n(5) requests for information which the Commission sent to Secrétama were essentially aimed at determining:\n\n(i) whether the Shipowners' Committees shared cargo on all the maritime routes in question and, if so, whether the cargo-sharing covered the entire trade;   \n(ii) how compliance with the quota by companies was enforced ;   \n(ii) whether a system of penalties existed either for members of the Shipowners' Committees that exceeded their cargo quotas, or for companies which, whilst not being members of such Committees, nevertheless carried cargoes in competition with Committee members.\n\n(6) In its reply dated 13 July 1988, Secrétama confirmed that the Shipowners' Committees shared the cargoes exported from France to 11 West and Central African States; it also indicated that it assisted the Committees in calculating the quotas (by drawing up statistics in particular) and, again on behalf of the Committees, monitored compliance with the quotas by certifying on the documents submitted to it by the different lines in the major French ports that the lines have complied with the decisions of the Committees.\n\n(7) On the other hand, Secrétama, in its letter of 13 July 1988, implicitly denied the existence of a system of penalties aimed at ensuring compliance with the rules of the Shipowners' Committees, doubted their existence, and then absolved the Commitees, and hence Secrétama itself, of any responsibility for the application of such systems :\n\n(i) in describing the 'formula' by which the Shipowners' Committees operated (see point 4 (i)) Secrétama states that there is no accompanying penalties' system, and describes this as an 'advantage' of the formula. It is of course understandable that Secrétama should, by its very nature, concern itself first with the rules instituted by the Shipowners' Committees and not with the public policy measures adopted by the States part of whose foreign trade is covered by the activities of the Committees. However, by describing the absence of a penalties' system within the Committees as an advantage, Secrétama would like the Commission to conclude that the advantage is not offset by a system of penalties which, although outside the Committees, is nevertheless aimed at ensuring that their rules are complied with. If such were the case, the lack of a penalties' system within the Committees themselves would not under any circumstances constitute an advantage for a shipping line wishing to exceed its cargo quota or take on cargo without being subject to the discipline of the\n\nShipowners' Committees. To present the absence of a penalty system within the Shipowners' Committees as an advantage is tantamount to denying implicitly the existence of any penalty system;\n\n(ii) questioned by the Commission on the existence of barriers (including laws and regulations) aimed at preventing a shipping company from operating outside the Shipowners Committees, Secrétama (see point4 (ii) doubted that such measures existed, referring to them as 'any barriers which may exist'.\n\nFurthermore, in stating that it had no knowledge of any regulations applicable to the Franco-Senegalese trade (see point 4 (ii)), Secrétama could have led the Commission to question the existence of such regulations. The Commission had received only a preliminary draft version of the Decree from the complainants (without any date, reference or signature) and had forwarded it as such to Secrétama. Thus at this stage of the inquiry, the Commission was not in a position to determine whether the Decree had actually been adopted and was in force. In affirming that it had no knowledge of the document, Secrétama (whose functions include providing the secretariat for the France-Senegal Shipowners' Committee and could therefore be assumed to be better informed than the Commission of any public policy measures concerning that trade) could have led the Commission to conclude that the provisions contained in the Decree were not in fact in force. In view of the fact, however, that the Decree highlights the role played by the Shipowners' Committee (and Secrétama) in the operation of a cargo-sharing system which, according to the same document, is applicable to the entire trade and is accompanied by substantial penalties imposed on shipping lines, Secrétama was aware that it was of considerable interest to the Commission to know whether the provision were really in force;\n\n(ii) lastly, Secrétama endeavoured to deny that the Shipowners' Committees had any responsibility for imposing penalties, maintaining that 'any legal barriers which may exist are not in any way the result of practices of the Shipowners' Committees' (see point 4 (i).\n\n(8) In replying to the requests for information from the Commission described above, Secrétama provided incorrect information liable to lead the Commission to draw incorrect conclusions about the facts forming the subject of the inquiry.\n\nMost of the 11 African States whose trade with France is, as regards liner transport, covered by Shipowners' Committees, have rules which include a system of penalties applicable to vessels which in France load cargoes not controlled by Secrétama. In some of these States, Secrétama is mentioned by name as the body responsible for stamping the cargo manifests. This is the case in particular with the Senagalese rules referred to in the Commission letter dated 15 June 1988. In other cases, the regulations do not name the agent responsible for stamping the manifests, the appointment being left to the Shippers' Council or the national shipping company of the country in question. Nevertheless, in all the cases in question, as Secrétama itself confirmed, the actual allocation of cargo on the liner routes from France to the 11 African countries is carried out by the Shipowners' Committees and is monitored by Secrétama and therefore, the stamp, authorization or certificate (the lack of which leads to penalties, under the abovementioned rules) is indeed issued by Secrétama.\n\n(10) A number of the documents contained in the file (to which Secrétama had access) confirm that penalties were imposed for failure to comply with quotas. The relevant documents are the following :\n\n(i) a warning letter sent by the maritime administration of an African State to a 'contravening' company informing it that it could not take part in that State's trade with France until it had obtained the approval of the Service Committee (Shipowners' Committee) and that the provisions in force would be strictly applied to cargoes loaded without approval;\n\n(ii) several documents of the National Shippers' Council of another African State imposing fines in respect of goods imported in breach of the rules on cargo-sharing, and exchanges of letters between that Council and the 'contrevening' companies. Some of the reports on the fines and the letters concern goods imported from France. As far as the Commission is aware, however (and Secrétama has not furnished any information to the contrary) the Shipowners' Committee is the only body competent to allocate cargoes exported from France to the African State in question. The Commission also notes that some of the fines were written on printed documents headed 'Freight loaded without the Secrétama stamp'. The sole fact that the authority which imposes penalties considered it necessary to have specially printed forms with such a heading would indicate that penalties are not so exceptional (even though in some cases it seems that the form was used incorrectly for 'infringements' committed in European countries other than France, i.e. on trades not covered by the Shipowners' Committee). Furthermore, some of the fines were imposed for infringements going back to the end of 1985, i.e. shortly after the entry into force of the Decree adopted by the African State concerned at the beginning of November 1985. The Commission is unable to assess the number of fines imposed since then. Simply imposing such penalties for failure to comply with the cargo-sharing system imposed by the Shipowners' Committee and monitored by Secrétama is in any event probably sufficient to dissuade companies which might be tempted to operate outside the Committee's rules;\n\n(iii) a telex sent on 21 November 1988 by the Shippers's Council of the African State referred to above in point (ji) to a European shipping line. The telex confirms the imposition of a fine for loading 'without the Secrétama stamp' in Marseilles, and specifies that 'prior to loading in a French port, the line must apply to the Secrétama representatives for a loading permit validated by the affixing of a stamp on the manifest'.\n\n(11) Secrétama apparently operates solely on French territory ; it is therefore not subject to the authority of a third country and hence not legally required to know its shipping rules.\n\n(12) In practice, the fact remains that Secrétama was aware of the existence of those rules and also of their salient points (although this may vary from one African State to another), at least as regards the provisions applicable to the trade with France. This is clear from the following facts in particular:\n\n(i) Secrétama provides the secretariat for the Shipowners'Committees whose sole purpose is to organize the trade between France and 11 West and Central African countries. It cannot be considered that, in such circumstances, Secrétama was not aware of the legal framework in which those trades operated. The possibility is even less likely in view of the fact that Secrétama not only provides the secretariat for the Shipowners' Committees or conference lines but also describes itself in one of its own brochures as a consultancy company in the maritime transport sector; it cannot therefore be unaware of the regulations in force, especially in the trades which it manages and monitors;\n\n(ii) as as already stated (see point 9), a number of the regulations adopted by African States refer explicitly to Secrétama as the body responsible for running the cargo-sharing system operated by the Shipowners' Committees. The regulations provide for penalties in the event of goods being unloaded without the Secrétama approval stamp. It is inconceivable that such provisions, in all the cases under consideration, were adopted without Secrétama being informed, either before or even after their adoption;\n\n(ii) this is particularly true as regards the Senegalese Decree referred to above which refers in several of its Articles to Secrétama yet of which Secrétama claims to have no knowledge. In practice:\n\n(a) the document was specifically referred to at a meeting of the France-Senegal Shipowners' Committee on 11 December 1987 at which Secrétama was represented by the delegates; Secrétama also subsequently distributed the minutes to the member companies;\n\n(b) the Decree in question whose last Article provides that it will be published wherever necessary', is contained in the Official Journal of the Republic of Senegal which is available, as the Commission has verified, to anyone upon request to the administrative archives of that country; Secrétama representatives visit Senegal at least once a year for a meeting of the Shipowners' Committee;\n\n(c) the Decree goes back to 1981 and has been applicable to the Franco-Senegalese trade since then without ever having, to the knowledge of the Commission, been amended or repealed. Secrétama cannot claim that in seven years of operating on the trade in question it has remained unaware of the Decree ;\n\n(d) the Decree in question was adopted in July 1981; at the next Shipowners'Committee meeting held on 16 September (attended by Secrétama representatives), it was decided that Secrétama would'disseminate the document to all the lines involved in the Franco-Senegalese trade. Secrétama did this by circular letter dated 17 September 1981;\n\n(e) Secrétama received a copy of a telex dated 30 June 1981 from the French lines to the Compagnie Sénégalaise de Navigation Maritime in which the signatories refer to their 'pleasure in learning of the imminent signing of the Decree concerning the sanctions to be imposed on lines infringing the shipping rules adopted by. the Shipowners' Committee';\n\n() Secrétama received a letter from a French shipping company dated 19 November 1981 stating that the company had requested 'the application of the penalties provided for in the Senegalese Decree' against a shipping line which had infringed the cargo-sharing rules;\n\n(g) Secrétama received a copy of a letter dated 18 November 1986 in which Secrétasen (joint secretariat for Senegalese lines) reminded the director of the Senegal merchant navy that the 'Interministerial Decree No 6678 of 8 July 1981 organized the liner trade between France and Senegal on a mandatory basis';\n\n(h) Secrétama is in possession of the copy of a telex sent on 25 February 1984 by Usina, Dakar to various shipping lines to remind them of their obligations and the penalties resulting from the application of the 'Interministerial Decree of 8 July 1981 regulating the Franco-Senegal maritime trade'.\n\n(iv) Secrétama itself admitted at the hearing that, at the time of the setting-up of the France-Niger Shipowners' Committee, it had been aware of Niger provisions stipulating that the absence of a Secrétama stamp on manifests accompanying goods exported from France by sea would lead to the imposition of a fine;\n\n(v) telexes sent by Secrétama to a member of the Shipowners' Committees which had exceeded its quota for cargo bound for three African States reveal that Secrétama had approached the authorities of the three countries to ask them to apply the rules governing such circumstances. In at least one of the three cases examined, its intervention resulted in a fine being imposed. Secrétama cannot in good faith claim that it called for the application of rules whose existence it has doubted.\n\n(13) Secrétama confirmed, in reply to the objections expressed by the Commission, that most of the shipowners' agreements provide that 'all cases of non-application of the practical trade organization arrangements would be notified to the parties concerned. In the southbound trade, the interested parties (administrative authorities or Shippers' Councils) are, pursuant to local regulations, competent to impose fines. By informing these parties 'for any appropriate action' of the 'non-application' cases that have come to its attention (whether involving Committee members that have exceeded their quotas or non-members that have carried cargoes), Secrétama knows that it is exposing the infringing company to a possible fine, although it may not be informed about the outcome of every case.\n\nIt should also be noted that in the case described under point 12 (v), Secrétama did not just inform the'destination'authorities but 'requested' them to apply the measures appropriate to the circumstances.\n\nUnder such conditions, Secrétama cannot maintain the that 'any legal barriers which may exist are not in any way the result of practices of the Shipowners'Committees'.\n\n(14) By implicitly denying, then doubting the existence of a penalties' system of which it was aware, Secré- tama deliberately supplied the Commission with incorrect information in reply to the questionnaire sent to it.\n\nIt acted in a similar fashion, and intentionally, by seeking to reject all responsibility on the part of the Shipowners'Committees for the application of such systems.\n\n(15) Article 16 (1) and (4) of Regulation (EEC) No ${ 4 0 5 6 } / { 8 6 }$ provides that in carrying out the duties assigned to it by that Regulation, the Commission may obtain all necessary information from undertakings and that to that end the owners of the undertakings or their representatives are bound to supply the information requested.\n\nArticle 19 (1) (b) of Regulation (EEC) No 4056/86 provides that the Commission may by decision impose on undertakings or associations of undertakings fines of from ECU 100 to ECU 5 000 where, intentionally or negligently they supply incorrect information in response to a request made pursuant to Article 16 (3).\n\nAs the preceding paragraphs make clear, Secrétama intentionally and repeatedly supplied incorrect information liable to lead the Commission to draw incorrect conclusions on the case in question.\n\nThe Commission considers that the infringement is particularly serious ; the fact that it was repeated rules out the possibility of negligence. Lastly, Secré- tama could not have been unaware that in acting as it did it was infringing the competition rules since the Commission made sure that the relevant provisions of Article 19 of Regulation (EEC) No 4056/86 were contained in its request for information.\n\nUnder the circumstances, it is justified to impose a heavy fine on Secretama within the limit set by Article 19 of Regulation (EEC) No 4056/86,\n\nHAS ADOPTED THIS DECISION :\n\n# Article 1\n\nSecrétama has infringed Article 16 (4) of Regulation (EEC) No 4056/86 by supplying incorrect information in response to a request made pursuant to Article 16 (3) of that Regulation.\n\n# Article 2\n\nA fine of ECU ${ \\bf 5 . 0 0 0 }$ is hereby imposed on Secrétama. The fine shall be paid, in ecus, within three months of the date of notification of this Decision to the account of the Commission of the European Communities, No 310- 0933000-43, Banque Bruxelles-Lambert, Agence Européenne, 5 Rond-Point Robert Schuman, B-1040 Brussels.\n\nOn expiry of that period interest shall automatically be payable at the rate charged by the European Monetary Cooperation Fund on its ecu operations on the first working day of the month in which this Decision was adopted, plus 3,5 percentage points, i.e. $14 \\%$ -\n\n# Article 3\n\nThis Decision is addressed to Secrétama, 167 rue de Courcelles, F-75017 Paris.\n\nThis Decision shall be enforceable pursuant to Article 192 of the EEC Treaty.\n\nDone at Brussels, 19 December 1990.\n\nFor the Commission   \nLeon BRITTAN   \nVice-President",
+    "document_id": "doc_8c9449de"
+}
