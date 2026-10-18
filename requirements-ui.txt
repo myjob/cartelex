@@ -93,7 +93,7 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-fsspec==2026.3.0
+fsspec==2026.6.0
     # via huggingface-hub
 gepa[dspy]==0.0.26
     # via dspy
