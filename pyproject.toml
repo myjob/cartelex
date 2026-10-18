@@ -5,9 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "celex-facts"
 version = "0.1.0"
-# Dual-licensed: a recipient may choose either license.
-license = "Apache-2.0 OR MIT"
-license-files = ["LICENSE", "LICENSE-MIT"]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
 classifiers = [

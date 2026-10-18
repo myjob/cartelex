@@ -466,7 +466,7 @@ class TestSshHostDerivation(_QuietTestCase):
 
     def test_host_comes_from_the_ollama_endpoint(self) -> None:
         """No separate DGX_SSH_HOST setting can drift from OLLAMA_HOST."""
-        with mock.patch.object(settings, "OLLAMA_HOST", "http://localhost:11434"):
+        with mock.patch.object(settings, "OLLAMA_HOST", "http:/localhost:11434"):
             self.assertEqual(dgx_ssh_host(), "localhost")
 
     def test_unparsable_endpoint_raises(self) -> None:

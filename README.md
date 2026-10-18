@@ -158,8 +158,8 @@ Use the remote Ollama host or a cloud API.
 ## Installation
 
 ```bash
-git clone <repository-url> celex-facts
-cd celex-facts
+git clone <repository-url> cartelex
+cd cartelex
 
 python3.12 -m venv .venv
 ```
@@ -644,14 +644,10 @@ and `- [x]` when solved.
 
 ## License
 
-Dual-licensed under **Apache License 2.0** or the **MIT License**, at your
-option:
+Licensed under the **Apache License 2.0** (see [LICENSE](LICENSE)), which
+includes an explicit patent grant.
 
-- [LICENSE](LICENSE) -- Apache-2.0 (adds an explicit patent grant)
-- [LICENSE-MIT](LICENSE-MIT) -- MIT (shortest permissive terms)
-
-SPDX: `Apache-2.0 OR MIT`. You may comply with either one; you do not have to
-satisfy both. Unless you state otherwise, any contribution you submit is
+SPDX: `Apache-2.0`. Unless you state otherwise, any contribution you submit is
 licensed the same way, with no additional terms.
 
 The repository was created under GPL-3.0 and relicensed on 2026-08-27 by the
