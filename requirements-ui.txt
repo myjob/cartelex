@@ -374,7 +374,7 @@ uuid-utils==0.14.1
     #   langsmith
 uvicorn==0.46.0
     # via celex-facts (pyproject.toml)
-weasyprint==68.1
+weasyprint==70.0
     # via celex-facts (pyproject.toml)
 webencodings==0.5.1
     # via

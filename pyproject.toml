@@ -93,7 +93,7 @@ dependencies = [
     "mistune>=3.2,<4",
     "py-heideltime>=1.0.6,<2",
     "pycountry>=24.6",
-    "weasyprint>=68,<69",
+    "weasyprint>=70.0,<71",
     "xlsxwriter>=3.2,<4",
 
     # --- Core plumbing ------------------------------------------------------
