@@ -167,7 +167,7 @@ langdetect==1.0.9
     # via celex-facts (pyproject.toml)
 langsmith==0.10.17
     # via langchain-core
-litellm==1.95.0
+litellm==1.88.6
     # via dspy
 markdown-it-py==4.2.0
     # via
