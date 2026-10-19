@@ -309,16 +309,16 @@ class TestCreateLm(unittest.TestCase):
             name="ui_planner", provider=PROVIDER_OLLAMA, model_id="qwen3-coder:30b"
         )
 
+        ollama_host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+
         with mock.patch("config.llm_factory.settings") as settings:
-            settings.OLLAMA_HOST = "http://localhost:11434"
+            settings.OLLAMA_HOST = ollama_host
             _stub_runtime_settings(settings)
             with mock.patch("config.llm_factory.dspy.LM") as mock_lm:
                 create_lm(profile)
 
         self.assertEqual(mock_lm.call_args.args[0], "openai/qwen3-coder:30b")
-        self.assertEqual(
-            mock_lm.call_args.kwargs["api_base"], "http://localhost:11434/v1"
-        )
+        self.assertEqual(mock_lm.call_args.kwargs["api_base"], f"{ollama_host}/v1")
 
     def test_temperature_is_sent_only_when_pinned(self) -> None:
         """A pinned temperature reaches the LM; an unpinned one is not sent at all."""
