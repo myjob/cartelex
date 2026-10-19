@@ -376,9 +376,22 @@
               "icon": "lucide-file",
               "title": "README"
             }
+          },
+          {
+            "id": "22dd8dba117ed402",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
           }
-        ],
-        "currentTab": 25
+        ]
       }
     ],
     "direction": "vertical"
@@ -518,7 +531,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "ISSUES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,11 +573,18 @@
       "obsidian-task-progress-bar:Open Task Genius view": false
     }
   },
-  "active": "901b0caaff431473",
+  "active": "6489c6f6b388e7b4",
   "lastOpenFiles": [
+    "logs/backend-server/application.log.2026-10-18",
+    "README.md",
+    "docs/howto publish data 2 Zenodo.md",
+    "logs/application.log.2026-10-18",
+    "ISSUES.md",
+    "docs/README-old.md",
+    "docs/dev/PR to cartelex.md",
+    "docs/ci-cd/CICD.md",
     "LICENSE",
     "docs/image-1.png",
-    "ISSUES.md",
     "docs/cartelex release.md",
     "docs/Design KnowledgeIngestModule.md",
     "docs/dev/Docker Cheat Sheet.md",
@@ -584,7 +604,6 @@
     "scripts/release_cartelex.sh.tmp.2777555.74187afeb851",
     "docs/infra/caddy and etc hosts.md",
     "logs/backend-server/application.log.2026-10-15",
-    "README.md",
     "docs/infra/unix 101 cheat sheet.md",
     "src/reporting/AI_USAGE.md",
     "logs/application.log.2026-10-16",
@@ -593,12 +612,6 @@
     "docs/GitHub Cheat Sheet.md",
     "src/pipelines/agent_dspy/tests/test_fact_summary_module.py.tmp.805102.989f41c42b0e",
     "docs/claude/plans/case-summary-context-facts-reconcile.md",
-    "docs/claude/plans/case-summary-context-facts-reconcile.md.tmp.805102.080d4c64d1bb",
-    "ISSUES.md.tmp.805102.6bc9d668b5f9",
-    "docs/Data fact2book_case_discrepancy.md",
-    "docs/Data  Quest Infringement Articles.md",
-    "docs/Design Book.md",
-    "docs/claude/plans/chat-completions-stream-flag-20260920.md",
     "docs/assets/Design KnowledgeIngestModule/Pasted image 20260522193315.png",
     "docs/assets/UI Walkthrough with Screen Shots/file-20260907200508041.png",
     "docs/desloppify-20260228.png",

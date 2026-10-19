@@ -8,7 +8,7 @@
 
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.3
+aiohttp==3.14.5
     # via litellm
 aiosignal==1.4.0
     # via aiohttp
@@ -34,6 +34,12 @@ attrs==25.4.0
     #   aiohttp
     #   jsonschema
     #   referencing
+boto3==1.43.114
+    # via litellm
+botocore==1.43.114
+    # via
+    #   boto3
+    #   s3transfer
 brotli==1.2.0
     # via fonttools
 cachetools==7.0.5
@@ -104,10 +110,16 @@ h11==0.16.0
     # via
     #   httpcore
     #   uvicorn
+h2==4.4.1
+    # via httpx
 hf-xet==1.4.3
     # via huggingface-hub
+hpack==4.2.0
+    # via h2
 httpcore==1.0.9
     # via httpx
+httpcore2==2.14.0
+    # via httpx2
 httpx==0.28.1
     # via
     #   celex-facts (pyproject.toml)
@@ -116,18 +128,22 @@ httpx==0.28.1
     #   litellm
     #   ollama
     #   openai
+httpx2==2.14.0
+    # via langsmith
 huggingface-hub==1.10.1
     # via
     #   sentence-transformers
     #   tokenizers
     #   transformers
-idna==3.11
+hyperframe==6.1.0
+    # via h2
+idna==3.18
     # via
     #   anyio
     #   httpx
     #   requests
     #   yarl
-importlib-metadata==9.0.0
+importlib-metadata==8.9.0
     # via litellm
 jinja2==3.1.6
     # via
@@ -135,6 +151,10 @@ jinja2==3.1.6
     #   torch
 jiter==0.13.0
     # via openai
+jmespath==1.1.0
+    # via
+    #   boto3
+    #   botocore
 joblib==1.5.3
     # via scikit-learn
 json-repair==0.58.7
@@ -147,20 +167,22 @@ jsonschema==4.26.0
     # via litellm
 jsonschema-specifications==2025.9.1
     # via jsonschema
-langchain-core==1.2.5
+langchain-core==1.6.12
     # via
     #   celex-facts (pyproject.toml)
     #   langchain-postgres
     #   langchain-text-splitters
 langchain-postgres==0.0.16
     # via celex-facts (pyproject.toml)
-langchain-text-splitters==1.1.0
+langchain-protocol==0.0.18
+    # via langchain-core
+langchain-text-splitters==1.1.2
     # via celex-facts (pyproject.toml)
 langdetect==1.0.9
     # via celex-facts (pyproject.toml)
-langsmith==0.6.0
+langsmith==0.14.11
     # via langchain-core
-litellm==1.82.6
+litellm==1.106.0
     # via dspy
 mako==1.3.10
     # via alembic
@@ -242,7 +264,7 @@ ollama==0.6.1
     # via celex-facts (pyproject.toml)
 onnxruntime==1.24.4
     # via flashrank
-openai==2.14.0
+openai==2.53.0
     # via
     #   dspy
     #   litellm
@@ -308,6 +330,8 @@ pydantic==2.12.5
     #   openai
 pydantic-core==2.41.5
     # via pydantic
+pydantic-settings==2.16.0
+    # via litellm
 pydyf==0.12.1
     # via weasyprint
 pygments==2.19.2
@@ -316,7 +340,7 @@ pyphen==0.17.2
     # via weasyprint
 python-dateutil==2.9.0.post0
     # via rule-engine
-python-dotenv==1.2.1
+python-dotenv==1.2.4
     # via
     #   celex-facts (pyproject.toml)
     #   litellm
@@ -354,6 +378,8 @@ rpds-py==0.30.0
     #   referencing
 rule-engine==4.5.3
     # via celex-facts (pyproject.toml)
+s3transfer==0.19.2
+    # via boto3
 safetensors==0.8.0
     # via transformers
 scikit-learn==1.9.0
@@ -423,6 +449,10 @@ transformers==5.13.0
     # via sentence-transformers
 triton==3.7.1
     # via torch
+truststore==0.10.5
+    # via
+    #   httpcore2
+    #   httpx2
 typer==0.21.0
     # via
     #   huggingface-hub
@@ -451,7 +481,7 @@ typing-inspection==0.4.2
     # via
     #   fastapi
     #   pydantic
-urllib3==2.6.3
+urllib3==2.8.0
     # via requests
 uuid-utils==0.14.1
     # via
@@ -466,11 +496,13 @@ webencodings==0.5.1
     #   cssselect2
     #   tinycss2
     #   tinyhtml5
+websockets==17.0.1
+    # via langsmith
 xlsxwriter==3.2.9
     # via celex-facts (pyproject.toml)
 xxhash==3.6.0
     # via dspy
-yarl==1.23.0
+yarl==1.25.1
     # via aiohttp
 zipp==3.23.0
     # via importlib-metadata

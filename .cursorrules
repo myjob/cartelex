@@ -1,0 +1,7 @@
+# Project Rules
+
+1. Always use the `unittest` framework for Python tests. Do not use `pytest` style tests unless explicitly requested relative to legacy code, but prefer refactoring to `unittest`.
+2. Follow the existing user rules:
+    - Always use the virtual environment located at the project root in `.venv`. Use the full path or correct relative path (e.g. `.venv/bin/python` or `../.venv/bin/python`) depending on your current working directory.
+    - Add tests in the `./tests` folder relative to the script being tested (e.g., `src/foo/bar.py` -> `src/foo/tests/test_bar.py`).
+    - Resolve existing modules in `.venv` vs `/src` conflicts by prioritizing `/src`.
