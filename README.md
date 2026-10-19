@@ -707,7 +707,13 @@ This project is based on a refactored application using pdf extraction, pytesser
 
 ---
 
+
+## DOI
+
+[10.5281/zenodo.23481580](https://zenodo.org/uploads/23481580)
+
+---
+
 ## Changelog
 
-No `CHANGELOG.md` is maintained. The commit history and [ISSUES.md](ISSUES.md)
-are the record of change.
+No `CHANGELOG` is maintained yet. The commit history and an internal Obsidian based ISSUES.md are the record of change.
