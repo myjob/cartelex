@@ -232,7 +232,7 @@ pgvector==0.3.6
     # via
     #   celex-facts (pyproject.toml)
     #   langchain-postgres
-pillow==12.2.0
+pillow==12.3.0
     # via weasyprint
 ply==3.11
     # via rule-engine
