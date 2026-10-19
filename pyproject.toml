@@ -89,7 +89,7 @@ dependencies = [
     # --- Text / documents / reporting ---------------------------------------
     "langdetect>=1.0.9,<2",
     "markdown-it-py>=4,<5",
-    "mistune>=3.2,<4",
+    "mistune>=3.3.3,<4",
     "py-heideltime>=1.0.6,<2",
     "pycountry>=24.6",
     "weasyprint>=70.0,<71",
