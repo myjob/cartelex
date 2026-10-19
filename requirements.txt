@@ -184,7 +184,7 @@ langsmith==0.14.11
     # via langchain-core
 litellm==1.106.0
     # via dspy
-mako==1.3.10
+mako==1.4.2
     # via alembic
 markdown-it-py==4.0.0
     # via
