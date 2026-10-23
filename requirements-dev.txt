@@ -284,7 +284,7 @@ pgvector==0.3.6
     # via
     #   celex-facts (pyproject.toml)
     #   langchain-postgres
-pillow==12.3.0
+pillow==13.0.0
     # via weasyprint
 pip-tools==7.6.0
     # via celex-facts (pyproject.toml)
