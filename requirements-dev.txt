@@ -38,7 +38,7 @@ botocore==1.43.114
     # via
     #   boto3
     #   s3transfer
-brotli==1.2.0
+brotli==1.2.1
     # via fonttools
 build==1.5.0
     # via
