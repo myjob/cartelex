@@ -87,7 +87,7 @@ fastapi==0.141.1
     # via celex-facts (pyproject.toml)
 fastuuid==0.14.0
     # via litellm
-filelock==3.32.2
+filelock==4.2.1
     # via
     #   huggingface-hub
     #   torch
