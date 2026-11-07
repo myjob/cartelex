@@ -5955,4 +5955,60 @@ ORDER BY c.celex_id, f.name;
 
 --34579_1889_2
 -- law_article_all_relevant
-select * from facts where celex_id =  '34579_1889_2'
+-- legal_assessment_period
+
+select distinct name from facts 
+
+select * from facts 
+where name = 'case_commission_infringement'
+where celex_id =  '40608_2860_3'
+
+where name LIKE 'OECD%'
+where name = 'products' and value_md = 'NA'
+where celex_id = 'DEC-AT39847-20121212'
+where celex_id =  '34579_1889_2'
+
+
+select * from celex_facts.fact_ingestion_audit_trail_vw
+
+------
+
+select * from celex_facts.decision_registry
+
+where celex_number = 'CELEX-31991D0298'
+
+select * from celex_facts.decision_registry
+where decision_id like '%133%'
+where decision_id like '%33.133%' -- case IV/33133
+
+-----------------
+-- DEC-AT39780-20141210
+
+select * from celex_facts.document_registry
+where decision_id = 'DEC-AT40413-20210120'
+ where decision_id = 'DEC-AT34174-20120611'  -- 34174_2_2
+-- where decision_id = 'DEC-AT39780-20141210'
+
+ 
+ case_commission_decision
+case_commission_info_request
+case_commission_no_action
+---------
+
+select * from celex_facts.facts
+where 1=1
+-- and celex_id in ('39780_3528_6','CELEX-31976D0915','CCELEX-31989D0408')
+-- and name like '%decision%'
+and name = 'case_commission_decision'
+and not(value_md in ('True','False','NA'))
+
+
+------------
+-- rare values
+SELECT value_md, COUNT(*) AS n
+FROM celex_facts.facts
+where name = 'case_commission_decision'
+GROUP BY value_md
+ORDER BY n ASC
+LIMIT 50;
+

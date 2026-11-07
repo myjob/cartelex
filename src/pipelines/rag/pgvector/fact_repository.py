@@ -15,16 +15,28 @@ Exports:
 """
 
 import logging
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
+from sqlalchemy import text
 from sqlalchemy.orm import sessionmaker
 
 from pipelines.agent_dspy.dspy_protocols import FirstPageVO
 from pipelines.rag.pgvector.models import CaseCelexId, Facts, RuleFacts
-from pipelines.rag.pgvector.session import make_engine
+from pipelines.rag.pgvector.session import column_exists, make_engine, warn_once
 from pipelines.rag.pgvector.vector_config import DATABASE_URL
 
 logger = logging.getLogger(__name__)
+
+#: Lineage column added by ``migrate_document_lineage.sql``. Deliberately not
+#: mapped on the ``Facts`` ORM model: an unmapped column never appears in an
+#: ORM SELECT or INSERT, so every ``Facts`` query keeps working before the
+#: migration is applied. It is written by ``_SET_DOCUMENT_ID`` only.
+_DOCUMENT_ID_COLUMN = "document_id"
+_LINEAGE_MIGRATION = "src/pipelines/rag/pgvector/migrate_document_lineage.sql"
+_SET_DOCUMENT_ID = text(
+    f"UPDATE {Facts.__table__.fullname} SET {_DOCUMENT_ID_COLUMN} = :document_id "
+    "WHERE id = :fact_id"
+)
 
 
 class FactRepository:
@@ -45,6 +57,8 @@ class FactRepository:
     def __init__(self, db_url: str = DATABASE_URL) -> None:
         self.engine = make_engine(db_url)
         self.Session = sessionmaker(bind=self.engine)
+        #: Cached probe of ``facts.document_id`` (None until first needed).
+        self._document_id_column: bool | None = None
 
     # ------------------------------------------------------------------
     # Point reads — previously in FactTable (db.py)
@@ -142,6 +156,121 @@ class FactRepository:
                 .all()
             )
             return [row.case_id for row in rows]
+
+    def select_case_refs(self, celex_id: str, title_fact_name: str) -> List[str]:
+        """Return the raw case references of a document: case ids and title values.
+
+        Feeds ``period_inheritance.case_numbers``, which extracts the 5-digit
+        case numbers; ``case_celex_id`` alone misses ``DEC-*`` ids and holds
+        prefix-only junk (``COMP/E``), so the case title is read alongside.
+
+        Parameters
+        ----------
+        celex_id:
+            The document identifier.
+        title_fact_name:
+            Name of the case-title fact (``settings.PERIOD_INHERITANCE_CASE_TITLE_FACT``).
+
+        Returns
+        -------
+        List[str]
+            ``case_celex_id.case_id`` values followed by the title fact's ``value_md``.
+        """
+        sql = text("""
+            SELECT case_id FROM celex_facts.case_celex_id WHERE celex_id = :celex_id
+            UNION ALL
+            SELECT value_md FROM celex_facts.facts
+             WHERE celex_id = :celex_id AND name = :title AND value_md IS NOT NULL
+        """)
+        with self.engine.connect() as conn:
+            rows = conn.execute(sql, {"celex_id": celex_id, "title": title_fact_name}).fetchall()
+        return [str(row[0]) for row in rows]
+
+    def select_period_donor_rows(
+        self, fact_name: str, gate_fact_name: str, title_fact_name: str, exclude_method: str
+    ) -> List[Dict[str, Any]]:
+        """Return every stored period fact that could be inherited, with its case refs.
+
+        Parameters
+        ----------
+        fact_name:
+            The period fact (``cartel_period``); ``NA`` rows are excluded.
+        gate_fact_name:
+            The infringement gate fact (``settings.PERIOD_INHERITANCE_GATE_FACT``).
+        title_fact_name:
+            The case-title fact whose value carries the case number.
+        exclude_method:
+            ``fact_source_link.extraction_method`` of inherited values
+            (``period_inheritance``); such facts are borrowed, not first-hand,
+            and never serve as donors.
+
+        Returns
+        -------
+        List[Dict[str, Any]]
+            Keys ``fact_id`` (UUID), ``celex_id``, ``value_json`` (text),
+            ``gate`` (gate ``value_md`` or None) and ``case_refs`` (list of
+            case ids and title values).
+        """
+        sql = text("""
+            SELECT f.id AS fact_id, f.celex_id, f.value_json::text AS value_json,
+                   g.value_md AS gate,
+                   ARRAY(SELECT c.case_id FROM celex_facts.case_celex_id c
+                          WHERE c.celex_id = f.celex_id)
+                   || ARRAY(SELECT t.value_md FROM celex_facts.facts t
+                             WHERE t.celex_id = f.celex_id AND t.name = :title
+                               AND t.value_md IS NOT NULL) AS case_refs
+              FROM celex_facts.facts f
+              LEFT JOIN celex_facts.facts g ON g.celex_id = f.celex_id AND g.name = :gate
+             WHERE f.name = :fact AND f.value_md IS NOT NULL AND f.value_md <> 'NA'
+               AND NOT EXISTS (SELECT 1 FROM celex_facts.fact_source_link l
+                                WHERE l.fact_id = f.id AND l.extraction_method = :exclude)
+        """)
+        params = {
+            "fact": fact_name, "gate": gate_fact_name,
+            "title": title_fact_name, "exclude": exclude_method,
+        }
+        with self.engine.connect() as conn:
+            rows = conn.execute(sql, params).fetchall()
+        return [dict(row._mapping) for row in rows]
+
+    def select_newer_cross_document_sources(self, celex_id: str, name: str) -> List[str]:
+        """Return the other documents whose source fact was written after this fact.
+
+        A fact copied from another decision (``fact_source_link`` to a ``fact``
+        source of a different ``celex_id``, e.g. an inherited cartel period) is
+        stale once that source fact is re-extracted: ``upsert_fact`` keeps the
+        source's id and moves its ``created_at``. Same-document predecessors
+        are not considered; the batch orders those itself.
+
+        Parameters
+        ----------
+        celex_id:
+            The CELEX document identifier of the dependent fact.
+        name:
+            The dependent fact's name.
+
+        Returns
+        -------
+        List[str]
+            Distinct ``celex_id`` values of the newer source facts, sorted;
+            empty when the fact is fresh, has no cross-document source, or
+            does not exist.
+        """
+        sql = text("""
+            SELECT DISTINCT s.celex_id
+              FROM celex_facts.facts f
+              JOIN celex_facts.fact_source_link l ON l.fact_id = f.id
+              JOIN celex_facts.fact_source_registry r
+                ON r.source_id = l.source_id AND r.source_type = 'fact'
+              JOIN celex_facts.facts s ON s.id = r.source_fact_id
+             WHERE f.celex_id = :celex_id AND f.name = :name
+               AND s.celex_id <> f.celex_id
+               AND s.created_at > f.created_at
+             ORDER BY s.celex_id
+        """)
+        with self.engine.connect() as conn:
+            rows = conn.execute(sql, {"celex_id": celex_id, "name": name}).fetchall()
+        return [row.celex_id for row in rows]
 
     # ------------------------------------------------------------------
     # Bulk reads — previously in CelexDatabaseToolkit (celex_tools.py)
@@ -482,12 +611,19 @@ class FactRepository:
         value_md: str,
         value_json: str,
         references_doc_json=None,
+        document_id: str | None = None,
     ):
         """Atomic upsert: insert-or-update with self-healing duplicate cleanup.
 
         If duplicate rows already exist for the ``(celex_id, name)`` key (from
         a prior race or migration), the extras are deleted in the same
         transaction so the table converges back to at most one row per key.
+
+        ``document_id`` is written in the same transaction by a separate
+        UPDATE, and only when it is not None and the ``facts.document_id``
+        column exists (probed once per repository). A None never clears a
+        stored value, and a missing column (migration not applied) logs one
+        warning per process and skips the lineage write.
 
         Parameters
         ----------
@@ -501,14 +637,26 @@ class FactRepository:
             JSON-serialised fact value.
         references_doc_json:
             Optional JSONB references payload.
+        document_id:
+            The decision's source document (``document_registry``), or None
+            to leave the stored lineage untouched.
 
         Returns
         -------
         uuid.UUID
             The primary-key ``id`` of the surviving row.
+
+        Raises
+        ------
+        sqlalchemy.exc.SQLAlchemyError
+            On database errors (the transaction is rolled back).
         """
         import datetime
         import uuid
+
+        # Probe before the row-locking session: the probe needs its own pooled
+        # connection, which must never be awaited while FOR UPDATE locks are held.
+        write_lineage = document_id is not None and self._has_document_id_column()
 
         with self.Session() as session:
             existing_rows = (
@@ -548,6 +696,11 @@ class FactRepository:
                 session.flush()
                 fact_id = new_fact.id
 
+            if write_lineage:
+                session.execute(
+                    _SET_DOCUMENT_ID, {"document_id": document_id, "fact_id": fact_id}
+                )
+
             try:
                 session.commit()
                 logger.info(
@@ -558,6 +711,41 @@ class FactRepository:
                 session.rollback()
                 logger.error("DB Error upserting fact for %s: %s", celex_id, e)
                 raise
+
+    def _has_document_id_column(self) -> bool:
+        """Return whether ``facts.document_id`` exists, probing once.
+
+        A failed probe counts as absent for the rest of the process and logs
+        the exception in one warning; a genuinely absent column logs a
+        separate one-time "missing" warning.
+
+        Returns
+        -------
+        bool
+            True once ``migrate_document_lineage.sql`` has been applied.
+        """
+        if self._document_id_column is None:
+            try:
+                with self.engine.connect() as conn:
+                    present = column_exists(
+                        conn, Facts.__table__.fullname, _DOCUMENT_ID_COLUMN
+                    )
+            except Exception as exc:
+                warn_once(
+                    logger, "facts.document_id.probe",
+                    "facts.document_id lineage probe failed, writing NULL: %s", exc,
+                )
+                self._document_id_column = False
+                return False
+            if not present:
+                warn_once(
+                    logger, "facts.document_id",
+                    "Column %s.%s is missing; facts are saved without lineage. "
+                    "Apply %s.", Facts.__table__.fullname, _DOCUMENT_ID_COLUMN,
+                    _LINEAGE_MIGRATION,
+                )
+            self._document_id_column = present
+        return self._document_id_column
 
 
 

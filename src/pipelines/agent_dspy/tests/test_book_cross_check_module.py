@@ -734,7 +734,7 @@ class TestCaseScopedPool(unittest.TestCase):
         case_chunks = [_chunk("case-1"), _chunk("case-2")]
         chapter_chunks = [_chunk("chap-1", "Another case, decided 28 July 1978.")]
         module, _, _ = self._module_with_pools(
-            _fact("eu_commisssion_decision_date", value_md="2001-12-02"),
+            _fact("eu_commission_decision_date", value_md="2001-12-02"),
             ranker, judge, case_chunks, chapter_chunks,
         )
 
@@ -771,7 +771,7 @@ class TestCaseScopedPool(unittest.TestCase):
         ]
         judge = MagicMock()
         module, lineage_repo, check_repo = self._module_with_pools(
-            _fact("eu_commisssion_decision_date", value_md="2001-12-02"),
+            _fact("eu_commission_decision_date", value_md="2001-12-02"),
             ranker, judge, [_chunk("case-1")], [_chunk("chap-1")],
         )
 
@@ -794,7 +794,7 @@ class TestCaseScopedPool(unittest.TestCase):
             )
         )
         module, _, _ = self._module_with_pools(
-            _fact("eu_commisssion_decision_date", value_md="2001-12-02"),
+            _fact("eu_commission_decision_date", value_md="2001-12-02"),
             ranker, judge, [_chunk("case-1")], [],
         )
 
@@ -819,7 +819,7 @@ class TestCaseScopedPool(unittest.TestCase):
 
         judge = MagicMock(side_effect=_capture)
         module, _, _ = self._module_with_pools(
-            _fact("eu_commisssion_decision_date", value_md="2001-12-02"),
+            _fact("eu_commission_decision_date", value_md="2001-12-02"),
             ranker, judge, [_chunk("case-1", long_text)], [],
         )
 

@@ -1,4 +1,5 @@
 # https://zerosteiner.github.io/rule-engine/
+import logging
 import rule_engine
 from datetime import date
 
@@ -10,6 +11,8 @@ _DEFAULT_ARTICLE_FACT = "law_article_all_relevant"
 # Stored values that carry no article tokens; a preferred source holding one
 # of these defers to the fallback fact.
 _PLACEHOLDER_VALUES: frozenset[str] = frozenset({"", "na", "n/a", "none", "null", "[]"})
+
+logger = logging.getLogger(__name__)
 
 
 class ConditionValidator:
@@ -34,7 +37,10 @@ class ConditionValidator:
         -------
         bool
             ``True`` when the condition matches (or is absent), ``False``
-            otherwise.
+            otherwise. A condition naming a fact absent from ``fact_context``
+            is not met: the parent fact was gated out by its own condition
+            (e.g. no ``infringement_category_hor_vert_lic_joint`` for an
+            abuse-of-dominance case), so the child has nothing to refine.
         """
         if not condition:
             return True
@@ -42,7 +48,11 @@ class ConditionValidator:
         context = rule_engine.Context(resolver=self.unified_custom_resolver)
         # context = rule_engine.Context(resolver=self.custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
-        return rule.matches(fact_context)
+        try:
+            return rule.matches(fact_context)
+        except rule_engine.errors.SymbolResolutionError as exc:
+            logger.info("condition | %s | not met: fact %s absent", condition, exc.symbol_name)
+            return False
 
     def custom_resolver(self, thing, name):
         # Intercept the symbol "exists" and return a Python function (callable)
@@ -126,7 +136,7 @@ class ConditionValidator:
             return False
         concepts = concepts_for(
             self._article_surface(thing, source_fact),
-            thing.get("eu_commisssion_decision_date", ""),
+            thing.get("eu_commission_decision_date", ""),
             thing.get("celex_id", ""),
         )
         return target in concepts

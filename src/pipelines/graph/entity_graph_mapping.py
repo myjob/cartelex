@@ -185,7 +185,7 @@ TEMPORAL_EDGE_FAMILY: str = "heideltime_event"
 #     company node rather than creating a new endpoint pair;
 #   * the non-event heideltime families.  ``heideltime_raw`` is a proxy fact
 #     whose payload is a row-count summary, and ``heideltime_event_agg`` /
-#     ``heideltime_cartel_period`` are per-*case* derivations with no company
+#     ``cartel_period`` are per-*case* derivations with no company
 #     endpoint at all.  Naming them here is what keeps the heideltime layer from
 #     being invisible by omission: after this, every heideltime family is either
 #     projected (``TEMPORAL_EDGE_FAMILY``) or excluded on the record.
@@ -197,7 +197,7 @@ EXCLUDED_FAMILIES: frozenset[str] = frozenset(
         "company_recidivism",
         "heideltime_raw",
         "heideltime_event_agg",
-        "heideltime_cartel_period",
+        "cartel_period",
     }
 )
 

@@ -35,8 +35,8 @@
             "args": [
                 // "--filter-celex-id", "39530_2671_5",
                 "--filter-celex-id", "CELEX-31972D0468",
-                "--filter-fact", "heideltime_cartel_period",
-                // "--filter-fact", "eu_commisssion_decision_date",
+                "--filter-fact", "cartel_period",
+                // "--filter-fact", "eu_commission_decision_date",
                 // "--filter-fact", "infringement_category_hor_vert_lic_joint",
                 // "--filter-fact", "infringement_category_abuse_of_dominance",
                 "--limit", "1",

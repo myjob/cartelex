@@ -58,7 +58,7 @@ Thin projections over `facts` that flatten specific fact names into columns.
 | Relation | Type | Rows | Purpose | Detail doc |
 | --- | --- | --- | --- | --- |
 | `celex_index_vw` | view | 702 | One row per decision: case title, industry, cartel period and case summary pivoted out of `facts`. The default case-picker index. | [Data Model](<Data Model.md>) |
-| `facts_cartel_legal_period_vw` | view | 702 | Pairs each decision's `cartel_period` with its `legal_assessment_period`. | [Data Model](<Data Model.md>) |
+| `facts_cartel_legal_period_vw` | view | 434 | Pairs each decision's `cartel_period` (HeidelTime-derived since 2026-11-06) with its `legal_assessment_period`. | [Data Model](<Data Model.md>) |
 | `facts_cartel_legal_period_category_vw` | view | 702 | Parses both periods into dates and classifies their overlap into a period category — the temporal-consistency QA lens. | [Data Quality Quests & Actions](<Data Quality Quests & Actions.md>) |
 | ~~`qa_company_delta_vw`~~ | view | *dropped* | Diffed `companies_investigated` against `companies_canoncial` to QA the rename. Dropped 2026-08-29 with the `companies_canoncial` fact by `migrate_delete_companies_canoncial_fact.sql`: with the canonical side gone every row reported a one-sided set, so the view measured nothing. | [Data Quality Quests & Actions](<Data Quality Quests & Actions.md>) |
 

@@ -84,8 +84,8 @@ _UNSTRUCTURED_TOPICS: tuple[str, ...] = (
 # synonym-fallback path; the planner remains the primary router.
 _TOPIC_SYNONYMS: tuple[tuple[str, str], ...] = (
     ("geographical market", "market_geographical"),
-    ("decision date", "eu_commisssion_decision_date"),
-    ("decision year", "eu_commisssion_decision_date"),
+    ("decision date", "eu_commission_decision_date"),
+    ("decision year", "eu_commission_decision_date"),
     ("nace group", "NACE_group_code"),
     ("nace class", "NACE_class_code"),
     ("nace code", "NACE_group_code"),

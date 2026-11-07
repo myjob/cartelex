@@ -26,7 +26,7 @@
   context_facts:
     - celex_case_id
     - case_title
-    - eu_commisssion_decision_date
+    - eu_commission_decision_date
     - case_commissioner
     - companies_investigated
     - companies_country
@@ -50,7 +50,7 @@
     - infringement_subcategory_horizontal_restraints
     - infringement_subcategory_vertical_restraints
     - infringement_gravity
-    - heideltime_cartel_period
+    - cartel_period
     - heideltime_event_agg
     - exemption_case
     - exemption_applicants
@@ -63,6 +63,7 @@
     - company_recidivism
     - case_commission_info_request
     - case_commission_no_action
+    - case_commission_infringement
     - case_commission_decision
     - is_court_involved
     - court_list
@@ -80,7 +81,7 @@
   output_schema: ""
   pipeline: keyword_regex
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 # The articles the decision actually applies: the same regex restricted to
 # chunks classified as the operative part ("HAS ADOPTED THIS DECISION ...
@@ -93,7 +94,7 @@
   pipeline: keyword_regex
   section_scope: [operative]
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 # Canonical infringement concept(s) derived deterministically from
 # law_article_all_relevant, mapped across the EU treaty renumbering (EEC/EC/TFEU)
@@ -107,7 +108,21 @@
   output_type: str
   pipeline: infringement_concept
   force_override: false
-  run_state_active: false
+  run_state_active: true
+
+# Highest recital number of the decision, for corpus statistics. Deterministic
+# (pipelines/legal/recital_count.py): longest +1..+gap chain of line-start (n)
+# numbers, dot-numbered paragraphs "n." as fallback for older decisions. Reads
+# the ingested markdown first, chunks only when no file exists. value_json
+# carries the max with coverage, status (confident/doubtful/undetermined) and
+# provenance so doubtful values can be filtered out.
+- target_fact_name: recitals_max
+  question: "Highest recital number of the decision, from line-start (n) or n. numbering"
+  output_schema: ""
+  output_type: dict
+  pipeline: recital_count
+  force_override: false
+  run_state_active: true
 
 # --------- infringements --------------
 
@@ -125,7 +140,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_category_member_states
   question: |
@@ -141,7 +156,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_category_abuse_of_dominance
   question: |
@@ -154,7 +169,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('abuse_of_dominance', 'law_article_operative')
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_category_hor_vert_lic_joint
   question: |
@@ -170,7 +185,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('anticompetitive_agreement', 'law_article_operative')
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_subcategory_horizontal_restraints
   question: |
@@ -192,7 +207,7 @@
   pipeline: universal
   condition: "'horizontal' in infringement_category_hor_vert_lic_joint"
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_subcategory_vertical_restraints
   question: |
@@ -211,7 +226,7 @@
   pipeline: universal
   condition: "'vertical' in infringement_category_hor_vert_lic_joint"
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: market_oligopoly
   question: |
@@ -229,7 +244,7 @@
   output_type: str
   pipeline: universal
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: infringement_gravity
   question: "How severe is the infringement? respond with one of the following categories: low, medium, high, NA. Consider factors such as the duration of the infringement, the market share of the involved companies, and the potential harm to consumers."
@@ -287,7 +302,7 @@
   predecessors: ["products", "NACE_group_code"]
   pipeline: nace_class_code
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: NACE_group_code
   question: |
@@ -302,7 +317,7 @@
   predecessors: ["products"]
   pipeline: fact_context
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: OECD_sector
   question: "Which economic sector is involved? Choose the most fitting out of the following 10 OECD sectors:\nagriculture; \nmining;\nmanufacturing; \nelectricity and gas; \nconstruction; \ntrade (wholesaling and retailing) and hotels; \ntransport; \nbanking and insurance (including real estate); \ncommunication;\npublic service"
@@ -315,7 +330,7 @@
   # `fact_context` feeds it directly.
   pipeline: fact_context
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 # --------- market --------------
 - target_fact_name: market_turbulence
@@ -346,7 +361,7 @@
   output_schema: products
   pipeline: universal
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 
 - target_fact_name: services
@@ -379,7 +394,7 @@
   output_schema: ""
   pipeline: keyword_search
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: leniency_case_match
   question: Are both facts similar? Ignore formatting differences, abbreviations, unit placements, casing, and minor stylistic variations.
@@ -396,7 +411,7 @@
   predecessors: ["companies_investigated", "leniency_case"]
   condition: 'exists("leniency_case") and leniency_case == true'
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: leniency_granted
   question: Which companies got which amount fine reduction?
@@ -405,7 +420,7 @@
   predecessors: ["companies_investigated", "leniency_case", "leniency_applicants"]
   condition: 'exists("leniency_case") and leniency_case == true'
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: leniency_rejected
   question: Identify which companies from the leniency_applicants list are NOT present in the leniency_granted list. Ignore company names suffixes like "S.A.", "SA", "AG", "GmbH", etc. ?
@@ -430,7 +445,7 @@
   # Restrict retrieval to the sections where amounts and orders live
   # (section_type metadata from Main_classify_sections.py).
   section_scope: [fines, operative]
-  run_state_active: false
+  run_state_active: true
 
 # -- companies --
 - target_fact_name: companies_investigated
@@ -461,7 +476,24 @@
   output_schema: companies, location
   pipeline: universal
   force_override: false
-  run_state_active: false
+  run_state_active: true
+
+# Number of distinct legal units (companies, subsidiaries named individually,
+# trade/professional associations) the decision assessed. Deterministic
+# (pipelines/legal/undertaking_count.py): counts the companies_investigated
+# roster rows, deduplicated on the company stem so "Akzo Chemicals BV" and
+# "Akzo Chemicals" count once. value_json carries the count, the counted names
+# and the pre-dedupe row count. Legal units, not EU-law economic units: a parent
+# and its separately named subsidiaries count individually.
+- target_fact_name: number_undertaking
+  question: "Number of distinct legal units (companies, associations) assessed, from companies_investigated"
+  output_schema: ""
+  output_type: dict
+  pipeline: undertaking_count
+  predecessors: ["companies_investigated"]
+  condition: 'exists("companies_investigated")'
+  force_override: false
+  run_state_active: true
 
 
 
@@ -527,7 +559,7 @@
   output_schema: ""
   pipeline: heideltime_raw
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 # -- HeidelTime Event Enrichment --------------
 - target_fact_name: heideltime_event
@@ -537,7 +569,7 @@
   predecessors:
     - heideltime_raw
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: heideltime_event_agg
   question: "Analyze the following input and extract up to 12 critical events spanning the whole case: always the earliest conduct event (agreement concluded, cartel creation), the last conduct event, and the final outcome (decision, fines). skip any trivia"
@@ -549,17 +581,25 @@
   run_state_active: false
 
 
-- target_fact_name: heideltime_cartel_period
+- target_fact_name: cartel_period
   question: "Analyze the provided event text to find the **global start date** and **global end date** of the company's infringement (cartel period)."
   output_schema: "start_date, end_date"
   pipeline: heideltime_cartel_period
   predecessors:
     - heideltime_event
+  # Exemption, negative-clearance and Article 9 commitments decisions carry an
+  # exemption or commitment term, not a cartel period (ISSUES #high 20261105).
+  # Only an explicit False suppresses the period; NA or a missing gate fact
+  # keeps it. The gate is an ordering-only context fact, never a predecessor:
+  # an NA predecessor counts as unfulfilled and would skip the period outright.
+  context_facts:
+    - case_commission_infringement
+  condition: 'not exists("case_commission_infringement") or case_commission_infringement != false'
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 # -- events --
-- target_fact_name: eu_commisssion_decision_date
+- target_fact_name: eu_commission_decision_date
   question: "When did the EU commission decided this case? Reply with date format YYYY-MM-DD or NA"
   predecessors: ["heideltime_event_agg"]
   output_schema: "str"
@@ -623,6 +663,19 @@
   force_override: false
   run_state_active: false
 
+- target_fact_name: case_commission_infringement
+  question: |
+    Does the Commission find an infringement in the operative part of this decision?
+    True: the undertakings "have infringed" Article 85/86 EEC, 81/82 EC or 101/102 TFEU, the conduct "constitutes an infringement", a fine or periodic penalty payment is imposed, or an infringement is found and declared terminated.
+    False: an exemption is granted (Article 85(3), 81(3) or 101(3)), a negative clearance or "no grounds for action" is issued, commitments are made binding (Article 9 of Regulation (EC) No 1/2003), or a complaint is rejected.
+    # Constraint: reply with 'True' or 'False' or 'NA' in no info is provided .
+  output_schema: ""
+  pipeline: universal
+  # The outcome is stated in the operative articles, not in the recitals.
+  section_scope: [operative]
+  force_override: false
+  run_state_active: true
+
 - target_fact_name: case_commission_decision
   question: |
     The EU commission has taken a decision? The text contains chapter "HAS ADOPTED THIS DECISION" and "Article 1","Article 2","Article 3", and so on
@@ -630,7 +683,7 @@
   output_schema: ""
   pipeline: universal
   force_override: false
-  run_state_active: false
+  run_state_active: true
 
 - target_fact_name: case_commissioner
   question:  |
@@ -654,4 +707,4 @@
     Extract the case id and the full title of the legal case from the input text.
   pipeline: case_title
   force_override: false
-  run_state_active: false
+  run_state_active: true

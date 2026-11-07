@@ -4,6 +4,8 @@ Fact ingestion orchestrator — delegates persistence to ``FactRepository``.
 Responsibility:
   - Format extracted content (dict/list/string) into markdown + JSON.
   - Persist via ``FactRepository.upsert_fact()`` (atomic upsert with self-healing dedup).
+  - Stamp the decision's source document (``facts.document_id``) via an injected
+    ``SourceDocumentResolver``.
   - Optionally record data lineage via ``LineageRepository`` (Option 2 / Option 3).
   - Record ingestion audit trail entries.
 """
@@ -20,6 +22,7 @@ from pydantic import BaseModel, Field, model_validator
 
 from pipelines.rag.pgvector.vector_config import DATABASE_URL
 from pipelines.rag.pgvector.chunk_repository import ChunkRepository
+from pipelines.rag.pgvector.source_document_resolver import SourceDocumentResolver
 from pipelines.rag.pgvector.lineage_repository import LineageRepository
 from pipelines.rag.pgvector.models import CelexFactIngestionAuditTrail
 from pipelines.rag.pgvector.fact_repository import FactRepository
@@ -182,6 +185,10 @@ class FactIngestor:
         Optional ``ChunkRepository`` used to resolve ``references_doc`` doc_pos
         values to stable chunk UUIDs when lineage is derived automatically.
         Defaults to a fresh instance when ``lineage_repo`` is supplied.
+    source_documents:
+        Optional ``SourceDocumentResolver`` giving each decision's source
+        document; share one across ingestors so each ``celex_id`` is looked up
+        once per run. ``None`` writes no ``document_id``.
     """
 
     def __init__(
@@ -191,6 +198,7 @@ class FactIngestor:
         fact_table: FactRepository | None = None,
         lineage_repo: LineageRepository | None = None,
         chunk_repo: ChunkRepository | None = None,
+        source_documents: SourceDocumentResolver | None = None,
     ) -> None:
         self._repo = fact_table if fact_table else FactRepository(db_url)
         self.Session = self._repo.Session
@@ -199,6 +207,7 @@ class FactIngestor:
         self._chunk_repo = chunk_repo if chunk_repo is not None else (
             ChunkRepository() if lineage_repo is not None else None
         )
+        self._source_documents = source_documents
         # Backward compat alias
         self.fact_table = self._repo
 
@@ -274,12 +283,18 @@ class FactIngestor:
         # When column is JSONB, we can pass python list directly instead of stringified json
         references_doc_json = references_doc if references_doc else None
 
+        document_id = (
+            self._source_documents.resolve(celex_id)
+            if self._source_documents is not None
+            else None
+        )
         fact_id = self._repo.upsert_fact(
             celex_id=celex_id,
             name=self.target_fact_name,
             value_md=formatted_md,
             value_json=merged_json,
             references_doc_json=references_doc_json,
+            document_id=document_id,
         )
 
         if self._lineage_repo is not None:
@@ -296,8 +311,9 @@ class FactIngestor:
             effective_sources += self._derive_predecessor_lineage(
                 celex_id, predecessors, condition, pipeline, dspy_module
             )
-            if effective_sources:
-                self._persist_lineage(fact_id, effective_sources)
+            # Always persist, even with no sources: the write also retracts
+            # cross-document edges the previous extraction left behind.
+            self._persist_lineage(fact_id, effective_sources)
 
         return fact_id
 
@@ -413,8 +429,10 @@ class FactIngestor:
 
         All sources for a fact are written within a single session; each source
         is wrapped in a SAVEPOINT so that a single failing source is rolled back
-        in isolation without discarding the others.  Lineage failure never
-        propagates — the fact itself is already persisted.
+        in isolation without discarding the others.  Links to fact sources of
+        other documents that this write did not link are then retracted, so a
+        re-run that no longer copies a donor drops its edge.  Lineage failure
+        never propagates — the fact itself is already persisted.
 
         Parameters
         ----------
@@ -426,6 +444,7 @@ class FactIngestor:
         repo = self._lineage_repo
         try:
             with repo.Session() as session:
+                linked: list[UUID] = []
                 for src in sources:
                     try:
                         with session.begin_nested():
@@ -443,11 +462,13 @@ class FactIngestor:
                                 dspy_module=src.dspy_module,
                                 session=session,
                             )
+                            linked.append(source_id)
                     except Exception:
                         logger.warning(
                             "Skipping lineage source for fact %s (source_type=%s)",
                             fact_id, src.source_type, exc_info=True,
                         )
+                repo.retract_cross_document_fact_links(fact_id, linked, session=session)
                 session.commit()
         except Exception:
             logger.exception("Failed to persist lineage for fact %s", fact_id)

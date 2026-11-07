@@ -83,5 +83,23 @@ class TestExportReportToExcel(unittest.TestCase):
         self.assertIsNone(filepath)
 
 
+class TestCreateCelexFactReport(unittest.TestCase):
+    """create_celex_fact_report propagates errors; main still swallows them."""
+
+    @patch("reporting.report_celex_facts.fetch_and_pivot_celex_facts", side_effect=RuntimeError("db down"))
+    def test_create_raises(self, _fetch) -> None:
+        """The reusable function lets callers see a failure."""
+        from reporting.report_celex_facts import create_celex_fact_report
+        with tempfile.TemporaryDirectory() as tmp, self.assertRaises(RuntimeError):
+            create_celex_fact_report(output_dir=tmp, db_url="postgresql://x")
+
+    @patch("reporting.report_celex_facts.create_celex_fact_report", side_effect=RuntimeError("db down"))
+    def test_main_logs_instead_of_raising(self, _create) -> None:
+        """The CLI entry point keeps its log-and-continue behaviour."""
+        from reporting.report_celex_facts import main
+        with self.assertLogs("reporting.report_celex_facts", level="ERROR"):
+            main()
+
+
 if __name__ == "__main__":
     unittest.main()

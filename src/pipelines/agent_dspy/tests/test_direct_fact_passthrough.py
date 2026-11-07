@@ -305,12 +305,12 @@ class TestPipelineDirectPassthrough(unittest.TestCase):
         pipe = self._build_pipeline(
             checker,
             fact_bag={
-                "eu_commisssion_decision_date": "2003-12-09",
+                "eu_commission_decision_date": "2003-12-09",
                 "fines": "| co | amt |\n|---|---|\n| X | 1M |",
             },
         )
 
-        pred = pipe(question="eu_commisssion_decision_date of CELEX-31969D0216")
+        pred = pipe(question="eu_commission_decision_date of CELEX-31969D0216")
 
         self.assertIn("2003-12-09", pred.answer)
         self.assertIsNone(pred.plan)

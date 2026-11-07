@@ -69,7 +69,7 @@ class FactRagPipeline:
         if params.condition:
             fact_context = self.fact_repo.select_facts4celex(params.celex_id)
             # Expose celex_id so concept conditions can fall back to the year
-            # embedded in the id when eu_commisssion_decision_date is absent.
+            # embedded in the id when eu_commission_decision_date is absent.
             fact_context.setdefault("celex_id", params.celex_id)
             rule = ConditionValidator()
             is_match = rule.evaluate(params.condition, fact_context)
@@ -81,12 +81,23 @@ class FactRagPipeline:
         else:
             logger.info("No condition defined .. processing")
 
-        # 2. High-speed Fact Existence Check
+        # 2. High-speed Fact Existence Check. A fact copied from another
+        # decision is re-extracted once that source is newer; the forced
+        # params also bypass the module's own stored-value short-circuit.
         if not params.force_override and self.ingestor.exists(params.celex_id):
-            logger.info(
-                f"Skipping pipeline for target fact {params.target_fact_name} of {params.celex_id}: Fact exists."
+            newer_sources = self.fact_repo.select_newer_cross_document_sources(
+                params.celex_id, params.target_fact_name
             )
-            return {"status": "skipped", "celex_id": params.celex_id}
+            if not newer_sources:
+                logger.info(
+                    f"Skipping pipeline for target fact {params.target_fact_name} of {params.celex_id}: Fact exists."
+                )
+                return {"status": "skipped", "celex_id": params.celex_id}
+            logger.info(
+                "Re-extracting %s of %s: source fact re-extracted in %s.",
+                params.target_fact_name, params.celex_id, ", ".join(newer_sources),
+            )
+            params = params.model_copy(update={"force_override": True})
 
         start_time = time.time()
         dspy_module_name = dspy_agent.__class__.__name__

@@ -12,3 +12,4 @@ dist/
 **/*.pyc
 *.log
 **/tests/*
+config_main/master_doc_descriptors.json.bak-*

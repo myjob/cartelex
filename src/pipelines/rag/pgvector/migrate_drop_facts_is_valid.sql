@@ -28,7 +28,7 @@ BEGIN;
 CREATE OR REPLACE VIEW celex_facts.facts_cartel_legal_period_vw AS
 SELECT c.celex_id,
        c.value_md AS cartel_period,
-       c.value_md AS legal_period
+       l.value_md AS legal_period
   FROM celex_facts.facts c
   JOIN (SELECT facts.id,
                facts.celex_id,

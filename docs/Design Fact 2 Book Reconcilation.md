@@ -288,7 +288,7 @@ What the skips actually are:
 
 ### 3.3 Corroborations
 
-Most-corroborated fact names: `eu_commisssion_decision_date` 260,
+Most-corroborated fact names: `eu_commission_decision_date` 260,
 `infringement_category_hor_vert_lic_joint` 246, `infringement_concept` 211,
 `companies_investigated` 169, `human_index_title` 152, `market_oligopoly` 150, `exemption_case`
 130, `market_geographical` 111, `cartel_period` 107, `market_outside_eu` 98.
@@ -304,7 +304,7 @@ corroborated / 16 mismatch / 4,861 skipped.
 | `infringement_subcategory_vertical_restraints` | 23 | 1 | 24 |
 | `is_court_involved` | – | 20 | 20 |
 | `infringement_subcategory_horizontal_restraints` | 12 | 4 | 16 |
-| `eu_commisssion_decision_date` | – | 10 | 10 |
+| `eu_commission_decision_date` | – | 10 | 10 |
 | `market_outside_eu` | – | 7 | 7 |
 | `case_commissioner`, `market_oligopoly` | – | 2 each | 4 |
 | others | – | 1 each | 7 |

@@ -20,7 +20,7 @@ The fact names in the schema ([KB_SCHEMA_DESCRIPTION](file://~/a/celex-facts/src
 | Category | Fact Names |
 |---|---|
 | Boolean | `leniency_case`, `exemption_case`, `market_outside_eu`, `market_oligopoly` |
-| Date | `eu_commisssion_decision_date` |
+| Date | `eu_commission_decision_date` |
 | Date-range | `heideltime_cartel_period` |
 | Free-text | `leniency_applicants`, `fines`, `companies_investigated`, `companies_country`, `case_commissioner`, `case_summary`, `OECD_sector`, `market_geographical`, `products`, `case_title`, `decision_remedies`, `cartel_period`, etc. |
 

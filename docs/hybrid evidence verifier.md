@@ -208,7 +208,7 @@ Modeled on `heideltime_source_register_fisher.py`: iterate all facts (`--celex-i
 
 ### 7. NEW tests
 
-- `src/pipelines/agent_dspy/tests/test_evidence_verifier_module.py` — fake repos + fake judge (`SimpleNamespace(output=...)`). Cover: routing (`human_index_year`→trusted, `decision_chapter_tokens`→excluded/no-row, `leniency_granted`→llm, `court_list`→entity, `eu_commisssion_decision_date`→temporal, derived-only→transitive); **entity gate concludes without any LLM call**; **every non-excluded path writes exactly one summary or best-candidate row** (DoD #1); `supports`-without-quote downgrade; judge exception → run completes.
+- `src/pipelines/agent_dspy/tests/test_evidence_verifier_module.py` — fake repos + fake judge (`SimpleNamespace(output=...)`). Cover: routing (`human_index_year`→trusted, `decision_chapter_tokens`→excluded/no-row, `leniency_granted`→llm, `court_list`→entity, `eu_commission_decision_date`→temporal, derived-only→transitive); **entity gate concludes without any LLM call**; **every non-excluded path writes exactly one summary or best-candidate row** (DoD #1); `supports`-without-quote downgrade; judge exception → run completes.
 
 - `src/pipelines/rag/pgvector/tests/test_fact_evidence_repository.py` — chunk upsert idempotency, null-chunk single-summary-row guarantee, status update, predecessor query.
 

@@ -884,6 +884,34 @@ class ChunkRepository:
 
         return [{"law_article": str(row[0])} for row in rows]
 
+    def select_regex_matches(self, celex_id: str, regex: str) -> List[str]:
+        """Return the distinct first capture groups of a regex over a document.
+
+        Unlike :meth:`regex_retriever` there is no whitelist: every distinct
+        match is returned (e.g. the years of cited ``C(YYYY) NNNN`` decisions).
+
+        Parameters
+        ----------
+        celex_id:
+            The document identifier.
+        regex:
+            PostgreSQL-style regular expression with one capture group.
+
+        Returns
+        -------
+        List[str]
+            Distinct captured values, sorted.
+        """
+        sql = text(f"""
+            SELECT DISTINCT (regexp_matches(document, :regex, 'g'))[1] AS match
+              FROM celex_facts.{self.embedding_table}
+             WHERE celex_id = :celex_id
+             ORDER BY 1
+        """)
+        with self.engine.connect() as conn:
+            rows = conn.execute(sql, {"regex": regex, "celex_id": celex_id}).fetchall()
+        return [str(row[0]) for row in rows if row[0] is not None]
+
     # ------------------------------------------------------------------
     # Positional retrieval (first / closing chunks)
     # ------------------------------------------------------------------
@@ -1081,6 +1109,32 @@ class ChunkRepository:
             total = conn.execute(sql, {"celex_id": celex_id}).scalar()
 
         return int(total or 0)
+
+    def select_source_paths(self, celex_id: str) -> List[str]:
+        """Return the Markdown files a decision's chunks were ingested from.
+
+        Parameters
+        ----------
+        celex_id:
+            The CELEX document identifier to scope the fetch.
+
+        Returns
+        -------
+        List[str]
+            Distinct non-null ``path`` values, sorted; empty when the decision
+            has no chunks.
+        """
+        sql = text(f"""
+            SELECT DISTINCT path
+            FROM celex_facts.{self.embedding_table}
+            WHERE celex_id = :celex_id AND path IS NOT NULL
+            ORDER BY path
+        """)
+
+        with self.engine.connect() as conn:
+            rows = conn.execute(sql, {"celex_id": celex_id}).fetchall()
+
+        return [str(row.path) for row in rows]
 
     def select_chunks_for_sections(self, celex_id: str) -> List[dict[str, Any]]:
         """Fetch every chunk of one CELEX document in structural order.

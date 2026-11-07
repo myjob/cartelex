@@ -3,7 +3,8 @@ import logging
 import re
 import time
 from datetime import datetime
-from typing import Any, Optional
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, Optional
 
 import dspy
 import tiktoken
@@ -36,10 +37,26 @@ from pipelines.agent_dspy.book_cross_check_module import (
     case_id_variants,
     classify_book_reference,
 )
+from pipelines.download.local_pdf import conventional_markdown_path
 from pipelines.legal.infringement_concept import concepts_for
+from pipelines.legal.recital_count import (
+    REASON_CHUNK_GAP,
+    REASON_NO_NUMBERING,
+    REASON_OPERATIVE_NOT_SEEN,
+    RecitalCount,
+    RecitalStatus,
+    RecitalThresholds,
+    count_recitals,
+    line_start_marker,
+    recital_part,
+)
+from pipelines.legal.undertaking_count import count_undertakings, parse_roster
 from pipelines.nace.nace_tree import NaceTree
 from pipelines.rag.pgvector.book_chunk_repository import BookChunkRepository
 from tools.PipelineFactIngestor import LineageSourceVO
+
+if TYPE_CHECKING:
+    from pipelines.rag.pgvector.chunk_repository import ChunkRepository
 
 logger = logging.getLogger(__name__)
 
@@ -830,7 +847,7 @@ class InfringementConceptModule(dspy.Module):
 
     A deterministic, LLM-free pipeline that reads the case's
     ``law_article_all_relevant`` (and, when available, its
-    ``eu_commisssion_decision_date``) from the store and maps the literal article
+    ``eu_commission_decision_date``) from the store and maps the literal article
     numbers to treaty-era-correct concepts via
     :func:`pipelines.legal.infringement_concept.concepts_for` -- the same
     normalizer backing the ``same_concept(...)`` rule-engine condition, so the
@@ -845,7 +862,7 @@ class InfringementConceptModule(dspy.Module):
     """
 
     _ARTICLE_FACT_NAME = "law_article_all_relevant"
-    _DECISION_DATE_FACT_NAME = "eu_commisssion_decision_date"
+    _DECISION_DATE_FACT_NAME = "eu_commission_decision_date"
     _SOURCE = "infringement_concept"
 
     def __init__(self, sql_store: SQLFactStore):
@@ -897,6 +914,221 @@ class InfringementConceptModule(dspy.Module):
         if not facts:
             return ""
         return facts[-1].value_md or ""
+
+
+class RecitalCountModule(dspy.Module):
+    """Highest recital number of a decision (fact ``recitals_max``).
+
+    Deterministic and LLM-free. Text resolution, markdown first: the file the
+    decision's chunks were ingested from, then the conventional MinerU path,
+    then the chunks themselves ordered by ``doc_pos`` (chunks can be missing
+    from the store, which would silently understate the max, so they are only
+    the fallback). Counting and grading live in
+    :mod:`pipelines.legal.recital_count`.
+
+    pipeline: recital_count
+    """
+
+    _SOURCE = "recital_count"
+    _TEXT_MARKDOWN = "markdown"
+    _TEXT_CHUNKS = "chunks"
+    _CHUNK_JOIN = "\n\n"
+
+    def __init__(
+        self,
+        sql_store: SQLFactStore,
+        chunk_repo: "ChunkRepository",
+        thresholds: RecitalThresholds | None = None,
+    ):
+        """Inject the stores.
+
+        Args:
+            sql_store: Fact store for the existence check.
+            chunk_repo: Chunk store providing source paths and chunk text.
+            thresholds: Chain and grading thresholds; ``settings.RECITAL_*``
+                when omitted.
+        """
+        super().__init__()
+        self.sql_store = sql_store
+        self.chunk_repo = chunk_repo
+        self.thresholds = thresholds or RecitalThresholds.from_settings()
+
+    def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Count the recitals of ``params.celex_id``.
+
+        Args:
+            params: Extraction parameters; ``celex_id`` selects the decision,
+                ``force_override`` bypasses the existing-fact check.
+
+        Returns:
+            dspy.Prediction: ``output`` is a ``FactOutput`` with one item, the
+            flattened :class:`RecitalCount`, and ``references_doc`` holding the
+            doc_pos of the chunks with the first and last recital (None when
+            they cannot be located).
+        """
+        prediction, _ = _check_fact_exists(self.sql_store, params)
+        if prediction:
+            return prediction
+
+        celex_id = params.celex_id
+        chunks = self.chunk_repo.select_chunks_for_sections(celex_id)
+        md_path = self._resolve_markdown(celex_id)
+        if md_path is not None:
+            result = count_recitals(md_path.read_text(encoding="utf-8"), self.thresholds)
+            result = result.model_copy(
+                update={"text_source": self._TEXT_MARKDOWN, "source_path": str(md_path)}
+            )
+        elif chunks:
+            text = self._CHUNK_JOIN.join(c["document"] for c in chunks)
+            result = count_recitals(text, self.thresholds).model_copy(
+                update={"text_source": self._TEXT_CHUNKS}
+            )
+            # Lost tail chunks leave no doc_pos gap; without the operative
+            # marker nothing shows the recitals were read to their end.
+            if result.status is RecitalStatus.CONFIDENT and recital_part(text) == text:
+                result = result.model_copy(
+                    update={"status": RecitalStatus.DOUBTFUL, "reason": REASON_OPERATIVE_NOT_SEEN}
+                )
+        else:
+            result = RecitalCount(reason=REASON_NO_NUMBERING)
+
+        references = self._locate(result, chunks)
+        if result.text_source == self._TEXT_CHUNKS:
+            result = self._apply_chunk_gaps(result, chunks, references)
+
+        logger.info(
+            "recitals_max %s: %s (%s, %s, coverage %.3f)",
+            celex_id, result.recitals_max, result.status, result.text_source, result.coverage,
+        )
+        return dspy.Prediction(
+            output=FactOutput(
+                items=[result.model_dump(mode="json")],
+                source=self._SOURCE,
+                references_doc=references,
+            )
+        )
+
+    def _resolve_markdown(self, celex_id: str) -> Path | None:
+        """Return the first existing markdown file for the decision, or None.
+
+        Args:
+            celex_id: Decision key.
+
+        Returns:
+            The ingested markdown (chunk ``path``), else the conventional MinerU
+            path, else None.
+        """
+        candidates = [Path(p) for p in self.chunk_repo.select_source_paths(celex_id)]
+        candidates.append(conventional_markdown_path(Path(settings.CELEX_DOCS_DIR), celex_id))
+        return next((p for p in candidates if p.is_file()), None)
+
+    @staticmethod
+    def _locate(result: RecitalCount, chunks: list[dict]) -> list[int] | None:
+        """Find the doc_pos of the chunks holding the first and last recital.
+
+        Args:
+            result: The graded count.
+            chunks: The decision's chunks in doc_pos order.
+
+        Returns:
+            ``[first_doc_pos, last_doc_pos]``, or None when undetermined, the
+            decision has no chunks, or either recital is not found.
+        """
+        if result.recitals_max is None or result.first_recital is None or not chunks:
+            return None
+        positions = []
+        for number in (result.first_recital, result.recitals_max):
+            pattern = line_start_marker(number, result.numbering)
+            hit = next((c["doc_pos"] for c in chunks if pattern.search(c["document"])), None)
+            if hit is None:
+                return None
+            positions.append(hit)
+        return positions
+
+    @staticmethod
+    def _apply_chunk_gaps(
+        result: RecitalCount, chunks: list[dict], references: list[int] | None
+    ) -> RecitalCount:
+        """Record missing doc_pos positions; downgrade when one follows the last recital.
+
+        Args:
+            result: The graded count read from chunks.
+            chunks: The decision's chunks in doc_pos order.
+            references: ``[first, last]`` recital doc_pos, or None.
+
+        Returns:
+            The result with ``chunk_gaps`` set, and ``confident`` downgraded to
+            ``doubtful`` with ``REASON_CHUNK_GAP`` when a chunk is missing after
+            the chunk with the last recital.
+        """
+        present = {c["doc_pos"] for c in chunks}
+        missing = set(range(min(present), max(present) + 1)) - present
+        result = result.model_copy(update={"chunk_gaps": len(missing)})
+        last = references[-1] if references else None
+        if (
+            result.status is RecitalStatus.CONFIDENT
+            and last is not None
+            and any(pos > last for pos in missing)
+        ):
+            result = result.model_copy(
+                update={"status": RecitalStatus.DOUBTFUL, "reason": REASON_CHUNK_GAP}
+            )
+        return result
+
+
+class UndertakingCountModule(dspy.Module):
+    """Number of distinct legal units the decision assessed (``number_undertaking``).
+
+    Deterministic and LLM-free: counts the rows of the stored
+    ``companies_investigated`` roster, deduplicated on the company stem, via
+    :func:`pipelines.legal.undertaking_count.count_undertakings`. Deriving the
+    count from the roster (rather than asking the LLM for a number) keeps it
+    consistent with every other company fact hanging off that roster.
+
+    pipeline: undertaking_count
+    """
+
+    _ROSTER_FACT_NAME = "companies_investigated"
+    _SOURCE = "undertaking_count"
+
+    def __init__(self, sql_store: SQLFactStore):
+        """Inject the fact store.
+
+        Args:
+            sql_store: Fact store holding the ``companies_investigated`` roster.
+        """
+        super().__init__()
+        self.sql_store = sql_store
+
+    def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Count the undertakings of ``params.celex_id``.
+
+        Args:
+            params: Extraction parameters; ``celex_id`` selects the roster,
+                ``force_override`` bypasses the existing-fact check.
+
+        Returns:
+            dspy.Prediction: ``output`` is a ``FactOutput`` with one item, the
+            flattened :class:`UndertakingCount`, or no items when the roster
+            is absent or empty (no fact rather than a misleading 0).
+        """
+        prediction, _ = _check_fact_exists(self.sql_store, params)
+        if prediction:
+            return prediction
+
+        rows = self.sql_store.select_fact4celex(params.celex_id, self._ROSTER_FACT_NAME)
+        names = parse_roster(rows[-1].value_json) if rows else []
+        items: list[dict] = []
+        if names:
+            result = count_undertakings(names)
+            logger.info(
+                "number_undertaking %s: %d (%d roster rows)",
+                params.celex_id, result.number_undertaking, result.roster_rows,
+            )
+            items = [result.model_dump(mode="json")]
+        return dspy.Prediction(
+            output=FactOutput(items=items, source=self._SOURCE, references_doc=None)
+        )
 
 
 # -----------------------------------------

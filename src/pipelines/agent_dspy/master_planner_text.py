@@ -238,10 +238,10 @@ ROLE_FACT_MAP: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("commissioner", ("case_commissioner",)),
     (
         "decision date",
-        ("eu_commisssion_decision_date", "human_index_decision_date"),
+        ("eu_commission_decision_date", "human_index_decision_date"),
     ),
-    ("decision year", ("eu_commisssion_decision_date", "human_index_decision_date")),
-    ("cartel period", ("cartel_period", "heideltime_cartel_period")),
+    ("decision year", ("eu_commission_decision_date", "human_index_decision_date")),
+    ("cartel period", ("cartel_period",)),
 )
 
 # Role words used by the deterministic filter stage to keep matching rows.

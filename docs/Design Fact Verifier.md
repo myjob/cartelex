@@ -224,7 +224,7 @@ ORDER BY celex_id, name
   that the predecessor is then verified a second time when the loop reaches it —
   correct, idempotent, and mildly wasteful.
 - **Exclusions are not filtered in SQL.** `settings.EVIDENCE_EXCLUDED_FACT_NAMES`
-  (default `decision_chapter_tokens`, `decision_chapter_sentences`, `heideltime_raw` —
+  (default `decision_chapter_tokens`, `decision_chapter_sentences`, `heideltime_raw`, `recitals_max` —
   see [§6.1](Design%20Fact%20Verifier.md#61-what-is-excluded-and-why)) is applied by the
   module, which returns `None` before touching the DB. The driver counts those as
   `excluded`. Doing it in the module keeps the exclusion rule true for every caller,
@@ -245,6 +245,7 @@ so a verdict on it is noise in the ledger rather than a signal.
 | --- | --- | --- |
 | `decision_chapter_tokens` | Token count of the decision text | A counter over the document, not a claim about it |
 | `decision_chapter_sentences` | Sentence count of the decision text | Same |
+| `recitals_max` | Highest recital number, with coverage and status | Same (added 2026-11-01) |
 | `heideltime_raw` | Raw TIMEX3 annotation dump from HeidelTime | Its content *is* the chunk text it was annotated from |
 
 **`heideltime_raw`** was added to the list on 2026-08-30. It is the unprocessed output
@@ -413,7 +414,7 @@ thresholds of its own beyond `_LOG_INTERVAL`.
 | `DATABASE_URL` | from env | The one database the whole pass reads and writes |
 | `LLM_MODEL_ID` | `qwen3-coder:30b` | Model behind both judges |
 | `OLLAMA_HOST` | remote Spark DGX | Inference endpoint |
-| `EVIDENCE_EXCLUDED_FACT_NAMES` | `decision_chapter_tokens,decision_chapter_sentences,heideltime_raw` | Names skipped with no row and no status churn ([§6.1](Design%20Fact%20Verifier.md#61-what-is-excluded-and-why)) |
+| `EVIDENCE_EXCLUDED_FACT_NAMES` | `decision_chapter_tokens,decision_chapter_sentences,heideltime_raw,recitals_max` | Names skipped with no row and no status churn ([§6.1](Design%20Fact%20Verifier.md#61-what-is-excluded-and-why)) |
 | `EVIDENCE_SUPPORT_MIN_SCORE` | `0.75` | At or above: `verified_supported` |
 | `EVIDENCE_WEAK_MIN_SCORE` | `0.4` | Between the two: `weak_support` |
 | `EVIDENCE_CANDIDATE_LIMIT` | `40` | Candidates pulled per retrieval leg before gating |

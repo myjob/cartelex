@@ -1,10 +1,10 @@
 """
-One-shot backfill: record lineage for ``heideltime_cartel_period`` facts.
+One-shot backfill: record lineage for ``cartel_period`` facts.
 
 Background
 ----------
-The ``heideltime_cartel_period`` fact stores the global infringement window as a
-single string, e.g. ``"1992-05-22 : 2007-12-19"`` (see
+The ``cartel_period`` fact (pipeline ``heideltime_cartel_period``) stores the
+global infringement window as a single string, e.g. ``"1992-05-22 : 2007-12-19"`` (see
 ``HeideltimeCartelPeriodModule``).  Those two dates are *derived from* individual
 HeidelTime temporal expressions persisted in
 ``celex_facts.heideltime_extractions``.  This script reconnects each cartel-period
@@ -27,7 +27,6 @@ Usage
 """
 
 import argparse
-import datetime
 import json
 import logging
 import sys
@@ -35,6 +34,7 @@ from uuid import UUID
 
 from sqlalchemy import text
 
+from pipelines.heideltime.event_dates import PartialDate, parse_partial_date
 from pipelines.rag.pgvector.lineage_repository import LineageRepository
 from pipelines.rag.pgvector.models import FactSourceLink
 from pipelines.rag.pgvector.session import make_engine
@@ -47,14 +47,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger("heideltime_lineage_fisher")
 
-_FACT_NAME = "heideltime_cartel_period"
+_FACT_NAME = "cartel_period"
 _DATE_RANGE_SEPARATOR = " : "
 _EXTRACTION_METHOD = "heideltime_cartel_period"
 _LOG_INTERVAL = 100  # log progress every N facts
 
 
 def _fetch_cartel_period_facts(conn, celex_filter: str | None) -> list[dict]:
-    """Return ``heideltime_cartel_period`` facts with a non-null value_json."""
+    """Return ``cartel_period`` facts with a non-null value_json."""
     where = "name = :fact_name AND value_json IS NOT NULL"
     params: dict[str, str] = {"fact_name": _FACT_NAME}
     if celex_filter:
@@ -97,28 +97,45 @@ def _parse_period_dates(value_json: str) -> tuple[str, str] | None:
     return start_date, end_date
 
 
-def _is_valid_iso_date(value: str) -> bool:
-    """Return ``True`` when ``value`` is a real ISO date.
+def _boundary_dates(dates: tuple[str, str]) -> list[PartialDate]:
+    """Return the distinct, valid period bounds at their stated precision.
 
-    Filters out HeidelTime sentinels such as ``"0000-00-00"`` that PostgreSQL
-    rejects when comparing against a date-typed column.
+    A year-only (``1994``) or year-month (``1994-03``) bound is kept rather
+    than dropped (#183); sentinels such as ``"0000-00-00"`` and out-of-range
+    years are filtered out by :func:`parse_partial_date`. A single-day period
+    (start == end) yields one bound, so it is queried once.
+
+    Parameters
+    ----------
+    dates:
+        ``(start, end)`` text of the stored period.
+
+    Returns
+    -------
+    list[PartialDate]
+        Distinct parsed bounds in ``(start, end)`` order.
     """
-    try:
-        datetime.date.fromisoformat(value)
-    except ValueError:
-        return False
-    return True
+    bounds: list[PartialDate] = []
+    for value in dates:
+        parsed = parse_partial_date(value)
+        if parsed is not None and parsed not in bounds:
+            bounds.append(parsed)
+    return bounds
 
 
-def _find_extractions(conn, celex_id: str, timex_value: str) -> list[dict]:
-    """Return heideltime_extractions rows for a CELEX whose timex_value matches.
+def _find_extractions(conn, celex_id: str, bound: PartialDate) -> list[dict]:
+    """Return heideltime_extractions rows for a CELEX inside a bound's span.
+
+    ``timex_value`` is a ``date`` column, so a partial bound is matched as the
+    range of days it covers (``1994`` -> 1994-01-01..1994-12-31); a full date
+    is the one-day range, i.e. an exact match.
 
     Parameters
     ----------
     celex_id:
         CELEX document identifier.
-    timex_value:
-        Normalised ISO date to match against ``timex_value``.
+    bound:
+        Period bound at year, month or day precision.
 
     Returns
     -------
@@ -126,9 +143,11 @@ def _find_extractions(conn, celex_id: str, timex_value: str) -> list[dict]:
     """
     sql = text(
         "SELECT id, timex_text FROM celex_facts.heideltime_extractions"
-        " WHERE celex_id = :celex_id AND timex_type = 'DATE' AND timex_value = :timex_value"
+        " WHERE celex_id = :celex_id AND timex_type = 'DATE'"
+        " AND timex_value BETWEEN :first_day AND :last_day"
     )
-    rows = conn.execute(sql, {"celex_id": celex_id, "timex_value": timex_value}).fetchall()
+    params = {"celex_id": celex_id, "first_day": bound.first_day, "last_day": bound.last_day}
+    rows = conn.execute(sql, params).fetchall()
     return [{"id": UUID(str(r.id)), "timex_text": r.timex_text} for r in rows]
 
 
@@ -171,9 +190,7 @@ def run(dry_run: bool = False, celex_filter: str | None = None) -> None:
                 skipped_no_dates += 1
                 continue
 
-            # De-duplicate so a single-day period (start == end) is queried once,
-            # and drop sentinel/invalid boundary dates the DB cannot compare.
-            boundary_dates = {d for d in dates if _is_valid_iso_date(d)}
+            boundary_dates = _boundary_dates(dates)
             if not boundary_dates:
                 logger.warning(
                     "No valid boundary dates in cartel period %s for %s — skipping",
@@ -249,7 +266,7 @@ def run(dry_run: bool = False, celex_filter: str | None = None) -> None:
 def main() -> None:
     """CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="Backfill heideltime_cartel_period fact lineage from heideltime_extractions"
+        description="Backfill cartel_period fact lineage from heideltime_extractions"
     )
     parser.add_argument(
         "--dry-run",

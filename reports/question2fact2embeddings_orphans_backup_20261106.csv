@@ -1,0 +1,317 @@
+fk_fact_id,celex_id,fact_name,value_txt,ingestion_timestamp
+2fa98c81-22ea-4d32-913c-c26cad31ca3e,39452_3336_8,authorities_canoncial,| authority | Roto Frank AG | | Gretsch-Unitas GmbH | | Mayer & Co Beschläge GmbH | | Siegenia-Aubi KG | | NORAA GmbH | | Aug. Winkhaus GmbH & Co. KG | | HAUTAU GmbH | | CARL FUHR GmbH & Co. KG | | Heinrich Strenger GmbH & Co. KG | | Alban Giacomo SpA |,2026-04-21 08:58:11.152058+00
+847dd95d-c2a1-44a7-b322-0d9b5dfdcb4b,AT_40013_5708398_1084_5,authorities_canoncial,| authority | Valeo S.A. | | Valeo Service SAS | | Valeo Vision SAS | | Automotive Lighting Reutlingen GmbH | | Magneti Marelli S.p.A. | | Hella KGaA Hueck & Co. |,2026-04-21 09:07:31.828835+00
+27b8679a-763c-4c7c-bc67-65f75d087350,AT_40940_10539411_1520_696_3,authorities_canoncial,NA,2026-04-21 09:10:45.386489+00
+b5515ebe-d925-4eac-bb35-98bc95195b0a,CELEX-32002D0758(01),authorities_canoncial,NA,2026-04-21 09:57:50.89341+00
+46b27f90-da5e-491b-94db-d1cf409fa44c,39452_3336_8,case_commission_decision,True,2026-04-21 08:58:11.368053+00
+27aa66b7-a927-453e-b140-401fb1282ca2,AT_40013_5708398_1084_5,case_commission_decision,NA,2026-04-21 09:07:32.057604+00
+85e14f0d-6126-4fba-a0a2-543f7aa4d7fb,39452_3336_8,case_commission_info_request,True,2026-04-21 08:58:11.593737+00
+92a9af18-721a-46b0-b5ad-25c4d08c3ac5,AT_40013_5708398_1084_5,case_commission_info_request,NA,2026-04-21 09:07:32.276357+00
+a12da12e-8b6d-4ba3-892b-01f4323116c9,39452_3336_8,case_commission_no_action,NA,2026-04-21 08:58:11.762704+00
+daaaa5d2-48c1-4922-89ca-e6d3f78e8cec,AT_40013_5708398_1084_5,case_commission_no_action,NA,2026-04-21 09:07:32.445516+00
+aa24112e-f774-434e-bd7b-686c1b54214f,39452_3336_8,case_infringement_type_book,NA,2026-04-21 08:58:11.977843+00
+821c95b8-660e-482f-a314-9b9a3249f6f4,AT_40013_5708398_1084_5,case_infringement_type_book,NA,2026-04-21 09:07:32.654105+00
+0d4948e6-67b2-4ef0-91aa-89ea5d224dad,CELEX-32002D0758(01),case_infringement_type_book,NA,2026-04-21 09:57:51.124981+00
+c4605354-243a-458f-911b-44a7ac098d79,39452_3336_8,case_is_in_book,NA,2026-04-21 08:58:12.16897+00
+20d90b23-ba84-482d-820c-001b9d5c5ba7,AT_40013_5708398_1084_5,case_is_in_book,NA,2026-04-21 09:07:32.868778+00
+e0219b4a-f01d-466d-b62f-b701dac2b100,CELEX-32002D0758(01),case_is_in_book,NA,2026-04-21 09:57:51.315633+00
+71481bc9-8c3f-4848-afb3-6573bb25971c,39452_3336_8,case_is_landmark_in_book,False,2026-06-29 19:30:42.228147+00
+e99ae8e9-c6cf-44bb-90ec-8cb317524dc9,AT_40013_5708398_1084_5,case_is_landmark_in_book,False,2026-06-29 19:34:13.085029+00
+d8e8d356-a3aa-4b65-a151-2fff3502cf63,CELEX-32002D0758(01),case_is_landmark_in_book,False,2026-06-29 19:34:30.904328+00
+0aba5a80-372e-4c71-a01a-8fc3a18aa0f8,39452_3336_8,case_summary,"# Case Summary: Cartel Involving Window and Door Hardware Manufacturers ## Chapter 1: Company History and Founding The history of the involved companies can be traced back to 1842, when Strenger was founded. In 1910, a workshop business was established, followed by the appointment of Johann Maus as partner and managing director. In 1914, another entity was founded by Wilhelm Jäger. The company was registered as a GmbH under German law in 1929. The company founding took place in 1947, and in 1973, the headquarters were relocated to Ditzingen. In 1977, Ferco International S.A.S. was acquired, and in 1979, exclusive representation for FV S+B by Heinrich Strenger GmbH was initiated. The company was converted into a German AG in 1989, changing its name to Roto Frank AG. In 1991, involvement of [Name] is noted. The company underwent significant structural changes, such as the renaming of Siegenia-Frank KG and the merger of AUBI-Baubeschläge GmbH with its parent company. ## Chapter 2: Activities and Price Coordination Starting from 1999, the companies began engaging in coordinated price increases across various European markets. A key meeting took place in November 1999 where a subcommittee of AKB addressed window hardware resolutions. The period saw multiple collaborative meetings among significant manufacturers such as GU, Hautau, Roto, Siegenia, Strenger, and Winkhaus, aimed at coordinating price increases. A decision was scheduled and agreed upon, leading to price increase agreements covering all markets. Subsequent meetings included discussions on the extent and timing of these increases and the participation of manufacturers in cost increase discussions. By 2000, a coordinated trend in price increase agreements started, affecting markets like the UK, Netherlands, Belgium, and Austria. Price increases were implemented, with specific percentages noted for individual countries like Denmark and Austria. The process extended to include the Netherlands, Belgium, and Austria with significant increases. ## Chapter 3: Cartel Structure and Legal Proceedings The cartel activity reached a significant phase by 2001 with trilateral meetings of major manufacturers including Roto, Winkhaus, and Siegenia. An agreement was made on a coordinated price increase for swing-tilt products, and independent decisions were noted, although not stemming from competition law violations. In 2002, companies agreed to avoid price increases, but by 2003, the price increase policies continued with coordinated discussions in European countries. Meetings in Frankfurt and other locations, including Düsseldorf and Milan, were held, indicating continuous communication. Legal proceedings followed with the Commission issuing information requests and initiating procedures based on complaints. By 2006, the cartel's activities had spread across various markets, with decisions and coordinated price increases communicated to key customers and implemented through various channels. ## Chapter 4: Decision and Fines In 2012, the European Commission issued a decision related to the infringement of competition law. The decision encompassed a high degree of infringement gravity and included various remedial measures, including a cease and desist order from future anti-competitive agreements or coordinated behavior. Fines were imposed on the participating companies. Notable amounts include 20,552,000 EUR for Gretsch-Unitas GmbH, 18,501,000 EUR for Mayer & Co Beschläge GmbH, 18,995,000 EUR for Siegenia-Aubi KG, 19,537,000 EUR for Aug. Winkhaus GmbH & Co. KG, 3,179,000 EUR for HAUTAU GmbH, 2,215,000 EUR for CARL FUHR GmbH & Co. KG, and 104,000 EUR for Heinrich Strenger GmbH & Co.KG. Other companies, such as Alban Giacomo SpA, were also fined 2,793,000 EUR. Despite the significant fines, some companies like Roto Frank AG were exempted from penalties. ## Chapter 5: Leniency Program A leniency program was implemented in this case, with companies like Maco, GU, and Winkhaus granted leniency benefits. The extent of leniency granted varied by company, with Maco receiving a 25% benefit, GU a 45% benefit, and Winkhaus a 5% benefit. Roto, however, was not granted leniency. The leniency program allowed companies to submit applications for fine cancellation and to participate in the witness protection program. ## Chapter 6: Market and Industry Context The market involved the production of various hardware fittings for windows and door frames, including tilt-and-turn fittings, swing and reversible fittings, and special hardware. The industry is classified under NACE 25.93: Manufacture of wire products, chain and springs. The market was influenced by significant economic turmoil, including the economic crisis, declining demand, falling prices, and rising raw material prices, resulting in an environment of market turbulence. The companies involved operated within an oligopolistic market structure, which contributed to the anti-competitive behavior. ## Chapter 7: Conclusion This case demonstrates a significant cartellistic practice among leading manufacturers of window and door hardware in Europe, spanning from 1999 to 2006. The coordinated activities led to substantial fines, but not all companies faced penalties. Legal actions were taken, and a leniency system provided relief for some. The decision underscored the importance of vigilance in maintaining fair competition in the industrial and commercial sectors.",2026-05-07 18:03:11.371357+00
+532ab678-523c-4ed5-96e1-5e44b40021b0,AT_40013_5708398_1084_5,case_summary,"# Competition Case Summary ## 1. Timeline and Infringement Period - **Commission Initiation**: April 2004 - Commission initiated proceedings in a competition case. - **Infringement Start**: 7 July 2004 - Infringement of Article 101 of the Treaty and Article 53 of the EEA Agreement through coordination of prices and trading conditions in the supply of automotive lighting systems. - **Infringement End**: 25 October 2007 - Commission concludes duration of infringement. - **Cartel Period**: 7 July 2004 - 25 October 2007 (approximately 3 years). ## 2. Key Participants and Companies - **Main Infringents**: Several companies participated in the infringement: - **Valeo S.A.** - **Valeo Service SAS** - **Valeo Vision SAS** - **Automotive Lighting Reutlingen GmbH** - **Magneti Marelli S.p.A.** - **Hella KGaA Hueck & Co.** - **Countries**: - France (Valeo S.A., Valeo Service SAS, Valeo Vision SAS) - Germany (Automotive Lighting Reutlingen GmbH, Hella KGaA Hueck & Co.) - Italy (Magneti Marelli S.p.A.) ## 3. Products Involved - Headlamps (with LED, xenon or halogen technology) - Daytime running lights (with LEDs or traditional bulbs) - Rear lights - High-mounted stop lamps (with LEDs or traditional bulbs) - Fog lights - Auxiliary lights ## 4. Market and Legal Assessment - **Market**: Original Equipment Spare Parts Market (OES Lighting Systems) - **Infringement Type**: Price coordination and trading conditions in the OES market - **Legal Basis**: Article 101 of the Treaty and Article 53 of the EEA Agreement - **Infringement Gravity**: High - **Legal Assessment Period**: 7 July 2004 - 25 October 2007 ## 5. Fines and Leniency - **Fines Imposed**: - Automotive Lighting Reutlingen GmbH, Magneti Marelli S.p.A. - €16,347,000 - Hella KGaA Hueck & Co. - €10,397,000 - Valeo S.A., Valeo Service SAS, Valeo Vision SAS - €0 (No fines) - **Leniency Applications**: - **Granted**: Automotive Lighting (35% reduction), Hella (20% reduction) - **Rejected**: Valeo - **Leniency Case**: True ## 6. Remedial Measures - **Decision**: Undertakings must immediately bring to an end the infringement referred to in Article 1. - **Refrain**: From repeating any act or conduct having the same or similar object or effect. ## 7. Authority and Proceedings - **Commissioner**: Margrethe Vestager - **Commission Initiation**: May 2016 - **Statement of Objections**: May 2017 - **Commission Decisions**: - Initial proceedings: May 2016 - Leniency reductions: April 2017 - Final decision: June 2016 ## 8. Additional Context - **OEM Customers**: Fiat, Iveco, VW, BMW, General Motors, Renault, PSA, Daimler Chrysler - **Sector**: Automotive Lighting Systems, specifically electrical and electronic equipment for motor vehicles (NACE: 29.31) - **Industry Classification**: Manufacturing of parts and accessories for motor vehicles (NACE: 29.3) - **Companies Involved**: - Automotive Lighting (Automotive Lighting Reutlingen GmbH, Hella, Magneti Marelli) - Valeo (Valeo S.A., Valeo Service SAS, Valeo Vision SAS)",2026-10-16 21:03:16.152579+00
+52d398cd-e2d1-4342-b815-56c75614ef0f,AT_40940_10539411_1520_696_3,case_summary,### Celex Case Id NA ### Case Title NA ### Overview NA ### Industry NA ### Oecd Nace NA ### Companies Undertakings NA ### Cartel Period NA ### Legal Assessment Period NA ### Key Timeline NA ### Legal Framework NA ### Infringement Category NA ### Infringement Sub Category NA ### Leniency Applicants NA ### Fines NA ### Company Recidivism NA ### Case Commission Info Request NA ### Case Commission No Action NA ### Case Commission Decision NA ### Outcome NA *(reported: 2026-08-15 16:14:47)*,2026-08-15 14:14:47.122024+00
+e1210723-f8d3-417f-ad8b-3c009b2a3c8a,CELEX-32002D0758(01),case_summary,# Case Summary ## General Information - **Exemption Case**: No - **Leniency Case**: No - **Market Turbulence**: Not available - **Infringement Gravity**: Not available - **Decision Remedies**: Not available ## Parties Involved - **Companies**: Not available - **Authorities**: Not available ## Market Context - **Market Geography**: Not available - **Market Outside EU**: Not available - **Market Oligopoly**: Not available ## Legal Framework - **Law Articles**: Not available - **OECD Sector**: Not available - **NACE Class Code**: Not available ## Case Details - **Infringement Type**: Not available - **Commissioner**: Not available - **Company Recidivism**: Not available - **Exemption Applicants**: Not available - **Case in Book**: Not available ## Additional Information - **Fines**: Not available,2026-10-16 21:22:58.242316+00
+6cd55243-eab7-45a1-b07e-2cc3e958e976,39452_3336_8,case_title,"('COMP/39452', 'Beschläge für Fenster und Fenstertüren')",2026-06-11 18:47:07.28164+00
+8cf61a17-4415-47ba-a3b1-9dc8f3f62479,AT_40013_5708398_1084_5,case_title,NA,2026-04-24 11:30:15.0668+00
+d0be3050-8b43-4f37-95f3-542368781d73,CELEX-32002D0758(01),case_title,NA,2026-04-24 11:31:18.355691+00
+73141ee6-39ed-4adb-b3a5-7b32cb6f4c49,39452_3336_8,celex_case_id,NA,2026-04-23 06:54:08.037213+00
+f684af62-f996-4182-9c36-df206108c929,AT_40013_5708398_1084_5,celex_case_id,| celex_id | case_id | AT_40013_5708398_1084_5 | IV/40013 |,2026-04-23 12:52:46.355174+00
+63e97e68-2c07-4105-a8b1-546eec136c2c,CELEX-32002D0758(01),celex_case_id,NA,2026-04-23 13:29:09.886386+00
+77d14f38-fd4a-4f63-a521-33ca71ccd714,39452_3336_8,commissioner,"",2026-03-21 10:03:42.477937+00
+1bd3c4c9-9a9a-4994-b684-2f49037209ef,AT_40013_5708398_1084_5,commissioner,Margrethe Vestager,2026-03-21 10:11:27.598378+00
+ebc91fc9-e1c1-49bc-a490-0eb40ce5ae6e,AT_40940_10539411_1520_696_3,commissioner,NA,2026-03-21 10:14:00.208598+00
+779d4812-3ab9-4e0f-8282-d5f357d44f3a,CELEX-32002D0758(01),commissioner,NA,2026-03-21 10:52:28.123505+00
+814b5375-9489-4448-8141-fe187f2f43f3,39452_3336_8,companies_address,"| company | address | Roto Frank AG | NA | | Gretsch-Unitas GmbH | NA | | Gretsch-Unitas GmbH Baubeschläge | Johann-Maus-Str. 3, D-71254 Ditzingen | | Mayer & Co Beschläge GmbH | NA | | Siegenia-Aubi KG | NA | | NORAA GmbH | Wilnsdorf, Deutschland | | Aug. Winkhaus GmbH & Co. KG | NA | | HAUTAU GmbH | Wilhelm-Hautau-Straße 2, D-31691 Helpsen | | Heinrich Strenger GmbH & Co. KG | Hauptstr. 103, D-42579 Heiligenhaus | | CARL FUHR GmbH & Co. KG | Carl-Fuhr-Str. 12, D-42579 Heiligenhaus | | Alban Giacomo SpA | Via A De Gasperi 75, IT-36060 Romano d'Ezzelino (Vicenza) |",2026-07-19 09:35:40.073272+00
+881d5db4-ceb2-4297-96ef-fb8a3d504364,AT_40013_5708398_1084_5,companies_address,"| company | address | Valeo S.A. | 43, rue Bayen, 75017 Paris, France | | Valeo Service SAS | 70, rue Pleyel, 93200 Saint Denis, France | | Valeo Vision SAS | 34, rue Saint-André, 93012 Bobigny Cedex, France | | Magneti Marelli S.p.A. | Viale Aldo Borletti 61/63, 20011 Corbetta (MI), Italy | | Automotive Lighting Reutlingen GmbH | Tübinger Strasse 123, 72762 Reutlingen, Germany | | Hella KGaA Hueck & Co. | Rixbecker Straße 75, 59552 Lippstadt, Germany |",2026-07-20 15:12:22.706254+00
+db5e168c-d43f-4510-bf08-38306527a9d3,39452_3336_8,companies_country,| companies_investigated | country | Roto Frank AG | DE | | Gretsch-Unitas GmbH | DE | | Gretsch-Unitas GmbH Baubeschläge | DE | | Mayer & Co. Beschläge GmbH | DE | | Siegenia-Aubi KG | DE | | NORAA GmbH | DE | | Aug. Winkhaus GmbH & Co. KG | DE | | HAUTAU GmbH | DE | | Heinrich Strenger GmbH & Co. KG | DE | | CARL FUHR GmbH & Co. KG | DE | | Alban Giacomo SpA | IT | | FV S+B | DE | | AKB | DE |,2026-07-20 18:49:49.459243+00
+99695854-c586-4d6f-b1c2-aa149d509016,AT_40013_5708398_1084_5,companies_country,| companies_investigated | country | Valeo S.A. | FR | | Valeo Service SAS | FR | | Valeo Vision SAS | FR | | Magneti Marelli S.p.A. | IT | | Automotive Lighting Reutlingen GmbH | DE | | Hella KGaA Hueck & Co. | DE |,2026-07-20 20:27:17.917611+00
+32b6b7e4-4670-433b-8f81-9d1801a98522,39452_3336_8,companies_industry,Beschläge für Fenster und Fenstertüren,2026-04-21 08:58:12.799247+00
+30feae77-8a4e-407b-8493-9986f210af7f,AT_40013_5708398_1084_5,companies_industry,NA,2026-04-21 09:07:33.469149+00
+a31a48ff-121a-483a-aa7b-a1b39ccfe146,AT_40940_10539411_1520_696_3,companies_industry,NA,2026-04-21 09:10:46.08459+00
+4f262f4a-3eab-44f8-b5c1-5a2b98141259,CELEX-32002D0758(01),companies_industry,NA,2026-04-21 09:57:51.911636+00
+3ae2c192-1b7d-4cdd-b025-681febd976ec,39452_3336_8,companies_investigated,| company | Roto Frank AG | | Gretsch-Unitas GmbH | | Mayer & Co Beschläge GmbH | | Siegenia-Aubi KG | | Aug. Winkhaus GmbH & Co. KG | | HAUTAU GmbH | | CARL FUHR GmbH & Co. KG | | Heinrich Strenger GmbH & Co. KG | | AGB | | Maco |,2026-07-19 09:29:58.706807+00
+c961335d-1a32-4db4-b80d-8bcbcc25ca61,AT_40013_5708398_1084_5,companies_investigated,NA,2026-07-20 15:10:38.999756+00
+0846f4c3-4c07-4353-b725-1b879c2c632b,CELEX-32002D0758(01),companies_investigated,NA,2026-07-20 17:29:57.716589+00
+4cb0bf86-5d12-400e-b987-225271db715c,39452_3336_8,company_country,| company | country | Roto Frank AG | Germany | | Gretsch-Unitas GmbH | Germany | | Gretsch-Unitas GmbH Baubeschläge | Germany | | MAYER & CO. BESCHLÄGE GMBH | Austria | | Siegenia-Aubi KG | Germany | | NORAA GMBH | Germany | | Aug. Winkhaus GmbH & Co. KG | Germany | | HAUTAU GMBH | Germany | | Heinrich Strenger GmbH & CO. KG | Germany | | CARL FUHR GmbH & Co. KG | Germany | | Alban Giacomo SpA | Italy |,2026-04-21 08:58:12.999188+00
+e1ead5d8-33c6-40c1-9937-221ecc5a7ceb,AT_40013_5708398_1084_5,company_country,| company | country | Valeo S.A. | France | | Valeo Service SAS | France | | Valeo Vision SAS | France | | Automotive Lighting Reutlingen GmbH | Germany | | Magneti Marelli S.p.A. | Italy | | Hella KGaA Hueck & Co. | Germany |,2026-04-21 09:07:33.652696+00
+18eccd62-a7d2-4257-b777-6e8fd3140a26,AT_40940_10539411_1520_696_3,company_country,NA,2026-04-21 09:10:46.319267+00
+d874818b-c6c3-4907-a0dc-154c4b902ae4,CELEX-32002D0758(01),company_country,NA,2026-04-21 09:57:52.079772+00
+e31188ed-9e8f-43fc-8190-981e18e9e441,39452_3336_8,company_recidivism,| company | recidivism | Roto Frank AG | NA | | Gretsch-Unitas GmbH | NA | | Mayer & Co Beschläge GmbH | NA | | Siegenia-Aubi KG | NA | | NORAA GmbH | NA | | Aug. Winkhaus GmbH & Co. KG | NA | | HAUTAU GmbH | NA | | CARL FUHR GmbH & Co. KG | NA | | Heinrich Strenger GmbH & Co. KG | NA | | Alban Giacomo SpA | NA |,2026-04-21 14:36:23.359683+00
+b172cd54-4e4d-431f-b97d-af77ca0942bc,AT_40013_5708398_1084_5,company_recidivism,NA,2026-04-21 17:47:37.690906+00
+9fb818c4-7f28-4ff7-8692-f46f3b729baf,CELEX-32002D0758(01),company_recidivism,NA,2026-04-21 18:02:30.100135+00
+3b1fdbe3-61e7-497f-b9b6-08d343e66de4,39226_8310_11,court_list,"| court | country | jurisdiction | United Kingdom High Court of Justice, Chancery Division, Patents Court | United Kingdom | Patent litigation | | United Kingdom Patent Court | United Kingdom | Patent litigation | | Patents Court of the High Court of Justice in the United Kingdom | United Kingdom | Patent litigation | | Court of the United Kingdom High Court of Justice in Chancery Division | United Kingdom | Patent litigation | | UK Patents Court | United Kingdom | Patent litigation |",2026-05-23 09:12:25.299026+00
+a80a7c4f-7876-43d7-a546-e9e3ff411ccd,39226_8310_11,court_list_comprehensive,"| court | country | jurisdiction | Patents Court | United Kingdom | UK | | High Court of Justice | United Kingdom | UK | | High Court of Justice, Chancery Division | United Kingdom | UK | | Court of Justice | European Union | EU | | Appeals Court | Denmark | Denmark | | Danish court | Denmark | Denmark | | Court of Amsterdam | Netherlands | Netherlands |",2026-05-25 09:10:37.326814+00
+8ad2aef8-8ff4-4437-8b10-f396b269894c,39452_3336_8,decision_remedies,"Cease and desist from the infringement, refrain from future anti-competitive agreements or coordinated behavior.",2026-04-21 08:58:13.220322+00
+bf7278f7-e1a8-475a-a9ad-594c9c1b3f5d,AT_40013_5708398_1084_5,decision_remedies,"| companies | Valeo S.A., Valeo Service SAS, Valeo Vision SAS | | Automotive Lighting Reutlingen GmbH, Magneti Marelli S.p.A. | | Hella KGaA Hueck & Co. |",2026-04-21 09:07:33.885046+00
+fbb458f9-be43-43fb-baa8-584faa7acf4d,CELEX-32002D0758(01),decision_remedies,NA,2026-04-21 09:57:52.269603+00
+649eb8d4-060e-4fef-b42a-d1838528aee3,39452_3336_8,exemption_applicants,NA,2026-04-21 08:58:13.425628+00
+5edd434d-67fe-415c-978d-69671a0a671e,AT_40013_5708398_1084_5,exemption_applicants,NA,2026-04-21 09:07:34.12939+00
+b86312ac-400c-47d5-a37e-db2daa852dac,AT_40940_10539411_1520_696_3,exemption_applicants,NA,2026-04-21 09:10:46.557732+00
+0094b198-81af-4faf-82f2-b35a38372ba1,CELEX-32002D0758(01),exemption_applicants,NA,2026-04-21 09:57:52.451324+00
+d570b10a-1123-4f5a-99c8-6679ba3b6d27,39452_3336_8,exemption_case,False,2026-04-21 08:58:13.626651+00
+9a9a3162-cc1e-48f6-93bc-f60235689318,AT_40013_5708398_1084_5,exemption_case,True,2026-04-21 09:07:34.300829+00
+6831d69b-92c3-4632-a01d-01e67854f45f,AT_40940_10539411_1520_696_3,exemption_case,False,2026-04-21 09:10:46.790654+00
+b48ce883-8f16-4280-8125-44b47283511d,CELEX-32002D0758(01),exemption_case,False,2026-04-21 09:57:52.610699+00
+fe5ea2f8-aeb0-4281-a214-05c2d6d610c2,39452_3336_8,fines,"| company | amount | Roto Frank AG | 0 EUR | | Gretsch-Unitas GmbH, Gretsch-Unitas GmbH gesamtschuldnerisch | 20 552 000 EUR | | Mayer & Co Beschläge GmbH | 18 501 000 EUR | | Siegenia-Aubi KG, NORAA GmbH, gesamtschuldnerisch | 18 995 000 EUR | | Aug. Winkhaus GmbH & Co. KG | 19 537 000 EUR | | HAUTAU GmbH | 3 179 000 EUR | | CARL FUHR GmbH & Co. KG | 2 215 000 EUR | | Heinrich Strenger GmbH & Co. KG | 104 000 EUR | | Alban Giacomo SpA | 2 793 000 EUR |",2026-04-21 08:58:13.810042+00
+dbd90132-def8-4a7d-a50a-a9fddbd1d4c2,AT_40013_5708398_1084_5,fines,"| company | amount | Valeo S.A., Valeo Service SAS, Valeo Vision SAS | 0 | | Automotive Lighting Reutlingen GmbH, Magneti Marelli S.p.A. | 16 347 000 | | Hella KGaA Hueck & Co. | 10 397 000 |",2026-04-21 09:07:34.465281+00
+a287713c-a625-4899-9d4c-e9ea5eac7b97,AT_40940_10539411_1520_696_3,fines,NA,2026-04-21 09:10:47.043384+00
+f5523705-0454-438b-b7ee-f2e16d8c8ab9,CELEX-32002D0758(01),fines,NA,2026-04-21 09:57:52.773117+00
+5fc7a711-0e76-44f2-b4a6-8e5d25408dca,39452_3336_8,heideltime_event,"| event_date | actor | predicate_object | 0001-03-15 | GU | prepared letter with 4% increase for SKB and 3% increase for DK | | 0003-02-01 | redacted | no activity described in text | | 0003-04-01 | redacted | increased price by 4.7% | | 0003-05-01 | GU | increased price by 4.2% | | 0004-12-01 | Fuhr | implemented new PL with MTZ 6% | | 0005-02-01 | redacted | no activity described in text | | 0005-03-01 | redacted | MTZ implementation announced | | 0005-04-01 | redacted | MTZ only for DK, not portal | | 0006-06-01 | Winkhaus | convened meeting with representatives discussing joint price increase | | 0006-07-01 | Siegenia | planned price increase of approximately 4% | | 0006-07-01 | redacted | no activity described in text | | 1999-11-16 | GU, Hautau, Roto, Siegenia, Strenger, Winkhaus | agreed on price increase in form of MTZ for year 2000 | | 2001-04-01 | redacted | announced price increases in Hungary | | 2001-06-01 | redacted | implemented price increases in Germany | | 2001-06-01 | redacted | implemented coordinated price increase for Drehkipp-Produkte | | 2002-11-20 | Industrie | agreed on price increase for 2003 | | 2003-02-01 | redacted | announced price increase | | 2003-02-01 | redacted | meeting involving West and South-east European sales departments | | 2003-04-01 | Industrie | implemented price increase of 4–4.6% for retailers | | 2003-04-01 | redacted | scheduled price increase of 4.7% | | 2003-07-01 | redacted | no activity described in text | | 2003-08-27 | Mitarbeiter | sent email criticizing aggressive pricing behavior in France | | 2004-06-01 | Hersteller | implemented price increase of 3-5% | | 2004-06-01 | Maco, Winkhaus, Siegenia | prepared for price increase effective June 1, 2004 | | 2004-06-01 | Siegenia | announced price increase | | 2004-07-01 | Winkhaus | introduced MTZ in Poland | | 2004-11-17 | redacted | held meeting agreeing on scope and timing of price increases | | 2005-02-01 | redacted | no activity described in text | | 2005-03-01 | redacted | began implementing price increases | | 2005-03-01 | redacted | no activity described in text | | 2005-04-01 | redacted | included MTZ in new price list following price increase | | 2005-05-01 | MACO | considered implementing 3% price increase | | 2005-06-01 | Maco and Siegenia Aubi representatives | discussed price increases for SKB and DK | | 2006-01-01 | Fuhr | recorded pre-increase notes | | 2006-02-01 | Fuhr | recorded pre-increase notes | | 2006-03-01 | redacted | received letter from BeNeLux about new price list | | 2006-04-01 | redacted | decided to increase prices in all markets except Germany | | 2006-04-06 | redacted | implemented price increases for incoming orders | | 2006-06-01 | Roto | increased prices by 3.5–4% | | 2006-07-01 | Maco | increased prices by 4% | | 2006-09-01 | redacted | announced price increase to end customers | | 2007-01-01 | Siegenia | raised prices by 6% in Italy | | 2007-01-01 | Roto | announced price increase of 5.3% | | 2007-01-01 | redacted | noted planned price increase in Italy | | 2007-01-01 | Fuhr | announced price increase of 5.5% | | 2007-01-01 | Maco | implemented price increase of 5.2% | | 2007-01-01 | Roto | implemented price increase of 5.3% | | 2007-01-01 | GU | announced first quarter price increase | | 2007-01-01 | redacted | began calculating services including drawings and patterns | | 2007-01-02 | redacted | no activity described in text | | 2007-02-01 | Roto | announced price increase of 5.3% | | 2007-02-01 | redacted | no activity described in text | | 2007-03-01 | Hautau | announced price increase of 5.3% | | 2007-05-01 | Winkhaus | announced price increase implementation | | 2007-05-01 | Winkhaus | announced price increase of 5.6% | | 2012-03-28 | redacted | no activity described in text | | 2012-03-28 | redacted | decision issued |",2026-04-28 14:11:31.135948+00
+0c6657ca-2364-42f0-8452-491f70174f85,AT_40013_5708398_1084_5,heideltime_event,"| event_date | actor | predicate_object | | --- | --- | --- | | 2002-12-16 | redacted | adopted council regulation | | 2004-04-07 | redacted | adopted commission regulation | | 2004-07-07 | redacted | infringement commenced | | 2004-07-07 | redacted | no activity described in text | | 2004-07-07 | Valeo Service SAS | acknowledged liability for direct participation in the infringement | | 2004-07-07 | Valeo S.A. and Valeo Service SAS | participated in price coordination infringement | | 2004-07-07 | Valeo | began Group 1 infringement period | | 2004-07-07 | Valeo | began sales to Group 1 customers | | 2004-07-07 | Valeo | entered into agreement with customers | | 2004-07-07 | Valeo, Automotive Lighting, Hella | began participation in infringement | | 2004-10-25 | Valeo | ended Group 1 infringement period | | 2005-05-20 | Valeo Vision SAS | acknowledged liability for direct participation in the infringement | | 2005-05-20 | Valeo Vision SAS | participated in price coordination infringement | | 2006-01-01 | Hella KGaA Hueck & Co. | acknowledged liability for direct participation in infringement | | 2006-01-01 | Hella KGaA Hueck & Co. | participated in price coordination infringement | | 2006-01-01 | AutomotiveLighting | began Group 3 infringement period | | 2006-01-01 | redacted | infringement began for Group 3 customers | | 2006-01-01 | AutomotiveLighting | entered into agreement with Daimler Chrysler | | 2007-01-01 | redacted | began sales to Group 2 customers | | 2007-01-01 | Valeo | began Group 2 infringement period | | 2007-01-01 | Valeo | entered into agreement with all other customers | | 2007-01-01 | Hella | began participation in infringement | | 2007-07-07 | redacted | no activity described in text | | 2007-10-25 | redacted | ended sales to Group 2 customers | | 2007-10-25 | redacted | infringement concluded | | 2007-10-25 | redacted | no activity described in text | | 2007-10-25 | Commission | imputed liability to Hella KGaA Hueck & Co. | | 2007-10-25 | AutomotiveLighting | ended Group 2 infringement period | | 2007-10-25 | redacted | infringement ended for all groups | | 2007-10-25 | redacted | agreement ended | | 2007-10-25 | Valeo, Automotive Lighting, Hella | ended participation in infringement | | 2012-01-25 | Valeo | applied for immunity under the Leniency Notice | | 2012-01-25 | Valeo | submitted immunity application under the Leniency Notice | | 2012-07-31 | Commission | carried out unannounced inspections at the premises of Automotive Lighting and Hella | | 2012-08-07 | redacted | no activity described in text | | 2012-08-10 | Automotive Lighting | applied for a reduction of a fine under the Leniency Notice | | 2012-08-10 | Automotive Lighting | applied for reduction of fines and submitted new evidence | | 2012-09-18 | Hella | applied for a reduction of a fine under the Leniency Notice | | 2012-09-18 | Hella | applied for reduction of fines providing evidence of infringement | | 2015-06-01 | redacted | no activity described in text | | 2016-01-01 | redacted | no activity described in text | | 2016-05-18 | Commission | granted Valeo conditional immunity from fines and initiated proceedings against the parties | | 2016-05-18 | Valeo | was granted conditional immunity from fines | | 2016-05-18 | redacted | initiated proceedings | | 2016-05-31 | redacted | no activity described in text | | 2016-07-06 | redacted | no activity described in text | | 2016-12-31 | redacted | no activity described in text | | 2017-05-10 | Commission | adopted Statement of Objections addressed to the parties | | 2017-06-21 | redacted | no activity described in text | | 2017-06-21 | redacted | issued decision | | 2017-06-21 | Margrethe Vestager | issued decision addressing undertakings |",2026-09-16 00:43:05.810769+00
+a6406b24-c01b-4cdb-acdc-5792ae2e3d18,CELEX-32002D0758(01),heideltime_event,NA,2026-04-29 20:24:44.536572+00
+2a74d71c-837b-4b88-8bf4-00cc1f3aa577,39452_3336_8,heideltime_event_agg,"| event | actor | predicate object | 1999-11-16 | GU, Hautau, Roto, Siegenia, Strenger, Winkhaus | agreed on price increase in form of MTZ for year 2000 | | 2003-04-01 | Industrie | implemented price increase of 4–4.6% for retailers | | 2004-06-01 | Hersteller | implemented price increase of 3-5% | | 2005-03-01 | redacted | began implementing price increases | | 2006-04-06 | redacted | implemented price increases for incoming orders | | 2006-06-01 | Roto | increased prices by 3.5–4% | | 2006-07-01 | Maco | increased prices by 4% | | 2007-01-01 | Siegenia | raised prices by 6% in Italy | | 2007-01-01 | Maco | implemented price increase of 5.2% | | 2007-01-01 | Roto | implemented price increase of 5.3% | | 2007-05-01 | Winkhaus | announced price increase implementation | | 2012-03-28 | redacted | decision issued |",2026-04-28 14:11:44.27877+00
+2a403edf-4d57-4e13-82ca-b476067b08f5,AT_40013_5708398_1084_5,heideltime_event_agg,| event | actor | predicate object | | --- | --- | --- | | 2007-10-25 | Commission | imputed liability to Hella KGaA Hueck & Co. | | 2016-05-18 | Valeo | was granted conditional immunity from fines | | 2017-05-10 | Commission | adopted Statement of Objections addressed to the parties | | 2017-06-21 | Margrethe Vestager | issued decision addressing undertakings |,2026-09-16 00:43:20.219559+00
+2bd77e07-4955-427e-aacf-29dc8bdb48b5,CELEX-39612_12448_6,heideltime_event_agg,NA,2026-04-28 10:56:56.766714+00
+a93db357-5f86-4de6-80f0-a82267594d81,39389_2761_1,heideltime_raw,NA,2026-04-29 19:42:28.162816+00
+e7fb7ab1-a5bb-4005-9dea-b1e00034f4df,39452_3336_8,heideltime_raw,| status | source_table | extraction_count | chunk_count | canonical_date_count | min_date | max_date | available | celex_facts.heideltime_extractions | 809 | 219 | 71 | 0001-03-15 | 2012-03-28 |,2026-08-28 22:06:02.838676+00
+b985a07f-59b7-46e1-93ea-ca137aaa5d98,39731_801_8,heideltime_raw,NA,2026-04-29 19:42:35.189613+00
+f2422332-f4ec-4624-a718-94e516608903,40013_1084_2,heideltime_raw,NA,2026-04-28 13:55:47.561713+00
+dc1ee845-9fef-4998-8091-2f5fec22c3d4,AT_40013_5708398_1084_5,heideltime_raw,NA,2026-04-29 19:42:39.86322+00
+5e5cd6f2-7465-4b1f-a4d2-569ae1eaa131,AT_40013_5708398_1084_5,heideltime_raw,NA,2026-09-16 00:41:19.233996+00
+d5da98cf-5fe1-4e01-bf5b-9bcb52ce136f,AT_40410_7557494_1654_9,heideltime_raw,NA,2026-04-29 19:42:44.528017+00
+7801babf-157f-4560-a08f-60777b222aac,AT_40703_8990760_1533_5,heideltime_raw,NA,2026-04-29 19:42:50.607812+00
+5e164c9f-1743-4412-b730-2f3c03b04018,CELEX-32000D0146,heideltime_raw,NA,2026-04-28 13:27:57.909709+00
+c9cc8315-a551-4c10-927b-4babbc17e5d8,CELEX-32002D0758(01),heideltime_raw,NA,2026-09-16 05:16:05.417573+00
+39e95ce8-b2c0-4dab-9660-3c901165fe8e,CELEX-32002D0758(01),heideltime_raw,NA,2026-04-29 19:42:59.42906+00
+9eee00cc-441a-45de-8dd9-c8130e0d389c,TEST-HT-F5B4AAF6298B,heideltime_raw,NA,2026-08-29 04:41:11.203641+00
+5f16fc38-a786-41f3-b4f7-3c3da0e094f2,33708_6_7,infringement_category_abuse_of_dominance,True,2026-04-21 08:48:00.864829+00
+66fca22c-85e8-47fe-97fe-d27bb15355c8,34579_1889_2,infringement_category_abuse_of_dominance,NA,2026-04-21 08:48:12.742306+00
+fd9c2b01-e2cc-4b5e-a216-b484448a31a2,36623_320_1,infringement_category_abuse_of_dominance,False,2026-04-21 08:48:40.194868+00
+60b65211-6fdc-4a0d-9128-2fe5e9d043b3,37396_45_3,infringement_category_abuse_of_dominance,True,2026-04-21 08:49:14.439305+00
+db1df9d8-0861-4aa9-a465-5c9598be91d7,37784_8_4,infringement_category_abuse_of_dominance,NA,2026-04-21 08:50:01.216366+00
+1cc5575d-e36e-43c3-8207-9b9e9a5d898f,38338_332_2,infringement_category_abuse_of_dominance,NA,2026-04-21 08:52:14.650941+00
+50493603-e7f6-4e45-a177-d98ef115b6e6,38354_527_4,infringement_category_abuse_of_dominance,False,2026-04-21 08:52:33.217891+00
+0942c536-4816-4f3a-85a2-c0e04a40efad,38456_792_2,infringement_category_abuse_of_dominance,NA,2026-04-21 08:53:02.87968+00
+f86bc9fa-f077-44bf-ada0-f41d130480d7,38549_72_1,infringement_category_abuse_of_dominance,NA,2026-04-21 08:53:30.345236+00
+a3a1af39-46f7-4edc-9e22-af32e14c0611,38698_4567_1,infringement_category_abuse_of_dominance,NA,2026-04-21 08:54:39.686281+00
+76b5bced-c958-485c-8d0f-554e7ae8f30e,39180_1315_4,infringement_category_abuse_of_dominance,False,2026-04-21 08:56:03.478681+00
+33891635-e93d-49dc-b4e0-7138dcdc0f98,39226_8310_11,infringement_category_abuse_of_dominance,NA,2026-04-21 08:56:21.13361+00
+3772ff51-2421-42be-8b18-454814af4066,39610_9899_5,infringement_category_abuse_of_dominance,NA,2026-04-21 08:59:56.943557+00
+b9a024b2-0a6d-42a4-9228-175e2e0951ef,39686_4072_5,infringement_category_abuse_of_dominance,NA,2026-04-21 09:00:44.156699+00
+24a6a670-acd5-4c41-b4f5-9f54cd663e7a,40208_1579_5,infringement_category_abuse_of_dominance,NA,2026-04-21 09:05:30.422367+00
+6b0abb76-e72e-4fb3-8b3d-912f72c82a6d,40410_1654_6,infringement_category_abuse_of_dominance,NA,2026-04-21 09:05:58.403618+00
+db40760c-3e81-4ecf-8fe1-d8cef022fdd4,CELEX-31975D0077,infringement_category_abuse_of_dominance,NA,2026-04-21 09:19:52.417515+00
+3690b746-2a03-4946-b157-9572041519f7,CELEX-31975D0095,infringement_category_abuse_of_dominance,NA,2026-04-21 09:20:04.115015+00
+42c1dd0e-df72-4cd6-a7a9-7e59e12f3673,CELEX-31975D0497,infringement_category_abuse_of_dominance,False,2026-04-21 09:20:34.24973+00
+f96adebb-14bb-40b5-b5ae-6b593849402a,CELEX-31975D0570,infringement_category_abuse_of_dominance,True,2026-04-21 09:20:46.008132+00
+5168aa71-a6b1-4efb-8891-7de4ebc8b4be,CELEX-31988D0084,infringement_category_abuse_of_dominance,False,2026-04-21 09:37:58.804854+00
+0df2982f-6f5d-480a-9f78-10fc83076894,CELEX-31988D0587,infringement_category_abuse_of_dominance,True,2026-04-21 09:39:46.659536+00
+d8408e80-4db8-4d17-9a50-62a112d46956,CELEX-31991D0297,infringement_category_abuse_of_dominance,True,2026-04-21 09:43:46.516633+00
+75ee4c97-0b67-4264-a42e-67f4879baa3c,CELEX-31991D0298,infringement_category_abuse_of_dominance,False,2026-04-21 09:43:52.332784+00
+a9400bbc-8f00-4c64-b08b-9a421f6bd51a,CELEX-31992D0261,infringement_category_abuse_of_dominance,True,2026-04-21 09:45:42.884608+00
+011ba14a-afb2-4198-ab1b-5a2cf80a0893,CELEX-31993D0049,infringement_category_abuse_of_dominance,False,2026-04-21 09:46:39.723121+00
+0e8a31df-88b3-4078-a4f7-a6616941bab5,CELEX-31993D0050,infringement_category_abuse_of_dominance,NA,2026-04-21 09:46:45.458428+00
+7d1f93f1-6ccb-4534-8eb4-55dd6590cc8d,CELEX-31993D0174,infringement_category_abuse_of_dominance,False,2026-04-21 09:47:03.660708+00
+6e61b1f1-684e-4adc-b268-c21ad8a5a3ac,CELEX-31993D0668,infringement_category_abuse_of_dominance,True,2026-04-21 09:47:44.825616+00
+57ae0db1-7bbe-454a-9f58-617b6d9a3a61,CELEX-31994D0663,infringement_category_abuse_of_dominance,True,2026-04-21 09:49:05.988861+00
+bbb2a9e4-83c1-4df3-9b90-97304f5263a3,CELEX-31994D0980,infringement_category_abuse_of_dominance,NA,2026-04-21 09:49:57.476937+00
+2a0693d4-dd47-46ba-a844-5135e5b18124,CELEX-31996D0478,infringement_category_abuse_of_dominance,True,2026-04-21 09:51:10.398061+00
+6ddc4280-389d-468c-8acb-fb8bc7b3cdc2,CELEX-31997D0123,infringement_category_abuse_of_dominance,NA,2026-04-21 09:51:44.278007+00
+5b4dfd41-1a92-4601-a381-f4537f8d65af,CELEX-31999D0695,infringement_category_abuse_of_dominance,False,2026-04-21 09:54:41.95882+00
+9f7fdc86-0c06-42c8-8460-c6a1a84e6918,CELEX-32001D0663,infringement_category_abuse_of_dominance,NA,2026-04-21 09:56:37.233718+00
+4592cee2-6674-4984-823e-9fb3ac6d4114,CELEX-32001D0791,infringement_category_abuse_of_dominance,NA,2026-04-21 09:57:01.114088+00
+d257dd56-b73f-4d29-a298-3edb6dd6c9a5,CELEX-32003D0569,infringement_category_abuse_of_dominance,True,2026-04-21 09:59:07.993306+00
+319d6562-85cc-4125-87f0-51ddc5c6e673,37507_193_6,infringement_category_hor_vert_lic_joint,license,2026-04-21 08:49:20.439027+00
+98eb10d8-1480-4d8f-81e4-f7bce1c023d8,37685_66_1,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 08:49:37.972998+00
+4813bb15-3903-4751-9fb2-063d5e40efbe,37966_639_3,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 08:50:36.935404+00
+a0b024fb-7e88-4daa-a19a-3f86c69a1161,38381_1065_1,infringement_category_hor_vert_lic_joint,horizontal,2026-04-21 08:52:45.32018+00
+dd9d7541-e707-4ce7-b764-667ede95a8db,38636_1203_1,infringement_category_hor_vert_lic_joint,license,2026-04-21 08:54:06.055627+00
+e815fa0a-9133-4256-b531-ea7955b070f4,39759_3071_5,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:01:35.05983+00
+1cb2520e-4070-4dd8-8ed1-dee4dbfc8ec1,39767_2018_3,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:01:41.143757+00
+04c118cf-a6f3-4d41-90a8-f5b32f701d7c,39849_2692_4,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:02:28.01778+00
+0c3d441f-a171-41d3-88f9-a36002557658,39939_1501_5,infringement_category_hor_vert_lic_joint,horizontal,2026-04-21 09:03:19.533769+00
+a3251521-d6dd-4c7d-b35d-ad51a2a32f83,39985_928_16,infringement_category_hor_vert_lic_joint,license,2026-04-21 09:03:59.059815+00
+7d29d745-dcd4-490b-a712-60d4bb38ba45,40099_9993_3,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:04:49.997507+00
+ed8d9834-cfb0-4054-8b88-27b67eea9fbd,40134_2872_5,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:05:07.420033+00
+f6443f9a-bda4-4205-9b04-fcb722a318ce,AT_40577_10333580_3473_8,infringement_category_hor_vert_lic_joint,NA,2026-04-21 09:09:41.281587+00
+d17c347d-ff7a-452a-b3de-6e0aaa3478d8,CELEX-31976D0353,infringement_category_hor_vert_lic_joint,horizontal,2026-04-21 09:21:33.388528+00
+2a7a576c-42b7-4aec-ad57-8fb7bd429108,CELEX-31977D0327,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:22:31.966405+00
+3a759383-44f3-4081-b1e9-55d9c82b8a04,CELEX-31978D0068,infringement_category_hor_vert_lic_joint,horizontal,2026-04-21 09:23:19.212161+00
+a504f101-08ad-4f9d-8cd0-2d467ac2d6ca,CELEX-31985D0609,infringement_category_hor_vert_lic_joint,NA,2026-04-21 09:34:53.009575+00
+7dd5c26f-81af-4798-9e18-788881163951,CELEX-31988D0501,infringement_category_hor_vert_lic_joint,license,2026-04-21 09:39:12.38878+00
+fd509b43-a180-4e7f-b2a6-4e66a4fb21d6,CELEX-31988D0518,infringement_category_hor_vert_lic_joint,horizontal,2026-04-21 09:39:18.192467+00
+8ef2a5d0-7983-479a-992a-95cc684ea1a5,CELEX-31988D0589,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:39:52.739095+00
+69a3d5e0-beb2-43ed-a249-97b4e910f904,CELEX-31989D0022,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:40:10.363868+00
+bacc67fe-b01f-4da1-a49e-0aba99cbcaac,CELEX-31991D0299,infringement_category_hor_vert_lic_joint,vertical,2026-04-21 09:43:58.603929+00
+b02c14d4-0a86-4c8e-9598-48d0ed16848a,CELEX-31996D0547,infringement_category_hor_vert_lic_joint,joint venture,2026-04-21 09:51:22.250042+00
+250a014d-bf67-44a6-9c26-618a069d8720,36571_222_1,infringement_category_member_states,NA,2026-04-21 08:48:34.270634+00
+c8e01444-e51c-478b-9caa-c6d18e555190,37685_66_1,infringement_category_member_states,False,2026-04-21 08:49:38.17223+00
+baf3b27d-020c-4d6e-ac9d-3962ff2d36b8,37784_8_4,infringement_category_member_states,False,2026-04-21 08:50:01.63386+00
+9a84cb36-a3d0-4513-9205-a22bf92a8183,38698_4567_1,infringement_category_member_states,NA,2026-04-21 08:54:40.101638+00
+94573797-db9f-428d-b70b-be56eacb6177,CELEX-31978D0823,infringement_category_member_states,False,2026-04-21 09:24:53.815538+00
+214f1236-5ecb-4f2b-b55a-3d6c559c5ea5,CELEX-31981D1030,infringement_category_member_states,NA,2026-04-21 09:27:44.07559+00
+5b53c58a-ede3-497f-a838-c02f3e4b1b40,CELEX-31982D0371,infringement_category_member_states,NA,2026-04-21 09:29:00.714956+00
+2d83b8cd-7536-48d5-97de-97492de28270,CELEX-31982D0861,infringement_category_member_states,NA,2026-04-21 09:29:47.909009+00
+4f35cd02-11f0-4135-bc67-8944ca855be6,CELEX-31985D0077,infringement_category_member_states,NA,2026-04-21 09:33:15.130232+00
+87d29209-de10-40ee-bdc2-423d6c214272,CELEX-31989D0113,infringement_category_member_states,NA,2026-04-21 09:40:47.851775+00
+9f012677-9af2-4e80-9f07-6c08068778b8,CELEX-31989D0205,infringement_category_member_states,NA,2026-04-21 09:41:05.677551+00
+3f64c4cc-a572-4bca-bf80-5d01cd305b94,CELEX-31989D0536,infringement_category_member_states,NA,2026-04-21 09:41:35.04358+00
+be00e5ba-5a17-42e5-ad63-f0c07744290f,CELEX-31990D0456,infringement_category_member_states,True,2026-04-21 09:42:43.151357+00
+4375ca59-9e5b-4d3a-9fe0-9d82bd5c9ba0,CELEX-31991D0050,infringement_category_member_states,NA,2026-04-21 09:43:11.87213+00
+6f9a9595-2d77-498e-a6bb-06a16b312a9e,CELEX-31991D0130,infringement_category_member_states,False,2026-04-21 09:43:29.049452+00
+e411d676-4b84-4beb-8e2f-cb1d691d6c4d,CELEX-31993D0126,infringement_category_member_states,NA,2026-04-21 09:46:57.695712+00
+f52fdd69-2810-4692-866c-7962491f84f0,CELEX-31993D0403,infringement_category_member_states,NA,2026-04-21 09:47:15.920521+00
+52cd60d1-a429-4bef-a757-382f05246817,CELEX-31999D0198,infringement_category_member_states,False,2026-04-21 09:53:21.353372+00
+c7c522c9-8f0d-4c64-bcfd-e28e54e00d81,CELEX-31999D0695,infringement_category_member_states,NA,2026-04-21 09:54:42.412715+00
+e67e87ee-347d-49bd-a33c-ba5e7e62b0fb,CELEX-32001D0354,infringement_category_member_states,False,2026-04-21 09:56:14.734003+00
+88eabdff-7f25-4948-b406-0b83aca943ab,CELEX-32001D0663,infringement_category_member_states,NA,2026-04-21 09:56:37.625518+00
+a8cc625d-7988-408a-bd58-61c3f7424f75,CELEX-32001D0892,infringement_category_member_states,NA,2026-04-21 09:57:07.333371+00
+84a83b04-c8ff-4641-92b7-9edd6a0d8b2f,CELEX-32003D0300,infringement_category_member_states,NA,2026-04-21 09:58:50.851737+00
+77eb07f1-d917-4591-a36d-2feb782fb193,CELEX-32003D0707,infringement_category_member_states,NA,2026-04-21 09:59:38.25024+00
+e08cca88-c0fc-466e-801b-0e581fcee901,iv34801_en,infringement_category_member_states,False,2026-04-21 10:00:19.464689+00
+4eb3da36-0454-44f2-a968-4cc1b2623f54,36571_222_1,infringement_category_procedural,NA,2026-04-21 08:48:34.491886+00
+bc1c2704-12e2-4ade-aaa9-41d47a247293,37685_66_1,infringement_category_procedural,NA,2026-04-21 08:49:38.405293+00
+887eb8d1-f6ab-4225-82f6-e7bff526b6cb,37784_8_4,infringement_category_procedural,False,2026-04-21 08:50:01.840912+00
+c2fb340f-22de-49ac-9273-fee90c59f2b1,38698_4567_1,infringement_category_procedural,NA,2026-04-21 08:54:40.315932+00
+7e4d488f-e764-4f47-879e-f87242e6a03d,CELEX-31978D0823,infringement_category_procedural,False,2026-04-21 09:24:54.056045+00
+bb8aa2da-8304-461a-a466-eb82b21c24cd,CELEX-31981D1030,infringement_category_procedural,NA,2026-04-21 09:27:44.278266+00
+5a4cf91a-dbf0-4413-bb9c-24a5fa82c7e4,CELEX-31982D0371,infringement_category_procedural,NA,2026-04-21 09:29:00.920757+00
+5020a0dc-82d3-4e6c-a5d5-3b434b2e17d1,CELEX-31982D0861,infringement_category_procedural,NA,2026-04-21 09:29:48.134581+00
+cb2289e1-8daa-42ad-a495-3f6178fef250,CELEX-31985D0077,infringement_category_procedural,NA,2026-04-21 09:33:15.3472+00
+8393d070-9752-4adb-9295-697620422f17,CELEX-31989D0113,infringement_category_procedural,NA,2026-04-21 09:40:48.08359+00
+34faefb3-d8f9-401f-a462-e44ddac2c1da,CELEX-31989D0205,infringement_category_procedural,False,2026-04-21 09:41:05.91459+00
+2558948b-c830-4ccb-9491-ff79e32ee9cc,CELEX-31989D0536,infringement_category_procedural,NA,2026-04-21 09:41:35.25117+00
+c46b95c9-9c63-42cb-bc0f-94992006bc6f,CELEX-31990D0456,infringement_category_procedural,False,2026-04-21 09:42:43.365486+00
+e5dbdaec-5400-4a58-908b-e0c46cb1bd60,CELEX-31991D0050,infringement_category_procedural,NA,2026-04-21 09:43:12.105641+00
+337c48ec-0888-403d-bc44-a33d89e4cb26,CELEX-31991D0130,infringement_category_procedural,False,2026-04-21 09:43:29.24932+00
+9eebff00-a637-4aef-8c24-6f39c9475548,CELEX-31993D0126,infringement_category_procedural,NA,2026-04-21 09:46:57.93166+00
+7a9db9de-2b8e-4e0a-8af7-d2b4a8de8583,CELEX-31993D0403,infringement_category_procedural,False,2026-04-21 09:47:16.14501+00
+761f75bb-c39c-4c94-ab89-8318094bb07d,CELEX-31999D0198,infringement_category_procedural,False,2026-04-21 09:53:21.586564+00
+224eea13-5caa-4928-94ff-c15cb5b88b3d,CELEX-31999D0695,infringement_category_procedural,NA,2026-04-21 09:54:42.63584+00
+9c97af7c-6aea-4c29-93d8-1354d554013a,CELEX-32001D0354,infringement_category_procedural,NA,2026-04-21 09:56:14.972565+00
+1ca1c404-9fba-4a4b-aad5-29ea17d6ecb0,CELEX-32001D0663,infringement_category_procedural,NA,2026-04-21 09:56:37.832395+00
+8078ad47-06f8-44e8-b0af-d771f37925b4,CELEX-32001D0892,infringement_category_procedural,NA,2026-04-21 09:57:07.549664+00
+53d41492-2af2-4e5f-8842-b59e8bb46230,CELEX-32003D0300,infringement_category_procedural,NA,2026-04-21 09:58:51.085811+00
+8f322541-c415-4aca-bcfd-b281e043eb64,CELEX-32003D0707,infringement_category_procedural,False,2026-04-21 09:59:38.501711+00
+09841c17-7b73-4449-9baa-6f38c4874dfb,iv34801_en,infringement_category_procedural,NA,2026-04-21 10:00:19.683311+00
+9bbe5c67-60d3-4bca-b3c8-c3b7af723ddf,39452_3336_8,infringement_concept,NA,2026-06-30 19:16:16.121188+00
+f609b64d-1035-46ea-9f0c-c6b83e6b8561,AT_40013_5708398_1084_5,infringement_concept,NA,2026-06-30 19:19:37.25689+00
+0658405f-a2f9-4956-b545-c43dea66e834,AT_40940_10539411_1520_696_3,infringement_concept,NA,2026-08-15 14:14:51.071969+00
+867107d8-0ee5-4afb-bef4-3bf3b95314b5,CELEX-32002D0758(01),infringement_concept,NA,2026-06-30 19:19:55.472429+00
+022f848a-3bb0-44e6-a39e-c74151c361c7,39452_3336_8,infringement_gravity,high,2026-04-21 08:58:14.035908+00
+375af992-97e8-4629-8277-5b4c62c1cb4e,AT_40013_5708398_1084_5,infringement_gravity,high,2026-04-21 09:07:34.6611+00
+9a9267e9-0c64-4f0e-95c4-463ea776a663,CELEX-32002D0758(01),infringement_gravity,NA,2026-04-21 09:57:52.944641+00
+ebe2298f-4e0b-426d-8671-114096686e77,38381_1065_1,infringement_subcategory_horizontal_restraints,"market sharing, quota cartels, and specialization agreements",2026-04-21 08:52:45.739551+00
+9a3474dd-e9b9-423e-bdb8-feb4842fb3ab,39939_1501_5,infringement_subcategory_horizontal_restraints,NA,2026-04-21 09:03:19.965774+00
+edbd04e0-dee8-478c-adb4-3c92835128f2,CELEX-31976D0353,infringement_subcategory_horizontal_restraints,"market sharing, quota cartels, and specialization agreements",2026-04-21 09:21:33.80021+00
+af9aeee0-5ae9-479b-85bf-a63c7205de00,CELEX-31978D0068,infringement_subcategory_horizontal_restraints,export cartels,2026-04-21 09:23:19.591153+00
+6fc09054-5ee4-4a60-9a38-11f55e2f4011,CELEX-31988D0518,infringement_subcategory_horizontal_restraints,NA,2026-04-21 09:39:18.621868+00
+824402e2-1280-4fe1-9f8b-c5f5469e27aa,37685_66_1,infringement_subcategory_vertical_restraints,Exclusive Dealing / Market Foreclosure;Territorial Exclusivity / Parallel Trade Bans,2026-04-21 08:49:38.867776+00
+aa3f9a79-ca25-4200-846b-8a99c0ff7f71,37966_639_3,infringement_subcategory_vertical_restraints,Market Foreclosure;Selective Distribution,2026-04-21 08:50:37.349127+00
+406669c7-caa4-4b2f-83d7-7b7fe50689c6,39759_3071_5,infringement_subcategory_vertical_restraints,Exclusive Dealing / Market Foreclosure,2026-04-21 09:01:35.501668+00
+cecf156f-adca-4575-b409-8c9bd7330d21,39767_2018_3,infringement_subcategory_vertical_restraints,Territorial Exclusivity / Parallel Trade Bans,2026-04-21 09:01:41.575848+00
+e0d4ecd8-1419-402f-9148-1a7ac40016fe,39849_2692_4,infringement_subcategory_vertical_restraints,Exclusive Dealing / Market Foreclosure,2026-04-21 09:02:28.3892+00
+5f6a4109-80ef-4298-a4c6-64180c56d64d,40099_9993_3,infringement_subcategory_vertical_restraints,Bundling and Tying,2026-04-21 09:04:50.387472+00
+7b0522ca-5954-4401-b826-dff76e067379,40134_2872_5,infringement_subcategory_vertical_restraints,Territorial Exclusivity / Parallel Trade Bans,2026-04-21 09:05:07.814553+00
+ecd925a4-2c66-436d-b4c6-d47d97b36bc6,CELEX-31977D0327,infringement_subcategory_vertical_restraints,NA,2026-04-21 09:22:32.773313+00
+b7a2ac1b-1f07-427e-ada5-0ee3ce1b490e,CELEX-31988D0589,infringement_subcategory_vertical_restraints,Bundling and Tying,2026-04-21 09:39:53.160771+00
+fbbae8d8-6a78-4e33-8d4f-9f8e2f6c9590,CELEX-31989D0022,infringement_subcategory_vertical_restraints,Exclusive Dealing / Market Foreclosure,2026-04-21 09:40:10.769942+00
+338abe09-f06c-4c5f-b90a-4b393104ec89,CELEX-31991D0299,infringement_subcategory_vertical_restraints,Exclusive Dealing / Market Foreclosure; Discounts and Rebates,2026-04-21 09:43:59.035144+00
+59afbb15-60a5-4160-8414-e72e66d1aefe,39452_3336_8,is_court_involved,False,2026-05-24 14:53:29.654741+00
+c61b4643-5c5a-4e5c-b828-93ec3f5acade,AT_40013_5708398_1084_5,is_court_involved,NA,2026-05-24 14:21:17.795109+00
+58259bf7-925a-4cdf-a1e2-e9acde047176,CELEX-32002D0758(01),is_court_involved,NA,2026-05-24 14:37:23.01966+00
+d0433b47-ae0b-4d57-a41c-c37284aa7a03,39452_3336_8,law_article_all_relevant,NA,2026-04-21 08:58:14.23295+00
+d1995466-deec-49fa-b2dc-dcccea054486,AT_40013_5708398_1084_5,law_article_all_relevant,NA,2026-04-21 09:07:34.868336+00
+00ed4631-3588-400b-a91f-36116b19314e,AT_40940_10539411_1520_696_3,law_article_all_relevant,NA,2026-08-15 14:14:49.748476+00
+a1fb4e3d-c1fd-4031-ace9-12683771a4a9,CELEX-32002D0758(01),law_article_all_relevant,NA,2026-04-21 09:57:53.146835+00
+61e3e85e-5b75-4853-b104-bae22e16b2a5,AT_40013_5708398_1084_5,law_article_operative,NA,2026-09-17 18:16:12.107052+00
+6838dc75-6271-4e53-a7f9-c61c6c6c2257,CELEX-32002D0758(01),law_article_operative,NA,2026-09-17 18:17:34.40869+00
+6678ff69-2a51-4321-ac53-0e313c5ff2f3,39452_3336_8,leniency_applicants,| company | Roto | | GU | | Maco |,2026-04-21 08:58:14.441102+00
+93cac0ba-a83a-4d4e-9f21-5d29b6b4b7e0,AT_40013_5708398_1084_5,leniency_applicants,| company | Valeo | | Automotive Lighting | | Hella |,2026-04-21 09:07:35.082345+00
+fe34f2b7-d140-4574-95da-d2350ed3fdbe,39452_3336_8,leniency_case,False,2026-04-21 08:58:14.602461+00
+35d166f7-c5c1-464a-ad4b-f54bb3987463,AT_40013_5708398_1084_5,leniency_case,True,2026-04-21 09:07:35.252237+00
+c86cefeb-5b57-4557-a736-62e856a8b1be,AT_40940_10539411_1520_696_3,leniency_case,False,2026-04-21 09:10:47.244062+00
+dc8ff93f-be65-464c-b6f6-aff2933483a9,CELEX-32002D0758(01),leniency_case,False,2026-04-21 09:57:53.345473+00
+da663966-4968-4995-983e-573e5996741e,39452_3336_8,leniency_case_match,| leniency_case_match_match | reasoning | False | Missing legacy rule_fact |,2026-04-21 08:58:14.765967+00
+efefa74c-d3e0-4f20-a423-b83a1447ad81,AT_40013_5708398_1084_5,leniency_case_match,| leniency_case_match_match | reasoning | False | Missing legacy rule_fact |,2026-04-21 09:07:35.446523+00
+9cc6c52e-6e39-4398-969b-afb36c35fc36,AT_40940_10539411_1520_696_3,leniency_case_match,| leniency_case_match_match | reasoning | False | Missing legacy rule_fact |,2026-04-21 09:10:47.477465+00
+001ad5fc-5193-42bc-a1f1-fd8c0239c78b,CELEX-32002D0758(01),leniency_case_match,| leniency_case_match_match | reasoning | False | Missing legacy rule_fact |,2026-04-21 09:57:53.520642+00
+b1136084-1dda-4d32-959a-1379ddc594ad,39452_3336_8,leniency_granted,| company | amount | Maco | 25% | | GU | 45% | | Winkhaus | 5% |,2026-04-21 08:58:14.960926+00
+b0ab7ece-0895-4034-abfa-ec84f70503d2,AT_40013_5708398_1084_5,leniency_granted,| company | amount | Automotive Lighting | 35% | | Hella | 20% |,2026-04-21 09:07:35.651776+00
+650817e1-b3e0-4ca8-b21c-d23597fb76c2,39452_3336_8,leniency_rejected,Roto,2026-04-21 08:58:15.170831+00
+c7afe32a-4a95-4ab2-9a02-c1b4ba97b3b7,AT_40013_5708398_1084_5,leniency_rejected,Valeo,2026-04-21 09:07:35.839954+00
+7d25754e-5167-4b46-8fb3-c8aafa1e80ea,39452_3336_8,market_geographical,| country | Germany | | Austria | | Belgium | | Luxembourg | | Netherlands | | Poland | | Italy | | Spain | | Hungary |,2026-04-21 08:58:15.382993+00
+5198e279-6695-42bd-989c-699725ec87b6,AT_40013_5708398_1084_5,market_geographical,NA,2026-04-21 09:07:36.041195+00
+6355e45d-8ee1-400a-8e52-04b82af7d626,AT_40940_10539411_1520_696_3,market_geographical,NA,2026-04-21 09:10:47.71459+00
+61c1b6fe-8c48-4cd7-9017-080f8d037e27,CELEX-32002D0758(01),market_geographical,NA,2026-04-21 09:57:53.707926+00
+9af90057-fda9-4cdc-829c-7863d942f0e0,39452_3336_8,market_oligopoly,True,2026-04-21 08:58:15.568796+00
+b76d666f-8e1f-430f-aa4e-e75a176a5cf9,AT_40013_5708398_1084_5,market_oligopoly,NA,2026-04-21 09:07:36.248528+00
+78144ab6-c7f8-4313-809a-338bb053b402,CELEX-32002D0758(01),market_oligopoly,NA,2026-04-21 09:57:53.887838+00
+08a63bcb-f8ff-4993-9115-4bbb030c2879,39452_3336_8,market_outside_eu,false,2026-04-21 08:58:15.751087+00
+37286ee3-afc8-4d59-b8b3-903e8b0bf14e,AT_40013_5708398_1084_5,market_outside_eu,NA,2026-04-21 09:07:36.428551+00
+c4a7faf0-f234-4e7b-b489-e6088efbc39f,AT_40940_10539411_1520_696_3,market_outside_eu,NA,2026-04-21 09:10:47.912996+00
+d75ac05b-9484-4fee-b0c9-29a60f441198,CELEX-32002D0758(01),market_outside_eu,NA,2026-04-21 09:57:54.053+00
+8424b8ce-d8ef-44af-9aca-904937707a32,39452_3336_8,market_turbulence,"Wirtschaftskrise, sinkende Nachfrage, fallende Preise, steigende Rohstoffpreise, wachsender Wettbewerb außerhalb Europas, Schwankungen im Zusammenhang mit globalen wirtschaftlichen Bedingungen",2026-04-21 08:58:15.917419+00
+6c0f5acc-e66b-4549-8504-bbc7c0e6bf95,AT_40013_5708398_1084_5,market_turbulence,NA,2026-04-21 09:07:36.629097+00
+9c4e9a9f-7b70-46ed-a98e-6b125e7b1590,CELEX-32002D0758(01),market_turbulence,NA,2026-04-21 09:57:54.231647+00
+03a146dd-d2ac-40fa-8f13-2ad4b9e1df3e,39452_3336_8,NACE_class_code,"25.93: Manufacture of wire products, chain and springs",2026-04-21 08:58:16.11276+00
+ad43bd8e-5fdd-4059-9419-f20abf7751dc,AT_40013_5708398_1084_5,NACE_class_code,29.31: Manufacture of electrical and electronic equipment for motor vehicles,2026-04-21 09:07:36.811263+00
+abad78ad-a585-4444-bf0c-ef8f6b35dc49,CELEX-32002D0758(01),NACE_class_code,NA,2026-04-21 09:57:54.408866+00
+e4485eae-57e4-4cbd-8940-48034ca3a2c9,39452_3336_8,OECD_sector,manufacturing,2026-04-21 08:58:16.305737+00
+01e05831-92b2-4062-8c6d-4f426eb91cb0,AT_40013_5708398_1084_5,OECD_sector,NA,2026-04-21 09:07:37.00747+00
+7045c2ac-c9ce-42b8-8326-d3af606b907e,CELEX-32002D0758(01),OECD_sector,NA,2026-04-21 09:57:54.611673+00
+0987d4a5-fdf8-4b04-b08b-c77aacd18cf3,39452_3336_8,products,- tilt-and-turn fittings - parallel slide-tilt fittings - sliding-folding fittings - lift-slide fittings - swing and reversible fittings - rotary handles - window ventilators - skylight openers - smoke and heat exhaust systems - locking rods - espagnolette locks - components for fittings.,2026-08-23 08:46:06.527614+00
+11127a5d-05a5-4ee1-be5d-f7dd2e61407d,AT_40013_5708398_1084_5,products,"- headlamps (with LED, xenon or halogen technology) - daytime running lights (with LEDs or traditional bulbs) - rear lights - high-mounted stop lamps (with LEDs or traditional bulbs) - fog lights - auxiliary lights",2026-08-23 08:46:33.213624+00
+15c443f2-9a7f-4067-a5f6-e7e4fe8a34a7,"""32450_35_6""",products_name,NA,2026-06-07 09:51:08.287409+00
+d4c09ef4-ff01-4509-8a24-d1a7dce985f9,"""33585_2_4""",products_name,NA,2026-06-07 10:04:12.716262+00
+1705754f-5aaa-4567-bafe-260be7270157,"""34466_15_4""",products_name,NA,2026-06-07 09:58:12.415079+00
+8cccc650-152e-40ad-b73b-bac126d39961,"""34579_1889_2""",products_name,NA,2026-06-07 10:00:22.898399+00
+e43b89ed-3113-44e7-946e-72c7b5399ba5,"""35388_9_5""",products_name,NA,2026-06-07 10:00:49.790988+00
+72213f3e-02f8-459e-9d70-419b76cf1742,"""36756_68_16""",products_name,NA,2026-06-07 09:53:56.092237+00
+3eba3a5f-5233-418d-a42d-cda3a2f8c7d5,"""37152_72_1""",products_name,NA,2026-06-07 09:53:56.365962+00
+68c069dd-d34c-4bdc-bd92-08df0cb454c2,"""37396_45_3""",products_name,NA,2026-06-07 10:00:04.230879+00
+ad2ecfbf-fd1d-4227-94e0-7e6734bcaaa4,"""37956_718_3""",products_name,NA,2026-06-07 09:54:20.776968+00
+9716f8bc-e37b-4e74-b868-25bb1356ea45,"""37966_639_3""",products_name,NA,2026-06-07 10:00:50.047928+00
+8809c33d-8797-41ad-8835-4a165375445e,"""38238_249_1""",products_name,NA,2026-06-07 09:54:21.006496+00
+aabf1cf6-cd68-461a-86cc-2c26dd59457b,"""38284_104_1""",products_name,NA,2026-06-07 10:00:12.857962+00
+289728db-c6b8-4ed3-bb0e-73a7bc6d7369,"""38287_27_1""",products_name,NA,2026-06-07 10:00:13.121591+00
+16736602-7075-4639-9901-0bcee94a1265,"""38348_998_3""",products_name,NA,2026-06-07 10:00:50.297372+00
+06f9aa97-bcee-4b15-9313-38d493b39bf0,"""38543_1810_3""",products_name,NA,2026-06-07 09:55:00.770445+00
+313005a9-ea8b-4b60-ae12-0829dd4473a2,"""38549_72_1""",products_name,NA,2026-06-07 10:00:13.344438+00
+deb63329-3c6d-4afc-a8c7-3e2fb6efb345,"""38681_216_1""",products_name,NA,2026-06-07 10:00:50.551482+00
+54749195-a7eb-459a-b386-698d0ebd4565,"""38745_32_1""",products_name,NA,2026-06-07 09:43:50.613521+00
+af861e59-417d-46a8-b142-1b98b7c6ff84,"""38823_1340_4""",products_name,NA,2026-06-07 09:55:00.971901+00
+19ecaa76-6af5-43d0-8fcb-cf095eeec556,"""39092_7226_4""",products_name,NA,2026-06-07 09:55:01.439143+00
+1586b9a6-70ae-4eb7-b302-80bc56419180,"""39316_2298_3""",products_name,NA,2026-06-07 10:00:50.787111+00
+992966fe-2113-45f3-9148-55b98802f332,"""39351_1223_4""",products_name,NA,2026-06-07 10:00:51.029253+00
+1ba8d887-4e56-44e8-9e1c-d5e58632bd84,"""39389_2761_1""",products_name,NA,2026-06-07 10:00:51.242422+00
+f489192c-7738-4351-a54d-3853864341bb,"""39401_1535_1""",products_name,NA,2026-06-07 09:55:01.65823+00
+4f5ba754-df31-4350-8295-e9bdeddc1f12,"""39406_1902_1""",products_name,NA,2026-06-07 09:55:01.216431+00
+35e59102-bded-45fd-a806-5c1d5bf4e76a,39452_3336_8,products_name,"| products | Dreh-, Drehkipp-, Parallelschiebe-, Parallelschiebe-Kipp- und Hebe-Schiebe-Kipp-Beschläge | | Spezialbeschläge |",2026-06-11 18:47:05.952026+00
+f4c8516a-1f0e-420a-bff9-a716c19064b4,"""39462_6408_3""",products_name,NA,2026-06-07 09:55:01.903199+00
+91d761c5-d2c8-41b4-a4f0-6debb8361524,"""39510_1203_3""",products_name,NA,2026-06-07 10:00:51.513795+00
+bdc4b4cb-35a5-4188-9502-5be26058bd3c,"""39523_5272_13""",products_name,NA,2026-06-07 10:00:51.76032+00
+08a416f0-5f1d-454b-84a7-4d45fcf21984,"""39574_2801_11""",products_name,NA,2026-06-07 09:55:02.118779+00
+3851dad6-ff4f-4b0b-a838-aa9b601d0ec2,"""39595_3012_4""",products_name,NA,2026-06-07 10:00:12.592241+00
+8c6b4c6b-12ac-498b-ad34-5903863c4b31,"""39678_2514_15""",products_name,NA,2026-06-07 10:00:51.991334+00
+f267c28b-98c5-43da-8633-78f882993feb,"""39711_4493_4""",products_name,NA,2026-06-07 10:00:52.215927+00
+465bbe22-f6a6-4a63-a481-8155324ce0f6,"""39731_801_8""",products_name,NA,2026-06-07 10:00:52.420978+00
+69ba2901-7959-452e-af16-e266710b4018,"""39767_2018_3""",products_name,NA,2026-06-07 10:00:52.654029+00
+482ba8ed-d977-414b-94a8-9dc4fe02e8eb,"""39816_10148_3""",products_name,NA,2026-06-07 10:00:52.894705+00
+832c5259-8ba3-4bd5-aa24-db72b07abe70,"""39850_3377_3""",products_name,NA,2026-06-07 10:00:53.143106+00
+453e797c-e2c4-40b8-b121-6f1e2aba8e82,"""39939_1501_5""",products_name,NA,2026-06-07 10:00:53.390124+00
+ed85c7b8-fd30-4485-b4f9-fd91c024ac01,"""39952_1517_5""",products_name,NA,2026-06-07 09:42:48.777235+00
+8d97b158-e376-47e1-835a-7f8f8a20f9c8,"""39964_1755_5""",products_name,NA,2026-06-07 10:00:53.613636+00
+844c6ac9-a85b-465c-a02b-28dc23bb9b0d,"""40023_10624_3""",products_name,NA,2026-06-07 10:04:16.172966+00
+951803bc-fa32-4bc1-a56a-df2e9952737b,"""40049_4172_3""",products_name,NA,2026-06-07 10:00:53.853057+00
+74576b25-3421-47ea-9a38-4cbb7bc05983,"""40153_4392_3""",products_name,NA,2026-06-07 10:00:58.780388+00
+5a6ce144-bf49-452b-80cd-aa392d2c99e9,"""40208_1579_5""",products_name,NA,2026-06-07 10:00:59.032429+00
+4cbc0547-7073-47db-a5ab-4aee8121e840,"""40335_1035_3""",products_name,NA,2026-06-07 10:01:19.229103+00
+014f0442-796d-42d0-b959-84def16e77cc,"""40410_1654_6""",products_name,NA,2026-06-07 09:55:59.349762+00
+b35fc45a-60f2-4509-9cc2-f0fd5b1bafdf,"""40528_418_3""",products_name,NA,2026-06-07 10:04:09.809002+00
+a23a6aee-e899-4b75-b28f-01dd949f6a59,AT_40013_5708398_1084_5,products_name,automotive lighting systems,2026-04-21 09:07:37.214948+00
+ecd90a81-1d3a-4a40-b7b7-abd7d30354e0,AT_40940_10539411_1520_696_3,products_name,NA,2026-06-07 09:43:59.84674+00
+54fb4ce1-aa02-4d54-a1e8-3c727dc612c4,CELEX-32002D0758(01),products_name,NA,2026-06-07 10:04:15.923259+00
+d4a9b5d5-94a7-4174-af3a-f1913d4de6cb,"""celex_id""",products_name,NA,2026-06-07 09:42:48.511014+00
+30c8e7e5-d1ae-4d16-bd03-341d4c6328be,39452_3336_8,services,NA,2026-06-11 18:47:06.23656+00

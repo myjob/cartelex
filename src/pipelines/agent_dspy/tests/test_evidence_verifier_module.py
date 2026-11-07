@@ -106,7 +106,7 @@ class TestRouting(unittest.TestCase):
         # A temporal-named fact with only fact lineage is still derived.
         self.assertEqual(
             self._strategy(
-                "eu_commisssion_decision_date",
+                "eu_commission_decision_date",
                 value_md="1981-11-01",
                 source_type_counts={"fact": 1},
             ),
@@ -115,7 +115,7 @@ class TestRouting(unittest.TestCase):
 
     def test_temporal_name_with_dates_is_deterministic_temporal(self):
         self.assertEqual(
-            self._strategy("eu_commisssion_decision_date", value_md="1981-11-01"),
+            self._strategy("eu_commission_decision_date", value_md="1981-11-01"),
             VerificationStrategy.DETERMINISTIC_TEMPORAL,
         )
 
@@ -415,13 +415,13 @@ class TestTemporalDeterministic(unittest.TestCase):
             "doc_pos": 3,
         }
         judge = MagicMock()
-        fact = _fact("eu_commisssion_decision_date", value_md="1982-01-01")
+        fact = _fact("eu_commission_decision_date", value_md="1982-01-01")
         module, _ = _build_module(fact, judge=judge, chunk_repo=chunk_repo)
         module._heideltime_match = lambda celex, iso, years: (
             "c-9", "1 January 1982", "1982-01-01"
         )
 
-        result = module.forward("CELEX-1", "eu_commisssion_decision_date")
+        result = module.forward("CELEX-1", "eu_commission_decision_date")
 
         self.assertEqual(result.status, VerificationStatus.VERIFIED_SUPPORTED)
         self.assertEqual(result.best_chunk_id, "c-9")
@@ -430,11 +430,11 @@ class TestTemporalDeterministic(unittest.TestCase):
 
     def test_no_timex_match_flags_missing_time(self):
         judge = MagicMock()
-        fact = _fact("eu_commisssion_decision_date", value_md="1982-01-01")
+        fact = _fact("eu_commission_decision_date", value_md="1982-01-01")
         module, _ = _build_module(fact, judge=judge)
         module._heideltime_match = lambda celex, iso, years: None
 
-        result = module.forward("CELEX-1", "eu_commisssion_decision_date")
+        result = module.forward("CELEX-1", "eu_commission_decision_date")
 
         self.assertEqual(result.status, VerificationStatus.MISSING_REQUIRED_TIME)
         judge.assert_not_called()

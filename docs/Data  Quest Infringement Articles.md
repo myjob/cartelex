@@ -26,7 +26,7 @@ This is a clean, concrete instance of the exact bug you've been chasing in the e
 
 **Walking the condition against this document:**
 
-- `eu_commisssion_decision_date` = 1988-12-21 (stated explicitly: "Date of the decision: 21 December 1988")
+- `eu_commission_decision_date` = 1988-12-21 (stated explicitly: "Date of the decision: 21 December 1988")
 - `law_article_all_relevant`, taken literally from the text, = `["Article 101", "Article 102"]` (from "Infringement of Article 101 and 102 FEU Treaty")
 
 Evaluating the three OR branches:
@@ -41,7 +41,7 @@ Net result: the whole condition evaluates **False**. The task doesn't get gated 
 
 So if your entity-resolution step extracts the literal string from text rather than mapping to the period-correct article based on decision date, you get exactly this: a document that _should_ hit the Article-86/pre-1999 branch instead fails all three branches because the literal text token is "Article 102," and 1988 doesn't satisfy that branch's date filter.
 
-**Likely fix:** at ingestion, don't trust literal article-number mentions in narrative/secondary-source text as ground truth for `law_article_all_relevant`. Either (a) derive it deterministically from `eu_commisssion_decision_date` using the same three date thresholds your condition already encodes, or (b) keep two separate fields — `law_article_as_stated_in_source` (literal, for provenance) vs `law_article_period_correct` (derived) — and gate conditions on the latter only.
+**Likely fix:** at ingestion, don't trust literal article-number mentions in narrative/secondary-source text as ground truth for `law_article_all_relevant`. Either (a) derive it deterministically from `eu_commission_decision_date` using the same three date thresholds your condition already encodes, or (b) keep two separate fields — `law_article_as_stated_in_source` (literal, for provenance) vs `law_article_period_correct` (derived) — and gate conditions on the latter only.
 
 For the underlying classification task itself (if it were correctly gated): the answer would be **True** — Decca's monopoly in DNS signals, the deliberate signal-frequency changes to malfunction unlicensed competitors' receivers, and the market-partitioning licenses with AP/PE are textbook exclusionary abuse of dominance, independent of which article number labels it.
 
@@ -49,7 +49,7 @@ For the underlying classification task itself (if it were correctly gated): the 
 ## Solution Options
 
 ### 1. specific book rules for infringments
-Rather than checking the commission date, go without eu_commisssion_decision_date 
+Rather than checking the commission date, go without eu_commission_decision_date 
 
 ```
 - target_fact_name: infringement_category_abuse_of_dominance
@@ -61,9 +61,9 @@ Rather than checking the commission date, go without eu_commisssion_decision_dat
   pipeline: universal
   condition: |
     exists("law_article_all_relevant") and 
-    ( ( "Article 86" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"1999-04-30") )
-    or  ( "Article 82" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"1999-04-30" and eu_commisssion_decision_date < d"2009-11-30") ) )
-    or  ( "Article 102" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"2009-11-30" )) )
+    ( ( "Article 86" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"1999-04-30") )
+    or  ( "Article 82" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"1999-04-30" and eu_commission_decision_date < d"2009-11-30") ) )
+    or  ( "Article 102" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"2009-11-30" )) )
     )
   force_override: true
   run_state_active: false
@@ -95,7 +95,7 @@ This means your doc's Option 1 / fix (a) ("drop the date, derive from date") is 
 
 ### Option C — Canonical infringement-concept fact _(recommended)_
 
-A small **deterministic** (non-LLM) normalizer maps each `Article N` token to one of three concept enums (`anticompetitive_agreement`, `abuse_of_dominance`, `public_undertaking`), consulting the date **only for the "86" token**. Emit it as a new structured fact `infringement_concept` (a set), derived from `law_article_all_relevant` + `eu_commisssion_decision_date`.
+A small **deterministic** (non-LLM) normalizer maps each `Article N` token to one of three concept enums (`anticompetitive_agreement`, `abuse_of_dominance`, `public_undertaking`), consulting the date **only for the "86" token**. Emit it as a new structured fact `infringement_concept` (a set), derived from `law_article_all_relevant` + `eu_commission_decision_date`.
 
 - **Conditions become** `'abuse_of_dominance' in infringement_concept` — no date arithmetic, no 3-branch duplication, no silent skips. A `NA` date only costs you precision on the lone "86" case, not a total miss.
 - **BookCrossCheck compares concept-to-concept**, so 82-vs-102 stops mattering.
@@ -104,7 +104,7 @@ A small **deterministic** (non-LLM) normalizer maps each `Article N` token to on
 
 ### Option D — Equivalence-class membership in the condition DSL (no new data)
 
-Keep `law_article_all_relevant` literal. Add a custom `rule_engine` function (same mechanism as the existing `exists`, [condition_checker.py:58-66](vscode-webview://0j52sitmv3flu88jv314acsl5a6f5ct662vmvi6o9rad7mt2d0ll/src/pipelines/rule_engine/condition_checker.py#L58-L66)) so conditions read `same_concept(law_article_all_relevant, eu_commisssion_decision_date, 'abuse_of_dominance')`. The helper expands {86,82,102} and resolves the 86 collision via date internally.
+Keep `law_article_all_relevant` literal. Add a custom `rule_engine` function (same mechanism as the existing `exists`, [condition_checker.py:58-66](vscode-webview://0j52sitmv3flu88jv314acsl5a6f5ct662vmvi6o9rad7mt2d0ll/src/pipelines/rule_engine/condition_checker.py#L58-L66)) so conditions read `same_concept(law_article_all_relevant, eu_commission_decision_date, 'abuse_of_dominance')`. The helper expands {86,82,102} and resolves the 86 collision via date internally.
 
 - **Cost:** ~one function, no re-ingestion, no schema change. **Risk:** very low. **Limit:** fixes the YAML-gating failure only; BookCrossCheck needs the same helper wired in separately. Good as a fast first move, or as the condition-side companion to C.
 

@@ -24,36 +24,71 @@
             }
           },
           {
-            "id": "215dfb147b02cca2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/Open WebUI Quest  Message Thread.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Open WebUI Quest  Message Thread"
-            }
-          },
-          {
             "id": "4ddf2c40a42c5bf7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/knowledge_extraction_queue rubbish prevention.md",
+                "file": "QuickCapture.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "knowledge_extraction_queue rubbish prevention"
+              "title": "QuickCapture"
+            }
+          },
+          {
+            "id": "8aee9e1e1a4630c2",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/DESIGN Celex-Facts.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "DESIGN Celex-Facts"
+            }
+          },
+          {
+            "id": "fa914e964f6eeee2",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design DSPY.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Design DSPY"
+            }
+          },
+          {
+            "id": "9c64cc79a760db96",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/UI Q&A Compendium.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "UI Q&A Compendium"
             }
           },
           {
             "id": "9cf6f51af42fed96",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -61,8 +96,25 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Feature list"
+            }
+          },
+          {
+            "id": "338005b84bec87dd",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/infra/caddy and etc hosts.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "caddy and etc hosts"
             }
           },
           {
@@ -82,6 +134,22 @@
             }
           },
           {
+            "id": "a1e6bdf7a101e023",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/hybrid evidence verifier.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "hybrid evidence verifier"
+            }
+          },
+          {
             "id": "7de178e86e279d2f",
             "type": "leaf",
             "pinned": true,
@@ -98,8 +166,145 @@
             }
           },
           {
-            "id": "16eadbea7a9a2641",
+            "id": "0daeca85c92d0000",
             "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Data Lineage Option & Implementation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Data Lineage Option & Implementation"
+            }
+          },
+          {
+            "id": "25099c98fddfdb16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/ADR Architecture Decision Record.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ADR Architecture Decision Record"
+            }
+          },
+          {
+            "id": "3b3c65c89d89ac5c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/qa/SKYLOS_REPORT-20260615.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SKYLOS_REPORT-20260615"
+            }
+          },
+          {
+            "id": "16a4a701bcd0aa99",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design DSPY.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Design DSPY"
+            }
+          },
+          {
+            "id": "2c63057d4796c562",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/DESIGN Search.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "DESIGN Search"
+            }
+          },
+          {
+            "id": "ded2a6509651085a",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Design Master Planner Agent.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Design Master Planner Agent"
+            }
+          },
+          {
+            "id": "ac8181f7e2e1f02b",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Data  Quest Infringement Articles.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Data  Quest Infringement Articles"
+            }
+          },
+          {
+            "id": "7f9af95513755206",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/claude/plans/infringement-concept-canonicalization-CDE.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "infringement-concept-canonicalization-CDE"
+            }
+          },
+          {
+            "id": "1858a85e1a6101ab",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/RAPTOR pattern  for Knowledge Tree.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "RAPTOR pattern  for Knowledge Tree"
+            }
+          },
+          {
+            "id": "12d91c16e9f4047c",
+            "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -107,96 +312,57 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Fable Knowledge Representation Review"
             }
           },
           {
-            "id": "448fd5c55c21ccb3",
+            "id": "0f17422e1f510a5d",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/OpenCorp API.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "OpenCorp API"
+            }
+          },
+          {
+            "id": "0ffda8110d2b74bc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "QuickCapture.md",
+                "file": "docs/Design Pipeline Universal.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "QuickCapture"
+              "title": "Design Pipeline Universal"
             }
           },
           {
-            "id": "43c919b540719f40",
+            "id": "3494847813dd46f1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/qa/Data Quality Checks.md",
+                "file": "docs/OpenCorp API.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Data Quality Checks"
+              "title": "OpenCorp API"
             }
           },
           {
-            "id": "bc75b9bda69e721b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/infra/Performance of LLM with MTP.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Performance of LLM with MTP"
-            }
-          },
-          {
-            "id": "42f78861cbd91ee9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/Design Fact Verifier.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Design Fact Verifier"
-            }
-          },
-          {
-            "id": "ffb4d4fc6f93530a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Issue & Runbook — Black screen after unlock — job-server"
-            }
-          },
-          {
-            "id": "711d0d336080d2a5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/infra/Black Screen Ubuntu.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Black Screen Ubuntu"
-            }
-          },
-          {
-            "id": "a0b78e338e0aad98",
+            "id": "9a4363800cc51ded",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -210,188 +376,63 @@
             }
           },
           {
-            "id": "d50d35f51b002b3e",
+            "id": "0c90eded64f03785",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Design Heideltime Events.md",
+                "file": "docs/Data Quest missing qwen embeddings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Design Heideltime Events"
+              "title": "Data Quest missing qwen embeddings"
             }
           },
           {
-            "id": "ed89452c42bb5543",
+            "id": "86d16b678ca89ac8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
+                "file": "docs/dev/Keyboard layout CH vs DE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Issue & Runbook — Black screen after unlock — job-server"
+              "title": "Keyboard layout CH vs DE"
             }
           },
           {
-            "id": "e949e6b0a77f9e7d",
+            "id": "29c2de2e0539c073",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/dev/Build.md",
+                "file": "docs/Data Quest Cartel Period Inheritance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Build"
+              "title": "Data Quest Cartel Period Inheritance"
             }
           },
           {
-            "id": "20a4ff081746c447",
+            "id": "a31f4b832d8c4bd1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/dev/Build.md",
+                "file": "RELEASE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Build"
-            }
-          },
-          {
-            "id": "6691ddd5e897cc58",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Issue & Runbook — Black screen after unlock — job-server"
-            }
-          },
-          {
-            "id": "6ccf266608f384f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Issue & Runbook — Black screen after unlock — job-server"
-            }
-          },
-          {
-            "id": "93fde71b861690b8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/Design KnowledgeIngestModule.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Design KnowledgeIngestModule"
-            }
-          },
-          {
-            "id": "cc2dea63f2d827f0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/dev/ISSUES.md doctor.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ISSUES.md doctor"
-            }
-          },
-          {
-            "id": "f81576beb7449402",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/claude/plans/phase3-decision-structure.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "phase3-decision-structure"
-            }
-          },
-          {
-            "id": "08e84293ed7aee9f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/answer-a-question vs. enumerate- all-instances of X.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "answer-a-question vs. enumerate- all-instances of X"
-            }
-          },
-          {
-            "id": "7cc48f9d92e47b7e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/cartelex release.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "cartelex release"
-            }
-          },
-          {
-            "id": "901b0caaff431473",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "22dd8dba117ed402",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
+              "title": "RELEASE"
             }
           }
-        ]
+        ],
+        "currentTab": 27
       }
     ],
     "direction": "vertical"
@@ -411,7 +452,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true,
+                "autoReveal": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -425,8 +466,8 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
-                "matchingCase": true,
+                "query": "unix chea",
+                "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
                 "extraContext": false,
@@ -441,10 +482,7 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {
-                "showSearch": false,
-                "searchQuery": ""
-              },
+              "state": {},
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
@@ -453,7 +491,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 489.5
+    "width": 439.5
   },
   "right": {
     "id": "24f29991c9f89d7b",
@@ -469,7 +507,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ISSUES.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -479,7 +516,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for ISSUES"
+              "title": "Backlinks"
             }
           },
           {
@@ -488,12 +525,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ISSUES.md",
+                "file": "docs/Design Mineru PDF 2 MD.md",
                 "linksCollapsed": true,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from ISSUES"
+              "title": "Outgoing links"
             }
           },
           {
@@ -531,7 +568,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ISSUES.md",
+                "file": "RELEASE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,15 +578,13 @@
             }
           },
           {
-            "id": "d9d68612151b5803",
+            "id": "2e65949fa35933ee",
             "type": "leaf",
             "state": {
-              "type": "file-properties",
-              "state": {
-                "file": "docs/claude/plans/drop-events-extraction.md"
-              },
-              "icon": "lucide-info",
-              "title": "File properties"
+              "type": "copilot-chat-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "copilot-chat-view"
             }
           }
         ],
@@ -557,10 +592,11 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 227.5
   },
   "left-ribbon": {
     "hiddenItems": {
+      "templater-obsidian:Templater": false,
       "vscode-editor:Create Code File": false,
       "code-files:Create Code File": false,
       "switcher:Open quick switcher": false,
@@ -569,57 +605,56 @@
       "daily-notes:Open today's daily note": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "templater-obsidian:Templater": false,
       "obsidian-task-progress-bar:Open Task Genius view": false
     }
   },
-  "active": "6489c6f6b388e7b4",
+  "active": "155448cc9544d44c",
   "lastOpenFiles": [
-    "logs/backend-server/application.log.2026-10-18",
-    "README.md",
-    "docs/howto publish data 2 Zenodo.md",
-    "logs/application.log.2026-10-18",
     "ISSUES.md",
-    "docs/README-old.md",
-    "docs/dev/PR to cartelex.md",
-    "docs/ci-cd/CICD.md",
-    "LICENSE",
-    "docs/image-1.png",
-    "docs/cartelex release.md",
-    "docs/Design KnowledgeIngestModule.md",
-    "docs/dev/Docker Cheat Sheet.md",
-    "docs/UI Walkthrough with Screen Shots.md",
-    "docs/infra/Issue & Runbook — Black screen after unlock — job-server.md",
-    "docs/claude/plans/heideltime-temporal-graph.md",
-    "docs/answer-a-question vs. enumerate- all-instances of X.md",
-    "docs/Design Russo-Schinkel-Book vs Facts Reconciliation.md",
-    "docs/claude/Claude OAuth Issues in vscode.md",
-    "docs/claude/plans/fact2book_processed_log_load.md",
-    "docs/Design Fact 2 Book Reconcilation.md",
-    "docs/qa/SKYLOS_REPORT-20260615.md",
-    "docs/celex-facts goes cartelex.md",
-    "logs/application.log.2026-10-17",
-    "scripts/release_cartelex.sh.tmp.2777555.7556eef1961f",
-    "scripts/release_cartelex.sh",
-    "scripts/release_cartelex.sh.tmp.2777555.74187afeb851",
-    "docs/infra/caddy and etc hosts.md",
-    "logs/backend-server/application.log.2026-10-15",
+    "RELEASE.md",
+    "RELEASE.md.tmp.17398.adcbe7311ce4",
+    "sedneYpXZ",
+    "seda7phhS",
+    "sedsyEfER",
+    "sedtM5qul",
+    "sedKWGBcX",
+    "sedHwqWIp",
+    "sedcdwnBY",
+    "sedxqvjJw",
+    "sedRdB3yh",
+    "QuickCapture.md",
+    "docs/claude/plans/fact2book-mismatch-cross-check.md",
+    "docs/Data Quest missing qwen embeddings.md",
+    "docs/dev/Keyboard layout CH vs DE.md",
+    "docs/Data Quest Cartel Period Inheritance.md",
     "docs/infra/unix 101 cheat sheet.md",
-    "src/reporting/AI_USAGE.md",
-    "logs/application.log.2026-10-16",
-    "src/reporting/__pycache__/retrieve_case_summary_md2disk.cpython-312.pyc",
-    "docs/infra/Disk Mnt.md",
-    "docs/GitHub Cheat Sheet.md",
-    "src/pipelines/agent_dspy/tests/test_fact_summary_module.py.tmp.805102.989f41c42b0e",
-    "docs/claude/plans/case-summary-context-facts-reconcile.md",
-    "docs/assets/Design KnowledgeIngestModule/Pasted image 20260522193315.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260907200508041.png",
+    "docs/claude/plans/eu-commission-decision-date-rename-20261106.md",
+    "docs/claude/plans/cartel-period-inheritance-20261106.md",
+    "docs/claude/plans/cartel-period-rename-20261106.md",
+    "docs/claude/plans/heideltime-temporal-quality-20261104.md",
+    "docs/features/Feature list.md",
+    "docs/Design fact completeness checker.md",
+    "docs/claude/plans/decision-merge-ledger-20261102.md",
+    "docs/claude/plans/2026-11-02-report-eddy-celex-facts.md",
+    "docs/claude/plans/2026-11-01-recital-count-plan.md",
+    "docs/claude/plans/2026-11-01-recital-count-design.md",
+    "docs/Design Source Decision.md",
+    "docs/claude/plans/2026-11-01-candidate-source-decision-implementation.md",
+    "docs/Design Translator.md",
+    "docs/claude/plans/2026-11-01-candidate-source-decision-design.md",
+    "docs/Design Downloader.md",
+    "docs/claude/plans/2026-10-31-markdown-translate-design.md",
+    "docs/claude/plans/2026-10-31-markdown-translate-implementation.md",
+    "docs/dev/assets/Keyboard layout CH vs DE/file-20261031181702260.png",
+    "docs/Design Mineru PDF 2 MD.md",
+    "src/pipelines/rag/pgvector/celex_facts - opencorp_index_companies.png",
+    "docs/infra/assets/issue pgadmin login attempts/Pasted image 20260726124120.png",
+    "docs/infra/assets/Ubuntu Workstation Quests/Pasted image 20260605193313.png",
+    "docs/infra/assets/OI Open WebUi/file-20260827193951211.png",
+    "docs/image-1.png",
     "docs/desloppify-20260228.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180549732.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180439598.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260829180256894.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260829175736370.png",
-    "docs/assets/UI Walkthrough with Screen Shots/file-20260829175650294.png",
-    "docs/infra/assets/OI Open WebUi/file-20260827193951211.png"
+    "docs/assets/WebUI Q&A/Pasted image 20260523112818.png",
+    "docs/assets/WebUI Q&A/Pasted image 20260523103053.png",
+    "docs/assets/WebUI Q&A/Pasted image 20260523101148.png"
   ]
 }

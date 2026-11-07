@@ -176,7 +176,7 @@ a tiebreaker in the read path, never a filter.
 | [PipelineFactIngestor.py](src/tools/PipelineFactIngestor.py) `FactIngestor.save_fact` | `chunk`, `book_case`, `heideltime`, `csv_human`, `lei_corporate` | `extracted_from` (default) | every fact ingestion; either a module emits `lineage_sources: list[LineageSourceVO]`, or the ingestor derives chunk sources from `references_doc` via `ChunkRepository.resolve_chunk_ids_by_doc_pos` |
 | [PipelineFactIngestor.py](src/tools/PipelineFactIngestor.py) `_derive_predecessor_lineage` | `fact` | `derived_from` / `gated_by` | same call: each YAML `predecessors` entry is resolved to its `facts` row and classified against the fact's `condition` |
 | [book_cross_check_module.py](src/pipelines/agent_dspy/book_cross_check_module.py) `_record_corroboration` | `book_case` | `corroborated_by` | book confirms a decision-extracted fact |
-| [heideltime_source_register_fisher.py](src/pipelines/heideltime/heideltime_source_register_fisher.py) | `heideltime` | `extracted_from` | one-shot: reconnects `heideltime_cartel_period` facts to the timex rows matching their boundary dates |
+| [heideltime_source_register_fisher.py](src/pipelines/heideltime/heideltime_source_register_fisher.py) | `heideltime` | `extracted_from` | one-shot: reconnects `cartel_period` facts to the timex rows matching their boundary dates |
 
 `LineageSourceVO` (in `PipelineFactIngestor.py`) is the boundary value object. Its
 `model_validator` refuses a source whose natural-key fields for the declared type are

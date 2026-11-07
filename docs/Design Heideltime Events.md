@@ -1,7 +1,7 @@
 
 Status: implemented; provenance closed 2026-08-29
 Owner tables: `celex_facts.heideltime_extractions`
-Facts produced: `heideltime_raw`, `heideltime_event`, `heideltime_event_agg`, `heideltime_cartel_period`
+Facts produced: `heideltime_raw`, `heideltime_event`, `heideltime_event_agg`, `cartel_period` (pipeline `heideltime_cartel_period`; took over the retired legacy LLM `cartel_period` name 2026-11-06)
 Code: `src/pipelines/heideltime/extract_heideltime.py`, `src/pipelines/heideltime/heideltime_module.py`, `src/pipelines/rag/pgvector/heideltime_ingestor.py`, `src/pipelines/rag/pgvector/event_repository.py`
 Related: [Design fact_source_registry](docs/Design%20fact_source_registry.md), [Design Fact Verifier](docs/Design%20Fact%20Verifier.md), [Design DSPY](docs/Design%20DSPY.md)
 
@@ -49,7 +49,7 @@ Four facts, in a strict dependency chain declared by `predecessors` in
          |                   |
     derived_from        derived_from
          v                   v
-  heideltime_event_agg   heideltime_cartel_period
+  heideltime_event_agg   cartel_period
    (1-2 critical events)  ("1992-05-22 : 2007-12-19")
 ```
 
@@ -58,7 +58,7 @@ Four facts, in a strict dependency chain declared by `predecessors` in
 | `heideltime_raw` | `HeidelTimeModule` | no | chunk text | `heideltime_extractions` + proxy fact |
 | `heideltime_event` | `HeidelTimeEventModule` | yes | extractions + chunk text | event list fact |
 | `heideltime_event_agg` | `HeidelTimeEventAggregateModule` | yes | `heideltime_event` JSON | critical-event fact |
-| `heideltime_cartel_period` | `HeideltimeCartelPeriodModule` | yes | `heideltime_event` JSON | date-range fact |
+| `heideltime_cartel_period` | `HeideltimeCartelPeriodModule` | yes | `heideltime_event` JSON | date-range fact `cartel_period` |
 
 All four are `run_state_active: false` — they are run deliberately, not in the default
 sweep.
@@ -154,7 +154,7 @@ writes them from the YAML `predecessors` on every save. The terminal node was th
   `date_sources` mapping (ISO date -> `{id, timex_text}` rows) alongside the
   `canonical_dates` the LLM sees, so an event resolves only to extractions **in the chunk
   the LLM actually read**. UUIDs never enter the prompt.
-- **`heideltime_event_agg` / `heideltime_cartel_period`** carry no direct evidence; they
+- **`heideltime_event_agg` / `cartel_period`** carry no direct evidence; they
   reach it through `derived_from` and the recursive CTE.
 
 ### 5.3 Recording lineage at extraction time, not after

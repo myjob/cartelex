@@ -26,6 +26,7 @@ from pipelines.rag.pgvector.embeddings.qwen3_embedding import (
     count_tokens,
     embedding_token_limit,
     retrieve_qwen3_embedding,
+    truncate_to_tokens,
 )
 from pipelines.rag.pgvector.session import Session
 
@@ -34,6 +35,11 @@ logger = logging.getLogger(__name__)
 # Tokenizer used for the size guard (tiktoken cl100k_base) only approximates the
 # Qwen3 tokenizer, so windows are sized below the limit by this margin.
 _TOKEN_WINDOW_MARGIN = 64
+
+# Share of the embedding context the question may take in the passage prefix.
+# A question carrying a whole code list (NACE_group_code, ~3300 tokens) would
+# otherwise leave no room, or a negative window, for the fact value.
+_QUESTION_TOKEN_SHARE = 0.5
 
 # Model name whose tiktoken encoding the window splitter uses. Matches the
 # encoder behind count_tokens() and TokenTargetMarkdownSplitter.
@@ -256,9 +262,12 @@ class FactEmbeddingLoaderQwen:
                     row.value_md,
                 )
                 value_txt = self._clean_for_embedding(value_md or "")
-                prefix = f"Represent this fact: {question} {row_fact_name} "
-                passage_text = f"{prefix}{value_txt}"
+                passage_text = f"Represent this fact: {question} {row_fact_name} {value_txt}"
                 hash_q_a = self._compute_hash(passage_text)
+                embed_question = truncate_to_tokens(
+                    question, int(embedding_token_limit() * _QUESTION_TOKEN_SHARE)
+                )
+                prefix = f"Represent this fact: {embed_question} {row_fact_name} "
 
                 logger.debug("Embedding fk_fact_id=%s hash=%s", fact_id, hash_q_a)
                 #!! use cache in retrieve_qwen3_embedding

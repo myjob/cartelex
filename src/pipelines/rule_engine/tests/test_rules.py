@@ -134,7 +134,7 @@ class TestSameConceptCondition(unittest.TestCase):
         """
         fact_context = {
             "law_article_all_relevant": "Article 101, Article 102",
-            "eu_commisssion_decision_date": "1988-12-21",
+            "eu_commission_decision_date": "1988-12-21",
         }
         self.assertTrue(self.validator.evaluate(self.condition, fact_context))
 
@@ -142,7 +142,7 @@ class TestSameConceptCondition(unittest.TestCase):
         """An EEC-era '86' with a pre-Amsterdam date is abuse of dominance."""
         fact_context = {
             "law_article_all_relevant": "Article 86",
-            "eu_commisssion_decision_date": "1988-12-21",
+            "eu_commission_decision_date": "1988-12-21",
         }
         self.assertTrue(self.validator.evaluate(self.condition, fact_context))
 
@@ -150,7 +150,7 @@ class TestSameConceptCondition(unittest.TestCase):
         """An EC-era '86' is public undertakings, not abuse of dominance."""
         fact_context = {
             "law_article_all_relevant": "Article 86",
-            "eu_commisssion_decision_date": "2003-05-01",
+            "eu_commission_decision_date": "2003-05-01",
         }
         self.assertFalse(self.validator.evaluate(self.condition, fact_context))
         public_condition = (
@@ -163,14 +163,14 @@ class TestSameConceptCondition(unittest.TestCase):
         """With an NA date, the CELEX year disambiguates the '86' token."""
         eec_context = {
             "law_article_all_relevant": "Article 86",
-            "eu_commisssion_decision_date": "NA",
+            "eu_commission_decision_date": "NA",
             "celex_id": "CELEX-31988D0000",
         }
         self.assertTrue(self.validator.evaluate(self.condition, eec_context))
 
         ec_context = {
             "law_article_all_relevant": "Article 86",
-            "eu_commisssion_decision_date": "NA",
+            "eu_commission_decision_date": "NA",
             "celex_id": "CELEX-32003D0000",
         }
         self.assertFalse(self.validator.evaluate(self.condition, ec_context))
@@ -227,22 +227,22 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 101, Article 102, Article 103",
-            "eu_commisssion_decision_date": "2009-12-31",
+            "eu_commission_decision_date": "2009-12-31",
         }
 
-        condition = 'exists("law_article_all_relevant") and "Article 102" in law_article_all_relevant and eu_commisssion_decision_date < d"2010-01-01"'
+        condition = 'exists("law_article_all_relevant") and "Article 102" in law_article_all_relevant and eu_commission_decision_date < d"2010-01-01"'
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
         is_match = rule.matches(fact_context)
         self.assertTrue(is_match)
 
-        condition = 'exists("law_article_all_relevant") and "Article 105" in law_article_all_relevant and eu_commisssion_decision_date < d"2010-01-01"'
+        condition = 'exists("law_article_all_relevant") and "Article 105" in law_article_all_relevant and eu_commission_decision_date < d"2010-01-01"'
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
         is_match = rule.matches(fact_context)
         self.assertFalse(is_match)
 
-        condition = 'exists("law_article_all_relevant") and "Article 105" in law_article_all_relevant and (eu_commisssion_decision_date < d"2010-01-01" or eu_commisssion_decision_date == "NA")'
+        condition = 'exists("law_article_all_relevant") and "Article 105" in law_article_all_relevant and (eu_commission_decision_date < d"2010-01-01" or eu_commission_decision_date == "NA")'
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
         is_match = rule.matches(fact_context)
@@ -250,10 +250,10 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 101, Article 102, Article 103",
-            "eu_commisssion_decision_date": "NA",
+            "eu_commission_decision_date": "NA",
         }
 
-        condition = 'exists("law_article_all_relevant") and "Article 102" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"2010-01-01")'
+        condition = 'exists("law_article_all_relevant") and "Article 102" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"2010-01-01")'
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
         is_match = rule.matches(fact_context)
@@ -262,10 +262,10 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 85",
-            "eu_commisssion_decision_date": "1999-04-29",
+            "eu_commission_decision_date": "1999-04-29",
         }
 
-        condition = 'exists("law_article_all_relevant") and "Article 85" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"1999-04-30")'
+        condition = 'exists("law_article_all_relevant") and "Article 85" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"1999-04-30")'
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
         is_match = rule.matches(fact_context)
@@ -274,13 +274,13 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 85",
-            "eu_commisssion_decision_date": "1999-04-29",
+            "eu_commission_decision_date": "1999-04-29",
         }
 
         condition = """ exists("law_article_all_relevant") and 
-                        ( ( "Article 85" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"1999-04-30") )
-                          or  ( "Article 81" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"1999-04-30" and eu_commisssion_decision_date < d"2009-11-30") ) )
-                          or  ( "Article 101" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"2009-11-30" )) )
+                        ( ( "Article 85" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"1999-04-30") )
+                          or  ( "Article 81" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"1999-04-30" and eu_commission_decision_date < d"2009-11-30") ) )
+                          or  ( "Article 101" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"2009-11-30" )) )
                         )  """
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -290,12 +290,12 @@ class TestRuleEngineBasics(unittest.TestCase):
         # -- 81 ---------------------------------------
         fact_context = {
             "law_article_all_relevant": "Article 81",
-            "eu_commisssion_decision_date": "1999-05-29",
+            "eu_commission_decision_date": "1999-05-29",
         }
         condition = """ exists("law_article_all_relevant") and 
-                        ( ( "Article 85" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"1999-04-30") )
-                          or  ( "Article 81" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"1999-04-30" and eu_commisssion_decision_date < d"2009-11-30") ) )
-                          or  ( "Article 101" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"2009-11-30" )) )
+                        ( ( "Article 85" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"1999-04-30") )
+                          or  ( "Article 81" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"1999-04-30" and eu_commission_decision_date < d"2009-11-30") ) )
+                          or  ( "Article 101" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"2009-11-30" )) )
                         )  """
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -304,7 +304,7 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 85",
-            "eu_commisssion_decision_date": "1999-05-29",
+            "eu_commission_decision_date": "1999-05-29",
         }
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -314,12 +314,12 @@ class TestRuleEngineBasics(unittest.TestCase):
         # -- 101 ---------------------------------------
         fact_context = {
             "law_article_all_relevant": "Article 101",
-            "eu_commisssion_decision_date": "2009-12-29",
+            "eu_commission_decision_date": "2009-12-29",
         }
         condition = """ exists("law_article_all_relevant") and 
-                        ( ( "Article 85" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or eu_commisssion_decision_date < d"1999-04-30") )
-                          or  ( "Article 81" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"1999-04-30" and eu_commisssion_decision_date < d"2009-11-30") ) )
-                          or  ( "Article 101" in law_article_all_relevant and ( eu_commisssion_decision_date == "NA" or (eu_commisssion_decision_date > d"2009-11-30" )) )
+                        ( ( "Article 85" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or eu_commission_decision_date < d"1999-04-30") )
+                          or  ( "Article 81" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"1999-04-30" and eu_commission_decision_date < d"2009-11-30") ) )
+                          or  ( "Article 101" in law_article_all_relevant and ( eu_commission_decision_date == "NA" or (eu_commission_decision_date > d"2009-11-30" )) )
                         )  """
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -328,7 +328,7 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 102",
-            "eu_commisssion_decision_date": "2009-12-29",
+            "eu_commission_decision_date": "2009-12-29",
         }
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -338,7 +338,7 @@ class TestRuleEngineBasics(unittest.TestCase):
 
         fact_context = {
             "law_article_all_relevant": "Article 101",
-            "eu_commisssion_decision_date": "2009-10-29",
+            "eu_commission_decision_date": "2009-10-29",
         }
         context = rule_engine.Context(resolver=self.validator.unified_custom_resolver)
         rule = rule_engine.Rule(condition, context=context)
@@ -356,7 +356,7 @@ class TestSameConceptSource(unittest.TestCase):
         """An Art. 86 abuse case that merely mentions Art. 85 is not an agreement case."""
         context = {
             "celex_id": "CELEX-31976D0353",
-            "eu_commisssion_decision_date": "1975-12-17",
+            "eu_commission_decision_date": "1975-12-17",
             "law_article_all_relevant": "Article 85, Article 86",
             "law_article_operative": "Article 86",
         }
@@ -375,7 +375,7 @@ class TestSameConceptSource(unittest.TestCase):
     def test_missing_source_falls_back_to_all_relevant(self):
         context = {
             "celex_id": "CELEX-31976D0353",
-            "eu_commisssion_decision_date": "1975-12-17",
+            "eu_commission_decision_date": "1975-12-17",
             "law_article_all_relevant": "Article 85, Article 86",
         }
         self.assertTrue(
@@ -388,7 +388,7 @@ class TestSameConceptSource(unittest.TestCase):
     def test_placeholder_source_falls_back_to_all_relevant(self):
         context = {
             "celex_id": "CELEX-31976D0353",
-            "eu_commisssion_decision_date": "1975-12-17",
+            "eu_commission_decision_date": "1975-12-17",
             "law_article_all_relevant": "Article 85",
             "law_article_operative": "NA",
         }
@@ -402,13 +402,23 @@ class TestSameConceptSource(unittest.TestCase):
     def test_single_argument_form_still_reads_all_relevant(self):
         context = {
             "celex_id": "CELEX-31976D0353",
-            "eu_commisssion_decision_date": "1975-12-17",
+            "eu_commission_decision_date": "1975-12-17",
             "law_article_all_relevant": "Article 85",
             "law_article_operative": "Article 86",
         }
         self.assertTrue(
             self.validator.evaluate("same_concept('anticompetitive_agreement')", context)
         )
+
+    def test_condition_on_missing_fact_is_not_met(self):
+        """A parent fact skipped by its own gate leaves the child unmet, not raised."""
+        condition = "'horizontal' in infringement_category_hor_vert_lic_joint"
+        self.assertFalse(self.validator.evaluate(condition, {"celex_id": "DEC-AT38700-20080305"}))
+
+    def test_condition_on_present_fact_still_matches(self):
+        condition = "'horizontal' in infringement_category_hor_vert_lic_joint"
+        context = {"infringement_category_hor_vert_lic_joint": "horizontal"}
+        self.assertTrue(self.validator.evaluate(condition, context))
 
 
 if __name__ == "__main__":

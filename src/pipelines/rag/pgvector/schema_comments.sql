@@ -50,6 +50,11 @@ COMMENT ON COLUMN celex_facts.facts.verification_status IS
     Written by the verifier, never by the extractor.$$;
 COMMENT ON COLUMN celex_facts.facts.verification_score IS
   $$Best final_score across this fact's fact_evidence rows.$$;
+COMMENT ON COLUMN celex_facts.facts.document_id IS
+  $$Source document the fact was extracted from: FK to
+    document_registry.document_id (the decision's is_source row,
+    migrate_document_lineage.sql). NULL when not yet linked or the registry
+    row was deleted (ON DELETE SET NULL).$$;
 
 COMMENT ON TABLE celex_facts.fact_source_registry IS
   $$Canonical registry of provenance anchors a fact may cite -- document chunk,
@@ -170,7 +175,19 @@ COMMENT ON VIEW celex_facts.facts_cartel_legal_period_vw IS
 
 COMMENT ON VIEW celex_facts.facts_cartel_legal_period_category_vw IS
   $$Parses both periods into dates and classifies their overlap into a period
-    category. The temporal-consistency QA lens.$$;
+    category. The temporal-consistency QA lens. A year or year-month bound is
+    widened to its span (start = first day, end = last day) instead of
+    becoming 'NA'; the period columns show each bound at its stored precision.$$;
+
+COMMENT ON FUNCTION celex_facts.partial_date_first_day(text) IS
+  $$First day covered by an ISO date of year, month or day precision
+    ('1994' -> 1994-01-01); a trailing '-00' is read as reduced precision.
+    NULL for anything that is not a real date.$$;
+
+COMMENT ON FUNCTION celex_facts.partial_date_last_day(text) IS
+  $$Last day covered by an ISO date of year, month or day precision
+    ('1996-02' -> 1996-02-29); a trailing '-00' is read as reduced precision.
+    NULL for anything that is not a real date.$$;
 
 COMMENT ON VIEW celex_facts.fact_ingestion_audit_trail_vw IS
   $$Audit trail joined to the resulting fact value, newest first. Inner join on
@@ -202,6 +219,11 @@ COMMENT ON COLUMN celex_facts.pg_embedding_qwen.chunk_hash IS
   $$Content hash used to skip re-embedding unchanged chunks on re-ingestion.$$;
 COMMENT ON COLUMN celex_facts.pg_embedding_qwen.token_count IS
   $$Token length under the Qwen3 tokenizer; oversized passages are split and pooled.$$;
+COMMENT ON COLUMN celex_facts.pg_embedding_qwen.document_id IS
+  $$Source document the chunk was embedded from: FK to
+    document_registry.document_id (the decision's is_source row,
+    migrate_document_lineage.sql). NULL when not yet linked or the registry
+    row was deleted (ON DELETE SET NULL).$$;
 COMMENT ON COLUMN celex_facts.pg_embedding_qwen.cmetadata IS
   $$LangChain-owned metadata blob. Project-specific fields are promoted to real
     columns instead -- do not add new keys here.$$;
@@ -265,6 +287,9 @@ COMMENT ON TABLE celex_facts.question2fact2embeddings IS
   $$Denormalised Q&A search surface: question, fact name, answer text and its
     embedding. Deliberately duplicates facts to keep Q&A retrieval to one scan.
     Largest relation by embedding volume.$$;
+COMMENT ON CONSTRAINT fk_question2fact2embeddings_fact ON celex_facts.question2fact2embeddings IS
+  $$ON DELETE CASCADE: deleting or re-extracting a fact drops its embedding, so
+    Q&A retrieval never surfaces a deleted value.$$;
 COMMENT ON COLUMN celex_facts.question2fact2embeddings.hash_q_a IS
   $$Hash of question plus answer. Change key -- a differing hash means the
     underlying fact moved and the row needs re-embedding.$$;
@@ -729,3 +754,291 @@ COMMENT ON COLUMN celex_facts.llm_index_companies.generic_corp_id IS
   $$Register id where no dedicated column exists; read with generic_corp_registrar.$$;
 COMMENT ON COLUMN celex_facts.llm_index_companies.generic_corp_registrar IS
   $$Which register generic_corp_id belongs to.$$;
+
+
+-- ---------------------------------------------------------------------
+-- 11. Document download registry (migrate_document_registry.sql)
+-- ---------------------------------------------------------------------
+
+COMMENT ON TABLE celex_facts.competition_case IS
+  $$One row per normalised competition case id, written by
+    Main_download_documents.py. A case links one or many decisions over time
+    through competition_case_decision. Not linked by FK to the legacy
+    celex_case_id / case_celex_id tables (soft join on case_id).$$;
+COMMENT ON COLUMN celex_facts.competition_case.case_id IS
+  $$Normalised case id (IV/223, IV/32.800, AT.35388, COMP/...), same convention
+    as celex_case_id.case_id. Spelling variants of one case are NOT merged.$$;
+COMMENT ON COLUMN celex_facts.competition_case.title IS
+  $$Case title. NULL today: the loaders carry titles per decision, not per case.$$;
+COMMENT ON COLUMN celex_facts.competition_case.meta IS
+  $$Case-level loader attributes as JSON; empty object when none are known.$$;
+
+COMMENT ON TABLE celex_facts.decision_registry IS
+  $$One row per decision known to the downloader, keyed like the master JSON
+    (master_doc_descriptors.json). Registered even without a PDF
+    (selection_status no_pdf_source) so the case timeline stays complete.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.decision_id IS
+  $$Master JSON key and document folder name: CELEX-<number>, a reused
+    existing key, or DEC-<case>-<YYYYMMDD>; collisions carry a _N suffix.
+    This is the project-wide celex_id (facts, pg_embedding_qwen,
+    celex_case_id): join those tables on decision_id = celex_id.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.celex_number IS
+  $$Real CELEX number WITH the CELEX- prefix, spelled like the decision_id of a
+    CELEX decision (CELEX-31964D0233, CELEX-32002D0758_01). NULL for DEC- keys
+    and EC-case master keys (35388_9_5, iv34801_en). Not the join key -- use
+    decision_id.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.decision_date IS
+  $$Date of the decision; the first date when the loader row listed two.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.title IS
+  $$Decision title from the loader; empty string when unknown.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.parties IS
+  $$Parties / firms as written in the loader; free text, not resolved.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.document_class IS
+  $$Loader document class (decision, exemption, ...); free text.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.selection_status IS
+  $$EN-first selection result: selected (one document chosen), undecided
+    (unmarked PDFs downloaded, language decided after MinerU) or
+    no_pdf_source (HTML only or no URL).$$;
+COMMENT ON COLUMN celex_facts.decision_registry.language_init IS
+  $$Language of the chosen document: en, the lower-case original language, or
+    NA while undecided.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.language_translated IS
+  $$Owned by the translate service; the downloader writes NA on insert and
+    never overwrites it.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.review_reasons IS
+  $$Why a human should look at the decision (two dates, duplicate CELEX, id
+    collision, many case PDFs, ...). Informational: never blocks a download.$$;
+COMMENT ON COLUMN celex_facts.decision_registry.meta IS
+  $$Every other loader column verbatim (gemma_*, source, manifest_row_id, ...).$$;
+COMMENT ON COLUMN celex_facts.decision_registry.loader_file IS
+  $$Loader file of the latest run that wrote the row.$$;
+
+COMMENT ON TABLE celex_facts.decision_merge IS
+  $$Ledger of decisions folded into another decision and then deleted from
+    decision_registry (dedupe, source-document decide, repair), written in the
+    merge transaction. Resolves stale ids such as
+    document_download_audit.decision_id. Soft references, no FKs; a chain
+    D -> K -> J is one row per hop.$$;
+COMMENT ON COLUMN celex_facts.decision_merge.merged_decision_id IS
+  $$Decision id that was merged and deleted from decision_registry.$$;
+COMMENT ON COLUMN celex_facts.decision_merge.merged_into IS
+  $$Decision that received the documents and case links; may itself be merged
+    later (follow the chain to a registered decision).$$;
+COMMENT ON COLUMN celex_facts.decision_merge.merged_by IS
+  $$Step that merged: dedupe_registry, decide_source_document,
+    repair_decided_duplicates, or backfill (migrate_decision_merge.sql,
+    inferred from the audited documents' current owner).$$;
+COMMENT ON COLUMN celex_facts.decision_merge.merged_at IS
+  $$When the merge was recorded (backfill: when the migration ran).$$;
+
+COMMENT ON TABLE celex_facts.competition_case_decision IS
+  $$Many-to-many link case <-> decision. A case timeline is its decisions
+    ordered by decision_registry.decision_date. Additive: a loader that knows
+    fewer case ids never removes a link.$$;
+COMMENT ON COLUMN celex_facts.competition_case_decision.case_id IS
+  $$FK to competition_case.$$;
+COMMENT ON COLUMN celex_facts.competition_case_decision.decision_id IS
+  $$FK to decision_registry.$$;
+
+COMMENT ON TABLE celex_facts.document_registry IS
+  $$One row per candidate document (one PDF URL) of a decision. Only rows with
+    local_file_pdf set have a validated file on disk; is_selected marks the
+    document the selector chose, is_source the one the pipeline processes.$$;
+COMMENT ON COLUMN celex_facts.document_registry.document_id IS
+  $$File stem derived from the URL (CELEX-31964D0233_EN, 36623_338_1,
+    dbcomp-1754).$$;
+COMMENT ON COLUMN celex_facts.document_registry.decision_id IS
+  $$FK to decision_registry.$$;
+COMMENT ON COLUMN celex_facts.document_registry.source_url IS
+  $$Absolute download URL; unique, so one URL never registers twice.$$;
+COMMENT ON COLUMN celex_facts.document_registry.file_format IS
+  $$Document format from the loader; pdf for every downloadable candidate.$$;
+COMMENT ON COLUMN celex_facts.document_registry.origin IS
+  $$Source site: eur-lex, ec.europa.eu, db-comp or other. Drives the
+    selection priority.$$;
+COMMENT ON COLUMN celex_facts.document_registry.language IS
+  $$Upper-case language from the URL marker (EN, DE); NULL when the URL carries
+    none -- NOT a detected language.$$;
+COMMENT ON COLUMN celex_facts.document_registry.is_selected IS
+  $$True for the candidate the EN-first selector chose (all unmarked PDFs of an
+    undecided decision).$$;
+COMMENT ON COLUMN celex_facts.document_registry.is_source IS
+  $$True for the document whose file the processing pipeline (MinerU,
+    translation, fact extraction) uses for the decision; at most one per
+    decision (partial unique index). Target of facts.document_id and
+    pg_embedding_qwen.document_id. Independent of is_selected.$$;
+COMMENT ON COLUMN celex_facts.document_registry.local_file_pdf IS
+  $$Path of the validated PDF under CELEX_DOCS_DIR; NULL when never stored.
+    Kept when a later upsert carries no file.$$;
+COMMENT ON COLUMN celex_facts.document_registry.sha256 IS
+  $$Lower-case hex SHA-256 of the stored file, hashed while streaming.$$;
+COMMENT ON COLUMN celex_facts.document_registry.size_bytes IS
+  $$Size of the stored file in bytes.$$;
+COMMENT ON COLUMN celex_facts.document_registry.content_type IS
+  $$Content-Type header as served -- recorded, not trusted; validity is
+    decided by the %PDF- magic.$$;
+COMMENT ON COLUMN celex_facts.document_registry.downloaded_at IS
+  $$When the file was last fetched over HTTP; NULL for files registered from
+    disk (registered_existing).$$;
+
+COMMENT ON TABLE celex_facts.document_download_audit IS
+  $$Append-only ledger: one row per candidate per run, plus one per loader row
+    the mapper could not map. Intentionally WITHOUT foreign keys -- failed rows
+    reference decisions and documents that were never registered.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.run_id IS
+  $$Id of the Main_download_documents.py run, logged at the end of the run.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.decision_id IS
+  $$Decision attempted (soft reference to decision_registry); NULL for a
+    row-level mapper failure.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.document_id IS
+  $$Candidate attempted (soft reference to document_registry); NULL for
+    decision-level and row-level rows.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.source_url IS
+  $$URL attempted; NULL when the row concerns no URL.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.outcome IS
+  $$downloaded, registered_existing (valid file on disk, registration
+    backfilled), skipped_exists, not_selected, no_pdf_source or failed.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.failure_reason IS
+  $$Why the attempt failed (not_a_pdf, http_404, timeout, tls_error,
+    registry_rejected, a mapper message, ...). Free text, not an enum.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.http_status IS
+  $$Final HTTP status; NULL when no response was received.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.content_type IS
+  $$Content-Type header as served; recorded, not trusted.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.size_bytes IS
+  $$Bytes received or found on disk.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.sha256 IS
+  $$SHA-256 of the file received or found on disk.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.duration_ms IS
+  $$Elapsed time of the attempt in milliseconds; NULL for mapper failures.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.loader_file IS
+  $$Loader file the decision or failed row came from.$$;
+COMMENT ON COLUMN celex_facts.document_download_audit.loader_row IS
+  $$Row number within loader_file; NULL when unknown.$$;
+
+COMMENT ON COLUMN celex_facts.document_registry.local_file_md IS
+  $$Spec'd Markdown path of the document; NULL means no target known and the
+    PDF to Markdown converter skips the row.$$;
+
+COMMENT ON TABLE celex_facts.document_conversion_audit IS
+  $$Append-only ledger: one row per candidate per PDF to Markdown conversion
+    run. Intentionally WITHOUT foreign keys, as document_download_audit.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.id IS
+  $$Surrogate key of the audit row.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.run_id IS
+  $$One id per conversion batch run.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.decision_id IS
+  $$Decision of the registry row (soft reference to decision_registry).$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.document_id IS
+  $$Document of the registry row (soft reference to document_registry).$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.local_file_pdf IS
+  $$Path of the source PDF used.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.local_file_md IS
+  $$Path of the target Markdown file used.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.outcome IS
+  $$converted, skipped_exists, no_target_path, pdf_missing, failed or
+    timeout.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.failure_reason IS
+  $$MinerU error.code or our own reason (task_not_found, upload_failed,
+    result_invalid, unexpected_error: ...). Free text, not an enum.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.error_message IS
+  $$MinerU or local error message accompanying failure_reason.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.mineru_task_id IS
+  $$MinerU task id, for tracing while the server still holds the task.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.mineru_file_id IS
+  $$MinerU file id, for tracing while the server still holds the task.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.mineru_api_url IS
+  $$MinerU server that did the work.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.tier IS
+  $$Engine tier reported by the server (parse.tier).$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.parser_version IS
+  $$Parser version reported by the server (parse.parser_version).$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.server_duration_ms IS
+  $$Server-side parsing time (parse.duration_ms), without queue wait.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.wall_duration_ms IS
+  $$Wall clock from submit to files in place, in milliseconds.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.pdf_size_bytes IS
+  $$Size of the input PDF in bytes.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.pdf_sha256 IS
+  $$SHA-256 of the input PDF.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.pdf_pages IS
+  $$Page count of the input PDF; NULL when unknown.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.md_chars IS
+  $$Character count of the produced Markdown; NULL when none was produced.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.image_count IS
+  $$Images in the result; NULL when the result does not report it.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.table_count IS
+  $$Tables in the result; NULL when the result does not report it.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.formula_count IS
+  $$Formulas in the result; NULL when the result does not report it.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.language_detected IS
+  $$Language detected from the Markdown; NULL when not determined.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.language_confidence IS
+  $$Confidence of language_detected; NULL when not determined.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.language_stored IS
+  $$Registry language value before the run.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.language_action IS
+  $$set, kept_equal, kept_mismatch or undetermined; NULL when no language
+    step ran.$$;
+COMMENT ON COLUMN celex_facts.document_conversion_audit.created_at IS
+  $$When the audit row was written.$$;
+
+COMMENT ON COLUMN celex_facts.document_registry.original_file_md IS
+  $$Foreign-language Markdown the English local_file_md was translated from;
+    NULL when local_file_md is the original. Set by Main_translate_markdown
+    and the translated-markdown repair.$$;
+
+COMMENT ON TABLE celex_facts.document_translation_audit IS
+  $$Append-only ledger: one row per queue item per Markdown translation run.
+    Intentionally WITHOUT foreign keys, as document_conversion_audit.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.id IS
+  $$Surrogate key of the audit row.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.run_id IS
+  $$One id per translation batch run.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.decision_id IS
+  $$Decision of the registry row (soft reference to decision_registry).$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.document_id IS
+  $$Source document of the registry row (soft reference to document_registry).$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.source_file_md IS
+  $$Foreign-language Markdown that was translated.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.target_file_md IS
+  $$English Markdown written (<source stem>_EN.md); NULL when none was written.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.source_language IS
+  $$Upper-case language code of the source Markdown.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.model_id IS
+  $$LLM model id that translated the chunks.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.chunk_count IS
+  $$Number of chunks the source was split into.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.input_tokens IS
+  $$Prompt tokens summed over all chunk calls; NULL when the provider did not
+    report usage.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.output_tokens IS
+  $$Completion tokens summed over all chunk calls; NULL when the provider did
+    not report usage.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.duration_ms IS
+  $$Wall clock of the item from start to commit or rollback.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.outcome IS
+  $$translated, skipped, already_english or failed.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.reason IS
+  $$Failure or skip reason (chunk_rejected, not_english, input_missing,
+    commit_failed, connection_error, ...). Free text, not an enum.$$;
+COMMENT ON COLUMN celex_facts.document_translation_audit.created_at IS
+  $$When the audit row was written.$$;
+
+COMMENT ON VIEW celex_facts.document_download_failures_vw IS
+  $$What is still missing across all runs: the latest failed row of every
+    candidate (also when a sibling document of the decision was downloaded),
+    plus the latest no_pdf_source row of decisions with no candidate whose
+    latest outcome is downloaded, registered_existing or skipped_exists. A
+    later success of the same candidate removes its row; not_selected is never
+    listed. A row-level failure (decision_id NULL) is removed only when a later
+    run mapped the same loader position to a decision. Only the LATEST outcome
+    counts: a later failed --force re-download keeps a candidate listed even if
+    local_file_pdf still exists. Backs Main_download_documents.py
+    --report-failures.$$;
+COMMENT ON COLUMN celex_facts.document_download_failures_vw.run_id IS
+  $$Run of the latest attempt for the candidate, not of the first failure.$$;
+COMMENT ON COLUMN celex_facts.document_download_failures_vw.celex_number IS
+  $$From decision_registry; NULL when the decision was never registered.$$;
+COMMENT ON COLUMN celex_facts.document_download_failures_vw.title IS
+  $$From decision_registry; NULL when the decision was never registered.$$;

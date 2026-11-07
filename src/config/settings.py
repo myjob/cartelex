@@ -684,6 +684,13 @@ class Config:
     REPORT_PATH = os.path.expanduser(
         os.getenv("REPORT_PATH", str(Path(CELEX_DOCS_DIR) / "reports"))
     )
+    # Loader file joined with the facts report by reporting.report_eddy_celex_facts.
+    REPORT_EDDY_MANIFEST_PATH = os.path.expanduser(
+        os.getenv(
+            "REPORT_EDDY_MANIFEST_PATH",
+            str(Path(CELEX_DOCS_DIR) / "filtered_final_manifest.xlsx"),
+        )
+    )
     # The Russo/Schinkel/Guenster/Carree 2010 monograph the book cross-check
     # judges facts against: its ``book_name`` key in pg_embedding_book_qwen and
     # the MinerU markdown it was ingested from. Resolved from CELEX_DOCS_DIR so
@@ -698,6 +705,113 @@ class Config:
             / "Russo_Schinkel_G\u00fcnster_Carree_2010_Book-mineru.md"
         ),
     )
+
+    # HTTP document downloader (pipelines.download).
+    DOWNLOAD_TIMEOUT_SECONDS = float(os.getenv("DOWNLOAD_TIMEOUT_SECONDS", "30"))
+    DOWNLOAD_USER_AGENT = os.getenv(
+        "DOWNLOAD_USER_AGENT", "celex-facts-downloader/1.0"
+    )
+    DOWNLOAD_MAX_RETRIES = int(os.getenv("DOWNLOAD_MAX_RETRIES", "3"))
+    DOWNLOAD_RETRY_BACKOFF_SECONDS = float(
+        os.getenv("DOWNLOAD_RETRY_BACKOFF_SECONDS", "2.0")
+    )
+    # Per-file manifest read by the final_manifest mapper of Main_download_documents.
+    DOWNLOAD_FILE_MANIFEST_PATH = os.getenv(
+        "DOWNLOAD_FILE_MANIFEST_PATH",
+        str(
+            Path.home() / "a" / "ec_cjeu-main" / "output" / "final_manifest"
+            / "final_commission_file_manifest.xlsx"
+        ),
+    )
+    DOWNLOAD_DEFAULT_MAX_WORKERS = int(os.getenv("DOWNLOAD_DEFAULT_MAX_WORKERS", "4"))
+    # Review threshold: more distinct case PDFs than this in one decision.
+    DOWNLOAD_REVIEW_MAX_CASE_PDFS = int(os.getenv("DOWNLOAD_REVIEW_MAX_CASE_PDFS", "8"))
+    # EUR-Lex PDFs are fetched from the Publications Office Cellar REST API
+    # (the EUR-Lex website answers automated requests with a bot check).
+    # Content negotiation: Accept must name the PDF variants; Accept-Language
+    # is taken from the EUR-Lex URL. See pipelines/download/cellar.py.
+    DOWNLOAD_CELLAR_ENABLED = os.getenv("DOWNLOAD_CELLAR_ENABLED", "true").lower() in (
+        "1", "true", "yes")
+    DOWNLOAD_CELLAR_BASE_URL = os.getenv(
+        "DOWNLOAD_CELLAR_BASE_URL", "https://publications.europa.eu/resource/celex/")
+    DOWNLOAD_CELLAR_ACCEPT = os.getenv(
+        "DOWNLOAD_CELLAR_ACCEPT",
+        "application/pdf;type=pdfa1a, application/pdf;type=pdfa1b, "
+        "application/pdf;type=pdfa2a, application/pdf;type=pdf",
+    )
+
+    # PDF-to-Markdown conversion (batch.Main_convert_pdf_markdown) against a
+    # self-hosted MinerU 4.1 Tasks API. The API key is a secret: set it in
+    # config_main/.env, never here. See pipelines/convert/mineru_client.py.
+    MINERU_API_URL = os.getenv("MINERU_API_URL", "http://127.0.0.1:8000")
+    MINERU_API_KEY = os.getenv("MINERU_API_KEY", "")
+    MINERU_TIER = os.getenv("MINERU_TIER", "advanced")
+    # Per-file budget from the first poll that sees the file `running`; files
+    # still queued are capped at files_per_task * this value from task creation.
+    MINERU_FILE_TIMEOUT_SECONDS = int(os.getenv("MINERU_FILE_TIMEOUT_SECONDS", "1800"))
+    MINERU_POLL_INTERVAL_SECONDS = int(os.getenv("MINERU_POLL_INTERVAL_SECONDS", "5"))
+    MINERU_FILES_PER_TASK = int(os.getenv("MINERU_FILES_PER_TASK", "10"))
+    MINERU_HTTP_TIMEOUT_SECONDS = int(os.getenv("MINERU_HTTP_TIMEOUT_SECONDS", "120"))
+    MINERU_PROGRESS_HEARTBEAT_SECONDS = int(
+        os.getenv("MINERU_PROGRESS_HEARTBEAT_SECONDS", "60"))
+    # Abort the run after this many consecutive connection errors.
+    MINERU_MAX_CONSECUTIVE_CONNECTION_ERRORS = int(
+        os.getenv("MINERU_MAX_CONSECUTIVE_CONNECTION_ERRORS", "3"))
+
+    # Markdown translation to English (batch.Main_translate_markdown).
+    # Chunk size in tiktoken tokens of the TokenTargetMarkdownSplitter.
+    TRANSLATE_CHUNK_TOKENS = int(os.getenv("TRANSLATE_CHUNK_TOKENS", "1000"))
+    # Accepted len(translation) / len(source) per chunk; outside -> rejected.
+    TRANSLATE_LENGTH_RATIO_MIN = float(os.getenv("TRANSLATE_LENGTH_RATIO_MIN", "0.5"))
+    TRANSLATE_LENGTH_RATIO_MAX = float(os.getenv("TRANSLATE_LENGTH_RATIO_MAX", "2.0"))
+    # Extra attempts per rejected chunk before the decision fails.
+    TRANSLATE_CHUNK_RETRIES = int(os.getenv("TRANSLATE_CHUNK_RETRIES", "1"))
+    # Translated chunks at least this long must detect as English (catches a
+    # chunk the LLM echoed back untranslated); shorter ones are too noisy.
+    TRANSLATE_CHUNK_LANGUAGE_MIN_CHARS = int(
+        os.getenv("TRANSLATE_CHUNK_LANGUAGE_MIN_CHARS", "300"))
+    TRANSLATE_HEARTBEAT_SECONDS = int(os.getenv("TRANSLATE_HEARTBEAT_SECONDS", "60"))
+    # Abort the run after this many consecutive LLM connection errors;
+    # translation/validation failures never abort.
+    TRANSLATE_MAX_CONSECUTIVE_CONNECTION_ERRORS = int(
+        os.getenv("TRANSLATE_MAX_CONSECUTIVE_CONNECTION_ERRORS", "3"))
+    # Output file: <origin dir>/<input stem><suffix>.md
+    TRANSLATE_TARGET_SUFFIX = os.getenv("TRANSLATE_TARGET_SUFFIX", "_EN")
+    # Fallback separators for a block above the chunk size: paragraph, line,
+    # then sentence ends, so a cut lands between sentences.
+    TRANSLATE_SPLIT_SEPARATORS = ["\n\n", "\n", ". ", "; ", ": ", " ", ""]
+    # Source-document decision (batch.Main_decide_source_document): the title
+    # page is read in the first N characters (images/HTML stripped), the
+    # operative part in the last fraction after footnote blocks are removed,
+    # closing salutations of letters in the last N characters.
+    DECIDE_TITLE_REGION_CHARS = int(os.getenv("DECIDE_TITLE_REGION_CHARS", "6000"))
+    DECIDE_ENDING_FRACTION = float(os.getenv("DECIDE_ENDING_FRACTION", "0.25"))
+    DECIDE_LETTER_TAIL_CHARS = int(os.getenv("DECIDE_LETTER_TAIL_CHARS", "1500"))
+    # Two same-language documents with the same title are the same decision
+    # only when the Jaccard overlap of their vocabularies (distinct words of
+    # six or more letters) reaches this value. Measured 2026-11-01: Commission
+    # vs Official Journal versions 0.95-1.00, the two Swiss Franc decisions of
+    # 21.10.2014 (same case, subject and date) 0.83.
+    DECIDE_SAME_TEXT_MIN_OVERLAP = float(os.getenv("DECIDE_SAME_TEXT_MIN_OVERLAP", "0.9"))
+    # A known candidate replaces the existing source when it is an English
+    # original beside a non-English source, or a same-language text at least
+    # this many times longer (user decision 2026-11-01: "switch to the better copy").
+    DECIDE_BETTER_COPY_MIN_RATIO = float(os.getenv("DECIDE_BETTER_COPY_MIN_RATIO", "1.5"))
+    # Registry language code -> name given to the LLM.
+    TRANSLATE_LANGUAGE_NAMES = {
+        "DE": "German", "FR": "French", "IT": "Italian", "NL": "Dutch",
+        "ES": "Spanish", "PT": "Portuguese", "DA": "Danish", "EL": "Greek",
+        "FI": "Finnish", "SV": "Swedish", "CS": "Czech", "SK": "Slovak",
+        "SL": "Slovenian", "HU": "Hungarian", "PL": "Polish", "LT": "Lithuanian",
+        "LV": "Latvian", "ET": "Estonian", "BG": "Bulgarian", "RO": "Romanian",
+        "HR": "Croatian", "MT": "Maltese", "GA": "Irish",
+    }
+
+    # Lineage backfill (batch.Main_backfill_document_lineage): rows per UPDATE
+    # batch (one commit each) and the per-transaction lock_timeout, so a
+    # batch never queues behind a writer and blocks the live UI readers.
+    LINEAGE_BACKFILL_BATCH_SIZE = int(os.getenv("LINEAGE_BACKFILL_BATCH_SIZE", "5000"))
+    LINEAGE_BACKFILL_LOCK_TIMEOUT = os.getenv("LINEAGE_BACKFILL_LOCK_TIMEOUT", "5s")
 
     # Derived paths can be properties or methods
     @property
@@ -742,6 +856,51 @@ class Config:
     # --- HeidelTime Configuration ---
     HEIDELTIME_LANGUAGE = os.getenv("HEIDELTIME_LANGUAGE", "english")
     HEIDELTIME_DOCUMENT_TYPE = os.getenv("HEIDELTIME_DOCUMENT_TYPE", "Narrative")
+    # Plausible year range of an event date (pipelines/heideltime/event_dates.py).
+    # HeidelTime normalises some expressions to years such as 0010 or 2202; any
+    # date outside this range is dropped before it reaches a prompt or a fact.
+    HEIDELTIME_MIN_YEAR = int(os.getenv("HEIDELTIME_MIN_YEAR", "1900"))
+    HEIDELTIME_MAX_YEAR = int(os.getenv("HEIDELTIME_MAX_YEAR", "2030"))
+    # Token budget of one heideltime_event_agg / heideltime_cartel_period prompt
+    # (pipelines/heideltime/event_digest.py). A digest above it is map-reduced
+    # over date-ordered batches: at ~24k tokens the model stops applying its
+    # selection rules and reports the extremes it sees (#186, #188).
+    HEIDELTIME_AGG_BATCH_TOKENS = int(os.getenv("HEIDELTIME_AGG_BATCH_TOKENS", "8000"))
+
+    # --- Cartel period inheritance (pipelines/heideltime/period_inheritance.py) ---
+    # A follow-up (amending / re-adopting) decision whose own text yields no
+    # cartel_period borrows it from the original decision of the same case.
+    # Case numbers are also read from this fact's value (e.g. 'COMP/E-1/39.168').
+    PERIOD_INHERITANCE_CASE_TITLE_FACT = os.getenv("PERIOD_INHERITANCE_CASE_TITLE_FACT", "case_title")
+    # Donors explicitly gated False by this fact are no infringement decisions.
+    PERIOD_INHERITANCE_GATE_FACT = os.getenv("PERIOD_INHERITANCE_GATE_FACT", "case_commission_infringement")
+    # fact_source_link.trust_rank of a period unioned over several candidate
+    # originals (none named by the follow-up's citation); a single or cited
+    # donor keeps the 'fact' source default (4).
+    PERIOD_INHERITANCE_UNION_TRUST_RANK = int(os.getenv("PERIOD_INHERITANCE_UNION_TRUST_RANK", "2"))
+
+    # --- Recital Count (fact recitals_max, pipelines/legal/recital_count.py) ---
+    # Largest allowed step inside a recital chain. MinerU drops whole runs of
+    # numbers (often around tables): a limit of 3 cut the chain short in 153 of
+    # 528 decisions (Google Android stopped at 225 of 1481). Confident values are
+    # identical for every limit from 50 to 400 (2026-11-01 corpus scan), since the
+    # longest-chain rule and the beyond-max guard keep strays out.
+    RECITAL_MAX_GAP = int(os.getenv("RECITAL_MAX_GAP", "50"))
+    # A chain must start at or below this number; rules out runs that begin
+    # mid-document (annex fragments, misread blocks).
+    RECITAL_MAX_START = int(os.getenv("RECITAL_MAX_START", "3"))
+    # Shorter chains are noise (a stray enumeration), reported undetermined.
+    RECITAL_MIN_CHAIN = int(os.getenv("RECITAL_MIN_CHAIN", "5"))
+    # Coverage (chain length / max) below this is undetermined; at or above
+    # the confident bar the max is confident, in between doubtful.
+    RECITAL_MIN_COVERAGE = float(os.getenv("RECITAL_MIN_COVERAGE", "0.6"))
+    RECITAL_MIN_COVERAGE_CONFIDENT = float(
+        os.getenv("RECITAL_MIN_COVERAGE_CONFIDENT", "0.9")
+    )
+    # A second chain at least this share of the main one (and at least
+    # RECITAL_MIN_CHAIN long) means the numbering restarts per section, as in
+    # older decisions (CELEX-31983D0400); the max is then doubtful.
+    RECITAL_RESTART_RATIO = float(os.getenv("RECITAL_RESTART_RATIO", "0.5"))
 
     # --- Chunk Language Audit Configuration ---
     # The language every ingested document is expected to be in; anything else
@@ -796,8 +955,8 @@ class Config:
     EVIDENCE_JUDGE_TOP_N = int(os.getenv("EVIDENCE_JUDGE_TOP_N", "3"))
     # Fact names skipped entirely by the verifier: machine-emitted artefacts
     # that make no claim about the decision, so there is nothing for a chunk to
-    # support. decision_chapter_tokens / decision_chapter_sentences are counters
-    # over the decision text; heideltime_raw is the raw TIMEX3 annotation dump
+    # support. decision_chapter_tokens / decision_chapter_sentences / recitals_max
+    # are counters over the decision text; heideltime_raw is the raw TIMEX3 annotation dump
     # of the very chunks the verifier would retrieve, so judging it only
     # confirms that the annotator read its own input (it scored
     # verified_supported on 737 of 745 rows before exclusion). Its temporal
@@ -807,7 +966,7 @@ class Config:
         name.strip()
         for name in os.getenv(
             "EVIDENCE_EXCLUDED_FACT_NAMES",
-            "decision_chapter_tokens,decision_chapter_sentences,heideltime_raw",
+            "decision_chapter_tokens,decision_chapter_sentences,heideltime_raw,recitals_max",
         ).split(",")
         if name.strip()
     )
@@ -841,7 +1000,7 @@ class Config:
     # state another case's date and read as a contradiction (design doc F-5).
     # Facts outside this list may also use the rest of the chapter.
     BOOK_CASE_SPECIFIC_FACT_PREFIXES: tuple[str, ...] = (
-        "eu_commisssion_decision_date",
+        "eu_commission_decision_date",
         "heideltime_",
         "cartel_period",
         "fines",

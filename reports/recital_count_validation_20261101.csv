@@ -1,0 +1,787 @@
+celex_id,recitals_max,recitals_found,first_recital,coverage,gaps,beyond_max,numbering,status,reason,text_source,source_path,chunk_gaps
+32450_35_6,112,106,1,0.946,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/32450_35_6/mineru/auto/32450_35_6.md,0
+33585_2_4,114,111,1,0.974,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/33585_2_4/auto/33585_2_4.md,0
+33708_6_7,218,206,1,0.945,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/33708_6_7/mineru/auto/33708_6_7.md,0
+34466_15_4,170,152,1,0.894,11,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/34466_15_4/mineru/auto/34466_15_4.md,0
+34579_1889_2,776,712,2,0.918,29,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/34579_1889_2/mineru/auto/34579_1889_2.md,0
+35388_9_5,92,80,1,0.87,9,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/35388_9_5/mineru/auto/35388_9_5_en.md,0
+35470_14_4,341,327,1,0.959,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/35470_14_4/mineru/auto/35470_14_4_en.md,0
+35814_17_6,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/35814_17_6/mineru/auto/35814_17_6_en.md,0
+36571_222_1,560,543,1,0.97,16,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/36571_222_1/mineru/auto/36571_222_1.md,0
+36623_320_1,181,161,1,0.89,16,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/36623_320_1/mineru/auto/36623_320_1.md,0
+36756_68_16,483,463,1,0.959,20,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/36756_68_16/mineru/auto/36756_68_16_en.md,0
+36756_74_4,438,407,1,0.929,30,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/36756_74_4/mineru/auto/36756_74_4_en.md,0
+37152_72_1,600,593,1,0.988,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37152_72_1/mineru/auto/37152_72_1.md,0
+37214_90_1,43,43,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37214_90_1/mineru/auto/37214_90_1.md,0
+37370_44_1,470,422,1,0.898,34,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37370_44_1/mineru/auto/37370_44_1.md,0
+37396_45_3,98,98,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37396_45_3/mineru/auto/37396_45_3.md,0
+37507_193_6,924,896,1,0.97,24,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37507_193_6/mineru/auto/37507_193_6.md,0
+37533_43_1,238,233,1,0.979,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37533_43_1/mineru/auto/37533_43_1.md,0
+37667_86_3,562,550,1,0.979,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37667_86_3/mineru/auto/37667_86_3.md,0
+37685_66_1,165,161,1,0.976,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37685_66_1/mineru/auto/37685_66_1.md,0
+37750_87_1,107,105,1,0.981,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37750_87_1/mineru/auto/37750_87_1.md,0
+37766_610_5,501,457,1,0.912,39,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37766_610_5/mineru/auto/37766_610_5_en.md,0
+37773_143_1,349,340,1,0.974,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37773_143_1/mineru/auto/37773_143_1.md,0
+37784_8_4,237,229,1,0.966,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37784_8_4/mineru/auto/37784_8_4.md,0
+37792_4177_3,1080,1001,1,0.927,72,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37792_4177_3/mineru/auto/37792_4177_3.md,0
+37857_100_1,518,491,1,0.948,23,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37857_100_1/mineru/auto/37857_100_1.md,0
+37860_629_1,370,351,1,0.949,19,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37860_629_1/mineru/auto/37860_629_1.md,0
+37956_1607_5,1009,860,2,0.852,116,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37956_1607_5/mineru/auto/37956_1607_5_en.md,0
+37956_718_3,643,611,1,0.95,29,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37956_718_3/mineru/auto/37956_718_3_en.md,0
+37966_639_3,48,48,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37966_639_3/mineru/auto/37966_639_3.md,0
+37975_91_5,200,174,1,0.87,17,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37975_91_5/mineru/auto/37975_91_5.md,0
+37980_17_1,184,172,1,0.935,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37980_17_1/mineru/auto/37980_17_1.md,0
+37990_3581_18,1803,1686,1,0.935,104,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/37990_3581_18/mineru/auto/37990_3581_18.md,0
+38044_15_5,220,186,1,0.845,23,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38044_15_5/mineru/auto/38044_15_5.md,0
+38069_33_4,842,816,1,0.969,22,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38069_33_4/mineru/auto/38069_33_4.md,0
+38096_75_1,345,315,1,0.913,29,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38096_75_1/mineru/auto/38096_75_1.md,0
+38113_250_8,420,407,1,0.969,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38113_250_8/mineru/auto/38113_250_8.md,0
+38121_1007_1,177,152,1,0.859,11,334,bracket,doubtful,numbers beyond max,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38121_1007_1/mineru/auto/38121_1007_1.md,0
+38173_134_9,,0,,0.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38173_134_9/mineru/auto/38173_134_9.md,0
+38233_87_1,414,389,1,0.94,24,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38233_87_1/mineru/auto/38233_87_1.md,0
+38238_249_1,458,442,1,0.965,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38238_249_1/mineru/auto/38238_249_1.md,0
+38240_29_1,432,422,1,0.977,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38240_29_1/mineru/auto/38240_29_1.md,0
+38281_508_1,500,493,1,0.986,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38281_508_1/mineru/auto/38281_508_1.md,0
+38284_104_1,175,164,1,0.937,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38284_104_1/mineru/auto/38284_104_1.md,0
+38287_27_1,260,252,1,0.969,8,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38287_27_1/mineru/auto/38287_27_1.md,0
+38337_251_1,464,440,1,0.948,23,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38337_251_1/mineru/auto/38337_251_1_en.md,0
+38338_332_2,340,310,1,0.912,27,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38338_332_2/mineru/auto/38338_332_2.md,0
+38344_5856_3,150,93,1,0.62,13,32,bracket,doubtful,numbers beyond max,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38344_5856_3/mineru/auto/38344_5856_3.md,0
+38348_998_3,48,48,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38348_998_3/mineru/auto/38348_998_3.md,0
+38354_527_4,460,375,1,0.815,15,352,bracket,doubtful,numbers beyond max,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38354_527_4/mineru/auto/38354_527_4.md,0
+38359_36_1,364,354,1,0.973,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38359_36_1/mineru/auto/38359_36_1.md,0
+38381_1065_1,49,49,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38381_1065_1/mineru/auto/38381_1065_1.md,0
+38432_526_5,263,255,1,0.97,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38432_526_5/mineru/auto/38432_526_5.md,0
+38443_320_1,379,361,1,0.953,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38443_320_1/mineru/auto/38443_320_1.md,0
+38456_792_2,400,387,1,0.968,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38456_792_2/mineru/auto/38456_792_2.md,0
+38477_19_3,79,79,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38477_19_3/auto/38477_19_3.md,0
+38479_24_8,114,113,1,0.991,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38479_24_8/auto/38479_24_8.md,0
+38511_1813_8,121,119,1,0.983,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38511_1813_8/mineru/auto/38511_1813_8.md,0
+38543_1810_3,663,576,1,0.869,67,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38543_1810_3/mineru/auto/38543_1810_3.md,0
+38549_72_1,138,130,1,0.942,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38549_72_1/mineru/auto/38549_72_1.md,0
+38589_4669_7,,0,,0.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38589_4669_7/mineru/auto/38589_4669_7.md,0
+38606_611_1,505,505,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38606_611_1/mineru/auto/38606_611_1.md,0
+38620_880_14,530,518,1,0.977,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38620_880_14/mineru/auto/38620_880_14.md,0
+38628_498_2,41,41,1,1.0,0,125,dot,doubtful,numbers beyond max,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38628_498_2/mineru/auto/38628_498_2.md,0
+38629_1056_4,655,597,1,0.911,42,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38629_1056_4/mineru/auto/38629_1056_4.md,0
+38636_1203_1,78,76,1,0.974,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38636_1203_1/mineru/auto/38636_1203_1.md,0
+38638_826_1,,0,,0.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38638_826_1/mineru/auto/38638_826_1.md,0
+38645_424_1,423,294,1,0.695,14,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38645_424_1/mineru/auto/38645_424_1.md,0
+38662_59_8,165,160,1,0.97,5,0,bracket,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38662_59_8/mineru/auto/38662_59_8_en.md,0
+38681_216_1,51,50,1,0.98,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38681_216_1/mineru/auto/38681_216_1.md,0
+38695_796_1,596,487,1,0.817,40,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38695_796_1/mineru/auto/38695_796_1.md,0
+38698_4567_1,265,227,1,0.857,34,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38698_4567_1/mineru/auto/38698_4567_1.md,0
+38710_790_1,597,578,1,0.968,19,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38710_790_1/mineru/auto/38710_790_1.md,0
+38745_32_1,145,145,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38745_32_1/mineru/auto/38745_32_1.md,0
+38784_311_12,768,758,1,0.987,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38784_311_12/mineru/auto/38784_311_12.md,0
+38823_1340_4,858,716,2,0.834,76,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38823_1340_4/mineru/auto/38823_1340_4.md,0
+38866_1676_3,242,226,1,0.934,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38866_1676_3/mineru/auto/38866_1676_3.md,0
+38899_1030_10,552,509,1,0.922,24,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38899_1030_10/mineru/auto/38899_1030_10.md,0
+38907_181_15,498,466,1,0.936,30,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/38907_181_15/mineru/auto/38907_181_15_en.md,0
+39092_7226_4,1399,1305,1,0.933,80,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39092_7226_4/mineru/auto/39092_7226_4.md,0
+39116_258_4,62,62,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39116_258_4/mineru/auto/39116_258_4.md,0
+39125_2726_3,731,687,1,0.94,39,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39125_2726_3/mineru/auto/39125_2726_3.md,0
+39129_1161_1,337,244,1,0.724,17,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39129_1161_1/mineru/auto/39129_1161_1.md,0
+39165_1314_1,541,505,1,0.933,29,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39165_1314_1/mineru/auto/39165_1314_1.md,0
+39168_757_6,692,609,1,0.88,33,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39168_757_6/mineru/auto/39168_757_6.md,0
+39180_1315_4,276,260,1,0.942,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39180_1315_4/mineru/auto/39180_1315_4.md,0
+39181_1908_8,786,742,1,0.944,39,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39181_1908_8/mineru/auto/39181_1908_8.md,0
+39188_2291_2,492,441,1,0.896,46,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39188_2291_2/mineru/auto/39188_2291_2.md,0
+39226_8310_11,1397,1172,3,0.839,167,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39226_8310_11/mineru/auto/39226_8310_11.md,0
+39230_2105_9,141,118,1,0.837,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39230_2105_9/mineru/auto/39230_2105_9.md,0
+39234_242_4,183,180,1,0.984,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39234_242_4/mineru/auto/39234_242_4_en.md,0
+39309_3643_4,482,434,1,0.9,37,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39309_3643_4/mineru/auto/39309_3643_4.md,0
+39315_3019_9,116,114,1,0.983,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39315_3019_9/mineru/auto/39315_3019_9.md,0
+39316_2298_3,90,90,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39316_2298_3/mineru/auto/39316_2298_3.md,0
+39317_1942_3,75,73,1,0.973,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39317_1942_3/mineru/auto/39317_1942_3.md,0
+39326_1774_1,113,110,1,0.973,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39326_1774_1/mineru/auto/39326_1774_1.md,0
+39351_1223_4,101,99,1,0.98,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39351_1223_4/mineru/auto/39351_1223_4.md,0
+39386_1536_3,104,104,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39386_1536_3/mineru/auto/39386_1536_3.md,0
+39388_2796_3,92,74,1,0.804,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39388_2796_3/mineru/auto/39388_2796_3.md,0
+39389_2761_1,92,74,1,0.804,12,0,bracket,doubtful,low coverage,markdown,~/a/celex_docs/39389_2761_1/mineru/auto/39389_2761_1.md,0
+39396_2009_5,378,370,1,0.979,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39396_2009_5/mineru/auto/39396_2009_5.md,0
+39398_14153_3,109,89,1,0.817,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39398_14153_3/mineru/auto/39398_14153_3.md,0
+39398_6930_6,73,73,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39398_6930_6/mineru/auto/39398_6930_6.md,0
+39401_1535_1,398,382,2,0.96,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39401_1535_1/mineru/auto/39401_1535_1_en.md,0
+39402_576_3,55,55,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39402_576_3/mineru/auto/39402_576_3.md,0
+39406_1902_1,507,476,1,0.939,24,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39406_1902_1/mineru/auto/39406_1902_1.md,0
+39416_2325_1,45,45,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39416_2325_1/mineru/auto/39416_2325_1.md,0
+39437_7332_3,1183,1129,1,0.954,45,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39437_7332_3/mineru/auto/39437_7332_3.md,0
+39452_3384_13,550,464,1,0.844,73,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39452_3384_13/mineru/auto/39452_3384_13_en.md,0
+39462_6408_3,1105,1030,1,0.932,67,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39462_6408_3/mineru/auto/39462_6408_3.md,0
+39482_3130_4,353,313,1,0.887,32,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39482_3130_4/mineru/auto/39482_3130_4.md,0
+39510_1203_3,772,741,1,0.96,31,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39510_1203_3/mineru/auto/39510_1203_3_en.md,0
+39523_5272_13,1543,1337,1,0.866,171,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39523_5272_13/mineru/auto/39523_5272_13.md,0
+39525_1916_7,921,871,1,0.946,48,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39525_1916_7/mineru/auto/39525_1916_7.md,0
+39530_2671_5,115,114,1,0.991,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39530_2671_5/mineru/auto/39530_2671_5.md,0
+39562_689_1,200,187,1,0.935,12,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39562_689_1/mineru/auto/39562_689_1.md,0
+39563_6945_3,1111,927,1,0.834,134,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39563_6945_3/mineru/auto/39563_6945_3.md,0
+39563_7279_3,,56,1,0.577,19,0,bracket,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39563_7279_3/mineru/auto/39563_7279_3.md,0
+39574_2801_11,457,386,1,0.845,47,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39574_2801_11/mineru/auto/39574_2801_11.md,0
+39579_2633_5,99,99,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39579_2633_5/mineru/auto/39579_2633_5.md,0
+39592_2152_5,82,76,1,0.927,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39592_2152_5/mineru/auto/39592_2152_5.md,0
+39595_3012_4,150,138,2,0.92,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39595_3012_4/mineru/auto/39595_3012_4.md,0
+39596_4342_9,241,241,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39596_4342_9/mineru/auto/39596_4342_9.md,0
+39600_2147_7,98,80,2,0.816,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39600_2147_7/mineru/auto/39600_2147_7.md,0
+39605_2700_3,99,78,1,0.788,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39605_2700_3/mineru/auto/39605_2700_3.md,0
+39610_9899_5,1078,915,3,0.849,122,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39610_9899_5/mineru/auto/39610_9899_5.md,0
+39611_2354_3,87,68,1,0.782,15,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39611_2354_3/mineru/auto/39611_2354_3.md,0
+39612_12448_6,3187,2865,1,0.899,283,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39612_12448_6/mineru/auto/39612_12448_6.md,0
+39633_2636_9,563,494,2,0.877,44,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39633_2636_9/mineru/auto/39633_2636_9.md,0
+39639_3631_8,592,480,1,0.811,82,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39639_3631_8/mineru/auto/39639_3631_8.md,0
+39654_2861_16,100,92,1,0.92,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39654_2861_16/mineru/auto/39654_2861_16.md,0
+39678_2514_15,107,99,1,0.925,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39678_2514_15/mineru/auto/39678_2514_15.md,0
+39685_1976_7,526,472,1,0.897,49,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39685_1976_7/mineru/auto/39685_1976_7.md,0
+39686_4072_5,16,16,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39686_4072_5/mineru/auto/39686_4072_5.md,0
+39692_1304_3,84,55,1,0.655,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39692_1304_3/mineru/auto/39692_1304_3.md,0
+39711_4493_4,1281,1140,1,0.89,110,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39711_4493_4/mineru/auto/39711_4493_4.md,0
+39727_2315_5,85,74,1,0.871,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39727_2315_5/mineru/auto/39727_2315_5.md,0
+39731_801_8,107,99,1,0.925,7,0,bracket,confident,"",markdown,~/a/celex_docs/39731_801_8/mineru/auto/39731_801_8.md,0
+39736_1746_5,108,100,1,0.926,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39736_1746_5/mineru/auto/39736_1746_5.md,0
+39740_14996_3,755,673,1,0.891,67,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39740_14996_3/mineru/auto/39740_14996_3.md,0
+39745_14237_7,59,37,1,0.627,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39745_14237_7/mineru/auto/39745_14237_7.md,0
+39748_3911_5,177,162,1,0.915,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39748_3911_5/mineru/auto/39748_3911_5.md,0
+39759_3071_5,9,9,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39759_3071_5/mineru/auto/39759_3071_5.md,0
+39767_2018_3,151,117,1,0.775,21,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39767_2018_3/mineru/auto/39767_2018_3.md,0
+39780_3528_6,108,99,1,0.917,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39780_3528_6/mineru/auto/39780_3528_6.md,0
+39792_2737_3,234,177,1,0.756,33,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39792_2737_3/mineru/auto/39792_2737_3.md,0
+39801_2468_8,105,79,1,0.752,19,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39801_2468_8/mineru/auto/39801_2468_8.md,0
+39813_1554_3,397,342,1,0.861,42,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39813_1554_3/mineru/auto/39813_1554_3.md,0
+39816_10148_3,186,153,1,0.823,25,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39816_10148_3/mineru/auto/39816_10148_3.md,0
+39824_6567_14,447,366,1,0.819,62,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39824_6567_14/mineru/39824_8754_5/auto/39824_8754_5.md,0
+39847_27536_4,130,117,1,0.9,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39847_27536_4/mineru/auto/39847_27536_4.md,0
+39849_2692_4,721,629,1,0.872,76,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39849_2692_4/mineru/auto/39849_2692_4.md,0
+39850_3377_3,90,66,1,0.733,15,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39850_3377_3/mineru/auto/39850_3377_3.md,0
+39861_4230_3,312,272,1,0.872,34,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39861_4230_3/mineru/auto/39861_4230_3.md,0
+39881_2123_5,148,138,1,0.932,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39881_2123_5/mineru/auto/39881_2123_5.md,0
+39904_1110_5,112,102,1,0.911,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39904_1110_5/mineru/auto/39904_1110_5.md,0
+39914_8910_5,770,606,2,0.787,110,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39914_8910_5/mineru/auto/39914_8910_5.md,0
+39920_738_3,121,95,2,0.785,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39920_738_3/mineru/auto/39920_738_3.md,0
+39922_2067_2,110,96,1,0.873,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39922_2067_2/mineru/auto/39922_2067_2.md,0
+39924_1155_4,85,69,2,0.812,13,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39924_1155_4/mineru/auto/39924_1155_4.md,0
+39939_1501_5,128,125,1,0.977,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39939_1501_5/mineru/auto/39939_1501_5.md,0
+39952_1517_5,89,75,1,0.843,11,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39952_1517_5/mineru/auto/39952_1517_5.md,0
+39960_2370_3,154,145,1,0.942,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39960_2370_3/mineru/auto/39960_2370_3.md,0
+39964_1755_5,178,140,1,0.787,26,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39964_1755_5/mineru/auto/39964_1755_5.md,0
+39965_1823_5,170,138,1,0.812,25,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39965_1823_5/mineru/auto/39965_1823_5.md,0
+39966_295_15,84,59,1,0.702,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39966_295_15/mineru/auto/39966_295_15.md,0
+39984_861_5,320,290,1,0.906,22,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39984_861_5/mineru/auto/39984_861_5.md,0
+39985_928_16,561,492,1,0.877,48,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/39985_928_16/mineru/auto/39985_928_16.md,0
+40009_2461_5,138,125,1,0.906,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40009_2461_5/mineru/auto/40009_2461_5.md,0
+40013_1084_2,108,98,1,0.907,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40013_1084_2/mineru/AT_40013_5708398_1084_5/auto/AT_40013_5708398_1084_5.md,0
+40018_2611_3,420,353,1,0.84,52,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40018_2611_3/mineru/auto/40018_2611_3.md,0
+40023_10624_3,141,125,2,0.887,11,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40023_10624_3/auto/40023_10624_3.md,0
+40028_1782_5,127,111,2,0.874,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40028_1782_5/mineru/auto/40028_1782_5.md,0
+40049_4172_3,108,79,1,0.731,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40049_4172_3/mineru/auto/40049_4172_3.md,0
+40055_713_11,108,98,1,0.907,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40055_713_11/mineru/auto/40055_713_11.md,0
+40098_827_7,102,93,1,0.912,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40098_827_7/mineru/auto/40098_827_7.md,0
+40099_9993_3,1481,1346,1,0.909,112,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40099_9993_3/mineru/auto/40099_9993_3.md,0
+40113_987_3,121,103,1,0.851,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40113_987_3/mineru/auto/40113_987_3.md,0
+40127_2661_3,145,119,1,0.821,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40127_2661_3/mineru/auto/40127_2661_3.md,0
+40134_2872_5,262,209,1,0.798,37,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40134_2872_5/mineru/auto/40134_2872_5.md,0
+40153_4392_3,201,178,1,0.886,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40153_4392_3/mineru/auto/40153_4392_3.md,0
+40181_417_3,99,76,1,0.768,15,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40181_417_3/mineru/auto/40181_417_3.md,0
+40182_370_3,192,144,1,0.75,33,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40182_370_3/mineru/auto/40182_370_3.md,0
+40208_1579_5,349,290,1,0.831,45,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40208_1579_5/mineru/auto/40208_1579_5.md,0
+40220_2702_4,599,541,1,0.903,50,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40220_2702_4/mineru/auto/40220_2702_4.md,0
+40299_1042_4,148,124,1,0.838,19,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40299_1042_4/mineru/auto/40299_1042_4.md,0
+40335_1035_3,146,123,1,0.842,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40335_1035_3/mineru/auto/40335_1035_3.md,0
+40394_5350_5,259,240,1,0.927,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40394_5350_5/mineru/auto/40394_5350_5.md,0
+40410_1654_6,167,146,1,0.874,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40410_1654_6/mineru/auto/40410_1654_6.md,0
+40411_1619_11,752,680,1,0.904,60,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40411_1619_11/mineru/auto/40411_1619_11.md,0
+40428_1205_3,201,182,1,0.905,16,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40428_1205_3/mineru/auto/40428_1205_3.md,0
+40432_720_4,138,114,1,0.826,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40432_720_4/mineru/auto/40432_720_4.md,0
+40433_734_3,152,124,1,0.816,23,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40433_734_3/mineru/auto/40433_734_3.md,0
+40436_949_5,167,127,1,0.76,28,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40436_949_5/mineru/auto/40436_949_5.md,0
+40461_461_3,102,71,3,0.696,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40461_461_3/mineru/auto/40461_461_3.md,0
+40465_337_3,145,111,1,0.766,20,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40465_337_3/mineru/auto/40465_337_3.md,0
+40469_329_3,132,92,1,0.697,20,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40469_329_3/mineru/auto/40469_329_3.md,0
+40481_2058_7,131,118,1,0.901,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40481_2058_7/mineru/auto/40481_2058_7.md,0
+40528_418_3,97,84,1,0.866,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40528_418_3/mineru/auto/40528_418_3.md,0
+40608_2860_3,9,9,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/40608_2860_3/mineru/auto/40608_2860_3.md,0
+AT_37990_9687627_5129_3,,45,1,0.592,13,0,bracket,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_37990_9687627_5129_3/mineru/auto/AT_37990_9687627_5129_3.md,0
+AT_38700_8179861_2920_3,82,66,2,0.805,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_38700_8179861_2920_3/mineru/auto/AT_38700_8179861_2920_3.md,0
+AT_39258_8068894_9177_3,1404,1158,2,0.825,149,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_39258_8068894_9177_3/mineru/auto/AT_39258_8068894_9177_3.md,0
+AT_39317_5430708_2139_6,56,45,2,0.804,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_39317_5430708_2139_6/mineru/auto/AT_39317_5430708_2139_6.md,0
+AT_39839_8432000_2174_3,531,445,1,0.838,62,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_39839_8432000_2174_3/mineru/auto/AT_39839_8432000_2174_3.md,0
+AT_40013_5708398_1084_5,108,98,1,0.907,9,0,bracket,confident,"",markdown,~/a/celex_docs/AT_40013_5708398_1084_5/mineru/auto/AT_40013_5708398_1084_5.md,0
+AT_40135_8399817_5458_10,660,501,2,0.759,85,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40135_8399817_5458_10/mineru/auto/AT_40135_8399817_5458_10.md,0
+AT_40136_7970992_6095_3,1139,1005,1,0.882,95,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40136_7970992_6095_3/mineru/auto/AT_40136_7970992_6095_3.md,0
+AT_40178_8022289_3048_5,248,191,1,0.77,39,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40178_8022289_3048_5/mineru/auto/AT_40178_8022289_3048_5.md,0
+AT_40305_8638841_4187_5,229,190,1,0.83,29,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40305_8638841_4187_5/mineru/auto/AT_40305_8638841_4187_5.md,0
+AT_40324_7971056_3662_3,907,701,1,0.773,149,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40324_7971056_3662_3/mineru/auto/AT_40324_7971056_3662_3.md,0
+AT_40330_7947754_1178_9,142,113,1,0.796,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40330_7947754_1178_9/mineru/auto/AT_40330_7947754_1178_9.md,0
+AT_40346_8399848_2719_3,971,814,1,0.838,132,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40346_8399848_2719_3/mineru/auto/AT_40346_8399848_2719_3.md,0
+AT_40401_2770,1176,967,1,0.822,154,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40401_2770/auto/AT_40401_2770.md,0
+AT_40410_7557494_1654_9,167,146,1,0.874,17,0,bracket,doubtful,low coverage,markdown,~/a/celex_docs/AT_40410_7557494_1654_9/mineru/auto/AT_40410_7557494_1654_9.md,0
+AT_40413_8465169_1613_3,173,135,2,0.78,26,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40413_8465169_1613_3/mineru/auto/AT_40413_8465169_1613_3.md,0
+AT_40414_8465254_1496_3,212,163,1,0.769,30,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40414_8465254_1496_3/mineru/auto/AT_40414_8465254_1496_3.md,0
+AT_40414_8465464_1500_3,610,528,1,0.866,61,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40414_8465464_1500_3/mineru/auto/AT_40414_8465464_1500_3.md,0
+AT_40420_8465317_1450_3,172,135,2,0.785,30,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40420_8465317_1450_3/mineru/auto/AT_40420_8465317_1450_3.md,0
+AT_40422_8465328_1527_3,193,154,1,0.798,25,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40422_8465328_1527_3/mineru/auto/AT_40422_8465328_1527_3.md,0
+AT_40424_8465426_1521_3,166,144,1,0.867,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40424_8465426_1521_3/mineru/auto/AT_40424_8465426_1521_3.md,0
+AT_40437_10026012_3547_4,1028,876,1,0.852,103,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40437_10026012_3547_4/auto/AT_40437_10026012_3547_4.md,0
+AT_40452_10269725_10183_3,213,173,1,0.812,24,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40452_10269725_10183_3/auto/AT_40452_10269725_10183_3.md,0
+AT_40462_8990760_8322_4,293,232,1,0.792,39,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40462_8990760_8322_4/mineru/auto/AT_40462_8990760_8322_4.md,0
+AT_40511_8511226_4076_3,119,81,1,0.681,21,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40511_8511226_4076_3/mineru/auto/AT_40511_8511226_4076_3.md,0
+AT_40512_1748,650,560,1,0.862,62,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40512_1748/auto/AT_40512_1748.md,0
+AT_40522_8986595_2868_7,118,88,1,0.746,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40522_8986595_2868_7/mineru/auto/AT_40522_8986595_2868_7.md,0
+AT_40547_9160373_2598_6,196,165,3,0.842,17,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40547_9160373_2598_6/mineru/auto/AT_40547_9160373_2598_6.md,0
+AT_40577_10333580_3473_8,228,165,1,0.724,43,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40577_10333580_3473_8/auto/AT_40577_10333580_3473_8.md,0
+AT_40588_6339,2290,2022,1,0.883,220,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40588_6339/auto/AT_40588_6339.md,0
+AT_40632_10195462_3123_3,286,233,1,0.815,32,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40632_10195462_3123_3/auto/AT_40632_10195462_3123_3.md,0
+AT_40636_10356597_3607_4,140,121,1,0.864,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40636_10356597_3607_4/auto/AT_40636_10356597_3607_4.md,0
+AT_40642_3643,533,443,1,0.831,58,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40642_3643/auto/AT_40642_3643.md,0
+AT_40669_18801,376,319,2,0.848,43,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40669_18801/auto/AT_40669_18801.md,0
+AT_40703_8990760_1533_5,293,232,1,0.792,39,0,bracket,doubtful,low coverage,markdown,~/a/celex_docs/AT_40703_8990760_1533_5/mineru/auto/AT_40703_8990760_1533_5.md,0
+AT_40735_9970535_1360_8,216,170,1,0.787,33,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40735_9970535_1360_8/mineru/auto/AT_40735_9970535_1360_8.md,0
+AT_40760_9770404_1218_4,105,87,2,0.829,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40760_9770404_1218_4/mineru/auto/AT_40760_9770404_1218_4.md,0
+AT_40795_1262,144,112,3,0.778,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40795_1262/auto/AT_40795_1262.md,0
+AT_40940_10539411_1520_6,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/AT_40940_10539411_1520_6/auto/AT_40940_10539411_1520_6.md,0
+CELEX-31964D0233,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31964D0233/mineru/auto/CELEX-31964D0233_en.md,0
+CELEX-31964D0344,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31964D0344/mineru/auto/CELEX-31964D0344_en.md,0
+CELEX-31964D0502,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31964D0502/mineru/auto/CELEX-31964D0502_en.md,0
+CELEX-31964D0566,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31964D0566/mineru/auto/CELEX-31964D0566_en.md,0
+CELEX-31964D0599,,4,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31964D0599/mineru/auto/CELEX-31964D0599_en.md,0
+CELEX-31965D0366,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31965D0366/mineru/auto/CELEX-31965D0366_en.md,0
+CELEX-31965D0426,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31965D0426/mineru/auto/CELEX-31965D0426_en.md,0
+CELEX-31966D0005,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31966D0005/mineru/auto/CELEX-31966D0005_en.md,0
+CELEX-31967D0454,,3,1,0.75,1,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31967D0454/mineru/auto/CELEX-31967D0454_en.md,0
+CELEX-31968D0128,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0128/mineru/auto/CELEX-31968D0128_en.md,0
+CELEX-31968D0317,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0317/mineru/auto/CELEX-31968D0317_en.md,0
+CELEX-31968D0318,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0318/mineru/auto/CELEX-31968D0318_en.md,0
+CELEX-31968D0319,9,9,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0319/mineru/auto/CELEX-31968D0319_en.md,0
+CELEX-31968D0374,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0374/mineru/auto/CELEX-31968D0374_en.md,0
+CELEX-31968D0375,8,8,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0375/mineru/auto/CELEX-31968D0375_en.md,0
+CELEX-31968D0376,,3,2,0.75,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0376/mineru/auto/CELEX-31968D0376_en.md,0
+CELEX-31968D0377,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31968D0377/mineru/auto/CELEX-31968D0377_en.md,0
+CELEX-31969D0090,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0090/mineru/auto/CELEX-31969D0090_en.md,0
+CELEX-31969D0152,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0152/mineru/auto/CELEX-31969D0152_en.md,0
+CELEX-31969D0195,,2,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0195/mineru/auto/CELEX-31969D0195_en.md,0
+CELEX-31969D0202,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0202/mineru/auto/CELEX-31969D0202_en.md,0
+CELEX-31969D0216,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0216/mineru/auto/CELEX-31969D0216_en.md,0
+CELEX-31969D0240,40,32,1,0.8,6,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0240/mineru/auto/CELEX-31969D0240_en.md,0
+CELEX-31969D0241,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0241/mineru/auto/CELEX-31969D0241_en.md,0
+CELEX-31969D0242,20,20,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0242/mineru/auto/CELEX-31969D0242_en.md,0
+CELEX-31969D0243,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0243/mineru/auto/CELEX-31969D0243_en.md,0
+CELEX-31969D0477,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31969D0477/mineru/auto/CELEX-31969D0477_en.md,0
+CELEX-31970D0332,24,23,1,0.958,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31970D0332/mineru/auto/CELEX-31970D0332_en.md,0
+CELEX-31970D0333,22,20,1,0.909,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31970D0333/mineru/auto/CELEX-31970D0333_en.md,0
+CELEX-31970D0346,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31970D0346/mineru/auto/CELEX-31970D0346_en.md,0
+CELEX-31970D0487,,3,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31970D0487/mineru/auto/CELEX-31970D0487_en.md,0
+CELEX-31970D0488,11,11,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31970D0488/mineru/auto/CELEX-31970D0488_en.md,0
+CELEX-31971D0022,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0022/mineru/auto/CELEX-31971D0022_en.md,0
+CELEX-31971D0023,11,11,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0023/mineru/auto/CELEX-31971D0023_en.md,0
+CELEX-31971D0085,,4,1,1.0,0,1,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0085/mineru/auto/CELEX-31971D0085_en.md,0
+CELEX-31971D0222,18,18,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0222/mineru/auto/CELEX-31971D0222_en.md,0
+CELEX-31971D0224,7,7,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0224/mineru/auto/CELEX-31971D0224_en.md,0
+CELEX-31971D0257,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0257/mineru/auto/CELEX-31971D0257_en.md,0
+CELEX-31971D0258,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0258/mineru/auto/CELEX-31971D0258_en.md,0
+CELEX-31971D0259,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0259/mineru/auto/CELEX-31971D0259_en.md,0
+CELEX-31971D0268,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0268/mineru/auto/CELEX-31971D0268_en.md,0
+CELEX-31971D0337,8,7,1,0.875,1,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0337/mineru/auto/CELEX-31971D0337_en.md,0
+CELEX-31971D0375,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0375/mineru/auto/CELEX-31971D0375_en.md,0
+CELEX-31971D0400,15,14,1,0.933,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31971D0400/mineru/auto/CELEX-31971D0400_en.md,0
+CELEX-31972D0021,32,31,1,0.969,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0021/mineru/auto/CELEX-31972D0021_en.md,0
+CELEX-31972D0022,22,20,1,0.909,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0022/mineru/auto/CELEX-31972D0022_en.md,0
+CELEX-31972D0023,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0023/mineru/auto/CELEX-31972D0023_en.md,0
+CELEX-31972D0024,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0024/mineru/auto/CELEX-31972D0024_en.md,0
+CELEX-31972D0025,10,10,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0025/mineru/auto/CELEX-31972D0025_en.md,0
+CELEX-31972D0026,11,11,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0026/mineru/auto/CELEX-31972D0026_en.md,0
+CELEX-31972D0041,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0041/mineru/auto/CELEX-31972D0041_en.md,0
+CELEX-31972D0068,13,12,1,0.923,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0068/mineru/auto/CELEX-31972D0068_en.md,0
+CELEX-31972D0088,37,33,1,0.892,4,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0088/mineru/auto/CELEX-31972D0088_en.md,0
+CELEX-31972D0128,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0128/mineru/auto/CELEX-31972D0128_en.md,0
+CELEX-31972D0237,19,18,1,0.947,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0237/mineru/auto/CELEX-31972D0237_en.md,0
+CELEX-31972D0238,,3,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0238/mineru/auto/CELEX-31972D0238_en.md,0
+CELEX-31972D0291,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0291/mineru/auto/CELEX-31972D0291_en.md,0
+CELEX-31972D0390,28,25,1,0.893,2,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0390/mineru/auto/CELEX-31972D0390_en.md,0
+CELEX-31972D0396,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0396/mineru/auto/CELEX-31972D0396_en.md,0
+CELEX-31972D0397,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0397/mineru/auto/CELEX-31972D0397_en.md,0
+CELEX-31972D0403,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0403/mineru/auto/CELEX-31972D0403_en.md,0
+CELEX-31972D0457,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0457/mineru/auto/CELEX-31972D0457_en.md,0
+CELEX-31972D0468,20,19,1,0.95,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0468/mineru/auto/CELEX-31972D0468_en.md,0
+CELEX-31972D0474,29,26,1,0.897,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0474/mineru/auto/CELEX-31972D0474_en.md,0
+CELEX-31972D0478,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0478/mineru/auto/CELEX-31972D0478_en.md,0
+CELEX-31972D0480,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31972D0480/mineru/auto/CELEX-31972D0480_en.md,0
+CELEX-31973D0109,18,18,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0109/mineru/auto/CELEX-31973D0109.md,0
+CELEX-31973D0196,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0196/mineru/auto/CELEX-31973D0196.md,0
+CELEX-31973D0212,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0212/mineru/auto/CELEX-31973D0212.md,0
+CELEX-31973D0232,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0232/mineru/auto/CELEX-31973D0232.md,0
+CELEX-31973D0322,,4,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0322/mineru/auto/CELEX-31973D0322.md,0
+CELEX-31973D0323,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31973D0323/mineru/auto/CELEX-31973D0323.md,0
+CELEX-31974D0016,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0016/mineru/auto/CELEX-31974D0016.md,0
+CELEX-31974D0017,,3,2,0.75,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0017/mineru/auto/CELEX-31974D0017.md,0
+CELEX-31974D0292,58,55,1,0.948,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0292/mineru/auto/CELEX-31974D0292.md,0
+CELEX-31974D0431,42,42,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0431/mineru/auto/CELEX-31974D0431.md,0
+CELEX-31974D0432,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0432/mineru/auto/CELEX-31974D0432.md,0
+CELEX-31974D0433,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0433/mineru/auto/CELEX-31974D0433.md,0
+CELEX-31974D0634,8,5,1,0.625,1,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31974D0634/mineru/auto/CELEX-31974D0634.md,0
+CELEX-31975D0073,35,29,1,0.829,4,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0073/mineru/auto/CELEX-31975D0073.md,0
+CELEX-31975D0074,,4,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0074/mineru/auto/CELEX-31975D0074.md,0
+CELEX-31975D0075,18,17,1,0.944,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0075/mineru/auto/CELEX-31975D0075.md,0
+CELEX-31975D0076,7,7,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0076/mineru/auto/CELEX-31975D0076.md,0
+CELEX-31975D0077,7,7,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0077/mineru/auto/CELEX-31975D0077.md,0
+CELEX-31975D0094,19,15,1,0.789,3,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0094/mineru/auto/CELEX-31975D0094.md,0
+CELEX-31975D0095,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0095/mineru/auto/CELEX-31975D0095.md,0
+CELEX-31975D0297,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0297/mineru/auto/CELEX-31975D0297.md,0
+CELEX-31975D0358,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0358/mineru/auto/CELEX-31975D0358.md,0
+CELEX-31975D0482,9,9,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0482/mineru/auto/CELEX-31975D0482.md,0
+CELEX-31975D0494,18,16,1,0.889,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0494/mineru/auto/CELEX-31975D0494.md,0
+CELEX-31975D0497,,3,1,0.6,1,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0497/mineru/auto/CELEX-31975D0497.md,0
+CELEX-31975D0498,7,6,1,0.857,1,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0498/mineru/auto/CELEX-31975D0498.md,0
+CELEX-31975D0570,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0570/mineru/auto/CELEX-31975D0570.md,0
+CELEX-31975D0649,,2,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0649/mineru/auto/CELEX-31975D0649.md,0
+CELEX-31975D0781,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31975D0781/mineru/auto/CELEX-31975D0781.md,0
+CELEX-31976D0029,10,10,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0029/mineru/auto/CELEX-31976D0029.md,0
+CELEX-31976D0159,55,47,1,0.855,6,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0159/mineru/auto/CELEX-31976D0159.md,0
+CELEX-31976D0172,5,5,1,1.0,0,1,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0172/mineru/auto/CELEX-31976D0172.md,0
+CELEX-31976D0248,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0248/mineru/auto/CELEX-31976D0248.md,0
+CELEX-31976D0249,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0249/mineru/auto/CELEX-31976D0249.md,0
+CELEX-31976D0353,6,5,1,0.833,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0353/mineru/auto/CELEX-31976D0353.md,0
+CELEX-31976D0593,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0593/mineru/auto/CELEX-31976D0593.md,0
+CELEX-31976D0642,28,28,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0642/mineru/auto/CELEX-31976D0642.md,0
+CELEX-31976D0684,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0684/mineru/auto/CELEX-31976D0684.md,0
+CELEX-31976D0743,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0743/mineru/auto/CELEX-31976D0743.md,0
+CELEX-31976D0915,23,21,1,0.913,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31976D0915/mineru/auto/CELEX-31976D0915.md,0
+CELEX-31977D0066,,4,1,1.0,0,1,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0066/mineru/auto/CELEX-31977D0066.md,0
+CELEX-31977D0100,42,35,1,0.833,4,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0100/mineru/auto/CELEX-31977D0100.md,0
+CELEX-31977D0129,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0129/mineru/auto/CELEX-31977D0129.md,0
+CELEX-31977D0160,26,25,1,0.962,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0160/mineru/auto/CELEX-31977D0160.md,0
+CELEX-31977D0327,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0327/mineru/auto/CELEX-31977D0327.md,0
+CELEX-31977D0543,17,17,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0543/mineru/auto/CELEX-31977D0543.md,0
+CELEX-31977D0592,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0592/mineru/auto/CELEX-31977D0592.md,0
+CELEX-31977D0722,13,11,1,0.846,2,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0722/mineru/auto/CELEX-31977D0722.md,0
+CELEX-31977D0781,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31977D0781/mineru/auto/CELEX-31977D0781.md,0
+CELEX-31978D0024,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0024/mineru/auto/CELEX-31978D0024.md,0
+CELEX-31978D0059,38,35,1,0.921,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0059/mineru/auto/CELEX-31978D0059.md,0
+CELEX-31978D0066,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0066/mineru/auto/CELEX-31978D0066.md,0
+CELEX-31978D0068,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0068/mineru/auto/CELEX-31978D0068.md,0
+CELEX-31978D0155,27,26,1,0.963,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0155/mineru/auto/CELEX-31978D0155.md,0
+CELEX-31978D0156,,2,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0156/mineru/auto/CELEX-31978D0156.md,0
+CELEX-31978D0163,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0163/mineru/auto/CELEX-31978D0163.md,0
+CELEX-31978D0172,27,25,1,0.926,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0172/mineru/auto/CELEX-31978D0172.md,0
+CELEX-31978D0193,8,8,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0193/mineru/auto/CELEX-31978D0193.md,0
+CELEX-31978D0194,8,7,1,0.875,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0194/mineru/auto/CELEX-31978D0194.md,0
+CELEX-31978D0251,6,6,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0251/mineru/auto/CELEX-31978D0251.md,0
+CELEX-31978D0252,85,74,1,0.871,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0252/mineru/auto/CELEX-31978D0252.md,0
+CELEX-31978D0253,12,12,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0253/mineru/auto/CELEX-31978D0253.md,0
+CELEX-31978D0516,,3,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0516/mineru/auto/CELEX-31978D0516.md,0
+CELEX-31978D0571,23,22,1,0.957,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0571/mineru/auto/CELEX-31978D0571.md,0
+CELEX-31978D0670,137,119,1,0.869,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0670/mineru/auto/CELEX-31978D0670.md,0
+CELEX-31978D0696,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0696/mineru/auto/CELEX-31978D0696.md,0
+CELEX-31978D0697,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0697/mineru/auto/CELEX-31978D0697.md,0
+CELEX-31978D0732,111,102,1,0.919,6,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0732/mineru/auto/CELEX-31978D0732.md,0
+CELEX-31978D0823,9,9,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0823/mineru/auto/CELEX-31978D0823.md,0
+CELEX-31978D0921,6,5,1,0.833,1,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0921/mineru/auto/CELEX-31978D0921.md,0
+CELEX-31978D0922,16,16,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31978D0922/mineru/auto/CELEX-31978D0922.md,0
+CELEX-31979D0037,18,18,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0037/mineru/auto/CELEX-31979D0037.md,0
+CELEX-31979D0068,63,59,1,0.937,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0068/mineru/auto/CELEX-31979D0068.md,0
+CELEX-31979D0086,27,27,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0086/mineru/auto/CELEX-31979D0086.md,0
+CELEX-31979D0090,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0090/mineru/auto/CELEX-31979D0090.md,0
+CELEX-31979D0253,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0253/mineru/auto/CELEX-31979D0253.md,0
+CELEX-31979D0298,49,48,1,0.98,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0298/mineru/auto/CELEX-31979D0298.md,0
+CELEX-31979D0670,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0670/mineru/auto/CELEX-31979D0670.md,0
+CELEX-31979D0934,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31979D0934/mineru/auto/CELEX-31979D0934.md,0
+CELEX-31980D0182,,2,1,1.0,0,1,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0182/mineru/auto/CELEX-31980D0182.md,0
+CELEX-31980D0183,26,22,1,0.846,2,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0183/mineru/auto/CELEX-31980D0183.md,0
+CELEX-31980D0184,10,7,1,0.7,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0184/mineru/auto/CELEX-31980D0184.md,0
+CELEX-31980D0234,33,30,2,0.909,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0234/mineru/auto/CELEX-31980D0234.md,0
+CELEX-31980D0256,104,92,1,0.885,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0256/mineru/auto/CELEX-31980D0256.md,0
+CELEX-31980D0334,14,13,1,0.929,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0334/mineru/auto/CELEX-31980D0334.md,0
+CELEX-31980D0335,11,11,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0335/mineru/auto/CELEX-31980D0335.md,0
+CELEX-31980D0489,16,13,1,0.812,2,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0489/mineru/auto/CELEX-31980D0489.md,0
+CELEX-31980D0789,17,17,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0789/mineru/auto/CELEX-31980D0789.md,0
+CELEX-31980D0917,57,55,1,0.965,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D0917/mineru/auto/CELEX-31980D0917.md,0
+CELEX-31980D1071,,2,3,0.4,1,1,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1071/mineru/auto/CELEX-31980D1071.md,0
+CELEX-31980D1074,,0,,0.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1074/mineru/auto/CELEX-31980D1074.md,0
+CELEX-31980D1283,50,46,1,0.92,4,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1283/mineru/auto/CELEX-31980D1283.md,0
+CELEX-31980D1332,10,10,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1332/mineru/auto/CELEX-31980D1332.md,0
+CELEX-31980D1333,37,34,1,0.919,2,1,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1333/mineru/auto/CELEX-31980D1333.md,0
+CELEX-31980D1334,7,7,1,1.0,0,1,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31980D1334/mineru/auto/CELEX-31980D1334.md,0
+CELEX-31981D0881,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31981D0881/mineru/auto/CELEX-31981D0881.md,0
+CELEX-31981D0969,63,62,1,0.984,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31981D0969/mineru/auto/CELEX-31981D0969.md,0
+CELEX-31981D1030,74,71,1,0.959,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31981D1030/mineru/auto/CELEX-31981D1030.md,0
+CELEX-31981D1066,9,9,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31981D1066/mineru/auto/CELEX-31981D1066.md,0
+CELEX-31982D0053,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0053/mineru/auto/CELEX-31982D0053.md,0
+CELEX-31982D0071,24,23,1,0.958,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0071/mineru/auto/CELEX-31982D0071.md,0
+CELEX-31982D0123,65,58,1,0.892,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0123/mineru/auto/CELEX-31982D0123.md,0
+CELEX-31982D0124,27,27,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0124/mineru/auto/CELEX-31982D0124.md,0
+CELEX-31982D0174,19,16,1,0.842,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0174/mineru/auto/CELEX-31982D0174.md,0
+CELEX-31982D0203,21,21,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0203/mineru/auto/CELEX-31982D0203.md,0
+CELEX-31982D0204,55,47,1,0.855,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0204/mineru/auto/CELEX-31982D0204.md,0
+CELEX-31982D0260,23,23,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0260/mineru/auto/CELEX-31982D0260.md,0
+CELEX-31982D0267,78,72,2,0.923,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0267/mineru/auto/CELEX-31982D0267.md,0
+CELEX-31982D0349,17,16,1,0.941,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0349/mineru/auto/CELEX-31982D0349.md,0
+CELEX-31982D0367,82,63,1,0.768,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0367/mineru/auto/CELEX-31982D0367.md,0
+CELEX-31982D0371,76,72,1,0.947,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0371/mineru/auto/CELEX-31982D0371.md,0
+CELEX-31982D0465,33,30,1,0.909,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0465/mineru/auto/CELEX-31982D0465.md,0
+CELEX-31982D0506,169,150,1,0.888,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0506/mineru/auto/CELEX-31982D0506.md,0
+CELEX-31982D0628,48,46,1,0.958,2,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0628/mineru/auto/CELEX-31982D0628.md,0
+CELEX-31982D0742,14,14,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0742/mineru/auto/CELEX-31982D0742.md,0
+CELEX-31982D0756,10,9,1,0.9,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0756/mineru/auto/CELEX-31982D0756.md,0
+CELEX-31982D0777,,0,,0.0,0,0,none,undetermined,no line-start numbering,markdown,~/a/celex_docs/CELEX-31982D0777/mineru/auto/CELEX-31982D0777.md,0
+CELEX-31982D0853,69,66,1,0.957,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0853/mineru/auto/CELEX-31982D0853.md,0
+CELEX-31982D0860,49,39,1,0.796,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0860/mineru/auto/CELEX-31982D0860.md,0
+CELEX-31982D0861,45,44,1,0.978,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0861/mineru/auto/CELEX-31982D0861.md,0
+CELEX-31982D0866,,3,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0866/mineru/auto/CELEX-31982D0866.md,0
+CELEX-31982D0896,77,71,1,0.922,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0896/mineru/auto/CELEX-31982D0896.md,0
+CELEX-31982D0897,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31982D0897/mineru/auto/CELEX-31982D0897.md,0
+CELEX-31983D0205,8,7,1,0.875,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0205/mineru/auto/CELEX-31983D0205.md,0
+CELEX-31983D0252,14,11,1,0.786,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0252/mineru/auto/CELEX-31983D0252.md,0
+CELEX-31983D0361,53,45,1,0.849,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0361/mineru/auto/CELEX-31983D0361.md,0
+CELEX-31983D0390,11,11,1,1.0,0,0,dot,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0390/mineru/auto/CELEX-31983D0390.md,0
+CELEX-31983D0400,8,8,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0400/mineru/auto/CELEX-31983D0400.md,0
+CELEX-31983D0462,36,29,1,0.806,5,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0462/mineru/auto/CELEX-31983D0462.md,0
+CELEX-31983D0546,77,71,1,0.922,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0546/mineru/auto/CELEX-31983D0546.md,0
+CELEX-31983D0560,46,42,1,0.913,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0560/mineru/auto/CELEX-31983D0560.md,0
+CELEX-31983D0610,17,14,1,0.824,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0610/mineru/auto/CELEX-31983D0610.md,0
+CELEX-31983D0622,21,20,1,0.952,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0622/mineru/auto/CELEX-31983D0622.md,0
+CELEX-31983D0666,24,23,1,0.958,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0666/mineru/auto/CELEX-31983D0666.md,0
+CELEX-31983D0667,16,14,2,0.875,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0667/mineru/auto/CELEX-31983D0667.md,0
+CELEX-31983D0668,38,36,1,0.947,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0668/mineru/auto/CELEX-31983D0668.md,0
+CELEX-31983D0669,,3,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0669/mineru/auto/CELEX-31983D0669.md,0
+CELEX-31983D0670,42,36,1,0.857,5,1,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0670/mineru/auto/CELEX-31983D0670.md,0
+CELEX-31983D0671,37,29,1,0.784,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0671/mineru/auto/CELEX-31983D0671.md,0
+CELEX-31983D0672,6,6,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31983D0672/mineru/auto/CELEX-31983D0672.md,0
+CELEX-31984D0191,27,24,1,0.889,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0191/mineru/auto/CELEX-31984D0191.md,0
+CELEX-31984D0233,17,16,1,0.941,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0233/mineru/auto/CELEX-31984D0233.md,0
+CELEX-31984D0282,64,51,1,0.797,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0282/mineru/auto/CELEX-31984D0282.md,0
+CELEX-31984D0379,31,27,1,0.871,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0379/mineru/auto/CELEX-31984D0379.md,0
+CELEX-31984D0380,,31,1,0.564,2,0,bracket,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0380/mineru/auto/CELEX-31984D0380.md,0
+CELEX-31984D0381,18,16,1,0.889,2,0,bracket,doubtful,numbering restarts,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0381/mineru/auto/CELEX-31984D0381.md,0
+CELEX-31984D0387,41,31,1,0.756,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0387/mineru/auto/CELEX-31984D0387.md,0
+CELEX-31984D0388,55,49,1,0.891,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0388/mineru/auto/CELEX-31984D0388.md,0
+CELEX-31984D0405,104,91,1,0.875,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0405/mineru/auto/CELEX-31984D0405.md,0
+CELEX-31984D0588,12,12,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31984D0588/mineru/auto/CELEX-31984D0588.md,0
+CELEX-31985D0044,29,25,1,0.862,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0044/mineru/auto/CELEX-31985D0044.md,0
+CELEX-31985D0045,29,22,1,0.759,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0045/mineru/auto/CELEX-31985D0045.md,0
+CELEX-31985D0074,58,46,1,0.793,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0074/mineru/auto/CELEX-31985D0074.md,0
+CELEX-31985D0075,45,35,1,0.778,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0075/mineru/auto/CELEX-31985D0075.md,0
+CELEX-31985D0076,44,35,1,0.795,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0076/mineru/auto/CELEX-31985D0076.md,0
+CELEX-31985D0077,49,40,1,0.816,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0077/mineru/auto/CELEX-31985D0077.md,0
+CELEX-31985D0078,19,13,2,0.684,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0078/mineru/auto/CELEX-31985D0078.md,0
+CELEX-31985D0079,44,40,1,0.909,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0079/mineru/auto/CELEX-31985D0079.md,0
+CELEX-31985D0121,9,8,1,0.889,1,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0121/mineru/auto/CELEX-31985D0121.md,0
+CELEX-31985D0202,149,114,1,0.765,13,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0202/mineru/auto/CELEX-31985D0202.md,0
+CELEX-31985D0206,,6,1,0.4,3,0,dot,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0206/mineru/auto/CELEX-31985D0206.md,0
+CELEX-31985D0383,56,50,1,0.893,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0383/mineru/auto/CELEX-31985D0383.md,0
+CELEX-31985D0404,,4,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0404/mineru/auto/CELEX-31985D0404.md,0
+CELEX-31985D0410,9,9,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0410/mineru/auto/CELEX-31985D0410.md,0
+CELEX-31985D0559,25,19,1,0.76,4,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0559/mineru/auto/CELEX-31985D0559.md,0
+CELEX-31985D0560,15,15,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0560/mineru/auto/CELEX-31985D0560.md,0
+CELEX-31985D0561,30,29,1,0.967,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0561/mineru/auto/CELEX-31985D0561.md,0
+CELEX-31985D0562,31,30,1,0.968,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0562/mineru/auto/CELEX-31985D0562.md,0
+CELEX-31985D0563,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0563/mineru/auto/CELEX-31985D0563.md,0
+CELEX-31985D0564,,1,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0564/mineru/auto/CELEX-31985D0564.md,0
+CELEX-31985D0565,5,5,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0565/mineru/auto/CELEX-31985D0565.md,0
+CELEX-31985D0566,,4,1,0.8,1,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0566/auto/CELEX-31985D0566.md,0
+CELEX-31985D0609,101,91,2,0.901,8,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0609/mineru/auto/CELEX-31985D0609.md,0
+CELEX-31985D0615,58,52,1,0.897,5,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0615/mineru/auto/CELEX-31985D0615.md,0
+CELEX-31985D0616,39,39,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0616/mineru/auto/CELEX-31985D0616.md,0
+CELEX-31985D0617,68,63,1,0.926,3,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0617/mineru/auto/CELEX-31985D0617.md,0
+CELEX-31985D0618,35,27,1,0.771,6,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31985D0618/mineru/auto/CELEX-31985D0618.md,0
+CELEX-31986D0398,109,104,1,0.954,5,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0398/mineru/auto/CELEX-31986D0398.md,0
+CELEX-31986D0399,115,102,1,0.887,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0399/mineru/auto/CELEX-31986D0399.md,0
+CELEX-31986D0405,84,74,1,0.881,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0405/mineru/auto/CELEX-31986D0405.md,0
+CELEX-31986D0499,27,24,2,0.889,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0499/mineru/auto/CELEX-31986D0499.md,0
+CELEX-31986D0506,53,49,1,0.925,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0506/mineru/auto/CELEX-31986D0506.md,0
+CELEX-31986D0507,18,15,1,0.833,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0507/mineru/auto/CELEX-31986D0507.md,0
+CELEX-31986D0596,82,78,1,0.951,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31986D0596/mineru/auto/CELEX-31986D0596.md,0
+CELEX-31987D0001,59,58,1,0.983,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0001/mineru/auto/CELEX-31987D0001.md,0
+CELEX-31987D0002,18,12,1,0.667,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0002/auto/CELEX-31987D0002.md,0
+CELEX-31987D0003,47,39,1,0.83,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0003/mineru/auto/CELEX-31987D0003.md,0
+CELEX-31987D0013,61,51,1,0.836,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0013/mineru/auto/CELEX-31987D0013.md,0
+CELEX-31987D0014,69,65,1,0.942,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0014/mineru/auto/CELEX-31987D0014.md,0
+CELEX-31987D0017,44,41,1,0.932,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0017/mineru/auto/CELEX-31987D0017.md,0
+CELEX-31987D0044,22,21,1,0.955,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0044/mineru/auto/CELEX-31987D0044.md,0
+CELEX-31987D0045,21,20,1,0.952,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0045/mineru/auto/CELEX-31987D0045.md,0
+CELEX-31987D0046,22,21,1,0.955,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0046/mineru/auto/CELEX-31987D0046.md,0
+CELEX-31987D0047,20,16,1,0.8,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0047/mineru/auto/CELEX-31987D0047.md,0
+CELEX-31987D0069,52,42,2,0.808,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0069/mineru/auto/CELEX-31987D0069.md,0
+CELEX-31987D0100,27,23,1,0.852,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0100/mineru/auto/CELEX-31987D0100.md,0
+CELEX-31987D0103,74,61,2,0.824,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0103/mineru/auto/CELEX-31987D0103.md,0
+CELEX-31987D0123,22,16,1,0.727,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0123/mineru/auto/CELEX-31987D0123.md,0
+CELEX-31987D0359,14,13,1,0.929,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0359/auto/CELEX-31987D0359.md,0
+CELEX-31987D0406,79,72,1,0.911,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0406/mineru/auto/CELEX-31987D0406.md,0
+CELEX-31987D0407,39,25,1,0.641,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0407/mineru/auto/CELEX-31987D0407.md,0
+CELEX-31987D0408,12,12,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0408/auto/CELEX-31987D0408.md,0
+CELEX-31987D0409,39,37,1,0.949,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0409/mineru/auto/CELEX-31987D0409.md,0
+CELEX-31987D0500,25,22,1,0.88,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0500/mineru/auto/CELEX-31987D0500.md,0
+CELEX-31987D0509,35,27,1,0.771,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31987D0509/mineru/auto/CELEX-31987D0509.md,0
+CELEX-31988D0084,48,44,2,0.917,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0084/mineru/auto/CELEX-31988D0084.md,0
+CELEX-31988D0086,27,27,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0086/mineru/auto/CELEX-31988D0086.md,0
+CELEX-31988D0087,56,47,1,0.839,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0087/mineru/auto/CELEX-31988D0087.md,0
+CELEX-31988D0088,61,52,1,0.852,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0088/mineru/auto/CELEX-31988D0088.md,0
+CELEX-31988D0109,,4,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0109/mineru/auto/CELEX-31988D0109.md,0
+CELEX-31988D0110,12,10,2,0.833,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0110/mineru/auto/CELEX-31988D0110.md,0
+CELEX-31988D0138,104,85,1,0.817,16,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0138/mineru/auto/CELEX-31988D0138.md,0
+CELEX-31988D0143,45,41,1,0.911,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0143/mineru/auto/CELEX-31988D0143.md,0
+CELEX-31988D0172,58,54,1,0.931,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0172/mineru/auto/CELEX-31988D0172.md,0
+CELEX-31988D0330,49,44,1,0.898,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0330/mineru/auto/CELEX-31988D0330.md,0
+CELEX-31988D0469,44,40,1,0.909,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0469/mineru/auto/CELEX-31988D0469.md,0
+CELEX-31988D0477,54,48,1,0.889,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0477/mineru/auto/CELEX-31988D0477.md,0
+CELEX-31988D0491,168,152,1,0.905,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0491/mineru/auto/CELEX-31988D0491.md,0
+CELEX-31988D0501,63,45,1,0.714,12,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0501/mineru/auto/CELEX-31988D0501.md,0
+CELEX-31988D0518,88,82,1,0.932,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0518/mineru/auto/CELEX-31988D0518.md,0
+CELEX-31988D0541,34,22,2,0.647,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0541/mineru/auto/CELEX-31988D0541.md,0
+CELEX-31988D0555,40,34,1,0.85,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0555/mineru/auto/CELEX-31988D0555.md,0
+CELEX-31988D0563,49,38,1,0.776,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0563/mineru/auto/CELEX-31988D0563.md,0
+CELEX-31988D0568,16,16,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0568/mineru/auto/CELEX-31988D0568.md,0
+CELEX-31988D0587,,3,1,0.2,1,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0587/mineru/auto/CELEX-31988D0587.md,0
+CELEX-31988D0589,40,34,1,0.85,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0589/mineru/auto/CELEX-31988D0589.md,0
+CELEX-31988D0604,30,28,2,0.933,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0604/mineru/auto/CELEX-31988D0604.md,0
+CELEX-31988D0635,18,17,1,0.944,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31988D0635/mineru/auto/CELEX-31988D0635.md,0
+CELEX-31989D0022,174,147,2,0.845,20,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0022/mineru/auto/CELEX-31989D0022.md,0
+CELEX-31989D0044,89,86,1,0.966,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0044/mineru/auto/CELEX-31989D0044.md,0
+CELEX-31989D0093,85,75,1,0.882,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0093/mineru/auto/CELEX-31989D0093.md,0
+CELEX-31989D0094,44,30,1,0.682,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0094/mineru/auto/CELEX-31989D0094.md,0
+CELEX-31989D0095,49,45,2,0.918,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0095/mineru/auto/CELEX-31989D0095.md,0
+CELEX-31989D0096,14,13,1,0.929,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0096/mineru/auto/CELEX-31989D0096.md,0
+CELEX-31989D0113,133,125,2,0.94,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0113/mineru/auto/CELEX-31989D0113.md,0
+CELEX-31989D0190,54,48,1,0.889,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0190/mineru/auto/CELEX-31989D0190.md,0
+CELEX-31989D0191,67,59,1,0.881,8,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0191/mineru/auto/CELEX-31989D0191.md,0
+CELEX-31989D0205,26,25,1,0.962,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0205/mineru/auto/CELEX-31989D0205.md,0
+CELEX-31989D0408,9,7,1,0.778,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0408/mineru/auto/CELEX-31989D0408.md,0
+CELEX-31989D0467,61,54,2,0.885,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0467/mineru/auto/CELEX-31989D0467.md,0
+CELEX-31989D0512,68,54,1,0.794,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0512/mineru/auto/CELEX-31989D0512.md,0
+CELEX-31989D0515,210,198,1,0.943,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0515/mineru/auto/CELEX-31989D0515.md,0
+CELEX-31989D0536,58,51,1,0.879,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31989D0536/mineru/auto/CELEX-31989D0536.md,0
+CELEX-31990D0016,18,15,1,0.833,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0016/auto/CELEX-31990D0016.md,0
+CELEX-31990D0022,33,26,1,0.788,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0022/mineru/auto/CELEX-31990D0022.md,0
+CELEX-31990D0025,29,24,1,0.828,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0025/mineru/auto/CELEX-31990D0025.md,0
+CELEX-31990D0033,43,40,1,0.93,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0033/mineru/auto/CELEX-31990D0033.md,0
+CELEX-31990D0038,70,66,2,0.943,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0038/mineru/auto/CELEX-31990D0038.md,0
+CELEX-31990D0045,105,98,1,0.933,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0045/mineru/auto/CELEX-31990D0045.md,0
+CELEX-31990D0046,26,24,2,0.923,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0046/mineru/auto/CELEX-31990D0046.md,0
+CELEX-31990D0186,16,13,3,0.812,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0186/mineru/auto/CELEX-31990D0186.md,0
+CELEX-31990D0363,19,18,1,0.947,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0363/mineru/auto/CELEX-31990D0363.md,0
+CELEX-31990D0410,37,35,1,0.946,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0410/mineru/auto/CELEX-31990D0410.md,0
+CELEX-31990D0446,7,7,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0446/mineru/auto/CELEX-31990D0446.md,0
+CELEX-31990D0456,14,12,1,0.857,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0456/mineru/auto/CELEX-31990D0456.md,0
+CELEX-31990D0535,49,46,1,0.939,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0535/mineru/auto/CELEX-31990D0535.md,0
+CELEX-31990D0645,20,18,1,0.9,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31990D0645/mineru/auto/CELEX-31990D0645.md,0
+CELEX-31991D0038,36,28,1,0.778,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0038/mineru/auto/CELEX-31991D0038.md,0
+CELEX-31991D0039,13,10,1,0.769,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0039/mineru/auto/CELEX-31991D0039.md,0
+CELEX-31991D0050,55,46,1,0.836,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0050/mineru/auto/CELEX-31991D0050.md,0
+CELEX-31991D0055,15,13,1,0.867,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0055/mineru/auto/CELEX-31991D0055.md,0
+CELEX-31991D0128,25,24,1,0.96,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0128/mineru/auto/CELEX-31991D0128.md,0
+CELEX-31991D0130,76,67,1,0.882,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0130/mineru/auto/CELEX-31991D0130.md,0
+CELEX-31991D0153,32,31,1,0.969,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0153/mineru/auto/CELEX-31991D0153.md,0
+CELEX-31991D0213,11,9,1,0.818,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0213/mineru/auto/CELEX-31991D0213.md,0
+CELEX-31991D0297,68,57,1,0.838,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0297/mineru/auto/CELEX-31991D0297.md,0
+CELEX-31991D0298,19,16,2,0.842,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0298/mineru/auto/CELEX-31991D0298.md,0
+CELEX-31991D0299,71,63,1,0.887,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0299/mineru/auto/CELEX-31991D0299.md,0
+CELEX-31991D0300,71,67,1,0.944,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0300/mineru/auto/CELEX-31991D0300.md,0
+CELEX-31991D0301,31,26,2,0.839,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0301/mineru/auto/CELEX-31991D0301.md,0
+CELEX-31991D0329,43,41,1,0.953,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0329/mineru/auto/CELEX-31991D0329.md,0
+CELEX-31991D0335,44,39,1,0.886,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0335/mineru/auto/CELEX-31991D0335.md,0
+CELEX-31991D0480,75,71,3,0.947,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0480/mineru/auto/CELEX-31991D0480.md,0
+CELEX-31991D0481,64,57,1,0.891,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0481/mineru/auto/CELEX-31991D0481.md,0
+CELEX-31991D0532,30,29,1,0.967,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0532/mineru/auto/CELEX-31991D0532.md,0
+CELEX-31991D0562,24,19,1,0.792,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31991D0562/mineru/auto/CELEX-31991D0562.md,0
+CELEX-31992D0033,7,7,1,1.0,0,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0033/mineru/auto/CELEX-31992D0033.md,0
+CELEX-31992D0096,44,39,1,0.886,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0096/mineru/auto/CELEX-31992D0096.md,0
+CELEX-31992D0154,34,33,1,0.971,1,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0154/mineru/auto/CELEX-31992D0154.md,0
+CELEX-31992D0157,64,60,1,0.938,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0157/mineru/auto/CELEX-31992D0157.md,0
+CELEX-31992D0163,184,144,1,0.783,13,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0163/mineru/auto/CELEX-31992D0163.md,0
+CELEX-31992D0204,141,93,1,0.66,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0204/mineru/auto/CELEX-31992D0204.md,0
+CELEX-31992D0212,91,78,2,0.857,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0212/mineru/auto/CELEX-31992D0212.md,0
+CELEX-31992D0213,44,41,1,0.932,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0213/mineru/auto/CELEX-31992D0213.md,0
+CELEX-31992D0261,71,66,2,0.93,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0261/mineru/auto/CELEX-31992D0261.md,0
+CELEX-31992D0262,74,69,1,0.932,4,0,bracket,confident,"",markdown,~/a/celex_docs/CELEX-31992D0262/mineru/auto/CELEX-31992D0262.md,0
+CELEX-31992D0426,26,24,1,0.923,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0426/mineru/auto/CELEX-31992D0426.md,0
+CELEX-31992D0427,55,45,1,0.818,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0427/auto/CELEX-31992D0427.md,0
+CELEX-31992D0428,8,7,1,0.875,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0428/mineru/auto/CELEX-31992D0428.md,0
+CELEX-31992D0500,,2,1,1.0,0,0,bracket,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0500/mineru/auto/CELEX-31992D0500.md,0
+CELEX-31992D0521,126,123,1,0.976,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31992D0521/mineru/auto/CELEX-31992D0521.md,0
+CELEX-31993D0003,39,33,2,0.846,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0003/mineru/auto/CELEX-31993D0003.md,0
+CELEX-31993D0046,23,20,1,0.87,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0046/mineru/auto/CELEX-31993D0046.md,0
+CELEX-31993D0047,9,8,1,0.889,1,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0047/mineru/auto/CELEX-31993D0047.md,0
+CELEX-31993D0048,30,26,1,0.867,4,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0048/mineru/auto/CELEX-31993D0048.md,0
+CELEX-31993D0049,41,33,1,0.805,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0049/mineru/auto/CELEX-31993D0049.md,0
+CELEX-31993D0050,33,29,1,0.879,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0050/mineru/auto/CELEX-31993D0050.md,0
+CELEX-31993D0082,115,105,1,0.913,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0082/mineru/auto/CELEX-31993D0082.md,0
+CELEX-31993D0126,43,35,1,0.814,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0126/mineru/auto/CELEX-31993D0126.md,0
+CELEX-31993D0174,74,69,3,0.932,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0174/mineru/auto/CELEX-31993D0174.md,0
+CELEX-31993D0252,42,35,1,0.833,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0252/mineru/auto/CELEX-31993D0252.md,0
+CELEX-31993D0354,,4,1,1.0,0,0,bracket,undetermined,chain too short,markdown,~/a/celex_docs/CELEX-31993D0354/mineru/auto/CELEX-31993D0354.md,0
+CELEX-31993D0403,83,72,1,0.867,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0403/mineru/auto/CELEX-31993D0403.md,0
+CELEX-31993D0405,154,138,1,0.896,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0405/mineru/auto/CELEX-31993D0405.md,0
+CELEX-31993D0406,154,141,1,0.916,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0406/mineru/auto/CELEX-31993D0406.md,0
+CELEX-31993D0438,54,51,1,0.944,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0438/mineru/auto/CELEX-31993D0438.md,0
+CELEX-31993D0554,132,126,1,0.955,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0554/mineru/auto/CELEX-31993D0554.md,0
+CELEX-31993D0668,38,36,1,0.947,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31993D0668/mineru/auto/CELEX-31993D0668.md,0
+CELEX-31994D0019,79,75,1,0.949,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0019/mineru/auto/CELEX-31994D0019.md,0
+CELEX-31994D0029,42,35,1,0.833,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0029/mineru/auto/CELEX-31994D0029.md,0
+CELEX-31994D0119,19,16,1,0.842,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0119/auto/CELEX-31994D0119.md,0
+CELEX-31994D0153,9,9,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0153/mineru/auto/CELEX-31994D0153.md,0
+CELEX-31994D0210,263,251,1,0.954,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0210/mineru/auto/CELEX-31994D0210.md,0
+CELEX-31994D0272,32,28,1,0.875,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0272/mineru/auto/CELEX-31994D0272.md,0
+CELEX-31994D0296,45,45,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0296/mineru/auto/CELEX-31994D0296.md,0
+CELEX-31994D0322,81,70,1,0.864,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0322/mineru/auto/CELEX-31994D0322.md,0
+CELEX-31994D0384,31,31,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0384/mineru/auto/CELEX-31994D0384.md,0
+CELEX-31994D0579,65,59,1,0.908,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0579/mineru/auto/CELEX-31994D0579.md,0
+CELEX-31994D0594,68,68,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0594/mineru/auto/CELEX-31994D0594.md,0
+CELEX-31994D0599,59,55,1,0.932,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0599/mineru/auto/CELEX-31994D0599.md,0
+CELEX-31994D0601,175,163,1,0.931,12,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0601/mineru/auto/CELEX-31994D0601.md,0
+CELEX-31994D0663,84,84,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0663/mineru/auto/CELEX-31994D0663.md,0
+CELEX-31994D0735,25,23,1,0.92,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0735/mineru/auto/CELEX-31994D0735.md,0
+CELEX-31994D0770,114,89,1,0.781,18,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0770/mineru/auto/CELEX-31994D0770.md,0
+CELEX-31994D0771,34,30,1,0.882,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0771/mineru/auto/CELEX-31994D0771.md,0
+CELEX-31994D0815,48,44,1,0.917,4,10,bracket,doubtful,numbers beyond max,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0815/mineru/auto/CELEX-31994D0815.md,0
+CELEX-31994D0823,46,42,1,0.913,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0823/mineru/auto/CELEX-31994D0823.md,0
+CELEX-31994D0894,124,123,1,0.992,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0894/mineru/auto/CELEX-31994D0894.md,0
+CELEX-31994D0895,62,59,1,0.952,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0895/mineru/auto/CELEX-31994D0895.md,0
+CELEX-31994D0896,34,27,1,0.794,6,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0896/mineru/auto/CELEX-31994D0896.md,0
+CELEX-31994D0980,492,462,1,0.939,18,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0980/mineru/auto/CELEX-31994D0980.md,0
+CELEX-31994D0985,159,157,1,0.987,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0985/mineru/auto/CELEX-31994D0985.md,0
+CELEX-31994D0986,31,24,2,0.774,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0986/mineru/auto/CELEX-31994D0986.md,0
+CELEX-31994D0987,74,71,3,0.959,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31994D0987/mineru/auto/CELEX-31994D0987.md,0
+CELEX-31995D0188,49,46,1,0.939,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0188/mineru/auto/CELEX-31995D0188.md,0
+CELEX-31995D0364,20,18,1,0.9,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0364/auto/CELEX-31995D0364.md,0
+CELEX-31995D0373,15,14,1,0.933,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0373/mineru/auto/CELEX-31995D0373.md,0
+CELEX-31995D0477,105,99,1,0.943,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0477/mineru/auto/CELEX-31995D0477.md,0
+CELEX-31995D0489,27,26,1,0.963,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0489/auto/CELEX-31995D0489.md,0
+CELEX-31995D0551,46,43,1,0.935,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31995D0551/mineru/auto/CELEX-31995D0551.md,0
+CELEX-31996D0180,114,109,1,0.956,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0180/mineru/auto/CELEX-31996D0180.md,0
+CELEX-31996D0438,90,87,2,0.967,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0438/mineru/auto/CELEX-31996D0438.md,0
+CELEX-31996D0454,,10,2,0.455,5,0,bracket,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0454/mineru/auto/CELEX-31996D0454.md,0
+CELEX-31996D0478,239,195,1,0.816,36,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0478/mineru/auto/CELEX-31996D0478.md,0
+CELEX-31996D0546,78,60,1,0.769,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0546/mineru/auto/CELEX-31996D0546.md,0
+CELEX-31996D0547,78,60,1,0.769,10,0,dot,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996D0547/mineru/auto/CELEX-31996D0547.md,0
+CELEX-31996M0802,,2,1,1.0,0,0,dot,undetermined,chain too short,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31996M0802/auto/CELEX-31996M0802.md,0
+CELEX-31997D0039,49,46,1,0.939,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0039/mineru/auto/CELEX-31997D0039.md,0
+CELEX-31997D0084,69,66,1,0.957,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0084/mineru/auto/CELEX-31997D0084.md,0
+CELEX-31997D0123,82,75,1,0.915,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0123/mineru/auto/CELEX-31997D0123.md,0
+CELEX-31997D0181,31,27,1,0.871,2,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0181/auto/CELEX-31997D0181.md,0
+CELEX-31997D0310,45,37,1,0.822,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0310/auto/CELEX-31997D0310.md,0
+CELEX-31997D0568,36,30,2,0.833,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0568/auto/CELEX-31997D0568.md,0
+CELEX-31997D0603,21,21,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0603/auto/CELEX-31997D0603.md,0
+CELEX-31997D0606,14,14,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0606/auto/CELEX-31997D0606.md,0
+CELEX-31997D0607,50,43,1,0.86,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0607/auto/CELEX-31997D0607.md,0
+CELEX-31997D0624,166,134,2,0.807,22,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0624/mineru/auto/CELEX-31997D0624.md,0
+CELEX-31997D0744,48,47,2,0.979,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0744/auto/CELEX-31997D0744.md,0
+CELEX-31997D0745,23,20,1,0.87,3,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0745/auto/CELEX-31997D0745.md,0
+CELEX-31997D0780,106,102,1,0.962,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0780/auto/CELEX-31997D0780.md,0
+CELEX-31997D0781,90,83,2,0.922,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31997D0781/auto/CELEX-31997D0781.md,0
+CELEX-31998D0004,64,61,1,0.953,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31998D0004/auto/CELEX-31998D0004.md,0
+CELEX-31998D0273,222,199,1,0.896,11,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31998D0273/mineru/auto/CELEX-31998D0273.md,0
+CELEX-31998D0531,280,254,1,0.907,22,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31998D0531/auto/CELEX-31998D0531.md,0
+CELEX-31998D0538,76,74,1,0.974,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31998D0538/mineru/auto/CELEX-31998D0538.md,0
+CELEX-31999D0006,79,77,1,0.975,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0006/mineru/auto/CELEX-31999D0006.md,0
+CELEX-31999D0060,183,168,1,0.918,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0060/mineru/auto/CELEX-31999D0060.md,0
+CELEX-31999D0198,63,59,1,0.937,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0198/mineru/auto/CELEX-31999D0198.md,0
+CELEX-31999D0199,45,41,1,0.911,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0199/mineru/auto/CELEX-31999D0199.md,0
+CELEX-31999D0230,185,175,2,0.946,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0230/mineru/auto/CELEX-31999D0230.md,0
+CELEX-31999D0242,140,131,1,0.936,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0242/mineru/auto/CELEX-31999D0242.md,0
+CELEX-31999D0243,611,569,1,0.931,36,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0243/mineru/auto/CELEX-31999D0243.md,0
+CELEX-31999D0267,47,42,1,0.894,5,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0267/mineru/auto/CELEX-31999D0267.md,0
+CELEX-31999D0329,142,134,1,0.944,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0329/mineru/auto/CELEX-31999D0329.md,0
+CELEX-31999D0421,137,135,1,0.985,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0421/mineru/auto/CELEX-31999D0421.md,0
+CELEX-31999D0473,199,186,1,0.935,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0473/mineru/auto/CELEX-31999D0473.md,0
+CELEX-31999D0474,172,163,1,0.948,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0474/mineru/auto/CELEX-31999D0474.md,0
+CELEX-31999D0485,239,222,1,0.929,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0485/mineru/auto/CELEX-31999D0485.md,0
+CELEX-31999D0573,69,62,1,0.899,7,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0573/mineru/auto/CELEX-31999D0573.md,0
+CELEX-31999D0574,47,44,1,0.936,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0574/mineru/auto/CELEX-31999D0574.md,0
+CELEX-31999D0687,65,59,1,0.908,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0687/mineru/auto/CELEX-31999D0687.md,0
+CELEX-31999D0695,98,88,1,0.898,9,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0695/mineru/auto/CELEX-31999D0695.md,0
+CELEX-31999D0781,194,175,1,0.902,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-31999D0781/mineru/auto/CELEX-31999D0781.md,0
+CELEX-32000D0012,125,124,1,0.992,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0012/mineru/auto/CELEX-32000D0012.md,0
+CELEX-32000D0074,123,110,1,0.894,10,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0074/mineru/auto/CELEX-32000D0074.md,0
+CELEX-32000D0117,153,147,1,0.961,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0117/mineru/auto/CELEX-32000D0117.md,0
+CELEX-32000D0146,74,70,1,0.946,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0146/mineru/auto/CELEX-32000D0146.md,0
+CELEX-32000D0182,99,95,1,0.96,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0182/mineru/auto/CELEX-32000D0182.md,0
+CELEX-32000D0400,116,116,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0400/mineru/auto/CELEX-32000D0400.md,0
+CELEX-32000D0475,68,65,1,0.956,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0475/mineru/auto/CELEX-32000D0475.md,0
+CELEX-32000D0484,70,66,1,0.943,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0484/mineru/auto/CELEX-32000D0484.md,0
+CELEX-32000D0521,73,73,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0521/mineru/auto/CELEX-32000D0521.md,0
+CELEX-32000D0627,208,203,1,0.976,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32000D0627/mineru/auto/CELEX-32000D0627.md,0
+CELEX-32001D0135,135,133,1,0.985,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0135/mineru/auto/CELEX-32001D0135.md,0
+CELEX-32001D0143,19,19,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0143/mineru/auto/CELEX-32001D0143.md,0
+CELEX-32001D0146,202,190,1,0.941,11,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0146/mineru/auto/CELEX-32001D0146.md,0
+CELEX-32001D0176,31,31,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0176/mineru/auto/CELEX-32001D0176.md,0
+CELEX-32001D0354,52,52,1,1.0,0,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0354/mineru/auto/CELEX-32001D0354.md,0
+CELEX-32001D0418,445,423,1,0.951,20,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0418/mineru/auto/CELEX-32001D0418.md,0
+CELEX-32001D0463,166,154,2,0.928,8,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0463/mineru/auto/CELEX-32001D0463.md,0
+CELEX-32001D0478,61,55,1,0.902,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0478/mineru/auto/CELEX-32001D0478.md,0
+CELEX-32001D0663,86,79,1,0.919,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0663/mineru/auto/CELEX-32001D0663.md,0
+CELEX-32001D0696,56,51,1,0.911,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0696/mineru/auto/CELEX-32001D0696.md,0
+CELEX-32001D0711,125,118,1,0.944,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0711/mineru/auto/CELEX-32001D0711.md,0
+CELEX-32001D0716,125,122,1,0.976,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0716/mineru/auto/CELEX-32001D0716.md,0
+CELEX-32001D0791,191,175,1,0.916,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0791/mineru/auto/CELEX-32001D0791.md,0
+CELEX-32001D0892,193,186,1,0.964,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32001D0892/mineru/auto/CELEX-32001D0892.md,0
+CELEX-32002D0180,94,89,1,0.947,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0180/mineru/auto/CELEX-32002D0180.md,0
+CELEX-32002D0190,261,245,1,0.939,14,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0190/mineru/auto/CELEX-32002D0190.md,0
+CELEX-32002D0271,244,226,1,0.926,17,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0271/mineru/auto/CELEX-32002D0271.md,0
+CELEX-32002D0344,97,92,1,0.948,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0344/mineru/auto/CELEX-32002D0344.md,0
+CELEX-32002D0405,365,350,1,0.959,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0405/mineru/auto/CELEX-32002D0405.md,0
+CELEX-32002D0742,336,326,1,0.97,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0742/mineru/auto/CELEX-32002D0742.md,0
+CELEX-32002D0746,116,113,1,0.974,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0746/mineru/auto/CELEX-32002D0746.md,0
+CELEX-32002D0758_01,253,236,1,0.933,13,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0758_01/mineru/auto/CELEX-32002D0758_01.md,0
+CELEX-32002D0759,109,108,1,0.991,1,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0759/mineru/auto/CELEX-32002D0759.md,0
+CELEX-32002D0914,110,103,2,0.936,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32002D0914/mineru/auto/CELEX-32002D0914.md,0
+CELEX-32003D0002,775,761,1,0.982,11,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0002/mineru/auto/CELEX-32003D0002.md,0
+CELEX-32003D0005,78,74,1,0.949,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0005/mineru/auto/CELEX-32003D0005.md,0
+CELEX-32003D0006,207,201,1,0.971,6,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0006/mineru/auto/CELEX-32003D0006.md,0
+CELEX-32003D0007,172,167,1,0.971,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0007/mineru/auto/CELEX-32003D0007.md,0
+CELEX-32003D0025,198,187,1,0.944,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0025/mineru/auto/CELEX-32003D0025.md,0
+CELEX-32003D0207,460,430,1,0.935,22,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0207/mineru/auto/CELEX-32003D0207.md,0
+CELEX-32003D0300,125,122,1,0.976,3,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0300/mineru/auto/CELEX-32003D0300.md,0
+CELEX-32003D0382,175,157,2,0.897,14,0,bracket,doubtful,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0382/mineru/auto/CELEX-32003D0382.md,0
+CELEX-32003D0437,370,361,1,0.976,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0437/mineru/auto/CELEX-32003D0437.md,0
+CELEX-32003D0569,368,359,1,0.976,9,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0569/mineru/auto/CELEX-32003D0569.md,0
+CELEX-32003D0570,154,148,1,0.961,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0570/mineru/auto/CELEX-32003D0570.md,0
+CELEX-32003D0600,186,175,1,0.941,10,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0600/mineru/auto/CELEX-32003D0600.md,0
+CELEX-32003D0674,356,347,2,0.975,7,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0674/mineru/auto/CELEX-32003D0674.md,0
+CELEX-32003D0675,475,443,1,0.933,29,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0675/mineru/auto/CELEX-32003D0675.md,0
+CELEX-32003D0707,212,197,1,0.929,15,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0707/mineru/auto/CELEX-32003D0707.md,0
+CELEX-32003D0778,201,195,2,0.97,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32003D0778/mineru/auto/CELEX-32003D0778.md,0
+CELEX-32004D0104,283,274,3,0.968,5,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32004D0104/mineru/auto/CELEX-32004D0104.md,0
+CELEX-32004D0139,182,180,1,0.989,2,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32004D0139/mineru/auto/CELEX-32004D0139.md,0
+CELEX-32004D0206,296,292,1,0.986,4,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32004D0206/mineru/auto/CELEX-32004D0206.md,0
+CELEX-32004D0207,151,137,1,0.907,14,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32004D0207/mineru/auto/CELEX-32004D0207.md,0
+CELEX-32004D0337,461,432,1,0.937,27,0,bracket,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/CELEX-32004D0337/mineru/auto/CELEX-32004D0337.md,0
+DEC-29373-20010809,72,72,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-29373-20010809/candidates/mineru/dbcomp-1648.md,0
+DEC-40636-20250407,453,453,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-40636-20250407/candidates/mineru/dbcomp-2763.md,0
+DEC-AT34174-20120611,53,53,1,1.0,0,0,dot,confident,"",markdown,~/a/celex_docs/DEC-AT34174-20120611/candidates/mineru/34174_2_2.md,0
+DEC-AT34493-20010917,185,185,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT34493-20010917/candidates/mineru/34493_63_6.md,0
+DEC-AT36212-20100623,479,479,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT36212-20100623/candidates/mineru/36212_471_5_EN.md,0
+DEC-AT38238-20170616,11,11,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT38238-20170616/candidates/mineru/38238_440_4.md,0
+DEC-AT38589-20160629,28,28,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT38589-20160629/candidates/mineru/38589_4951_5.md,0
+DEC-AT38589-20160629_2,14,14,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT38589-20160629/candidates/mineru/38589_4952_3.md,0
+DEC-AT38695-20120327,11,11,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT38695-20120327/candidates/mineru/38695_1000_9.md,0
+DEC-AT38700-20080305,252,251,1,0.996,1,0,dot,confident,"",markdown,~/a/celex_docs/DEC-AT38700-20080305/candidates/mineru/38700_517_3.md,0
+DEC-AT38700-20090804,51,51,1,1.0,0,0,dot,confident,"",markdown,~/a/celex_docs/DEC-AT38700-20090804/candidates/mineru/38700_521_3.md,0
+DEC-AT38700-20180417,88,88,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT38700-20180417/candidates/mineru/38700_2053_3.md,0
+DEC-AT39168-20110331,9,8,1,0.889,1,0,bracket,doubtful,low coverage,markdown,~/a/celex_docs/DEC-AT39168-20110331/candidates/mineru/39168_1108_5_EN.md,0
+DEC-AT39258-20101109,1400,1392,1,0.994,6,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39258-20101109/candidates/mineru/39258_7008_8.md,0
+DEC-AT39398-20140226,118,118,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39398-20140226/candidates/mineru/39398_9728_3.md,0
+DEC-AT39530-20130306,79,79,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39530-20130306/candidates/mineru/39530_3162_3.md,0
+DEC-AT39780-20170616,71,71,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39780-20170616/candidates/mineru/39780_3807_3.md,0
+DEC-AT39792-20140402,115,115,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39792-20140402/candidates/mineru/AT_39792_4939923_2603_5.md,0
+DEC-AT39793-20120328,103,103,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39793-20120328/candidates/mineru/39793_489_4.md,0
+DEC-AT39796-20110827,105,105,1,1.0,0,0,dot,confident,"",markdown,~/a/celex_docs/DEC-AT39796-20110827/candidates/mineru/39796_554_6_EN.md,0
+DEC-AT39824-20160719,136,136,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39824-20160719/candidates/mineru/39824_8750_4.md,0
+DEC-AT39839-20130123,513,513,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39839-20130123/candidates/mineru/39839_1210_8.md,0
+DEC-AT39847-20121212,163,163,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39847-20121212/candidates/mineru/39847_26804_4.md,0
+DEC-AT39861-20131204,169,169,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39861-20131204/candidates/mineru/39861_4165_3.md,0
+DEC-AT39914-20131204,109,109,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39914-20131204/candidates/mineru/39914_8648_3.md,0
+DEC-AT39914-20160406,12,12,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39914-20160406/candidates/mineru/39914_8702_9.md,0
+DEC-AT39914-20210628,158,158,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39914-20210628/candidates/mineru/AT_39914_10516787_9433_3.md,0
+DEC-AT39924-20141021,93,93,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39924-20141021/candidates/mineru/AT_39924_4127881_1156_5.md,0
+DEC-AT39965-20140625,76,76,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT39965-20140625/candidates/mineru/AT_39965_4058784_1431_9.md,0
+DEC-AT40018-20170406,6,6,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40018-20170406/candidates/mineru/40018_2612_9.md,0
+DEC-AT40023-20160726,97,97,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40023-20160726/candidates/mineru/40023_5273_5.md,0
+DEC-AT40049-20190122,121,121,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40049-20190122/candidates/mineru/40049_4093_3.md,0
+DEC-AT40135-20190516,215,212,2,0.986,2,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40135-20190516/candidates/mineru/AT_40135_8399795_5456_11.md,0
+DEC-AT40135-20190516_2,210,209,2,0.995,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40135-20190516/candidates/mineru/AT_40135_8399809_5457_11.md,0
+DEC-AT40608-20191016,554,554,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40608-20191016/candidates/mineru/40608_2791_11.md,0
+DEC-AT40670-20250905,2247,2245,1,0.999,2,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40670-20250905/candidates/mineru/AT_40670_18812.md,0
+DEC-AT40684-20241114,1484,1484,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40684-20241114/candidates/mineru/AT_40684_10582539_13405_4.md,0
+DEC-AT40721-20250912,255,254,1,0.996,1,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40721-20250912/candidates/mineru/AT_40721_7220.md,0
+DEC-AT40840-20251014,116,116,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40840-20251014/candidates/mineru/AT_40840_1895.md,0
+DEC-AT40880-20251014,88,88,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40880-20251014/candidates/mineru/AT_40880_645.md,0
+DEC-AT40881-20251014,84,84,1,1.0,0,0,bracket,confident,"",markdown,~/a/celex_docs/DEC-AT40881-20251014/candidates/mineru/AT_40881_1076.md,0
+c1417,134,123,1,0.918,11,0,dot,confident,"",markdown,/usr/job/a/pdf-pytesseract-ocr/docs/c1417/mineru/auto/c1417_en.md,0
+iv34801_en,,59,1,0.551,25,0,dot,undetermined,low coverage,markdown,/usr/job/a/pdf-pytesseract-ocr/docs/iv34801_en/mineru/auto/iv34801_en.md,0

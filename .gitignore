@@ -221,3 +221,5 @@ node_modules/
 
 # Large binary artifacts (e.g. downloaded .deb packages) — never commit
 *.deb
+
+config_main/master_doc_descriptors.json.bak-*

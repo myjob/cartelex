@@ -457,6 +457,29 @@ class TestFactIngestionOrchestratorDependencies(unittest.TestCase):
             execution_order.index("heideltime_event"),
         )
 
+    def test_topological_order_runs_reader_after_selected_context_facts(self):
+        """A ``context_facts`` reader listed first still runs after its inputs."""
+        active = [
+            {"target_fact_name": "case_summary", "context_facts": ["case_title", "fines"]},
+            {"target_fact_name": "case_title"},
+            {"target_fact_name": "fines", "predecessors": ["case_title"]},
+        ]
+
+        execution_order = self.orchestrator._topological_order(active)
+
+        self.assertEqual(execution_order[-1], "case_summary")
+
+    def test_topological_order_ignores_unselected_context_facts(self):
+        """Context facts are ordering-only; unselected ones are not scheduled."""
+        active = [
+            {"target_fact_name": "case_summary", "context_facts": ["case_title", "fines"]},
+            {"target_fact_name": "case_title"},
+        ]
+
+        execution_order = self.orchestrator._topological_order(active)
+
+        self.assertEqual(execution_order, ["case_title", "case_summary"])
+
     def test_expanded_sorted_structs_execute_predecessor_first(self):
         structs = [
             {
@@ -632,6 +655,36 @@ class TestFactIngestionOrchestratorDependencies(unittest.TestCase):
         independent_pipe.process.assert_called_once()
 
 
+class TestBuildPipelinesWiring(unittest.TestCase):
+    """_build_pipelines shares one resolver across every FactIngestor (fakes only)."""
+
+    def test_one_shared_resolver_injected_into_every_ingestor(self):
+        """from_engine is called once with the shared engine; each ingestor gets it."""
+        module = "batch.Main_ingest_generic_facts"
+        shared_repo = MagicMock()
+        resolver = MagicMock(name="resolver")
+        with (
+            patch(f"{module}.LineageRepository"),
+            patch(f"{module}.ChunkRepository"),
+            patch(f"{module}.FactEmbeddingLoaderQwen"),
+            patch(f"{module}.FactRagPipeline"),
+            patch(f"{module}.FactIngestor") as ingestor_cls,
+            patch(f"{module}.SourceDocumentResolver") as resolver_cls,
+        ):
+            resolver_cls.from_engine.return_value = resolver
+            pipelines = FactIngestionOrchestrator(description="test")._build_pipelines(
+                [{"target_fact_name": "fines"}, {"target_fact_name": "parties"}],
+                shared_repo,
+            )
+
+        self.assertEqual(len(pipelines), 2)
+        resolver_cls.from_engine.assert_called_once_with(shared_repo.engine)
+        self.assertEqual(ingestor_cls.call_count, 2)
+        for call in ingestor_cls.call_args_list:
+            self.assertIs(call.kwargs["source_documents"], resolver)
+            self.assertIs(call.kwargs["fact_table"], shared_repo)
+
+
 class TestFactIngestionOrchestratorSelectionFlags(unittest.TestCase):
     """Tests for the mutually exclusive fact-selection CLI flags."""
 
@@ -661,7 +714,7 @@ class TestOverwriteCascadeConfirmation(unittest.TestCase):
         {"target_fact_name": "heideltime_raw"},
         {"target_fact_name": "heideltime_event", "predecessors": ["heideltime_raw"]},
         {"target_fact_name": "heideltime_event_agg", "predecessors": "heideltime_event"},
-        {"target_fact_name": "heideltime_cartel_period", "predecessors": ["heideltime_event"]},
+        {"target_fact_name": "cartel_period", "predecessors": ["heideltime_event"]},
         {"target_fact_name": "decision_date", "predecessors": ["heideltime_event_agg"]},
         {"target_fact_name": "fines"},
     ]
@@ -713,7 +766,7 @@ class TestOverwriteCascadeConfirmation(unittest.TestCase):
             self._confirm(args, self.AGG_CHAIN, "")
         output = "\n".join(logs.output)
         self.assertIn("heideltime_event, heideltime_raw", output)
-        self.assertIn("decision_date, heideltime_cartel_period", output)
+        self.assertIn("cartel_period, decision_date", output)
         self.assertNotIn("fines", output)
         self.assertIn("the whole corpus", output)
 
