@@ -1,3 +1,13 @@
+# v0.2.1 — Re-release of v0.2.0
+
+The v0.2.0 tag was created on a commit that predated the release merge: its
+source archives carried version 0.1.0 and none of the v0.2.0 changes. v0.2.1
+publishes the intended v0.2.0 content from `main`. It also removes the re-added
+`.cursorrules` and a stray `celex-facts/` spec-kit scaffold from the repository.
+The v0.2.0 notes below apply unchanged.
+
+---
+
 # v0.2.0 — Document acquisition pipeline, translation and deterministic facts
 
 **Period:** 2026-10-18 (v0.1.0) to 2026-11-07
