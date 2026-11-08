@@ -286,6 +286,36 @@ class TestFactEmbeddingLoaderQwenOversizedPassage(unittest.TestCase):
             math.sqrt(sum(value * value for value in vector)), 1.0, places=6
         )
 
+    @patch(
+        "pipelines.rag.pgvector.embeddings.fact_embedding_loader_qwen.retrieve_qwen3_embedding",
+        return_value=[0.1] * 4096,
+    )
+    def test_question_longer_than_the_limit_is_capped(self, mock_embed):
+        """A question alone over the context (NACE list) must not yield a negative window."""
+        from pipelines.rag.pgvector.embeddings.qwen3_embedding import (
+            count_tokens,
+            embedding_token_limit,
+        )
+
+        row = SimpleNamespace(
+            id="row-id",
+            question="Match the product to a NACE group. " + "01.1:Growing of crops\n" * 900,
+            fact_name="NACE_group_code",
+            value_md="05.1:Mining of hard coal",
+        )
+        mock_session = self._make_mock_session([row])
+        loader = self._make_loader(mock_session)
+
+        result = loader.ingest_for_celex_and_fact("DEC-AT39168-20110331", "NACE_group_code")
+
+        self.assertEqual(result, 1)
+        token_limit = embedding_token_limit()
+        for call in mock_embed.call_args_list:
+            passage = call[0][0]
+            self.assertTrue(passage.startswith("Represent this fact: Match the product"))
+            self.assertIn("NACE_group_code 05.1:Mining of hard coal", passage)
+            self.assertLessEqual(count_tokens(passage), token_limit)
+
     def test_mean_pool_normalises_and_handles_zero_vectors(self):
         """_mean_pool returns a unit vector and never produces NaN."""
         from pipelines.rag.pgvector.embeddings.fact_embedding_loader_qwen import (

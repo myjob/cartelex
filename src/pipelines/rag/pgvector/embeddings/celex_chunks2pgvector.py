@@ -171,7 +171,12 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
     _TABLE = f"celex_facts.{settings.EMBEDDING_TABLE}"
 
     def _persist_md_chunks(
-        self, celex_id: str, md_file: str, chunks: List[Document], doc_total_tokens: int
+        self,
+        celex_id: str,
+        md_file: str,
+        chunks: List[Document],
+        doc_total_tokens: int,
+        document_id: str | None = None,
     ) -> int:
         """
         Embed and persist document chunks in the vector store.
@@ -182,6 +187,9 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
             chunks: List of ``Document`` chunks produced by the splitter.
             doc_total_tokens: Total token count of the source document used
                 for a sanity-check assertion.
+            document_id: Source document (``document_registry``) of the
+                decision; the store writes it to the ``document_id`` column,
+                never into ``cmetadata``. None writes NULL.
 
         Returns:
             The sum of token counts across all persisted chunks.
@@ -195,6 +203,7 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
                     page_content=chunk.page_content,
                     metadata={
                         "id": i,
+                        "doc_pos": i,
                         "celex_id": celex_id,
                         "token_count": chunk.metadata["token_count"],
                         "doc_type": "full_md",
@@ -202,6 +211,7 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
                         "chunk_hash": hashlib.md5(
                             chunk.page_content.encode("utf-8")
                         ).hexdigest(),
+                        "document_id": document_id,
                     },
                 )
             )
@@ -214,13 +224,17 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
         self.vector_store.add_documents(doc_chunks)
         return chunk_token_sum
 
-    def ingest_doc(self, celex_id: str, md_file: str) -> None:
+    def ingest_doc(
+        self, celex_id: str, md_file: str, document_id: str | None = None
+    ) -> None:
         """
         Full ingestion pipeline: split, embed, persist, and verify.
 
         Args:
             celex_id: The Celex document identifier.
             md_file: Absolute path to the markdown file to ingest.
+            document_id: The decision's source document, recorded on every
+                new chunk; None writes NULL.
         """
         chunks_of_langchain_doc, doc_total_tokens = self._split_markdown(md_file)
         if not chunks_of_langchain_doc:
@@ -228,7 +242,7 @@ class CelexMarkdownIngestor(MarkdownIngestorBase):
             return
 
         chunk_token_sum = self._persist_md_chunks(
-            celex_id, md_file, chunks_of_langchain_doc, doc_total_tokens
+            celex_id, md_file, chunks_of_langchain_doc, doc_total_tokens, document_id
         )
         self._verify_load_by_token_count(celex_id, chunk_token_sum)
         self._verify_load_by_chunk_count(celex_id, len(chunks_of_langchain_doc))

@@ -1,12 +1,61 @@
 import logging
 import os
+from pathlib import Path
+
+from pydantic import BaseModel, Field
+from sqlalchemy import text
+from sqlalchemy.engine import Engine
 
 from batch.utils.Job_Utils import loadJsonFor
 from batch.BatchJobRunner import BatchJobRunner
+from pipelines.download.local_pdf import conventional_markdown_path
+from pipelines.rag.pgvector.source_document_resolver import SourceDocumentResolver
 from pipelines.rag.pgvector.embeddings.celex_chunks2pgvector import (
     CelexMarkdownIngestor,
 )
+from pipelines.rag.pgvector.session import engine
 from config.settings import settings
+
+
+MODE_LAZY = "lazy"
+MODE_FORCE = "force"
+_SELECT_INGESTED_PATHS = (
+    "SELECT celex_id, array_agg(DISTINCT path) FROM {schema}.{table} "
+    "WHERE celex_id IS NOT NULL GROUP BY celex_id"
+)
+
+
+class IngestState(BaseModel):
+    """What is already in the embedding table (lazy mode) or nothing (force mode)."""
+
+    ingested_paths: dict[str, set[str]] | None = Field(
+        description="Markdown paths per celex_id that already have chunks; None in force mode.")
+
+    @classmethod
+    def force(cls) -> "IngestState":
+        """Return the state that re-ingests every decision.
+
+        Returns:
+            A state without an ingested set.
+        """
+        return cls(ingested_paths=None)
+
+
+def load_ingested_paths(db_engine: Engine) -> dict[str, set[str]]:
+    """Read the Markdown paths per celex_id that already have chunks.
+
+    Args:
+        db_engine: SQLAlchemy engine.
+
+    Returns:
+        ``{celex_id: {path, ...}}``.
+
+    Raises:
+        sqlalchemy.exc.SQLAlchemyError: On database errors.
+    """
+    sql = text(_SELECT_INGESTED_PATHS.format(schema=settings.DB_SCHEMA, table=settings.EMBEDDING_TABLE))
+    with db_engine.connect() as conn:
+        return {r[0]: {p for p in r[1] if p} for r in conn.execute(sql).fetchall()}
 
 
 def _build_ingestor() -> CelexMarkdownIngestor:
@@ -46,16 +95,46 @@ def _resolve_md_path(celex_id: str, master_data: dict) -> str:
     if filename and filename != "NA":
         return filename
 
-    return os.path.join(
-        settings.CELEX_DOCS_DIR, celex_id, "mineru", "auto", f"{celex_id}.md"
-    )
+    return str(conventional_markdown_path(Path(settings.CELEX_DOCS_DIR), celex_id))
 
 
-def process_single_celex(celex_id, context, dry_run=False):
-    ingestor, master_data = context
+def process_single_celex(
+    celex_id: str,
+    context: tuple[CelexMarkdownIngestor, dict, SourceDocumentResolver, IngestState],
+    dry_run: bool = False,
+) -> bool:
+    """Ingest one decision's markdown, stamping its source document.
+
+    In lazy mode a decision that already has chunks is skipped: the ingest
+    only adds chunks whose hash is new, so re-chunking an ingested decision
+    with a changed splitter would leave both chunkings in the table. A
+    skipped decision whose master markdown is another file than the one its
+    chunks came from is reported (it needs a deliberate replace).
+
+    Args:
+        celex_id: The decision id (``celex_id`` == ``decision_id``).
+        context: ``(ingestor, master_data, source_documents, state)``; the
+            resolver caches one lookup per decision, the state holds the
+            already ingested decisions (lazy) or nothing (force).
+        dry_run: Log what would be ingested without writing.
+
+    Returns:
+        True if ingested, skipped as already ingested (or would be in a dry
+        run), False if the markdown file is missing.
+    """
+    ingestor, master_data, source_documents, state = context
     logger = logging.getLogger(__name__)
 
     md_path = _resolve_md_path(celex_id, master_data)
+    if state.ingested_paths is not None and celex_id in state.ingested_paths:
+        stored = state.ingested_paths[celex_id]
+        if stored and Path(md_path).name not in {Path(p).name for p in stored}:
+            logger.warning(
+                "Skip %s: already ingested, but markdown changed since ingest (chunks from %s, master %s); "
+                "not re-chunked", celex_id, ", ".join(sorted(stored)), md_path)
+        else:
+            logger.info("Skip %s: already ingested (lazy mode)", celex_id)
+        return True
     if not os.path.exists(md_path):
         logger.warning(
             "Skip load for %s: markdown not found at %s", celex_id, md_path
@@ -66,7 +145,9 @@ def process_single_celex(celex_id, context, dry_run=False):
         logger.info("[DRY RUN] Would ingest %s from %s", celex_id, md_path)
         return True
 
-    ingestor.ingest_doc(celex_id, md_path)
+    ingestor.ingest_doc(
+        celex_id, md_path, document_id=source_documents.resolve(celex_id)
+    )
     return True
 
 
@@ -83,6 +164,16 @@ def main():
             "from the master JSON when present, otherwise from the conventional "
             "<CELEX_DOCS_DIR>/<id>/mineru/auto/<id>.md layout. Does not require "
             "the document to be listed in the master JSON."
+        ),
+    )
+
+    runner.parser.add_argument(
+        "--mode",
+        choices=[MODE_LAZY, MODE_FORCE],
+        default=MODE_LAZY,
+        help=(
+            "lazy (default) skips decisions that already have chunks; force re-ingests them "
+            "(new chunks are added beside existing ones when the chunking changed)."
         ),
     )
 
@@ -103,24 +194,30 @@ def main():
         master_data = {}
 
     ingestor = _build_ingestor()
+    source_documents = SourceDocumentResolver.from_engine(engine)
+    if args.mode == MODE_LAZY:
+        state = IngestState(ingested_paths=load_ingested_paths(engine))
+        runner.logger.info("Lazy mode: %d decisions already ingested are skipped", len(state.ingested_paths))
+    else:
+        state = IngestState.force()
+    context = (ingestor, master_data, source_documents, state)
 
     if args.celex_id:
-        ok = process_single_celex(
-            args.celex_id, (ingestor, master_data), dry_run=args.dry_run
-        )
+        ok = process_single_celex(args.celex_id, context, dry_run=args.dry_run)
         runner.logger.info(
             "Single-ID ingest for %s: %s", args.celex_id, "OK" if ok else "FAILED"
         )
         return
 
-    # Pass both ingestor and master_data as context
-    runner.run(process_single_celex, context=(ingestor, master_data))
+    runner.run(process_single_celex, context=context)
 
 
 if __name__ == "__main__":
     main()
 
-# Ingest the full corpus:
-#   python src/batch/Main_ingest_case_markdown2pgvector.py --json-fn ./config_main/master_doc_descriptors.json
+# Ingest the decisions that have no chunks yet (lazy, default):
+#   .venv/bin/python -m batch.Main_ingest_case_markdown2pgvector --json-fn ./config_main/master_doc_descriptors.json
+# Re-ingest everything (adds new chunks beside existing ones if the chunking changed):
+#   .venv/bin/python -m batch.Main_ingest_case_markdown2pgvector --mode force
 # Ingest a single document (bypasses the master-JSON list):
 #   python src/batch/Main_ingest_case_markdown2pgvector.py --celex-id 39731_801_8

@@ -8,6 +8,9 @@
 #rclone_GDrive
 
 # features
+- [ ] Main_main_pipeline
+- [x] #doc_download feature 20261025: translate service for non-EN decision documents: decisions without an EN version are downloaded in the original language (mostly old OCR-scanned PDFs, typically DE/FR); after MinerU, translate the markdown to EN before the ingestion batches run; set `language_translated` in master_doc_descriptors.json and document_registry. `src/pipelines/translate/` is still empty.
+- [ ] #doc_download feature 20261025: post-MinerU language decision: for decisions whose candidate PDF URLs carry no language marker (ec.europa.eu dec_docs, db-comp.eu; ~370 decisions in filtered_final_manifest.xlsx), detect the language on the MinerU markdown, pick the EN candidate as the decision's document if one exists, otherwise route the original to the translate service.
 - [x] fact extractor language of doc chunks
 - [ ] #fact2book_veriyfeature 20260629: case_in_book_landmark # F Economic landmark cases
 - [ ] entire: add claude sessions to github

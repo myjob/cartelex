@@ -47,6 +47,23 @@ def count_tokens(text: str) -> int:
     return len(tiktoken.get_encoding(_TIKTOKEN_ENCODING).encode(text))
 
 
+def truncate_to_tokens(text: str, max_tokens: int) -> str:
+    """Cut ``text`` to at most ``max_tokens`` tokens of the size-guard encoding.
+
+    Args:
+        text: Text to shorten.
+        max_tokens: Token budget; text already within it is returned unchanged.
+
+    Returns:
+        ``text`` itself, or its leading ``max_tokens`` tokens decoded back.
+    """
+    encoding = tiktoken.get_encoding(_TIKTOKEN_ENCODING)
+    tokens = encoding.encode(text)
+    if len(tokens) <= max_tokens:
+        return text
+    return encoding.decode(tokens[:max_tokens])
+
+
 def embedding_token_limit() -> int:
     """Return the configured embedding context limit in tokens.
 

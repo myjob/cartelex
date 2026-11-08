@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "celex-facts"
-version = "0.1.0"
+version = "0.2.0"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README.md"
@@ -73,10 +73,12 @@ dependencies = [
     #   connectorx -> `pl.read_database_uri` (src/reporting/*)
     #   pyarrow    -> the Arrow hand-off connectorx returns to polars
     #   xlsxwriter -> `DataFrame.write_excel` (listed under reporting below)
+    #   openpyxl   -> `pl.read_excel(engine="openpyxl")` (pipelines.download.reader)
     # `pl.read_database` (src/pipelines/heideltime/qa/scan_dates.py) rides the
     # SQLAlchemy cursor path, which needs no further extra.
     "connectorx>=0.4.5,<0.5",
     "numpy>=2.4,<3",
+    "openpyxl>=3.1.5,<4",
     "polars>=1.39,<2",
     "pyarrow>=25.0,<26",
 
@@ -84,15 +86,17 @@ dependencies = [
     "fastapi>=0.136,<1",
     "uvicorn>=0.46,<1",
     "httpx>=0.28,<1",
-    "requests>=2.32,<3",
+    "requests>=2.33,<3",
+    # retry policy of pipelines.download.fetcher (imported directly)
+    "tenacity>=9.1,<10",
 
     # --- Text / documents / reporting ---------------------------------------
     "langdetect>=1.0.9,<2",
     "markdown-it-py>=4,<5",
-    "mistune>=3.2,<4",
+    "mistune>=3.3,<4",
     "py-heideltime>=1.0.6,<2",
     "pycountry>=24.6",
-    "weasyprint>=70.0,<71",
+    "weasyprint>=70,<71",
     "xlsxwriter>=3.2,<4",
 
     # --- Core plumbing ------------------------------------------------------

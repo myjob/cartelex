@@ -43,9 +43,13 @@ logger = logging.getLogger(__name__)
 _HEADING_RE = re.compile(r"^#{1,6}\s*(.+?)\s*$", re.MULTILINE)
 
 # The hinge between the reasoning and the numbered final Articles. Tolerant of
-# OCR whitespace; both historical spellings.
-_OPERATIVE_MARKER_RE = re.compile(
-    r"HAS\s+ADOPTED\s+(?:THIS|THE\s+FOLLOWING)\s+DECISION", re.IGNORECASE
+# OCR whitespace. Modern "HAS ADOPTED THIS / THE FOLLOWING DECISION" plus the
+# older "HAS ISSUED / MADE / GIVEN THE FOLLOWING DECISION / ARRANGEMENT"
+# (~31 decisions on the 2026-11-01 corpus).
+OPERATIVE_MARKER_RE = re.compile(
+    r"HAS\s+(?:ADOPTED\s+(?:THIS|THE\s+FOLLOWING)\s+DECISION"
+    r"|(?:ISSUED|MADE|GIVEN)\s+THE\s+FOLLOWING\s+(?:DECISION|ARRANGEMENT))",
+    re.IGNORECASE,
 )
 
 # A bare operative article heading ("Article 1", "ARTICLE 4"). Anything after
@@ -179,7 +183,7 @@ def classify_chunk_by_rules(chunk_text: str, doc_pos: int) -> SectionType | None
     SectionType | None
         The rule-assigned section, or ``None`` when the rules abstain.
     """
-    if _OPERATIVE_MARKER_RE.search(chunk_text):
+    if OPERATIVE_MARKER_RE.search(chunk_text):
         return SectionType.OPERATIVE
     for heading in iter_headings(chunk_text):
         section = classify_heading(heading)

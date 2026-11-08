@@ -143,7 +143,7 @@ class TestMappingCoverage(unittest.TestCase):
                     "company_recidivism",
                     "heideltime_raw",
                     "heideltime_event_agg",
-                    "heideltime_cartel_period",
+                    "cartel_period",
                 }
             ),
         )
@@ -173,7 +173,7 @@ class TestMappingCoverage(unittest.TestCase):
         # temporal family or explicitly excluded.
         heideltime_families = {
             "heideltime_raw", "heideltime_event", "heideltime_event_agg",
-            "heideltime_cartel_period",
+            "cartel_period",
         }
         for family in heideltime_families:
             with self.subTest(family=family):

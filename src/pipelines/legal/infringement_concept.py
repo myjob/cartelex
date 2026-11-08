@@ -332,7 +332,7 @@ def parse_decision_date(value: date | str | None) -> date | None:
     Parameters
     ----------
     value:
-        The ``eu_commisssion_decision_date`` fact value.
+        The ``eu_commission_decision_date`` fact value.
 
     Returns
     -------
@@ -427,7 +427,7 @@ def concepts_for(
     article_text:
         The ``law_article_all_relevant`` value.
     decision_date_value:
-        The ``eu_commisssion_decision_date`` value (date, ISO string, or
+        The ``eu_commission_decision_date`` value (date, ISO string, or
         placeholder).
     celex_id:
         The document id, used for the year fallback when the date is absent.

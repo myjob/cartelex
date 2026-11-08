@@ -190,7 +190,7 @@ flowchart LR
 | [HeidelTimeModule](file://~/a/celex-facts/src/pipelines/heideltime/heideltime_module.py#L38) | *(none — HeidelTime JAR)* | ❌ | `heideltime_raw` |
 | [HeidelTimeEventModule](file://~/a/celex-facts/src/pipelines/heideltime/heideltime_module.py#L144) | `HeidelTimeEventSignature` | ✅ CoT | `heideltime_event` |
 | [HeidelTimeEventAggregateModule](file://~/a/celex-facts/src/pipelines/heideltime/heideltime_module.py#L243) | `HeidelTimeEventAggregateSignature` | ✅ CoT | `heideltime_event_agg` |
-| [HeideltimeCartelPeriodModule](file://~/a/celex-facts/src/pipelines/heideltime/heideltime_module.py#L310) | `HeideltimeCartelPeriodSignature` | ✅ CoT | `heideltime_cartel_period` |
+| [HeideltimeCartelPeriodModule](file://~/a/celex-facts/src/pipelines/heideltime/heideltime_module.py#L310) | `HeideltimeCartelPeriodSignature` | ✅ CoT | `cartel_period` |
 
 ---
 

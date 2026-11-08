@@ -85,10 +85,10 @@ Fact names and their value_md TYPES:
     infringement_category_procedural, infringement_category_member_states
 
   Date facts (value_md is 'YYYY-MM-DD'):
-    eu_commisssion_decision_date
+    eu_commission_decision_date
 
   Date-range facts (value_md is 'YYYY-MM-DD : YYYY-MM-DD'):
-    heideltime_cartel_period, legal_assessment_period
+    cartel_period, legal_assessment_period
 
   Category / classification facts (value_md is a short label):
     infringement_category_hor_vert_lic_joint,
@@ -104,7 +104,7 @@ Fact names and their value_md TYPES:
     case_commissioner, case_summary, case_title,
     market_geographical, market_turbulence,
     products, products_name,
-    decision_remedies, cartel_period,
+    decision_remedies,
     exemption_applicants, law_article_all_relevant,
     human_index_nace,
     court_list_raw, court_list,
@@ -137,7 +137,7 @@ CORRECT PATTERNS:
   FROM celex_facts.facts l
   JOIN celex_facts.facts d ON l.celex_id = d.celex_id
   WHERE l.name = 'leniency_case' AND l.value_md = 'True'
-    AND d.name = 'eu_commisssion_decision_date' AND LENGTH(d.value_md) = 10
+    AND d.name = 'eu_commission_decision_date' AND LENGTH(d.value_md) = 10
   GROUP BY yr ORDER BY yr;
 
   -- Find leniency applicants for a specific case
@@ -150,14 +150,14 @@ CORRECT PATTERNS:
 
   -- Cases decided in a given year (date column may contain 'NA' — GUARD the cast)
   SELECT DISTINCT celex_id FROM celex_facts.facts
-  WHERE name = 'eu_commisssion_decision_date'
+  WHERE name = 'eu_commission_decision_date'
     AND LENGTH(value_md) = 10
     AND EXTRACT(YEAR FROM value_md::date) = 1991;
 
   -- Counts of decisions per year (same guard required)
   SELECT EXTRACT(YEAR FROM value_md::date) AS yr, COUNT(DISTINCT celex_id) AS cnt
   FROM celex_facts.facts
-  WHERE name = 'eu_commisssion_decision_date'
+  WHERE name = 'eu_commission_decision_date'
     AND LENGTH(value_md) = 10
   GROUP BY yr ORDER BY yr;
 
@@ -196,7 +196,7 @@ CORRECT PATTERNS:
     AND value_md ILIKE '%brew%';
   --   Step 2 (input_from_step=1):
   SELECT celex_id, name, value_md FROM celex_facts.facts
-  WHERE name IN ('cartel_period','heideltime_cartel_period')
+  WHERE name = 'cartel_period'
     AND celex_id IN ({celex_ids});
 
   -- One-shot alternative when a single step is preferred: self-join
@@ -355,7 +355,7 @@ other two views cannot: what happened, in what order, and who acted.
 WHEN TO USE IT:
   - "What happened between the inspection and the decision in case X?"
   - "When was company Y active in this cartel?"
-  - Cross-checking a heideltime_cartel_period fact against the event evidence
+  - Cross-checking a cartel_period fact against the event evidence
     that should support it.
 
 WHEN NOT TO USE IT:
@@ -409,7 +409,7 @@ case_timeline_vw columns:
          MAX(t.event_date) AS last_event, f.value_md AS stored_period
   FROM celex_facts.case_timeline_vw t
   JOIN celex_facts.facts f
-    ON f.celex_id = t.celex_id AND f.name = 'heideltime_cartel_period'
+    ON f.celex_id = t.celex_id AND f.name = 'cartel_period'
   WHERE t.event_date IS NOT NULL
   GROUP BY t.celex_id, f.value_md;
 """

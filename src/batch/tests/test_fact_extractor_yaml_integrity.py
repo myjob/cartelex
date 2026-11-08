@@ -126,6 +126,26 @@ class TestFactExtractorYamlIntegrity(unittest.TestCase):
         self.assertEqual(_predecessors(summary), [])
         self.assertNotIn("case_summary", summary["context_facts"])
 
+    def test_full_catalog_runs_case_summary_after_its_context_facts(self):
+        """On a decision's first run the summary must see every input fact.
+
+        ``case_summary`` heads the YAML but declares no predecessors; ordering
+        it by predecessors alone ran it first and stored ``NA``.
+        """
+        from batch.Main_ingest_generic_facts import FactIngestionOrchestrator
+
+        order = FactIngestionOrchestrator(description="test")._topological_order(
+            self.catalog
+        )
+        self.assertIsNotNone(order, "catalog ordering has a cycle")
+        by_name = {s["target_fact_name"]: s for s in self.catalog}
+        late = [
+            fact
+            for fact in by_name["case_summary"]["context_facts"]
+            if order.index(fact) > order.index("case_summary")
+        ]
+        self.assertEqual(late, [], f"case_summary runs before {late}")
+
     def test_master_company_facts_are_defined(self):
         """The July 2026 master company set is the authoritative catalog."""
         expected = {
@@ -146,6 +166,63 @@ class TestFactExtractorYamlIntegrity(unittest.TestCase):
                 _predecessors(by_name[fact]),
                 f"{fact} must declare companies_investigated as a predecessor",
             )
+
+
+
+class TestCartelPeriodInfringementGate(unittest.TestCase):
+    """``cartel_period`` is skipped only when no infringement is found.
+
+    Exemption, negative-clearance and Article 9 commitments decisions carry an
+    exemption or commitment term, not a cartel period (ISSUES #high 20261105).
+    The gate reads ``case_commission_infringement`` and suppresses the period
+    only on an explicit False, so an NA or noisy answer keeps it.
+    """
+
+    GATE = "case_commission_infringement"
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.by_name = {s["target_fact_name"]: s for s in _load_catalog()}
+        cls.period = cls.by_name["cartel_period"]
+
+    def test_period_is_named_cartel_period_and_built_by_heideltime(self):
+        """The fact is ``cartel_period``; ``heideltime_cartel_period`` is only its pipeline.
+
+        The legacy LLM ``cartel_period`` was retired and the HeidelTime fact took
+        its name (plan cartel-period-rename-20261106), so no catalog entry may
+        reintroduce the prefixed fact name.
+        """
+        self.assertEqual(self.period["pipeline"], "heideltime_cartel_period")
+        prefixed = [n for n in self.by_name if n.startswith("heideltime_cartel")]
+        self.assertEqual(prefixed, [])
+
+    def _met(self, context: dict) -> bool:
+        """Evaluate the period's YAML condition against a fact context."""
+        from pipelines.rule_engine.condition_checker import ConditionValidator
+
+        return ConditionValidator().evaluate(self.period.get("condition"), context)
+
+    def test_gate_fact_follows_the_case_commission_style(self):
+        """True/False/NA universal fact, retrieved from the operative part."""
+        gate = self.by_name[self.GATE]
+        self.assertEqual(gate["pipeline"], "universal")
+        self.assertEqual(gate.get("section_scope"), ["operative"])
+        self.assertIn("'True' or 'False' or 'NA'", gate["question"])
+
+    def test_only_an_explicit_false_suppresses_the_period(self):
+        self.assertFalse(self._met({self.GATE: "False"}))
+        self.assertFalse(self._met({self.GATE: "false"}))
+        for value in ("True", "NA", "| company | x |"):
+            self.assertTrue(self._met({self.GATE: value}), value)
+        self.assertTrue(self._met({}), "a decision without the gate fact keeps its period")
+
+    def test_gate_orders_but_never_gates_as_predecessor(self):
+        """An NA predecessor is unfulfilled and would skip the period outright."""
+        self.assertNotIn(self.GATE, _predecessors(self.period))
+        self.assertIn(self.GATE, self.period.get("context_facts") or [])
+
+    def test_case_summary_reads_the_gate_fact(self):
+        self.assertIn(self.GATE, self.by_name["case_summary"]["context_facts"])
 
 
 if __name__ == "__main__":

@@ -76,6 +76,10 @@ class Facts(Base):
     )
     verification_score = Column(Float)
     verification_updated_at = Column(DateTime(timezone=True))
+    # ``document_id`` (migrate_document_lineage.sql) is intentionally NOT
+    # mapped: the ORM puts every mapped column into its INSERTs, so mapping it
+    # would break fact writes before the migration is applied. It is written by
+    # FactRepository.upsert_fact via a probed, separate UPDATE.
 
 
 class CorpLei(Base):

@@ -1,11 +1,11 @@
 import logging
-import re
 from typing import List, Dict, Any, Literal, Optional
 
 import dspy
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from pipelines.agent_dspy.dspy_protocols import FactComparisonOutput
+from pipelines.heideltime.event_dates import parse_partial_date
 
 logger = logging.getLogger(__name__)
 
@@ -17,8 +17,8 @@ _NULL_LIKE_STRINGS: frozenset[str] = frozenset({"null", "none", "n/a", "na", ""}
 # answer nothing -- and the 2026-09-02 corpus shows it did both (198 ranges
 # ending on a Jan-1/Dec-31 boundary, 33 empty facts). Partial precision is
 # therefore accepted and stored verbatim, so a year-only period stays a
-# year-only period instead of becoming a fabricated day.
-_PARTIAL_ISO_DATE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$")
+# year-only period instead of becoming a fabricated day. What counts as a date
+# is decided by pipelines.heideltime.event_dates.parse_partial_date.
 
 # The cartel-period prompt bounds the search to 1900..2030. The model reads
 # those bounds as legal answers and emits them as placeholders when it finds
@@ -257,12 +257,12 @@ class CaseSummaryChapters(BaseModel):
     cartel_period: str = Field(
         description=(
             "Cartel period start and end date. "
-            "MUST be taken verbatim from the 'heideltime_cartel_period' fact if present in the context. "
+            "MUST be taken verbatim from the 'cartel_period' fact if present in the context. "
             "Do not derive or infer this value from other sources."
         )
     )
     key_timeline: str = Field(
-        description="Key timeline of events, from the 'heideltime_event_agg' and 'eu_commisssion_decision_date' facts"
+        description="Key timeline of events, from the 'heideltime_event_agg' and 'eu_commission_decision_date' facts"
     )
     legal_framework: str = Field(
         description=(
@@ -405,6 +405,19 @@ class HeidelTimeEvent(BaseModel):
         if isinstance(v, str) and v.strip().lower() in _NULL_LIKE_STRINGS:
             return "unknown"
         return v
+
+    @field_validator("event_date", mode="after")
+    @classmethod
+    def _reject_impossible_date(cls, v: str) -> str:
+        """Map a date-shaped but impossible value to ``unknown`` at write time.
+
+        HeidelTime normalises some expressions to years such as ``0010`` or
+        ``2202`` (#187) and the LLM occasionally emits month ``00`` (#190);
+        stored, they inflate every min/max span and break a blind ``::date``
+        cast downstream. ``unknown`` is the sentinel this model already uses
+        for a missing date, so consumers see one absence value, not two.
+        """
+        return v if parse_partial_date(v) else "unknown"
 
 
 class HeidelTimeEventResult(BaseModel):
@@ -550,7 +563,7 @@ class HeidelTimeEventAggregateSignature(dspy.Signature):
     """
 
     heideltime_event_result: str = dspy.InputField(
-        desc="Serialized HeidelTimeEventResult produced by the heideltime_event pipeline."
+        desc="Chronological events of the case, one 'date | actor | predicate_object' line each."
     )
     
     output: HeidelTimeCriticalEventResult = dspy.OutputField(
@@ -559,6 +572,47 @@ class HeidelTimeEventAggregateSignature(dspy.Signature):
             "earliest conduct event, the last conduct event and the final outcome "
             "are always included -- sorted chronologically."
         )
+    )
+
+
+class HeidelTimeConductEventResult(HeidelTimeCriticalEventResult):
+    """The infringement-conduct events of one batch of a case's event list.
+
+    Inherits the bare-list and malformed-element tolerance of
+    :class:`HeidelTimeCriticalEventResult` but not its description: the JSON
+    schema the LLM sees wins over the instruction text, and "always including
+    the final outcome" would put the decision date back into the period
+    prompt (#188).
+    """
+
+    events: List[HeidelTimeCriticalEvent] = Field(
+        description=(
+            "At most two infringement-conduct events of this slice: the earliest "
+            "and the latest (meetings, price or quota agreements, information "
+            "exchanges, stated start or end of participation), dates copied "
+            "verbatim. One event when the slice holds only one; empty when none."
+        ),
+    )
+
+
+class HeideltimeConductEventsSignature(dspy.Signature):
+    """
+    From one slice of a case's event list, keep only the events of the INFRINGEMENT itself: cartel meetings, price fixing, quota or market allocation, bid rigging, exchanges of sensitive information, and stated starts or ends of participation in the conduct.
+
+    Drop everything else, even when it is the most prominent date present:
+    - Commission steps: inspections/dawn raids, requests for information, statement of objections, leniency applications, the adoption of the decision, fines imposed or paid.
+    - Court steps: appeals, annulments, judgments, re-adopted decisions.
+    - Corporate events: mergers, acquisitions, liquidations, ownership or name changes.
+
+    Return ONLY the EARLIEST and the LATEST of the conduct events -- at most two rows. Never list the events in between: the cartel period is decided from the bounds of each slice.
+    Copy each kept event's date exactly as given; never invent or widen a date. Return an empty list when the slice holds no conduct event.
+    """
+
+    heideltime_event_result: str = dspy.InputField(
+        desc="One slice of the case's chronological events, one 'date | actor | predicate_object' line each."
+    )
+    output: HeidelTimeConductEventResult = dspy.OutputField(
+        desc="The earliest and the latest conduct event of this slice (at most two), dates copied verbatim; empty when there are none."
     )
 
 
@@ -595,8 +649,12 @@ class HeideltimeCartelPeriodResult(BaseModel):
         2026-09-05, and a likely contributor to the 33 empty facts in the
         corpus. The bounds are present and usable, so they are joined here
         rather than discarded; ``date_range`` is only filled when absent, so a
-        schema-compliant answer is never rewritten.
+        schema-compliant answer is never rewritten. A null envelope is the
+        model's "no period" answer (corpus run 20261105) and maps to an empty
+        result instead of a validation error.
         """
+        if values is None:
+            return {}
         if not isinstance(values, dict) or values.get("date_range") is not None:
             return values
 
@@ -643,7 +701,7 @@ class HeideltimeCartelPeriodResult(BaseModel):
             return None
 
         parts = [part.strip() for part in v.split(":")]
-        if len(parts) != 2 or not all(_PARTIAL_ISO_DATE.match(p) for p in parts):
+        if len(parts) != 2 or not all(parse_partial_date(p) for p in parts):
             return None
 
         start, end = parts
@@ -696,14 +754,15 @@ class HeideltimeCartelPeriodSignature(dspy.Signature):
     """
 
     heideltime_event_result: str = dspy.InputField(
-        desc="Serialized HeidelTimeEventResult produced by the heideltime_event pipeline."
+        desc="Chronological events of the case, one 'date | actor | predicate_object' line each."
     )
 
     output: HeideltimeCartelPeriodResult = dspy.OutputField(
         desc=(
             "Extracted cartel period as 'START : END', each side being 'YYYY', "
-            "'YYYY-MM' or 'YYYY-MM-DD' at the precision the document states, "
-            "or null when no period is stated."
+            "'YYYY-MM' or 'YYYY-MM-DD' at the precision the document states. "
+            "Always return the object; set its date_range to null when no "
+            "period is stated."
         )
     )
 
@@ -957,7 +1016,7 @@ class QAPlannerSignature(dspy.Signature):
              AND value_md ILIKE '%brew%'
          Step 2 (kb_sql, input_from_step=1):
            SELECT celex_id, name, value_md FROM celex_facts.facts
-           WHERE name IN ('cartel_period','heideltime_cartel_period')
+           WHERE name = 'cartel_period'
              AND celex_id IN ({celex_ids})
        Do NOT dump a fact for ALL cases when the question scopes it to a
        subset — always chain via {celex_ids} instead.

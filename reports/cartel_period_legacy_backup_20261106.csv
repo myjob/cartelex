@@ -1,0 +1,1435 @@
+celex_id,name,value_md,value_json,created_at
+32450_35_6,cartel_period,1987-07-01 : 1995-01-01,"""1987-07-01 : 1995-01-01""",2026-01-28 21:53:16.641303
+33708_6_7,cartel_period,1986-01-01 : 1990-02-02,"""1986-01-01 : 1990-02-02""",2026-01-28 22:18:58.025107
+34466_15_4,cartel_period,1987-01-01 : 1994-07-01,"""1987-01-01 : 1994-07-01""",2026-01-28 22:13:48.479659
+34579_1889_2,cartel_period,1992-05-22 : 2007-12-19,"""1992-05-22 : 2007-12-19""",2026-01-28 22:18:15.016887
+35388_9_5,cartel_period,1993-12-23 : 1996-01-01,"""1993-12-23 : 1996-01-01""",2026-01-28 22:18:58.976663
+35470_14_4,cartel_period,2002-01-01 : 2020-01-01,"""2002-01-01 : 2020-01-01""",2026-01-28 22:18:19.197385
+35814_17_6,cartel_period,1993-01-01 : 1994-06-01,"""1993-01-01 : 1994-06-01""",2026-01-28 22:19:00.042174
+36571_222_1,cartel_period,1994-01-01 : 1998-06-30,"""1994-01-01 : 1998-06-30""",2026-01-28 21:55:52.155351
+36623_320_1,cartel_period,1997-01-01 : 2003-09-30,"""1997-01-01 : 2003-09-30""",2026-01-28 22:18:37.154879
+36756_68_16,cartel_period,1981-01-01 : 1995-06-01,"""1981-01-01 : 1995-06-01""",2026-01-28 21:56:14.139149
+36756_74_4,cartel_period,1981-01-01 : 1995-06-30,"""1981-01-01 : 1995-06-30""",2026-01-28 22:27:14.019651
+37152_72_1,cartel_period,1984-01-01 : 1998-11-25,"""1984-01-01 : 1998-11-25""",2026-01-28 21:56:48.922413
+37214_90_1,cartel_period,2003-10-22 : 2009-06-30,"""2003-10-22 : 2009-06-30""",2026-01-28 22:19:01.052537
+37370_44_1,cartel_period,1973-01-01 : 1995-01-01,"""1973-01-01 : 1995-01-01""",2026-01-28 21:56:55.208358
+37396_45_3,cartel_period,1994-01-01 : 2001-12-31,"""1994-01-01 : 2001-12-31""",2026-01-28 22:15:18.370448
+37507_193_6,cartel_period,"I can see you've provided a comprehensive timeline of events related to AstraZeneca's (formerly Astra AB) omeprazole (Losec) patent and market dominance, including SPC strategy, abuse of dominant position, and regulatory proceedings. However, I notice there are several issues with the data that make it difficult to provide a clear analysis:
+
+1. **Data Quality Issues**: 
+   - Many entries are repeated multiple times (e.g., ""SPC expiry date set for 15 April 2002"" appears 60+ times)
+   - Dates are inconsistently formatted and sometimes duplicated
+   - Some entries appear to be corrupted or misformatted (like the long list of ""Draft paper preparation for gastrointestinal therapeutic area team meeting"")
+
+2. **Content Issues**:
+   - The data appears to be a mix of actual events and placeholder text
+   - Many entries seem to be automated or incomplete
+   - Some dates appear to be from 2002-2004 but are listed multiple times
+
+3. **Missing Context**:
+   - The timeline lacks clear categorization of events
+   - It's difficult to distinguish between:
+     - Patent and SPC-related activities
+     - Regulatory proceedings
+     - Market entry/exit events
+     - Legal cases
+
+**What I can help with:**
+If you're looking for analysis of:
+- AstraZeneca's SPC strategy and abuse of dominant position
+- The European Commission's investigation into omeprazole pricing
+- The impact of generic competition on Losec sales
+- The timeline of patent expirations and market entry
+
+I'd recommend:
+1. Cleaning up the data to remove duplicates
+2. Categorizing events clearly
+3. Providing a structured timeline with key dates and events
+
+Would you like me to help you organize this data into a more structured format, or do you have specific questions about particular aspects of this timeline?","""I can see you've provided a comprehensive timeline of events related to AstraZeneca's (formerly Astra AB) omeprazole (Losec) patent and market dominance, including SPC strategy, abuse of dominant position, and regulatory proceedings. However, I notice there are several issues with the data that make it difficult to provide a clear analysis:\n\n1. **Data Quality Issues**: \n   - Many entries are repeated multiple times (e.g., \""SPC expiry date set for 15 April 2002\"" appears 60+ times)\n   - Dates are inconsistently formatted and sometimes duplicated\n   - Some entries appear to be corrupted or misformatted (like the long list of \""Draft paper preparation for gastrointestinal therapeutic area team meeting\"")\n\n2. **Content Issues**:\n   - The data appears to be a mix of actual events and placeholder text\n   - Many entries seem to be automated or incomplete\n   - Some dates appear to be from 2002-2004 but are listed multiple times\n\n3. **Missing Context**:\n   - The timeline lacks clear categorization of events\n   - It's difficult to distinguish between:\n     - Patent and SPC-related activities\n     - Regulatory proceedings\n     - Market entry/exit events\n     - Legal cases\n\n**What I can help with:**\nIf you're looking for analysis of:\n- AstraZeneca's SPC strategy and abuse of dominant position\n- The European Commission's investigation into omeprazole pricing\n- The impact of generic competition on Losec sales\n- The timeline of patent expirations and market entry\n\nI'd recommend:\n1. Cleaning up the data to remove duplicates\n2. Categorizing events clearly\n3. Providing a structured timeline with key dates and events\n\nWould you like me to help you organize this data into a more structured format, or do you have specific questions about particular aspects of this timeline?""",2026-01-28 22:15:52.911104
+37533_43_1,cartel_period,1992-01-01 : 1998-09-30,"""1992-01-01 : 1998-09-30""",2026-01-28 21:57:29.540799
+37667_86_3,cartel_period,1993-02-01 : 1998-12-31,"""1993-02-01 : 1998-12-31""",2026-01-28 21:57:51.389439
+37685_66_1,cartel_period,1995-08-01 : 2003-06-27,"""1995-08-01 : 2003-06-27""",2026-01-28 22:15:58.78569
+37750_87_1,cartel_period,1996-03-21 : 1996-03-21,"""1996-03-21 : 1996-03-21""",2026-01-28 21:58:00.399124
+37766_610_5,cartel_period,1990-01-01 : 1999-12-31,"""1990-01-01 : 1999-12-31""",2026-01-28 21:58:03.839517
+37773_143_1,cartel_period,1984-01-01 : 1999-05-07,"""1984-01-01 : 1999-05-07""",2026-01-28 21:58:10.661511
+37784_8_4,cartel_period,1993-04-30 : 2000-02-07,"""1993-04-30 : 2000-02-07""",2026-01-28 21:58:16.861861
+37792_4177_3,cartel_period,2000-02-01 : 2001-11-16,"""2000-02-01 : 2001-11-16""",2026-01-28 22:16:08.376445
+37857_100_1,cartel_period,1971-01-01 : 1999-12-31,"""1971-01-01 : 1999-12-31""",2026-01-28 21:58:32.174834
+37860_629_1,cartel_period,2000-03-22 : 2006-09-22,"""2000-03-22 : 2006-09-22""",2026-01-28 22:16:14.730374
+37956_1607_5,cartel_period,1989-01-01 : 2000-06-02,"""1989-01-01 : 2000-06-02""",2026-01-28 22:19:16.010245
+37956_718_3,cartel_period,1952-01-01 : 2000-12-31,"""1952-01-01 : 2000-12-31""",2026-01-28 21:58:49.089877
+37966_639_3,cartel_period,2005-01-01 : 2010-12-31,"""2005-01-01 : 2010-12-31""",2026-01-28 22:19:17.507927
+37975_91_5,cartel_period,1977-06-01 : 2002-01-01,"""1977-06-01 : 2002-01-01""",2026-01-28 22:16:21.509266
+37980_17_1,cartel_period,2000-02-04 : 2000-08-04,"""2000-02-04 : 2000-08-04""",2026-01-28 22:16:23.47272
+37990_3581_18,cartel_period,"This dataset appears to be a comprehensive timeline of events related to the European Commission's antitrust investigation into Intel's business practices, particularly focusing on exclusionary conduct involving AMD. Here's a structured overview of the key elements:
+
+## Timeline Overview
+
+**Investigation Period**: The investigation spans from 2002-2008, with key events from 2007-2008 being particularly significant.
+
+## Key Participants
+
+- **Intel Corporation**: Primary defendant in the antitrust case
+- **AMD**: Competitor affected by Intel's practices
+- **HP**: OEM customer involved in rebate agreements
+- **NEC**: Another OEM customer
+- **MSH (Media Saturn Holding)**: Retailer involved in exclusivity agreements
+- **Acer**: OEM customer mentioned in relation to notebook delays
+
+## Major Events and Dates
+
+### Early Investigation (2002-2003)
+- **November 2002**: HPA1 agreement concluded for one year
+- **2003**: Various OEMs (HP, Dell, Lenovo) respond to Commission requests
+
+### Key Investigation Period (2007-2008)
+- **July 26, 2007**: Commission notifies Intel of Statement of Objections
+- **July 17, 2008**: Supplementary Statement of Objections issued
+- **October 2008**: Intel's failure to respond to SSO by deadline
+- **December 2008**: Commission decision on deadline extensions
+- **February 2009**: Intel finally submits reply to SSO
+
+### Key Legal Proceedings
+- **2008**: Court of First Instance proceedings initiated
+- **2009**: Commission publishes guidance paper on abusive exclusionary conduct
+
+## Core Issues Investigated
+
+1. **Conditional Rebates**: Intel's practice of providing rebates to OEMs contingent on exclusivity agreements
+2. **Exclusivity Agreements**: Contracts requiring OEMs to purchase exclusively from Intel
+3. **Foreclosure of Competition**: Intel's actions affecting AMD's market access
+4. **Naked Restrictions**: Unilateral termination clauses in rebate agreements
+
+## Significant Findings
+
+The investigation concluded that Intel engaged in practices that:
+- **Foreclosed competitors** from strategically important sales channels
+- **Provided conditional rebates** to OEMs (HP, NEC, Lenovo) that were tied to exclusivity requirements
+- **Implemented naked restrictions** that affected consumer choice
+- **Violated Article 82 of the Treaty** (abuse of dominant position)
+
+## Outcomes
+
+The investigation resulted in:
+- **Commission decision** finding Intel guilty of antitrust violations
+- **Fines imposed** on Intel Corporation
+- **Ongoing legal proceedings** through the Court of First Instance
+
+This timeline represents one of the most significant antitrust cases involving Intel in Europe, highlighting the complex interplay between dominant market positions, competitive practices, and regulatory enforcement.","""This dataset appears to be a comprehensive timeline of events related to the European Commission's antitrust investigation into Intel's business practices, particularly focusing on exclusionary conduct involving AMD. Here's a structured overview of the key elements:\n\n## Timeline Overview\n\n**Investigation Period**: The investigation spans from 2002-2008, with key events from 2007-2008 being particularly significant.\n\n## Key Participants\n\n- **Intel Corporation**: Primary defendant in the antitrust case\n- **AMD**: Competitor affected by Intel's practices\n- **HP**: OEM customer involved in rebate agreements\n- **NEC**: Another OEM customer\n- **MSH (Media Saturn Holding)**: Retailer involved in exclusivity agreements\n- **Acer**: OEM customer mentioned in relation to notebook delays\n\n## Major Events and Dates\n\n### Early Investigation (2002-2003)\n- **November 2002**: HPA1 agreement concluded for one year\n- **2003**: Various OEMs (HP, Dell, Lenovo) respond to Commission requests\n\n### Key Investigation Period (2007-2008)\n- **July 26, 2007**: Commission notifies Intel of Statement of Objections\n- **July 17, 2008**: Supplementary Statement of Objections issued\n- **October 2008**: Intel's failure to respond to SSO by deadline\n- **December 2008**: Commission decision on deadline extensions\n- **February 2009**: Intel finally submits reply to SSO\n\n### Key Legal Proceedings\n- **2008**: Court of First Instance proceedings initiated\n- **2009**: Commission publishes guidance paper on abusive exclusionary conduct\n\n## Core Issues Investigated\n\n1. **Conditional Rebates**: Intel's practice of providing rebates to OEMs contingent on exclusivity agreements\n2. **Exclusivity Agreements**: Contracts requiring OEMs to purchase exclusively from Intel\n3. **Foreclosure of Competition**: Intel's actions affecting AMD's market access\n4. **Naked Restrictions**: Unilateral termination clauses in rebate agreements\n\n## Significant Findings\n\nThe investigation concluded that Intel engaged in practices that:\n- **Foreclosed competitors** from strategically important sales channels\n- **Provided conditional rebates** to OEMs (HP, NEC, Lenovo) that were tied to exclusivity requirements\n- **Implemented naked restrictions** that affected consumer choice\n- **Violated Article 82 of the Treaty** (abuse of dominant position)\n\n## Outcomes\n\nThe investigation resulted in:\n- **Commission decision** finding Intel guilty of antitrust violations\n- **Fines imposed** on Intel Corporation\n- **Ongoing legal proceedings** through the Court of First Instance\n\nThis timeline represents one of the most significant antitrust cases involving Intel in Europe, highlighting the complex interplay between dominant market positions, competitive practices, and regulatory enforcement.""",2026-01-28 22:19:55.589305
+38044_15_5,cartel_period,1860-01-01 : 2001-07-03,"""1860-01-01 : 2001-07-03""",2026-01-28 22:20:01.829066
+38069_33_4,cartel_period,"I've reviewed the extensive timeline and data you've provided, which details the history of a major cartel involving copper plumbing tubes in Europe, particularly focusing on companies like KME, Wieland, Outokumpu, IMI, and others. This appears to be a comprehensive record of:
+
+1. **Cartel Activities**: From 1988-2001, with meetings, price coordination, market sharing, and rebate structures
+2. **Company Involvement**: Detailed participation of multiple companies over decades
+3. **Regulatory Actions**: Commission investigations, inspections, leniency applications, and fines
+4. **Financial Impact**: Losses, profits, and restructuring costs for various entities
+5. **Legal Proceedings**: Various court cases, appeals, and decisions
+
+Key points that stand out:
+
+- The cartel operated for over 13 years (1988-2001) with continuous infringement
+- Multiple companies faced significant fines and penalties
+- There was extensive cooperation with the Commission through leniency programs
+- The financial impact was substantial, with some companies reporting losses in the hundreds of millions
+- The case involved complex legal structures including joint and several liability
+
+Is there a specific aspect of this cartel investigation you'd like me to analyze or summarize further? For example:
+- Timeline of key events
+- Financial implications for specific companies
+- Legal proceedings and outcomes
+- Market impact analysis
+- Leniency program effectiveness
+
+Please let me know what specific information you're seeking from this data.","""I've reviewed the extensive timeline and data you've provided, which details the history of a major cartel involving copper plumbing tubes in Europe, particularly focusing on companies like KME, Wieland, Outokumpu, IMI, and others. This appears to be a comprehensive record of:\n\n1. **Cartel Activities**: From 1988-2001, with meetings, price coordination, market sharing, and rebate structures\n2. **Company Involvement**: Detailed participation of multiple companies over decades\n3. **Regulatory Actions**: Commission investigations, inspections, leniency applications, and fines\n4. **Financial Impact**: Losses, profits, and restructuring costs for various entities\n5. **Legal Proceedings**: Various court cases, appeals, and decisions\n\nKey points that stand out:\n\n- The cartel operated for over 13 years (1988-2001) with continuous infringement\n- Multiple companies faced significant fines and penalties\n- There was extensive cooperation with the Commission through leniency programs\n- The financial impact was substantial, with some companies reporting losses in the hundreds of millions\n- The case involved complex legal structures including joint and several liability\n\nIs there a specific aspect of this cartel investigation you'd like me to analyze or summarize further? For example:\n- Timeline of key events\n- Financial implications for specific companies\n- Legal proceedings and outcomes\n- Market impact analysis\n- Leniency program effectiveness\n\nPlease let me know what specific information you're seeking from this data.""",2026-01-28 21:59:25.925973
+38096_75_1,cartel_period,1997-01-01 : 2001-11-19,"""1997-01-01 : 2001-11-19""",2026-01-28 22:16:33.764614
+38113_250_8,cartel_period,1995-01-01 : 2002-12-31,"""1995-01-01 : 2002-12-31""",2026-01-28 22:16:47.977805
+38121_1007_1,cartel_period,1985-01-01 : 2004-04-01,"""1985-01-01 : 2004-04-01""",2026-01-28 21:59:36.564297
+38173_134_9,cartel_period,2002-12-16 : 2007-01-01,"""2002-12-16 : 2007-01-01""",2026-01-28 22:20:04.054396
+38233_87_1,cartel_period,2001-01-01 : 2002-10-15,"""2001-01-01 : 2002-10-15""",2026-01-28 22:17:04.831897
+38238_249_1,cartel_period,1996-01-01 : 2001-03-03,"""1996-01-01 : 2001-03-03""",2026-01-28 21:59:42.321209
+38240_29_1,cartel_period,1988-05-03 : 2001-02-01,"""1988-05-03 : 2001-02-01""",2026-01-28 21:59:55.305732
+38281_508_1,cartel_period,1995-01-01 : 2002-02-28,"""1995-01-01 : 2002-02-28""",2026-01-28 22:00:10.117844
+38284_104_1,cartel_period,2001-11-12 : 2007-11-11,"""2001-11-12 : 2007-11-11""",2026-01-28 22:17:05.997884
+38287_27_1,cartel_period,2001-06-10 : 2007-06-21,"""2001-06-10 : 2007-06-21""",2026-01-28 22:17:08.893934
+38337_251_1,cartel_period,1990-01-01 : 2001-01-01,"""1990-01-01 : 2001-01-01""",2026-01-28 22:00:12.8233
+38338_332_2,cartel_period,1994-09-10 : 1999-12-31,"""1994-09-10 : 1999-12-31""",2026-01-28 22:00:20.276376
+38344_5856_3,cartel_period,"I notice that the data you've provided appears to be a comprehensive timeline of events related to a competition law case involving various steel and wire producers in Europe, particularly focusing on cartel activities and anti-trust violations. This includes:
+
+- Timeline of cartel activities from 1981-2025
+- Company mergers and acquisitions (Arcelor, Aceralia, etc.)
+- Commission investigations and decisions
+- Fines and penalties
+- Company name changes and structural changes
+- Key dates for document notifications and decisions
+
+However, I see there are some issues with the data format:
+
+1. Many entries have repeated or inconsistent date formats
+2. Some entries appear to be duplicates or variations of the same information
+3. There's a pattern of entries that seem to be generated by a machine rather than actual historical data (like the ""2010-01-01"" entries that repeat ""Redaelli informed participants about annual contracts"" for years 2010-2045)
+
+Could you clarify what specific information you're looking for from this dataset? For example:
+- Are you looking for a summary of the key events?
+- Do you need specific dates or company relationships?
+- Are you trying to identify the companies involved in the cartel?
+- Do you want to understand the timeline of the Commission's investigation?
+
+This will help me provide you with more useful and accurate information based on this dataset.","""I notice that the data you've provided appears to be a comprehensive timeline of events related to a competition law case involving various steel and wire producers in Europe, particularly focusing on cartel activities and anti-trust violations. This includes:\n\n- Timeline of cartel activities from 1981-2025\n- Company mergers and acquisitions (Arcelor, Aceralia, etc.)\n- Commission investigations and decisions\n- Fines and penalties\n- Company name changes and structural changes\n- Key dates for document notifications and decisions\n\nHowever, I see there are some issues with the data format:\n\n1. Many entries have repeated or inconsistent date formats\n2. Some entries appear to be duplicates or variations of the same information\n3. There's a pattern of entries that seem to be generated by a machine rather than actual historical data (like the \""2010-01-01\"" entries that repeat \""Redaelli informed participants about annual contracts\"" for years 2010-2045)\n\nCould you clarify what specific information you're looking for from this dataset? For example:\n- Are you looking for a summary of the key events?\n- Do you need specific dates or company relationships?\n- Are you trying to identify the companies involved in the cartel?\n- Do you want to understand the timeline of the Commission's investigation?\n\nThis will help me provide you with more useful and accurate information based on this dataset.""",2026-01-28 22:00:48.50224
+38348_998_3,cartel_period,2004-06-16 : 2011-12-31,"""2004-06-16 : 2011-12-31""",2026-01-28 22:20:05.126063
+38354_527_4,cartel_period,1982-01-06 : 2002-06-26,"""1982-01-06 : 2002-06-26""",2026-01-28 22:00:58.536175
+38359_36_1,cartel_period,Server disconnected without sending a response.,"""Server disconnected without sending a response.""",2026-01-28 22:00:59.090715
+38381_1065_1,cartel_period,2001-12-17 : 2009-12-31,"""2001-12-17 : 2009-12-31""",2026-01-28 22:20:06.259431
+38432_526_5,cartel_period,"Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download","""Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download""",2026-01-28 22:00:59.25036
+38443_320_1,cartel_period,"Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download","""Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download""",2026-01-28 22:00:59.657932
+38456_792_2,cartel_period,1994-04-01 : 2002-04-15,"""1994-04-01 : 2002-04-15""",2026-01-28 22:01:45.086327
+38511_1813_8,cartel_period,1998-07-01 : 2002-06-15,"""1998-07-01 : 2002-06-15""",2026-01-28 22:01:47.564866
+38543_1810_3,cartel_period,1984-10-04 : 2003-09-10,"""1984-10-04 : 2003-09-10""",2026-01-28 22:01:58.1784
+38549_72_1,cartel_period,1967-07-12 : 2003-11-21,"""1967-07-12 : 2003-11-21""",2026-01-28 22:17:21.629924
+38589_4669_7,cartel_period,1987-02-24 : 2000-09-26,"""1987-02-24 : 2000-09-26""",2026-01-28 22:02:13.76691
+38606_611_1,cartel_period,1984-01-01 : 2002-12-31,"""1984-01-01 : 2002-12-31""",2026-01-28 22:17:33.200013
+38620_880_14,cartel_period,1994-01-31 : 2000-12-31,"""1994-01-31 : 2000-12-31""",2026-01-28 22:02:21.855707
+38628_498_2,cartel_period,2000-10-09 : 2002-09-30,"""2000-10-09 : 2002-09-30""",2026-01-28 22:02:25.110704
+38629_1056_4,cartel_period,1993-05-13 : 2002-05-13,"""1993-05-13 : 2002-05-13""",2026-01-28 22:02:35.476907
+38636_1203_1,cartel_period,2000-01-01 : 2009-08-14,"""2000-01-01 : 2009-08-14""",2026-01-28 22:20:07.232742
+38638_826_1,cartel_period,1996-05-20 : 2002-11-28,"""1996-05-20 : 2002-11-28""",2026-01-28 22:02:38.852681
+38645_424_1,cartel_period,1997-01-23 : 2002-09-12,"""1997-01-23 : 2002-09-12""",2026-01-28 22:02:43.184025
+38662_59_8,cartel_period,1999-10-01 : 2003-11-03,"""1999-10-01 : 2003-11-03""",2026-01-28 22:17:35.668225
+38681_216_1,cartel_period,2002-07-01 : 2006-07-05,"""2002-07-01 : 2006-07-05""",2026-01-28 22:20:08.094495
+38695_796_1,cartel_period,1994-09-21 : 2000-02-09,"""1994-09-21 : 2000-02-09""",2026-01-28 22:02:47.212851
+38698_4567_1,cartel_period,2002-12-16 : 2008-07-18,"""2002-12-16 : 2008-07-18""",2026-01-28 22:17:37.282053
+38710_790_1,cartel_period,1991-03-01 : 2002-10-01,"""1991-03-01 : 2002-10-01""",2026-01-28 22:02:55.764499
+38745_32_1,cartel_period,2003-05-06 : 2007-12-31,"""2003-05-06 : 2007-12-31""",2026-01-28 22:17:42.739405
+38784_311_12,cartel_period,2001-09-01 : 2006-12-31,"""2001-09-01 : 2006-12-31""",2026-01-28 22:17:53.833194
+38823_1340_4,cartel_period,1995-08-01 : 2004-03-09,"""1995-08-01 : 2004-03-09""",2026-01-28 22:03:11.030366
+38866_1676_3,cartel_period,1969-03-19 : 2004-02-10,"""1969-03-19 : 2004-02-10""",2026-01-28 22:03:19.28127
+38899_1030_10,cartel_period,1988-04-15 : 2004-05-11,"""1988-04-15 : 2004-05-11""",2026-01-28 22:03:29.684389
+38907_181_15,cartel_period,1984-01-01 : 1990-12-31,"""1984-01-01 : 1990-12-31""",2026-01-28 22:03:33.920889
+39092_7226_4,cartel_period,"Based on the provided timeline, here's a summary of the key events and patterns related to price coordination and cartel activities in the bathroom fittings and fixtures industry:
+
+## Key Participants and Their Involvement
+
+**Major Companies Involved:**
+- **Hansa** - Consistently involved throughout the period, with leniency applications and cooperation
+- **Grohe** - Active participant with leniency application and conditional immunity
+- **Villeroy & Boch** - Significant involvement, with disputes over liability and cooperation
+- **Roca** - Submitted leniency application and received fine reduction
+- **Zucchetti** - Active participant in meetings and price coordination
+- **Cisal** - Participated in price coordination and information exchange
+- **Dornbracht** - Involved in cartel activities and inspections
+- **Sanitec** - Under ownership changes and involved in cartel activities
+
+## Timeline of Key Activities
+
+### 2004-2005: Price Coordination and Surcharge Implementation
+- **Early 2004**: Price increases linked to rising raw material costs
+- **Mid-2004**: Coordination of price increases in response to rising raw material prices
+- **2004-2005**: Implementation of cost surcharges (3.1% in September 2004)
+- **January 2005**: 5% price increase applied
+
+### 2005-2006: Leniency Applications and Cooperation
+- **Early 2005**: Companies began submitting leniency applications
+- **2005**: Multiple leniency applications submitted by various companies
+- **2006**: Commission grants conditional immunity to several participants
+
+### 2006-2007: Investigation and Proceedings
+- **2006**: Commission sent Article 18 requests to various companies
+- **2007**: Statement of Objections issued, oral hearings conducted
+- **2007**: Commission initiated proceedings and adopted Statement of Objections
+
+### 2008-2010: Finalization and Decision
+- **2008-2009**: Requests for information sent to gather turnover data
+- **2010**: Commission issued final decision on proceedings
+
+## Key Patterns and Methods
+
+### Communication and Coordination Methods
+- **Meetings**: Regular meetings between industry participants (AGSI, Euroitalia, Amicale du Sanitaire, VC)
+- **Email Communications**: Extensive internal and external email exchanges
+- **Price List Sharing**: Companies shared price lists and information about competitors' pricing
+- **Information Exchange**: Regular exchange of sales data, turnover information, and price developments
+
+### Price Coordination Mechanisms
+- **Cost Surcharges**: Implementation of surcharges due to rising raw material prices
+- **Price Increases**: Coordinated percentage increases across the industry
+- **Discount Reductions**: Strategic reduction of discounts to maintain margins
+- **Gross Price Adjustments**: Coordination of gross price changes
+
+### Industry Associations and Groups
+- **AGSI**: German association with significant participation in price coordination
+- **Euroitalia**: Italian industry group with regular meetings
+- **VC (Villeroy & Boch group)**: Internal coordination group
+- **AFPR**: French industry group involved in price coordination
+- **SFP**: French industry group with coordination activities
+
+## Legal and Regulatory Developments
+
+### Commission Actions
+- **Inspections**: Unannounced inspections of industry participants
+- **Article 18 Requests**: Formal requests for information from companies
+- **Statement of Objections**: Formal legal proceedings initiated
+- **Fines and Penalties**: Various companies faced significant fines
+
+### Leniency Programs
+- **Conditional Immunity**: Multiple companies received conditional immunity
+- **Fine Reductions**: Several companies received reduced fines based on cooperation
+- **Cooperation Requirements**: Companies had to meet specific cooperation criteria
+
+## Key Findings
+
+1. **Systematic Price Coordination**: The industry showed systematic coordination of pricing decisions over many years
+2. **Multiple Methods**: Various methods of coordination including meetings, emails, and price list sharing
+3. **Duration**: The cartel activities spanned over a decade (2004-2010)
+4. **Scale**: Involvement of major industry players across multiple countries
+5. **Legal Response**: Commission took extensive legal action with significant penalties
+
+This timeline demonstrates a complex, multi-year cartel operation involving major European bathroom fittings and fixtures manufacturers, with sophisticated coordination methods and significant legal consequences.","""Based on the provided timeline, here's a summary of the key events and patterns related to price coordination and cartel activities in the bathroom fittings and fixtures industry:\n\n## Key Participants and Their Involvement\n\n**Major Companies Involved:**\n- **Hansa** - Consistently involved throughout the period, with leniency applications and cooperation\n- **Grohe** - Active participant with leniency application and conditional immunity\n- **Villeroy & Boch** - Significant involvement, with disputes over liability and cooperation\n- **Roca** - Submitted leniency application and received fine reduction\n- **Zucchetti** - Active participant in meetings and price coordination\n- **Cisal** - Participated in price coordination and information exchange\n- **Dornbracht** - Involved in cartel activities and inspections\n- **Sanitec** - Under ownership changes and involved in cartel activities\n\n## Timeline of Key Activities\n\n### 2004-2005: Price Coordination and Surcharge Implementation\n- **Early 2004**: Price increases linked to rising raw material costs\n- **Mid-2004**: Coordination of price increases in response to rising raw material prices\n- **2004-2005**: Implementation of cost surcharges (3.1% in September 2004)\n- **January 2005**: 5% price increase applied\n\n### 2005-2006: Leniency Applications and Cooperation\n- **Early 2005**: Companies began submitting leniency applications\n- **2005**: Multiple leniency applications submitted by various companies\n- **2006**: Commission grants conditional immunity to several participants\n\n### 2006-2007: Investigation and Proceedings\n- **2006**: Commission sent Article 18 requests to various companies\n- **2007**: Statement of Objections issued, oral hearings conducted\n- **2007**: Commission initiated proceedings and adopted Statement of Objections\n\n### 2008-2010: Finalization and Decision\n- **2008-2009**: Requests for information sent to gather turnover data\n- **2010**: Commission issued final decision on proceedings\n\n## Key Patterns and Methods\n\n### Communication and Coordination Methods\n- **Meetings**: Regular meetings between industry participants (AGSI, Euroitalia, Amicale du Sanitaire, VC)\n- **Email Communications**: Extensive internal and external email exchanges\n- **Price List Sharing**: Companies shared price lists and information about competitors' pricing\n- **Information Exchange**: Regular exchange of sales data, turnover information, and price developments\n\n### Price Coordination Mechanisms\n- **Cost Surcharges**: Implementation of surcharges due to rising raw material prices\n- **Price Increases**: Coordinated percentage increases across the industry\n- **Discount Reductions**: Strategic reduction of discounts to maintain margins\n- **Gross Price Adjustments**: Coordination of gross price changes\n\n### Industry Associations and Groups\n- **AGSI**: German association with significant participation in price coordination\n- **Euroitalia**: Italian industry group with regular meetings\n- **VC (Villeroy & Boch group)**: Internal coordination group\n- **AFPR**: French industry group involved in price coordination\n- **SFP**: French industry group with coordination activities\n\n## Legal and Regulatory Developments\n\n### Commission Actions\n- **Inspections**: Unannounced inspections of industry participants\n- **Article 18 Requests**: Formal requests for information from companies\n- **Statement of Objections**: Formal legal proceedings initiated\n- **Fines and Penalties**: Various companies faced significant fines\n\n### Leniency Programs\n- **Conditional Immunity**: Multiple companies received conditional immunity\n- **Fine Reductions**: Several companies received reduced fines based on cooperation\n- **Cooperation Requirements**: Companies had to meet specific cooperation criteria\n\n## Key Findings\n\n1. **Systematic Price Coordination**: The industry showed systematic coordination of pricing decisions over many years\n2. **Multiple Methods**: Various methods of coordination including meetings, emails, and price list sharing\n3. **Duration**: The cartel activities spanned over a decade (2004-2010)\n4. **Scale**: Involvement of major industry players across multiple countries\n5. **Legal Response**: Commission took extensive legal action with significant penalties\n\nThis timeline demonstrates a complex, multi-year cartel operation involving major European bathroom fittings and fixtures manufacturers, with sophisticated coordination methods and significant legal consequences.""",2026-01-28 22:04:33.61142
+39116_258_4,cartel_period,2004-10-15 : 2005-06-22,"""2004-10-15 : 2005-06-22""",2026-01-28 22:20:10.612928
+39125_2726_3,cartel_period,"I notice that you've provided a large dataset of dates and events related to a competition case involving automotive glass suppliers, particularly focusing on cartel activities between companies like Asahi Glass, Saint-Gobain, Pilkington, AGC, and Soliver.
+
+However, I see that the data appears to be incomplete or corrupted in the final rows, with entries like ""(No valid data)"" and ""(No valid data)"" which makes it difficult to provide a comprehensive analysis.
+
+What specific aspect of this data would you like me to help you analyze or summarize? For example:
+
+1. Timeline of key events in the investigation
+2. Companies involved and their roles
+3. Types of anti-competitive behavior documented
+4. Key dates of commission actions
+5. Financial penalties or fines mentioned
+6. The duration of the cartel activity
+7. Any specific products or markets affected
+
+Please let me know what specific information you're looking for, and I'll do my best to extract and organize the relevant details from the data you've provided.","""I notice that you've provided a large dataset of dates and events related to a competition case involving automotive glass suppliers, particularly focusing on cartel activities between companies like Asahi Glass, Saint-Gobain, Pilkington, AGC, and Soliver.\n\nHowever, I see that the data appears to be incomplete or corrupted in the final rows, with entries like \""(No valid data)\"" and \""(No valid data)\"" which makes it difficult to provide a comprehensive analysis.\n\nWhat specific aspect of this data would you like me to help you analyze or summarize? For example:\n\n1. Timeline of key events in the investigation\n2. Companies involved and their roles\n3. Types of anti-competitive behavior documented\n4. Key dates of commission actions\n5. Financial penalties or fines mentioned\n6. The duration of the cartel activity\n7. Any specific products or markets affected\n\nPlease let me know what specific information you're looking for, and I'll do my best to extract and organize the relevant details from the data you've provided.""",2026-01-28 22:04:58.89716
+39129_1161_1,cartel_period,1999-06-09 : 2003-05-15,"""1999-06-09 : 2003-05-15""",2026-01-28 22:05:02.297152
+39165_1314_1,cartel_period,2004-01-09 : 2005-02-22,"""2004-01-09 : 2005-02-22""",2026-01-28 22:05:06.6729
+39168_757_6,cartel_period,1977-01-15 : 2001-03-15,"""1977-01-15 : 2001-03-15""",2026-01-28 22:05:23.082942
+39180_1315_4,cartel_period,1997-01-01 : 2000-12-31,"""1997-01-01 : 2000-12-31""",2026-01-28 22:05:27.219233
+39181_1908_8,cartel_period,1992-09-03 : 2005-04-28,"""1992-09-03 : 2005-04-28""",2026-01-28 22:05:43.53823
+39188_2291_2,cartel_period,2000-01-01 : 2002-12-31,"""2000-01-01 : 2002-12-31""",2026-01-28 22:05:47.119594
+39226_8310_11,cartel_period,"Looking at the provided timeline, I can identify the key events related to the **£150,000 payment** mentioned in the prompt:
+
+### Key Timeline Events for the £150,000 Payment:
+
+1. **June 16, 2003** - *Payment of GBP 300,000*
+   - This is the first payment mentioned in the timeline that matches the timeframe and amount (though it's £300,000, which is double the £150,000 mentioned in the prompt).
+
+2. **June 17, 2003** - *Interim injunction granted*
+   - This date is associated with the legal proceedings, but not specifically with the £150,000 payment.
+
+3. **June 30, 2003** - *Payment of final instalment under marketing authorisation agreement*
+   - This date is associated with the end of an agreement and payment of final instalments, but not specifically the £150,000 mentioned.
+
+4. **July 31, 2003** - *Payment of GBP 150,000*
+   - This is the specific date that matches the £150,000 payment mentioned in the prompt.
+
+5. **October 2003** - *Termination of agreement with Merck (GUK)*
+   - The agreement with Merck (GUK) was terminated in October 2003, which would include the payment of the £150,000.
+
+6. **December 31, 2003** - *Agreement terminates on 31 December 2003*
+   - The agreement between Lundbeck and Ranbaxy ended on this date, but the £150,000 payment was already made in July.
+
+7. **December 31, 2003** - *Lundbeck agreed to pay USD 4.5 million in two instalments*
+   - This is a different payment amount and relates to Ranbaxy.
+
+### Conclusion:
+The £150,000 payment was made on **July 31, 2003**, as indicated in the timeline. This payment was part of an agreement between Lundbeck and Merck (GUK) related to the citalopram market entry and generic competition. The payment was made as part of a settlement or agreement to prevent generic entry into the UK market, as part of the broader anticompetitive agreements that were later investigated by the Commission.
+
+The payment was made **before** the termination of the agreement in October 2003, and it was one of several payments made under the terms of the agreement between Lundbeck and Merck (GUK) to prevent generic competition in the UK market for citalopram.","""Looking at the provided timeline, I can identify the key events related to the **\u00a3150,000 payment** mentioned in the prompt:\n\n### Key Timeline Events for the \u00a3150,000 Payment:\n\n1. **June 16, 2003** - *Payment of GBP 300,000*\n   - This is the first payment mentioned in the timeline that matches the timeframe and amount (though it's \u00a3300,000, which is double the \u00a3150,000 mentioned in the prompt).\n\n2. **June 17, 2003** - *Interim injunction granted*\n   - This date is associated with the legal proceedings, but not specifically with the \u00a3150,000 payment.\n\n3. **June 30, 2003** - *Payment of final instalment under marketing authorisation agreement*\n   - This date is associated with the end of an agreement and payment of final instalments, but not specifically the \u00a3150,000 mentioned.\n\n4. **July 31, 2003** - *Payment of GBP 150,000*\n   - This is the specific date that matches the \u00a3150,000 payment mentioned in the prompt.\n\n5. **October 2003** - *Termination of agreement with Merck (GUK)*\n   - The agreement with Merck (GUK) was terminated in October 2003, which would include the payment of the \u00a3150,000.\n\n6. **December 31, 2003** - *Agreement terminates on 31 December 2003*\n   - The agreement between Lundbeck and Ranbaxy ended on this date, but the \u00a3150,000 payment was already made in July.\n\n7. **December 31, 2003** - *Lundbeck agreed to pay USD 4.5 million in two instalments*\n   - This is a different payment amount and relates to Ranbaxy.\n\n### Conclusion:\nThe \u00a3150,000 payment was made on **July 31, 2003**, as indicated in the timeline. This payment was part of an agreement between Lundbeck and Merck (GUK) related to the citalopram market entry and generic competition. The payment was made as part of a settlement or agreement to prevent generic entry into the UK market, as part of the broader anticompetitive agreements that were later investigated by the Commission.\n\nThe payment was made **before** the termination of the agreement in October 2003, and it was one of several payments made under the terms of the agreement between Lundbeck and Merck (GUK) to prevent generic competition in the UK market for citalopram.""",2026-01-28 22:20:48.218087
+39230_2105_9,cartel_period,2006-01-01 : 2018-01-20,"""2006-01-01 : 2018-01-20""",2026-01-28 22:20:49.295483
+39234_242_4,cartel_period,1993-01-01 : 1998-01-01,"""1993-01-01 : 1998-01-01""",2026-01-28 22:05:49.94824
+39309_3643_4,cartel_period,2001-10-19 : 2006-02-28,"""2001-10-19 : 2006-02-28""",2026-01-28 22:06:27.753885
+39315_3019_9,cartel_period,2003-01-01 : 2010-07-08,"""2003-01-01 : 2010-07-08""",2026-01-28 22:20:51.985214
+39316_2298_3,cartel_period,2004-04-01 : 2009-06-22,"""2004-04-01 : 2009-06-22""",2026-01-28 22:20:53.211458
+39317_1942_3,cartel_period,2008-10-01 : 2015-10-01,"""2008-10-01 : 2015-10-01""",2026-01-28 22:20:54.408187
+39326_1774_1,cartel_period,2006-05-29 : 2006-05-30,"""2006-05-29 : 2006-05-30""",2026-01-28 22:17:58.744747
+39351_1223_4,cartel_period,2003-06-01 : 2011-07-01,"""2003-06-01 : 2011-07-01""",2026-01-28 22:20:57.262225
+39386_1536_3,cartel_period,2009-10-14 : 2021-03-31,"""2009-10-14 : 2021-03-31""",2026-01-28 22:20:58.480141
+39388_2796_3,cartel_period,2002-01-01 : 2008-05-27,"""2002-01-01 : 2008-05-27""",2026-01-28 22:20:59.774022
+39389_2761_1,cartel_period,2002-01-01 : 2008-05-01,"""2002-01-01 : 2008-05-01""",2026-01-28 22:21:02.259093
+39396_2009_5,cartel_period,2004-04-07 : 2007-01-16,"""2004-04-07 : 2007-01-16""",2026-01-28 22:06:32.786906
+39398_14153_3,cartel_period,2002-12-16 : 2014-02-26,"""2002-12-16 : 2014-02-26""",2026-01-28 22:21:04.171372
+39398_6930_6,cartel_period,2009-04-03 : 2014-01-01,"""2009-04-03 : 2014-01-01""",2026-01-28 22:21:03.126511
+39401_1535_1,cartel_period,1975-01-01 : 2005-09-30,"""1975-01-01 : 2005-09-30""",2026-01-28 22:06:37.602707
+39402_576_3,cartel_period,2007-01-01 : 2008-12-05,"""2007-01-01 : 2008-12-05""",2026-01-28 22:21:05.009515
+39406_1902_1,cartel_period,1986-04-01 : 2007-05-02,"""1986-04-01 : 2007-05-02""",2026-01-28 22:06:55.632202
+39416_2325_1,cartel_period,2009-05-12 : 2015-01-01,"""2009-05-12 : 2015-01-01""",2026-01-28 22:21:06.247325
+39437_7332_3,cartel_period,"This is a comprehensive timeline detailing the activities and events related to the **CDT (Cathode Ray Tube) and CPT (Cathode Ray Tube Panel) cartel investigations** conducted by the European Commission, primarily focusing on the **Toshiba Corporation** and other major participants.
+
+Here's a structured summary of key aspects from the timeline:
+
+---
+
+### 📅 **Timeline Overview**
+
+#### **1. Cartel Formation & Activities (1990s - 2006)**
+- **1990s - Early 2000s:** 
+  - CDT and CPT producers in Europe, Asia, and China meet regularly to coordinate prices, allocate customers, and restrict output.
+  - Key players include **Samsung SDI**, **Thomson**, **Philips/LGE joint venture**, **MEI (Matsushita Electric Industrial Co.)**, and **Toshiba**.
+  - Meetings occur both in Asia and Europe, with **SML (Samsung, Philips/LGE, and Thomson) meetings** being central to coordination.
+
+- **2003 - 2006:**
+  - **Toshiba** transfers its CRT business into a joint venture called **MTPD (MT Picture Display)**.
+  - **MEI** also joins MTPD, forming a joint venture to continue cartel activities.
+  - **Toshiba** remains liable for MTPD's conduct from **April 2003 to June 2006**.
+  - **Samsung SDI** continues participation until **January 2006**.
+  - **Philips/LGE joint venture** and its subsidiaries remain active until **June 2006**.
+
+#### **2. Investigation Begins (2004 - 2007)**
+- **2004:**
+  - EU expansion to 25 member states, increasing scope of investigation.
+  - Commission begins investigations into alleged participation in CRT cartels in EEA.
+
+- **2005 - 2006:**
+  - **Leniency applications** submitted by **Samsung**, **Philips**, **Thomson**, and **Chunghwa**.
+  - **Panasonic/MTPD** applies for immunity but is denied.
+  - **Commission issues Statements of Objections**.
+  - **Toshiba** is found liable for MTPD's conduct, though it argues for limited liability under the **Termination Agreement**.
+
+#### **3. Legal Proceedings & Fines (2007 - 2013)**
+- **2007 - 2010:**
+  - **Commission investigates** the conduct of various parties, including Toshiba.
+  - **Toshiba** seeks access to evidence and files replies to Commission's questions.
+  - **Court proceedings** begin, with **General Court** ruling on cases involving Toshiba.
+
+- **2010 - 2013:**
+  - **Commission issues final decisions** on fines.
+  - **Toshiba** and other undertakings face significant fines.
+  - **Court of Justice confirms General Court's judgment** in 2017.
+
+#### **4. Final Decisions & Resolution (2013 - 2018)**
+- **2013:**
+  - Final fine amounts are imposed.
+  - **Toshiba** and other companies are fined based on their involvement in the cartel.
+
+- **2018:**
+  - **Commission finalizes fine determination**.
+  - **Statute of limitations** for the infringements has expired (five-year limit).
+  - **Companies dissolve or restructure** following the end of the cartel.
+
+---
+
+### 🔍 **Key Participants**
+| Participant | Role | Key Activities |
+|-------------|------|----------------|
+| **Toshiba** | Joint venture participant, liable for MTPD’s conduct | Transferred CRT business to MTPD, faced fines |
+| **Samsung SDI** | Cartel member | Continued participation until 2006 |
+| **Philips/LGE Joint Venture** | Cartel member | Active until 2006, declared bankrupt |
+| **Thomson** | Cartel member | Submitted leniency application |
+| **MEI (Matsushita Electric)** | Joint venture participant | Joined MTPD, involved in cartel |
+| **Chunghwa** | Cartel member | Submitted leniency application |
+| **Panasonic/MTPD** | Joint venture participant | Applied for immunity, denied |
+
+---
+
+### 📉 **Fines & Penalties**
+- **Toshiba** was fined for its involvement in the cartel.
+- **Samsung SDI**, **Philips/LGE**, and **Thomson** also faced penalties.
+- Fines were calculated based on **sales values** and **market conduct**.
+- **Leniency applications** were accepted for some participants, but not for Panasonic/MTPD.
+
+---
+
+### 🧾 **Legal Proceedings**
+- **Commission issued Statements of Objections** in 2009.
+- **Oral hearings** took place in 2010.
+- **General Court** ruled on the cases.
+- **Court of Justice** confirmed the rulings in 2017.
+
+---
+
+### 📌 **Conclusion**
+This timeline illustrates the **long-term nature of the CDT/CPT cartel investigation**, involving multiple countries and companies. It highlights the **complexity of cartel enforcement**, including **international cooperation**, **leniency programs**, **legal proceedings**, and **fines imposed** under EU competition law.
+
+Let me know if you'd like this information summarized in a table format or converted into a visual timeline!","""This is a comprehensive timeline detailing the activities and events related to the **CDT (Cathode Ray Tube) and CPT (Cathode Ray Tube Panel) cartel investigations** conducted by the European Commission, primarily focusing on the **Toshiba Corporation** and other major participants.\n\nHere's a structured summary of key aspects from the timeline:\n\n---\n\n### \ud83d\udcc5 **Timeline Overview**\n\n#### **1. Cartel Formation & Activities (1990s - 2006)**\n- **1990s - Early 2000s:** \n  - CDT and CPT producers in Europe, Asia, and China meet regularly to coordinate prices, allocate customers, and restrict output.\n  - Key players include **Samsung SDI**, **Thomson**, **Philips/LGE joint venture**, **MEI (Matsushita Electric Industrial Co.)**, and **Toshiba**.\n  - Meetings occur both in Asia and Europe, with **SML (Samsung, Philips/LGE, and Thomson) meetings** being central to coordination.\n\n- **2003 - 2006:**\n  - **Toshiba** transfers its CRT business into a joint venture called **MTPD (MT Picture Display)**.\n  - **MEI** also joins MTPD, forming a joint venture to continue cartel activities.\n  - **Toshiba** remains liable for MTPD's conduct from **April 2003 to June 2006**.\n  - **Samsung SDI** continues participation until **January 2006**.\n  - **Philips/LGE joint venture** and its subsidiaries remain active until **June 2006**.\n\n#### **2. Investigation Begins (2004 - 2007)**\n- **2004:**\n  - EU expansion to 25 member states, increasing scope of investigation.\n  - Commission begins investigations into alleged participation in CRT cartels in EEA.\n\n- **2005 - 2006:**\n  - **Leniency applications** submitted by **Samsung**, **Philips**, **Thomson**, and **Chunghwa**.\n  - **Panasonic/MTPD** applies for immunity but is denied.\n  - **Commission issues Statements of Objections**.\n  - **Toshiba** is found liable for MTPD's conduct, though it argues for limited liability under the **Termination Agreement**.\n\n#### **3. Legal Proceedings & Fines (2007 - 2013)**\n- **2007 - 2010:**\n  - **Commission investigates** the conduct of various parties, including Toshiba.\n  - **Toshiba** seeks access to evidence and files replies to Commission's questions.\n  - **Court proceedings** begin, with **General Court** ruling on cases involving Toshiba.\n\n- **2010 - 2013:**\n  - **Commission issues final decisions** on fines.\n  - **Toshiba** and other undertakings face significant fines.\n  - **Court of Justice confirms General Court's judgment** in 2017.\n\n#### **4. Final Decisions & Resolution (2013 - 2018)**\n- **2013:**\n  - Final fine amounts are imposed.\n  - **Toshiba** and other companies are fined based on their involvement in the cartel.\n\n- **2018:**\n  - **Commission finalizes fine determination**.\n  - **Statute of limitations** for the infringements has expired (five-year limit).\n  - **Companies dissolve or restructure** following the end of the cartel.\n\n---\n\n### \ud83d\udd0d **Key Participants**\n| Participant | Role | Key Activities |\n|-------------|------|----------------|\n| **Toshiba** | Joint venture participant, liable for MTPD\u2019s conduct | Transferred CRT business to MTPD, faced fines |\n| **Samsung SDI** | Cartel member | Continued participation until 2006 |\n| **Philips/LGE Joint Venture** | Cartel member | Active until 2006, declared bankrupt |\n| **Thomson** | Cartel member | Submitted leniency application |\n| **MEI (Matsushita Electric)** | Joint venture participant | Joined MTPD, involved in cartel |\n| **Chunghwa** | Cartel member | Submitted leniency application |\n| **Panasonic/MTPD** | Joint venture participant | Applied for immunity, denied |\n\n---\n\n### \ud83d\udcc9 **Fines & Penalties**\n- **Toshiba** was fined for its involvement in the cartel.\n- **Samsung SDI**, **Philips/LGE**, and **Thomson** also faced penalties.\n- Fines were calculated based on **sales values** and **market conduct**.\n- **Leniency applications** were accepted for some participants, but not for Panasonic/MTPD.\n\n---\n\n### \ud83e\uddfe **Legal Proceedings**\n- **Commission issued Statements of Objections** in 2009.\n- **Oral hearings** took place in 2010.\n- **General Court** ruled on the cases.\n- **Court of Justice** confirmed the rulings in 2017.\n\n---\n\n### \ud83d\udccc **Conclusion**\nThis timeline illustrates the **long-term nature of the CDT/CPT cartel investigation**, involving multiple countries and companies. It highlights the **complexity of cartel enforcement**, including **international cooperation**, **leniency programs**, **legal proceedings**, and **fines imposed** under EU competition law.\n\nLet me know if you'd like this information summarized in a table format or converted into a visual timeline!""",2026-01-28 22:07:49.697416
+39452_3384_13,cartel_period,2000-01-01 : 2007-12-31,"""2000-01-01 : 2007-12-31""",2026-01-28 22:21:09.446003
+39462_6408_3,cartel_period,2002-10-01 : 2003-03-10,"""2002-10-01 : 2003-03-10""",2026-01-28 22:08:02.967524
+39482_3130_4,cartel_period,2004-07-28 : 2005-04-08,"""2004-07-28 : 2005-04-08""",2026-01-28 22:08:07.188455
+39510_1203_3,cartel_period,2003-01-01 : 2007-12-31,"""2003-01-01 : 2007-12-31""",2026-01-28 22:21:13.359957
+39523_5272_13,cartel_period,"This is a comprehensive dataset containing a vast array of dates, events, and data points related to Slovak Telekom (ST) and Deutsche Telekom (DT), particularly focusing on regulatory proceedings, market competition, unbundling practices, and various operational and financial aspects from 1995 to 2164.
+
+The dataset appears to be structured as a timeline of events, with each entry consisting of:
+1. A date or date range
+2. An event or data point related to ST, DT, or regulatory proceedings
+3. Contextual information such as:
+   - Regulatory actions (e.g., Commission proceedings, TUSR decisions)
+   - Market data (e.g., broadband prices, market shares, penetration rates)
+   - Technical details (e.g., collocation fees, unbundling processes)
+   - Financial information (e.g., turnover, dividends, amortization periods)
+   - Company actions (e.g., mergers, rebranding, strategic decisions)
+   - Legal proceedings (e.g., annulment applications, fines, commitments)
+
+Key themes that emerge from this dataset include:
+- **Regulatory Compliance**: Extensive documentation of TUSR and Commission actions, including designations of significant market power, proceedings, and decisions.
+- **Market Competition**: Detailed analysis of broadband market dynamics, pricing, and competition between operators.
+- **Unbundling Practices**: Comprehensive coverage of local loop unbundling processes, fees, qualification procedures, and access rights.
+- **Financial and Operational Metrics**: Data on turnover, dividends, costs, and amortization periods.
+- **Strategic Decisions**: Company-level decisions including mergers, rebranding, technology adoption, and business planning.
+
+This dataset would be valuable for researchers studying EU telecommunications regulation, market competition dynamics, or the specific case of Slovak Telekom's regulatory challenges and business practices. The extensive timeline and detailed entries provide a rich resource for understanding the evolution of telecommunications markets and regulatory frameworks in Slovakia and the broader EU context.","""This is a comprehensive dataset containing a vast array of dates, events, and data points related to Slovak Telekom (ST) and Deutsche Telekom (DT), particularly focusing on regulatory proceedings, market competition, unbundling practices, and various operational and financial aspects from 1995 to 2164.\n\nThe dataset appears to be structured as a timeline of events, with each entry consisting of:\n1. A date or date range\n2. An event or data point related to ST, DT, or regulatory proceedings\n3. Contextual information such as:\n   - Regulatory actions (e.g., Commission proceedings, TUSR decisions)\n   - Market data (e.g., broadband prices, market shares, penetration rates)\n   - Technical details (e.g., collocation fees, unbundling processes)\n   - Financial information (e.g., turnover, dividends, amortization periods)\n   - Company actions (e.g., mergers, rebranding, strategic decisions)\n   - Legal proceedings (e.g., annulment applications, fines, commitments)\n\nKey themes that emerge from this dataset include:\n- **Regulatory Compliance**: Extensive documentation of TUSR and Commission actions, including designations of significant market power, proceedings, and decisions.\n- **Market Competition**: Detailed analysis of broadband market dynamics, pricing, and competition between operators.\n- **Unbundling Practices**: Comprehensive coverage of local loop unbundling processes, fees, qualification procedures, and access rights.\n- **Financial and Operational Metrics**: Data on turnover, dividends, costs, and amortization periods.\n- **Strategic Decisions**: Company-level decisions including mergers, rebranding, technology adoption, and business planning.\n\nThis dataset would be valuable for researchers studying EU telecommunications regulation, market competition dynamics, or the specific case of Slovak Telekom's regulatory challenges and business practices. The extensive timeline and detailed entries provide a rich resource for understanding the evolution of telecommunications markets and regulatory frameworks in Slovakia and the broader EU context.""",2026-01-28 22:21:45.008122
+39525_1916_7,cartel_period,2005-01-01 : 2009-10-22,"""2005-01-01 : 2009-10-22""",2026-01-28 22:21:58.355074
+39530_2671_5,cartel_period,2001-01-01 : 2009-12-16,"""2001-01-01 : 2009-12-16""",2026-01-28 22:21:59.628693
+39562_689_1,cartel_period,2005-01-01 : 2008-09-30,"""2005-01-01 : 2008-09-30""",2026-01-28 22:18:01.419056
+39563_6945_3,cartel_period,"Based on the provided timeline data, here's a structured summary of key events related to the cartel activities and legal proceedings involving the companies mentioned:
+
+### Key Events Summary
+
+#### **Cartel Activities (1990s - 2008)**
+- **1990s**: Cartel activities began, involving companies like Linpac, Coopbox, Sirap-Gema, Vitembal, Nespak, and others in anti-competitive practices.
+- **Early 2000s**: 
+  - Companies engaged in coordinated price increases, client allocations, and tender rigging.
+  - Meetings held in various locations including Barcelona, Madrid, Vienna, and Paris.
+  - Specific agreements made regarding market shares, pricing strategies, and customer assignments.
+- **2006**: 
+  - Significant price coordination and tender-related activities.
+  - Meetings at trade fairs and industry events.
+- **2007-2008**: 
+  - Continued cartel activities including price increases, client sharing, and tender coordination.
+  - Ovarpack resumed participation in cartels.
+  - End of major cartel periods in Italy, SWE, and CEE.
+
+#### **Legal Proceedings and Immunity Applications**
+- **2008**: 
+  - Linpac submitted an application under the Leniency Notice.
+  - Commission's investigation began following an immunity application by Linpac.
+  - Linpac submitted evidence and claimed continued collusive contacts after immunity application.
+  - Ovarpack submitted a separate application for leniency reduction.
+  - Coopbox submitted an application for immunity or leniency reduction.
+- **2012**: 
+  - Commission initiated proceedings in competition case.
+  - Commission addressed decisions to companies regarding immunity from fines and intention to apply fine reduction.
+  - Commission initiated proceedings and adopted the Statement of Objections (SO).
+- **2013**: 
+  - Written submissions and participation in oral hearing on objections.
+  - Silver Plastics submitted employee statements explaining the meaning of internal emails.
+- **2014**: 
+  - Commission notes impact of Coopbox's last closed accounts on fines.
+  - Commission uses Coopbox's worldwide turnover for decision-making.
+- **2015**: 
+  - Company put into judicial liquidation following Commercial Tribunal judgement.
+  - Submission to the Commission regarding turnover consideration.
+
+#### **Key Companies Involved**
+- **Linpac**: Central participant in the cartel, submitted applications for immunity.
+- **Coopbox**: Involved in cartel activities, submitted applications for immunity.
+- **Sirap-Gema**: Active participant in cartel meetings and coordination.
+- **Vitembal**: Participated in cartel activities, involved in price coordination.
+- **Nespak**: Participated in cartel activities, submitted documents to Commission.
+- **Ovarpack**: Resumed participation in cartels, submitted applications for leniency.
+- **Huhtamäki**: Involved in cartel activities, held liability for infringement.
+
+#### **Legal and Financial Implications**
+- **Fines and Reductions**: 
+  - Commission considers reductions based on leniency applications.
+  - Calculation of variable amounts based on sales value and participation years.
+- **Turnover Considerations**: 
+  - Commission reviews worldwide turnover for decision-making.
+  - Impact of consolidated accounts and financial reporting on fine calculations.
+- **Duration and Participation**: 
+  - Calculation of duration including years and months.
+  - Interruption of participation due to time gaps considered.
+
+#### **Timeline Highlights**
+- **2004-2008**: Major cartel activities, including price coordination, client sharing, and tender rigging.
+- **2008**: Immunity applications and Commission investigations begin.
+- **2012-2013**: Legal proceedings and hearings.
+- **2014-2015**: Financial reporting and company liquidation.
+
+This summary outlines the major activities, legal proceedings, and key participants in the cartel case, highlighting the timeline of events from initiation through to legal resolution and financial implications.","""Based on the provided timeline data, here's a structured summary of key events related to the cartel activities and legal proceedings involving the companies mentioned:\n\n### Key Events Summary\n\n#### **Cartel Activities (1990s - 2008)**\n- **1990s**: Cartel activities began, involving companies like Linpac, Coopbox, Sirap-Gema, Vitembal, Nespak, and others in anti-competitive practices.\n- **Early 2000s**: \n  - Companies engaged in coordinated price increases, client allocations, and tender rigging.\n  - Meetings held in various locations including Barcelona, Madrid, Vienna, and Paris.\n  - Specific agreements made regarding market shares, pricing strategies, and customer assignments.\n- **2006**: \n  - Significant price coordination and tender-related activities.\n  - Meetings at trade fairs and industry events.\n- **2007-2008**: \n  - Continued cartel activities including price increases, client sharing, and tender coordination.\n  - Ovarpack resumed participation in cartels.\n  - End of major cartel periods in Italy, SWE, and CEE.\n\n#### **Legal Proceedings and Immunity Applications**\n- **2008**: \n  - Linpac submitted an application under the Leniency Notice.\n  - Commission's investigation began following an immunity application by Linpac.\n  - Linpac submitted evidence and claimed continued collusive contacts after immunity application.\n  - Ovarpack submitted a separate application for leniency reduction.\n  - Coopbox submitted an application for immunity or leniency reduction.\n- **2012**: \n  - Commission initiated proceedings in competition case.\n  - Commission addressed decisions to companies regarding immunity from fines and intention to apply fine reduction.\n  - Commission initiated proceedings and adopted the Statement of Objections (SO).\n- **2013**: \n  - Written submissions and participation in oral hearing on objections.\n  - Silver Plastics submitted employee statements explaining the meaning of internal emails.\n- **2014**: \n  - Commission notes impact of Coopbox's last closed accounts on fines.\n  - Commission uses Coopbox's worldwide turnover for decision-making.\n- **2015**: \n  - Company put into judicial liquidation following Commercial Tribunal judgement.\n  - Submission to the Commission regarding turnover consideration.\n\n#### **Key Companies Involved**\n- **Linpac**: Central participant in the cartel, submitted applications for immunity.\n- **Coopbox**: Involved in cartel activities, submitted applications for immunity.\n- **Sirap-Gema**: Active participant in cartel meetings and coordination.\n- **Vitembal**: Participated in cartel activities, involved in price coordination.\n- **Nespak**: Participated in cartel activities, submitted documents to Commission.\n- **Ovarpack**: Resumed participation in cartels, submitted applications for leniency.\n- **Huhtam\u00e4ki**: Involved in cartel activities, held liability for infringement.\n\n#### **Legal and Financial Implications**\n- **Fines and Reductions**: \n  - Commission considers reductions based on leniency applications.\n  - Calculation of variable amounts based on sales value and participation years.\n- **Turnover Considerations**: \n  - Commission reviews worldwide turnover for decision-making.\n  - Impact of consolidated accounts and financial reporting on fine calculations.\n- **Duration and Participation**: \n  - Calculation of duration including years and months.\n  - Interruption of participation due to time gaps considered.\n\n#### **Timeline Highlights**\n- **2004-2008**: Major cartel activities, including price coordination, client sharing, and tender rigging.\n- **2008**: Immunity applications and Commission investigations begin.\n- **2012-2013**: Legal proceedings and hearings.\n- **2014-2015**: Financial reporting and company liquidation.\n\nThis summary outlines the major activities, legal proceedings, and key participants in the cartel case, highlighting the timeline of events from initiation through to legal resolution and financial implications.""",2026-01-28 22:08:50.862932
+39563_7279_3,cartel_period,2000-03-02 : 2008-02-13,"""2000-03-02 : 2008-02-13""",2026-01-28 22:22:01.815807
+39574_2801_11,cartel_period,2003-01-01 : 2004-09-09,"""2003-01-01 : 2004-09-09""",2026-01-28 22:08:58.822873
+39579_2633_5,cartel_period,2002-01-07 : 2005-03-08,"""2002-01-07 : 2005-03-08""",2026-01-28 22:09:01.218965
+39592_2152_5,cartel_period,2009-11-13 : 2011-11-15,"""2009-11-13 : 2011-11-15""",2026-01-28 22:22:02.763626
+39595_3012_4,cartel_period,2009-01-01 : 2013-03-31,"""2009-01-01 : 2013-03-31""",2026-01-28 22:22:03.64159
+39596_4342_9,cartel_period,2009-04-08 : 2010-06-25,"""2009-04-08 : 2010-06-25""",2026-01-28 22:22:05.152752
+39600_2147_7,cartel_period,2004-04-01 : 2007-10-09,"""2004-04-01 : 2007-10-09""",2026-01-28 22:09:02.06454
+39605_2700_3,cartel_period,1999-02-23 : 2004-12-27,"""1999-02-23 : 2004-12-27""",2026-01-28 22:09:04.79031
+39610_9899_5,cartel_period,"This document is a comprehensive timeline of events related to an EU antitrust investigation into a cartel involving power cable companies, primarily focusing on the activities of **VISCAS**, **Prysmian**, **Nexans**, **ABB**, **JPS**, **EXSYM**, and other participants in the European power cable market. The timeline spans from **2004 to 2014**, detailing:
+
+### Key Points Covered:
+
+1. **Cartel Formation and Activities (2004–2008):**
+   - The cartel involved **anti-competitive practices** such as price fixing, bid rigging, and allocation of projects.
+   - Participants included major European and Asian power cable manufacturers.
+   - Activities were documented through **email exchanges**, **meeting minutes**, **representative communications**, and **internal reports**.
+   - The cartel operated under a **""home territory principle""**, where companies agreed not to compete in certain regions or projects.
+
+2. **Key Companies and Their Roles:**
+   - **VISCAS**: A joint venture between **Furukawa Electric** and **Fujikura**, central to the cartel’s operations.
+   - **Prysmian**: Originally part of the **Pirelli Group**, later acquired by **Goldman Sachs**.
+   - **Nexans**: A French energy company involved in the cartel.
+   - **ABB**: Involved in both direct and indirect cartel activities; later applied for leniency.
+   - **JPS**: A Japanese company that participated in the cartel until its dissolution.
+   - **EXSYM**: Another joint venture company involved in cartel activities.
+   - **Silec/Safran**: Involved in later stages, particularly in **2005–2009**.
+
+3. **Regulatory and Legal Actions:**
+   - The **European Commission** initiated proceedings in **2011**.
+   - **Leniency applications** were submitted by several companies (e.g., **ABB**, **Mitsubishi**, **Prysmian**).
+   - **Inspections** were conducted under **Article 20(4) of Regulation (EC)**.
+   - **Oral hearings** took place in **2012**.
+   - **General Court** partially annulled some **Commission decisions** in **2012** regarding inspections.
+
+4. **Ownership and Corporate Changes:**
+   - **Pirelli Group** sold its power cable business to **Goldman Sachs**.
+   - **Prysmian** became a **wholly-owned subsidiary** of Goldman Sachs.
+   - **Silec** became indirectly owned by **Safran** and later by **General Cable**.
+   - **JPS** transferred its business unit to **Silec** in **2005**.
+
+5. **End of the Cartel (2008–2009):**
+   - The cartel's activities **ended** around **2008–2009**.
+   - **VISCAS** and **EXSYM** were involved in the cartel until **2009**.
+   - **JPS** ceased participation in **2008**.
+   - **Prysmian** and other companies submitted **leniency applications**.
+   - **End dates** for parental liability and participation in the infringement were set.
+
+6. **Investigation Timeline (2009–2014):**
+   - **RFI (Request for Information)**s were issued and responded to by various companies.
+   - **Prysmian** and **ABB** provided responses to SO (Statement of Objections).
+   - **Court proceedings** and **appeals** continued through **2014**.
+
+### Notable Dates and Events:
+- **2004**: EU accession of several countries (Cyprus, Czech Republic, Estonia, etc.), affecting sales data.
+- **2005**: **Prysmian** sold its power cable activities to Goldman Sachs.
+- **2006**: **JPS** announced new position within Sumitomo, followed by a response from Nexans.
+- **2008**: **VISCAS** participated in last anti-competitive meeting.
+- **2009**: End of agreement period for multiple companies, including **VISCAS** and **EXSYM**.
+- **2011**: Commission initiated proceedings.
+- **2012**: Oral hearings; General Court partially annulled Commission decisions.
+- **2014**: Final events related to **Hitachi** and **Sumitomo** transferring shares in **JPS**.
+
+### Conclusion:
+This timeline provides a detailed overview of a complex **EU cartel case** involving **international power cable manufacturers**. It highlights the **evolution of corporate structures**, **regulatory responses**, and **legal proceedings** over more than a decade. The case underscores the **importance of antitrust enforcement** in global markets and the **complexity of multi-jurisdictional cartels**.
+
+Would you like a **summary table**, **visual timeline**, or **analysis of specific companies** or **legal implications**?","""This document is a comprehensive timeline of events related to an EU antitrust investigation into a cartel involving power cable companies, primarily focusing on the activities of **VISCAS**, **Prysmian**, **Nexans**, **ABB**, **JPS**, **EXSYM**, and other participants in the European power cable market. The timeline spans from **2004 to 2014**, detailing:\n\n### Key Points Covered:\n\n1. **Cartel Formation and Activities (2004\u20132008):**\n   - The cartel involved **anti-competitive practices** such as price fixing, bid rigging, and allocation of projects.\n   - Participants included major European and Asian power cable manufacturers.\n   - Activities were documented through **email exchanges**, **meeting minutes**, **representative communications**, and **internal reports**.\n   - The cartel operated under a **\""home territory principle\""**, where companies agreed not to compete in certain regions or projects.\n\n2. **Key Companies and Their Roles:**\n   - **VISCAS**: A joint venture between **Furukawa Electric** and **Fujikura**, central to the cartel\u2019s operations.\n   - **Prysmian**: Originally part of the **Pirelli Group**, later acquired by **Goldman Sachs**.\n   - **Nexans**: A French energy company involved in the cartel.\n   - **ABB**: Involved in both direct and indirect cartel activities; later applied for leniency.\n   - **JPS**: A Japanese company that participated in the cartel until its dissolution.\n   - **EXSYM**: Another joint venture company involved in cartel activities.\n   - **Silec/Safran**: Involved in later stages, particularly in **2005\u20132009**.\n\n3. **Regulatory and Legal Actions:**\n   - The **European Commission** initiated proceedings in **2011**.\n   - **Leniency applications** were submitted by several companies (e.g., **ABB**, **Mitsubishi**, **Prysmian**).\n   - **Inspections** were conducted under **Article 20(4) of Regulation (EC)**.\n   - **Oral hearings** took place in **2012**.\n   - **General Court** partially annulled some **Commission decisions** in **2012** regarding inspections.\n\n4. **Ownership and Corporate Changes:**\n   - **Pirelli Group** sold its power cable business to **Goldman Sachs**.\n   - **Prysmian** became a **wholly-owned subsidiary** of Goldman Sachs.\n   - **Silec** became indirectly owned by **Safran** and later by **General Cable**.\n   - **JPS** transferred its business unit to **Silec** in **2005**.\n\n5. **End of the Cartel (2008\u20132009):**\n   - The cartel's activities **ended** around **2008\u20132009**.\n   - **VISCAS** and **EXSYM** were involved in the cartel until **2009**.\n   - **JPS** ceased participation in **2008**.\n   - **Prysmian** and other companies submitted **leniency applications**.\n   - **End dates** for parental liability and participation in the infringement were set.\n\n6. **Investigation Timeline (2009\u20132014):**\n   - **RFI (Request for Information)**s were issued and responded to by various companies.\n   - **Prysmian** and **ABB** provided responses to SO (Statement of Objections).\n   - **Court proceedings** and **appeals** continued through **2014**.\n\n### Notable Dates and Events:\n- **2004**: EU accession of several countries (Cyprus, Czech Republic, Estonia, etc.), affecting sales data.\n- **2005**: **Prysmian** sold its power cable activities to Goldman Sachs.\n- **2006**: **JPS** announced new position within Sumitomo, followed by a response from Nexans.\n- **2008**: **VISCAS** participated in last anti-competitive meeting.\n- **2009**: End of agreement period for multiple companies, including **VISCAS** and **EXSYM**.\n- **2011**: Commission initiated proceedings.\n- **2012**: Oral hearings; General Court partially annulled Commission decisions.\n- **2014**: Final events related to **Hitachi** and **Sumitomo** transferring shares in **JPS**.\n\n### Conclusion:\nThis timeline provides a detailed overview of a complex **EU cartel case** involving **international power cable manufacturers**. It highlights the **evolution of corporate structures**, **regulatory responses**, and **legal proceedings** over more than a decade. The case underscores the **importance of antitrust enforcement** in global markets and the **complexity of multi-jurisdictional cartels**.\n\nWould you like a **summary table**, **visual timeline**, or **analysis of specific companies** or **legal implications**?""",2026-01-28 22:09:55.376835
+39611_2354_3,cartel_period,2006-06-21 : 2008-05-15,"""2006-06-21 : 2008-05-15""",2026-01-28 22:09:56.42327
+39612_12448_6,cartel_period,"This appears to be a comprehensive dataset containing detailed information about the **perindopril patent settlement case** involving **Les Laboratoires Servier** and various generic pharmaceutical companies. The dataset includes:
+
+1. **Timeline of Events**: Extensive chronological data from 1981 to 2066+ covering:
+   - Patent filings and acquisitions
+   - Technology transfers
+   - Settlement agreements
+   - Market entry of generics
+   - Legal proceedings and court decisions
+
+2. **Key Entities**:
+   - **Servier**: Originator company (Les Laboratoires Servier)
+   - **Generic Companies**: Teva, Glenmark, Cipla, Mylan, Matrix, Niche, Unichem, Krka, Arrow, Specifar, Ratiopharm
+   - **Legal Framework**: EU competition law, Article 101/102, patent law, antitrust regulations
+
+3. **Legal and Regulatory Aspects**:
+   - Infringement of Articles 101 and 102 of the Treaty
+   - Reverse payment patent settlements
+   - Market dominance analysis
+   - Technology transfer guidelines
+   - Competition law enforcement
+
+4. **Market Data**:
+   - Sales figures and market shares
+   - Price reductions
+   - Geographic market definitions
+   - Product characteristics and formulations
+   - Regulatory frameworks in different countries
+
+5. **Competition Law Issues**:
+   - Exclusionary strategies
+   - Anticompetitive effects
+   - Dominance and market power
+   - Efficiency justifications
+   - Fines and penalties
+
+This dataset is likely used for:
+- **Legal analysis** of pharmaceutical antitrust cases
+- **Regulatory compliance** for competition authorities
+- **Academic research** on patent settlements and market dynamics
+- **Corporate strategy** and risk assessment in pharmaceutical industry
+
+Would you like me to analyze specific aspects of this dataset or extract particular information from it?","""This appears to be a comprehensive dataset containing detailed information about the **perindopril patent settlement case** involving **Les Laboratoires Servier** and various generic pharmaceutical companies. The dataset includes:\n\n1. **Timeline of Events**: Extensive chronological data from 1981 to 2066+ covering:\n   - Patent filings and acquisitions\n   - Technology transfers\n   - Settlement agreements\n   - Market entry of generics\n   - Legal proceedings and court decisions\n\n2. **Key Entities**:\n   - **Servier**: Originator company (Les Laboratoires Servier)\n   - **Generic Companies**: Teva, Glenmark, Cipla, Mylan, Matrix, Niche, Unichem, Krka, Arrow, Specifar, Ratiopharm\n   - **Legal Framework**: EU competition law, Article 101/102, patent law, antitrust regulations\n\n3. **Legal and Regulatory Aspects**:\n   - Infringement of Articles 101 and 102 of the Treaty\n   - Reverse payment patent settlements\n   - Market dominance analysis\n   - Technology transfer guidelines\n   - Competition law enforcement\n\n4. **Market Data**:\n   - Sales figures and market shares\n   - Price reductions\n   - Geographic market definitions\n   - Product characteristics and formulations\n   - Regulatory frameworks in different countries\n\n5. **Competition Law Issues**:\n   - Exclusionary strategies\n   - Anticompetitive effects\n   - Dominance and market power\n   - Efficiency justifications\n   - Fines and penalties\n\nThis dataset is likely used for:\n- **Legal analysis** of pharmaceutical antitrust cases\n- **Regulatory compliance** for competition authorities\n- **Academic research** on patent settlements and market dynamics\n- **Corporate strategy** and risk assessment in pharmaceutical industry\n\nWould you like me to analyze specific aspects of this dataset or extract particular information from it?""",2026-01-28 22:22:37.963657
+39633_2636_9,cartel_period,2000-01-01 : 2009-12-31,"""2000-01-01 : 2009-12-31""",2026-01-28 22:10:01.650032
+39639_3631_8,cartel_period,2004-06-23 : 2008-11-25,"""2004-06-23 : 2008-11-25""",2026-01-28 22:10:07.886382
+39654_2861_16,cartel_period,2002-12-16 : 2012-11-07,"""2002-12-16 : 2012-11-07""",2026-01-28 22:22:39.086112
+39678_2514_15,cartel_period,2003-01-01 : 2011-05-25,"""2003-01-01 : 2011-05-25""",2026-01-28 22:22:41.154948
+39685_1976_7,cartel_period,2004-04-01 : 2006-12-15,"""2004-04-01 : 2006-12-15""",2026-01-28 22:22:48.668289
+39686_4072_5,cartel_period,"I've analyzed the provided timeline of events related to the modafinil market, particularly focusing on the relationship between Cephalon and Teva. Here's a summary of key points:
+
+### Key Events and Timeline:
+
+**Early Development (1981-1995):**
+- Formation of subsidiary companies
+- Initial development of modafinil and armodafinil products
+
+**Patent and Regulatory Developments (1995-2000):**
+- Cephalon filed patents for modafinil and its formulations
+- Patent applications and approvals for crystalline forms
+- Regulatory filings and market authorizations in various countries
+
+**Settlement and Market Entry (2000-2010):**
+- Cephalon and Teva reached settlement agreements in 2005
+- Teva agreed not to compete in the modafinil market until 2012
+- Cephalon's exclusivity extended through 2011-2012
+- Nuvigil launched in the United States in 2009
+- Teva's acquisition of Cephalon in 2011
+
+**Market Dynamics (2010-2020):**
+- Generic competition entered the market in France (2011)
+- Cephalon's market share remained above 50% until 2012
+- Regulatory restrictions on modafinil use in the EEA (2011)
+- Price reductions following generic entry (2012-2014)
+- FTC antitrust action against Cephalon in 2012
+
+**Legal Proceedings and Resolution (2010-2020):**
+- Various patent litigation cases in multiple countries
+- European Commission investigation into the settlement
+- FTC settlement with Teva in 2015
+- Commission's decision on Teva/Cephalon merger in 2011
+
+**Recent Developments (2020-2024):**
+- Patent expirations for key modafinil patents
+- Continued generic competition in the market
+- Ongoing legal proceedings related to patent settlements
+
+### Key Points:
+
+1. **Settlement Impact:** The settlement between Cephalon and Teva significantly impacted market competition by delaying generic entry until 2012.
+
+2. **Regulatory Changes:** EMA restrictions on modafinil indications affected market dynamics and patient access.
+
+3. **Market Share:** Cephalon maintained significant market share (above 50% until 2012) before generic competition entered.
+
+4. **Legal Challenges:** Multiple court cases and regulatory investigations addressed the anticompetitive aspects of the settlement.
+
+5. **Price Evolution:** Significant price drops occurred after generic entry, with continued market dynamics affecting pricing strategies.
+
+This timeline illustrates the complex interplay between patent protection, regulatory frameworks, market competition, and antitrust considerations in the pharmaceutical industry, particularly for a product like modafinil with significant market value and regulatory attention.","""I've analyzed the provided timeline of events related to the modafinil market, particularly focusing on the relationship between Cephalon and Teva. Here's a summary of key points:\n\n### Key Events and Timeline:\n\n**Early Development (1981-1995):**\n- Formation of subsidiary companies\n- Initial development of modafinil and armodafinil products\n\n**Patent and Regulatory Developments (1995-2000):**\n- Cephalon filed patents for modafinil and its formulations\n- Patent applications and approvals for crystalline forms\n- Regulatory filings and market authorizations in various countries\n\n**Settlement and Market Entry (2000-2010):**\n- Cephalon and Teva reached settlement agreements in 2005\n- Teva agreed not to compete in the modafinil market until 2012\n- Cephalon's exclusivity extended through 2011-2012\n- Nuvigil launched in the United States in 2009\n- Teva's acquisition of Cephalon in 2011\n\n**Market Dynamics (2010-2020):**\n- Generic competition entered the market in France (2011)\n- Cephalon's market share remained above 50% until 2012\n- Regulatory restrictions on modafinil use in the EEA (2011)\n- Price reductions following generic entry (2012-2014)\n- FTC antitrust action against Cephalon in 2012\n\n**Legal Proceedings and Resolution (2010-2020):**\n- Various patent litigation cases in multiple countries\n- European Commission investigation into the settlement\n- FTC settlement with Teva in 2015\n- Commission's decision on Teva/Cephalon merger in 2011\n\n**Recent Developments (2020-2024):**\n- Patent expirations for key modafinil patents\n- Continued generic competition in the market\n- Ongoing legal proceedings related to patent settlements\n\n### Key Points:\n\n1. **Settlement Impact:** The settlement between Cephalon and Teva significantly impacted market competition by delaying generic entry until 2012.\n\n2. **Regulatory Changes:** EMA restrictions on modafinil indications affected market dynamics and patient access.\n\n3. **Market Share:** Cephalon maintained significant market share (above 50% until 2012) before generic competition entered.\n\n4. **Legal Challenges:** Multiple court cases and regulatory investigations addressed the anticompetitive aspects of the settlement.\n\n5. **Price Evolution:** Significant price drops occurred after generic entry, with continued market dynamics affecting pricing strategies.\n\nThis timeline illustrates the complex interplay between patent protection, regulatory frameworks, market competition, and antitrust considerations in the pharmaceutical industry, particularly for a product like modafinil with significant market value and regulatory attention.""",2026-01-28 22:23:27.027398
+39692_1304_3,cartel_period,2002-11-01 : 2011-12-13,"""2002-11-01 : 2011-12-13""",2026-01-28 22:23:28.094732
+39711_4493_4,cartel_period,"I've analyzed the extensive timeline data you've provided, which appears to be a comprehensive record of events related to Qualcomm's UMTS chipset market conduct, particularly in relation to competition with Icera and regulatory proceedings.
+
+Key observations from this data:
+
+## Timeline Overview
+The data spans from 2009 to 2019, documenting a complex regulatory investigation into Qualcomm's pricing practices. The core period of alleged infringement runs from July 1, 2009 to June 30, 2011.
+
+## Key Themes
+
+**1. Competitive Dynamics**
+- Qualcomm's strategic response to Icera's competitive threat
+- Pricing decisions for MDM6200, MDM8200, and MDM8200A chipsets
+- Market positioning in HSPA/HSPA+ segments
+
+**2. Regulatory Process**
+- Multiple stages of Commission proceedings (Statement of Objections, Supplementary SO, etc.)
+- Extensive document exchanges and information requests
+- Court involvement (General Court proceedings)
+
+**3. Technical Development**
+- Chronic delays in QSC6295 and QSC7230 chipset development
+- Product lifecycle management (MDM8200 reaching end-of-life)
+- Data rate evolution (14Mbps, 21Mbps, 42Mbps)
+
+**4. Market Impact**
+- Huawei and ZTE as key customers affected by pricing decisions
+- Market share dynamics in UMTS chipset market
+- Competition from Nvidia's acquisition of Icera
+
+## Notable Patterns
+
+- **Repetitive Data**: The data contains numerous repeated entries, particularly around 2015-2019, suggesting either:
+  - Systematic data entry issues
+  - Multiple references to the same events
+  - Inconsistent documentation practices
+
+- **Pricing Strategy**: The timeline reveals a pattern of below-cost pricing to Huawei and ZTE, with the stated intention of eliminating Icera as a competitor.
+
+- **Legal Proceedings**: The investigation involved extensive back-and-forth between Qualcomm and the Commission, with multiple submissions, clarifications, and court proceedings.
+
+This appears to be a detailed record of a significant EU competition case involving one of the world's largest semiconductor companies. The data suggests a complex investigation involving technical, economic, and legal considerations spanning several years.
+
+Would you like me to focus on any particular aspect of this timeline or extract specific information?","""I've analyzed the extensive timeline data you've provided, which appears to be a comprehensive record of events related to Qualcomm's UMTS chipset market conduct, particularly in relation to competition with Icera and regulatory proceedings.\n\nKey observations from this data:\n\n## Timeline Overview\nThe data spans from 2009 to 2019, documenting a complex regulatory investigation into Qualcomm's pricing practices. The core period of alleged infringement runs from July 1, 2009 to June 30, 2011.\n\n## Key Themes\n\n**1. Competitive Dynamics**\n- Qualcomm's strategic response to Icera's competitive threat\n- Pricing decisions for MDM6200, MDM8200, and MDM8200A chipsets\n- Market positioning in HSPA/HSPA+ segments\n\n**2. Regulatory Process**\n- Multiple stages of Commission proceedings (Statement of Objections, Supplementary SO, etc.)\n- Extensive document exchanges and information requests\n- Court involvement (General Court proceedings)\n\n**3. Technical Development**\n- Chronic delays in QSC6295 and QSC7230 chipset development\n- Product lifecycle management (MDM8200 reaching end-of-life)\n- Data rate evolution (14Mbps, 21Mbps, 42Mbps)\n\n**4. Market Impact**\n- Huawei and ZTE as key customers affected by pricing decisions\n- Market share dynamics in UMTS chipset market\n- Competition from Nvidia's acquisition of Icera\n\n## Notable Patterns\n\n- **Repetitive Data**: The data contains numerous repeated entries, particularly around 2015-2019, suggesting either:\n  - Systematic data entry issues\n  - Multiple references to the same events\n  - Inconsistent documentation practices\n\n- **Pricing Strategy**: The timeline reveals a pattern of below-cost pricing to Huawei and ZTE, with the stated intention of eliminating Icera as a competitor.\n\n- **Legal Proceedings**: The investigation involved extensive back-and-forth between Qualcomm and the Commission, with multiple submissions, clarifications, and court proceedings.\n\nThis appears to be a detailed record of a significant EU competition case involving one of the world's largest semiconductor companies. The data suggests a complex investigation involving technical, economic, and legal considerations spanning several years.\n\nWould you like me to focus on any particular aspect of this timeline or extract specific information?""",2026-01-28 22:24:02.18407
+39727_2315_5,cartel_period,2007-01-01 : 2012-12-31,"""2007-01-01 : 2012-12-31""",2026-01-28 22:24:03.232792
+39731_801_8,cartel_period,2003-01-01 : 2013-12-18,"""2003-01-01 : 2013-12-18""",2026-01-28 22:24:04.552062
+39736_1746_5,cartel_period,2000-01-01 : 2012-10-16,"""2000-01-01 : 2012-10-16""",2026-01-28 22:24:05.793908
+39740_14996_3,cartel_period,2002-12-01 : 2016-12-31,"""2002-12-01 : 2016-12-31""",2026-01-28 22:24:16.38353
+39745_14237_7,cartel_period,2006-01-01 : 2016-06-01,"""2006-01-01 : 2016-06-01""",2026-01-28 22:24:17.388892
+39748_3911_5,cartel_period,2000-03-06 : 2009-03-31,"""2000-03-06 : 2009-03-31""",2026-01-28 22:10:09.608656
+39759_3071_5,cartel_period,2008-03-01 : 2012-04-02,"""2008-03-01 : 2012-04-02""",2026-01-28 22:24:20.688943
+39767_2018_3,cartel_period,2008-12-01 : 2015-12-02,"""2008-12-01 : 2015-12-02""",2026-01-28 22:24:21.556773
+39780_3528_6,cartel_period,2003-10-08 : 2008-04-22,"""2003-10-08 : 2008-04-22""",2026-01-28 22:10:10.651955
+39792_2737_3,cartel_period,2003-03-03 : 2007-05-16,"""2003-03-03 : 2007-05-16""",2026-01-28 22:10:14.930319
+39801_2468_8,cartel_period,2005-10-26 : 2010-07-27,"""2005-10-26 : 2010-07-27""",2026-01-28 22:10:17.417827
+39813_1554_3,cartel_period,2008-10-03 : 2024-03-01,"""2008-10-03 : 2024-03-01""",2026-01-28 22:24:26.424012
+39816_10148_3,cartel_period,2002-12-16 : 2016-12-31,"""2002-12-16 : 2016-12-31""",2026-01-28 22:24:27.472387
+39824_6567_14,cartel_period,1997-01-17 : 2011-01-18,"""1997-01-17 : 2011-01-18""",2026-01-28 21:47:01.662886
+39847_27536_4,cartel_period,2009-12-01 : 2010-05-01,"""2009-12-01 : 2010-05-01""",2026-01-28 22:24:35.997605
+39849_2692_4,cartel_period,"I've reviewed the provided timeline of events related to Bulgarian gas market competition, focusing on the BEH group (Bulgarian Energy Holding), Bulgargaz, and Bulgartransgaz. Here's a structured summary of the key points and timeline:
+
+### Key Entities:
+1. **BEH Group (Bulgarian Energy Holding EAD)**: Parent company controlling Bulgargaz and Bulgartransgaz.
+2. **Bulgargaz EAD**: Major gas importer and supplier in Bulgaria.
+3. **Bulgartransgaz EAD**: Transmission system operator (TSO) responsible for gas pipelines.
+4. **Overgas Inc. AD**: Competitor attempting to access gas infrastructure.
+
+### Timeline Summary:
+
+#### **Early Period (2013-2015) - Infringement Period**
+- **2013**: 
+  - BEH group's behavior was identified as anti-competitive.
+  - Bulgartransgaz denied Overgas access to Bulgarian transmission network.
+  - Overgas imported small quantities of Russian gas.
+  - Access to Romanian Transit Pipeline 1 was limited and non-transparent.
+  - Commission initiated proceedings under EU antitrust laws.
+- **2014**:
+  - Bulgartransgaz refused to supply Overgas despite requests.
+  - BEH group's influence over Bulgartransgaz operations was significant.
+  - Infringement continued until January 2015.
+- **2015**:
+  - **January 1**: Commission found infringement of Article 102 TFEU by BEH group and its subsidiaries.
+  - BEH group's refusal to grant access to Bulgarian transmission network and capacity hoarding prevented third-party access.
+  - Romanian Transit Pipeline 1 access was not objective, transparent, or non-discriminatory.
+  - Infringement ended, and BEH group started granting objective, transparent, and non-discriminatory access.
+
+#### **Post-Infringement Period (2015-2018)**
+- **2015**:
+  - EWRC's certification decision confirmed Bulgartransgaz compliance with regulatory framework.
+  - Amendments to rules for access to gas transmission and distribution networks.
+  - Bulgartransgaz announced available firm capacity at compressor station Ihtiman.
+- **2016**:
+  - Early termination of the 2005 Commercial Agreement between Bulgargaz and Transgaz.
+  - Bulgarian Transit Pipeline restrictions on gas imports.
+  - Romanian Transit Pipeline 1 became the only viable route for bringing gas into Bulgaria.
+  - Bulgartransgaz adopted new capacity allocation methodologies.
+- **2017-2018**:
+  - Commission meetings with BEH group.
+  - Submission of arguments on mitigating circumstances.
+  - BEH group obtained access to confidential versions of Commission meeting minutes.
+
+#### **Ongoing Developments (2018-2022)**
+- **2018**:
+  - Project completion expected.
+  - Romanian Transit Pipeline 1 becoming operational.
+- **2020-2022**:
+  - Project implementation envisaged.
+  - Gas volume reduction agreement signed.
+
+### Key Findings:
+1. **Anti-Competitive Behavior**: BEH group's subsidiaries (Bulgargaz and Bulgartransgaz) restricted access to gas infrastructure, preventing competition.
+2. **Regulatory Compliance**: EU antitrust laws were violated, leading to formal proceedings and penalties.
+3. **Infrastructure Development**: Significant efforts were made to develop infrastructure and ensure compliance with EU regulations.
+4. **Market Access**: Overgas gradually gained access to gas transmission networks, though initially restricted and non-transparent.
+
+### Conclusion:
+The timeline illustrates a complex period where BEH group's dominance in the Bulgarian gas market was challenged by EU antitrust authorities. The resolution involved changes in regulatory frameworks, modifications to access rules, and increased transparency in infrastructure usage. The case highlights the importance of ensuring fair competition in energy markets and compliance with EU regulations.","""I've reviewed the provided timeline of events related to Bulgarian gas market competition, focusing on the BEH group (Bulgarian Energy Holding), Bulgargaz, and Bulgartransgaz. Here's a structured summary of the key points and timeline:\n\n### Key Entities:\n1. **BEH Group (Bulgarian Energy Holding EAD)**: Parent company controlling Bulgargaz and Bulgartransgaz.\n2. **Bulgargaz EAD**: Major gas importer and supplier in Bulgaria.\n3. **Bulgartransgaz EAD**: Transmission system operator (TSO) responsible for gas pipelines.\n4. **Overgas Inc. AD**: Competitor attempting to access gas infrastructure.\n\n### Timeline Summary:\n\n#### **Early Period (2013-2015) - Infringement Period**\n- **2013**: \n  - BEH group's behavior was identified as anti-competitive.\n  - Bulgartransgaz denied Overgas access to Bulgarian transmission network.\n  - Overgas imported small quantities of Russian gas.\n  - Access to Romanian Transit Pipeline 1 was limited and non-transparent.\n  - Commission initiated proceedings under EU antitrust laws.\n- **2014**:\n  - Bulgartransgaz refused to supply Overgas despite requests.\n  - BEH group's influence over Bulgartransgaz operations was significant.\n  - Infringement continued until January 2015.\n- **2015**:\n  - **January 1**: Commission found infringement of Article 102 TFEU by BEH group and its subsidiaries.\n  - BEH group's refusal to grant access to Bulgarian transmission network and capacity hoarding prevented third-party access.\n  - Romanian Transit Pipeline 1 access was not objective, transparent, or non-discriminatory.\n  - Infringement ended, and BEH group started granting objective, transparent, and non-discriminatory access.\n\n#### **Post-Infringement Period (2015-2018)**\n- **2015**:\n  - EWRC's certification decision confirmed Bulgartransgaz compliance with regulatory framework.\n  - Amendments to rules for access to gas transmission and distribution networks.\n  - Bulgartransgaz announced available firm capacity at compressor station Ihtiman.\n- **2016**:\n  - Early termination of the 2005 Commercial Agreement between Bulgargaz and Transgaz.\n  - Bulgarian Transit Pipeline restrictions on gas imports.\n  - Romanian Transit Pipeline 1 became the only viable route for bringing gas into Bulgaria.\n  - Bulgartransgaz adopted new capacity allocation methodologies.\n- **2017-2018**:\n  - Commission meetings with BEH group.\n  - Submission of arguments on mitigating circumstances.\n  - BEH group obtained access to confidential versions of Commission meeting minutes.\n\n#### **Ongoing Developments (2018-2022)**\n- **2018**:\n  - Project completion expected.\n  - Romanian Transit Pipeline 1 becoming operational.\n- **2020-2022**:\n  - Project implementation envisaged.\n  - Gas volume reduction agreement signed.\n\n### Key Findings:\n1. **Anti-Competitive Behavior**: BEH group's subsidiaries (Bulgargaz and Bulgartransgaz) restricted access to gas infrastructure, preventing competition.\n2. **Regulatory Compliance**: EU antitrust laws were violated, leading to formal proceedings and penalties.\n3. **Infrastructure Development**: Significant efforts were made to develop infrastructure and ensure compliance with EU regulations.\n4. **Market Access**: Overgas gradually gained access to gas transmission networks, though initially restricted and non-transparent.\n\n### Conclusion:\nThe timeline illustrates a complex period where BEH group's dominance in the Bulgarian gas market was challenged by EU antitrust authorities. The resolution involved changes in regulatory frameworks, modifications to access rules, and increased transparency in infrastructure usage. The case highlights the importance of ensuring fair competition in energy markets and compliance with EU regulations.""",2026-01-28 22:25:19.555826
+39850_3377_3,cartel_period,2009-01-01 : 2015-12-31,"""2009-01-01 : 2015-12-31""",2026-01-28 22:25:20.602265
+39861_4230_3,cartel_period,2007-01-01 : 2010-12-31,"""2007-01-01 : 2010-12-31""",2026-01-28 22:10:24.840793
+39881_2123_5,cartel_period,2004-06-06 : 2010-07-26,"""2004-06-06 : 2010-07-26""",2026-01-28 22:10:26.130809
+39904_1110_5,cartel_period,2004-02-24 : 2007-11-10,"""2004-02-24 : 2007-11-10""",2026-01-28 22:10:27.125013
+39914_8910_5,cartel_period,2005-03-03 : 2007-03-19,"""2005-03-03 : 2007-03-19""",2026-01-28 22:10:33.832875
+39920_738_3,cartel_period,2002-12-16 : 2011-07-07,"""2002-12-16 : 2011-07-07""",2026-01-28 22:10:35.08114
+39922_2067_2,cartel_period,2004-04-08 : 2011-07-25,"""2004-04-08 : 2011-07-25""",2026-01-28 22:10:37.543721
+39924_1155_4,cartel_period,2008-03-06 : 2009-07-13,"""2008-03-06 : 2009-07-13""",2026-01-28 22:10:38.336518
+39939_1501_5,cartel_period,2012-12-21 : 2018-03-22,"""2012-12-21 : 2018-03-22""",2026-01-28 22:25:21.715773
+39952_1517_5,cartel_period,2011-06-21 : 2012-02-07,"""2011-06-21 : 2012-02-07""",2026-01-28 22:10:40.634166
+39960_2370_3,cartel_period,2004-11-29 : 2009-12-02,"""2004-11-29 : 2009-12-02""",2026-01-28 22:10:42.064066
+39964_1755_5,cartel_period,2008-01-01 : 2015-05-04,"""2008-01-01 : 2015-05-04""",2026-01-28 22:25:23.240026
+39965_1823_5,cartel_period,2010-09-01 : 2011-12-31,"""2010-09-01 : 2011-12-31""",2026-01-28 22:10:43.559728
+39966_295_15,cartel_period,1988-04-15 : 2004-05-11,"""1988-04-15 : 2004-05-11""",2026-01-28 22:10:45.295601
+39984_861_5,cartel_period,2008-06-30 : 2013-09-16,"""2008-06-30 : 2013-09-16""",2026-01-28 22:25:26.866951
+39985_928_16,cartel_period,2004-04-01 : 2012-05-29,"""2004-04-01 : 2012-05-29""",2026-01-28 22:25:31.731837
+40009_2461_5,cartel_period,2006-10-01 : 2012-09-06,"""2006-10-01 : 2012-09-06""",2026-01-28 22:10:46.556519
+40013_1084_2,cartel_period,2004-07-07 : 2007-10-25,"""2004-07-07 : 2007-10-25""",2026-01-28 21:46:55.78608
+40018_2611_3,cartel_period,2009-09-23 : 2012-09-26,"""2009-09-23 : 2012-09-26""",2026-01-28 22:10:53.550391
+40028_1782_5,cartel_period,2004-09-14 : 2010-02-23,"""2004-09-14 : 2010-02-23""",2026-01-28 22:10:54.803721
+40049_4172_3,cartel_period,2015-07-09 : 2019-01-29,"""2015-07-09 : 2019-01-29""",2026-01-28 22:25:35.093853
+40055_713_11,cartel_period,2001-09-13 : 2011-09-30,"""2001-09-13 : 2011-09-30""",2026-01-28 22:10:55.699834
+40098_827_7,cartel_period,2004-07-02 : 2012-06-30,"""2004-07-02 : 2012-06-30""",2026-01-28 22:10:56.690508
+40099_9993_3,cartel_period,2010-01-01 : 2014-03-31,"""2010-01-01 : 2014-03-31""",2026-01-28 22:25:52.333665
+40113_987_3,cartel_period,2010-01-01 : 2010-02-08,"""2010-01-01 : 2010-02-08""",2026-01-28 22:10:57.757516
+40127_2661_3,cartel_period,2000-01-19 : 2013-10-01,"""2000-01-19 : 2013-10-01""",2026-01-28 22:10:59.089583
+40134_2872_5,cartel_period,2009-02-09 : 2016-10-31,"""2009-02-09 : 2016-10-31""",2026-01-28 22:25:56.837468
+40153_4392_3,cartel_period,2011-01-01 : 2015-06-11,"""2011-01-01 : 2015-06-11""",2026-01-28 22:26:00.539575
+40181_417_3,cartel_period,2011-11-21 : 2013-11-20,"""2011-11-21 : 2013-11-20""",2026-01-28 22:26:01.497773
+40182_370_3,cartel_period,2011-01-20 : 2013-11-14,"""2011-01-20 : 2013-11-14""",2026-01-28 22:26:03.032328
+40208_1579_5,cartel_period,1998-06-01 : 2016-12-31,"""1998-06-01 : 2016-12-31""",2026-01-28 22:26:06.088641
+40220_2702_4,cartel_period,2011-02-25 : 2016-09-16,"""2011-02-25 : 2016-09-16""",2026-01-28 22:26:14.671901
+40299_1042_4,cartel_period,2009-06-01 : 2012-05-07,"""2009-06-01 : 2012-05-07""",2026-01-28 22:26:17.727877
+40335_1035_3,cartel_period,2014-08-01 : 2019-10-01,"""2014-08-01 : 2019-10-01""",2026-01-28 22:26:21.954848
+40394_5350_5,cartel_period,2012-05-01 : 2019-09-30,"""2012-05-01 : 2019-09-30""",2026-01-28 22:26:23.542637
+40410_1654_6,cartel_period,2005-01-19 : 2017-03-28,"""2005-01-19 : 2017-03-28""",2026-01-28 22:12:11.233643
+40411_1619_11,cartel_period,2006-01-01 : 2016-09-06,"""2006-01-01 : 2016-09-06""",2026-01-28 22:26:34.691607
+40428_1205_3,cartel_period,2014-01-01 : 2017-10-31,"""2014-01-01 : 2017-10-31""",2026-01-28 22:26:53.375222
+40432_720_4,cartel_period,2008-01-01 : 2018-12-21,"""2008-01-01 : 2018-12-21""",2026-01-28 22:26:54.255552
+40433_734_3,cartel_period,2013-01-01 : 2019-09-25,"""2013-01-01 : 2019-09-25""",2026-01-28 22:26:55.318624
+40436_949_5,cartel_period,2004-07-01 : 2017-10-27,"""2004-07-01 : 2017-10-27""",2026-01-28 22:26:56.447401
+40461_461_3,cartel_period,2011-01-01 : 2018-03-19,"""2011-01-01 : 2018-03-19""",2026-01-28 22:26:57.561888
+40465_337_3,cartel_period,2011-03-03 : 2014-06-27,"""2011-03-03 : 2014-06-27""",2026-01-28 22:27:00.168402
+40469_329_3,cartel_period,2011-04-19 : 2015-01-19,"""2011-04-19 : 2015-01-19""",2026-01-28 22:27:02.864307
+40481_2058_7,cartel_period,2007-01-04 : 2011-06-07,"""2007-01-04 : 2011-06-07""",2026-01-28 22:12:12.606746
+40528_418_3,cartel_period,2014-01-01 : 2015-12-31,"""2014-01-01 : 2015-12-31""",2026-01-28 22:27:04.671739
+40608_2860_3,cartel_period,2015-01-01 : 2018-12-31,"""2015-01-01 : 2018-12-31""",2026-01-28 22:27:05.495599
+AT_37990_9687627_5129_3,cartel_period,2002-01-01 : 2008-12-31,"""2002-01-01 : 2008-12-31""",2026-01-28 22:19:57.559406
+AT_38700_8179861_2920_3,cartel_period,2008-03-05 : 2024-12-31,"""2008-03-05 : 2024-12-31""",2026-01-28 22:17:41.162098
+AT_39258_8068894_9177_3,cartel_period,"Looking at this extensive dataset, I can see it contains a comprehensive timeline of anti-competitive practices related to fuel surcharges (FSC) and security surcharges (SSC) in the airline industry, particularly involving major European carriers.
+
+Key observations from the data:
+
+**Timeline Scope**: The dataset covers activities from 1999 through 2017, with the most intensive period being 2005-2006 when the major infringement was detected and ended in February 2006.
+
+**Major Participants**: 
+- Lufthansa Group (including SWISS/LX)
+- Air France-KLM 
+- KLM
+- British Airways
+- Singapore Airlines (SIA)
+- Martinair Holland N.V.
+- SAS Group
+- Cathay Pacific
+- Qantas Airways
+- LAN Airlines
+
+**Key Activities**:
+- Coordinated increases in fuel surcharges across multiple airlines
+- Discussions about commission payments to forwarders (refusal to pay)
+- Coordination on security surcharges
+- Meetings and communications between airlines about surcharge levels
+- Coordination on implementation timing and geographic scope
+- Application for leniency programs
+
+**Legal Consequences**:
+- Commission investigations began in 2006
+- Multiple leniency applications
+- Annulment of the 2010 Decision by the General Court in 2015
+- New decisions being proposed after the annulment
+
+**Pattern of Conduct**:
+The data shows systematic coordination among major airlines to increase surcharges, with evidence of collusive behavior spanning 15+ years, involving both fuel surcharges and security surcharges, with particular focus on commission payments to freight forwarders.
+
+This appears to be a detailed record of the EU Commission's investigation into airline cartel behavior in the freight sector.","""Looking at this extensive dataset, I can see it contains a comprehensive timeline of anti-competitive practices related to fuel surcharges (FSC) and security surcharges (SSC) in the airline industry, particularly involving major European carriers.\n\nKey observations from the data:\n\n**Timeline Scope**: The dataset covers activities from 1999 through 2017, with the most intensive period being 2005-2006 when the major infringement was detected and ended in February 2006.\n\n**Major Participants**: \n- Lufthansa Group (including SWISS/LX)\n- Air France-KLM \n- KLM\n- British Airways\n- Singapore Airlines (SIA)\n- Martinair Holland N.V.\n- SAS Group\n- Cathay Pacific\n- Qantas Airways\n- LAN Airlines\n\n**Key Activities**:\n- Coordinated increases in fuel surcharges across multiple airlines\n- Discussions about commission payments to forwarders (refusal to pay)\n- Coordination on security surcharges\n- Meetings and communications between airlines about surcharge levels\n- Coordination on implementation timing and geographic scope\n- Application for leniency programs\n\n**Legal Consequences**:\n- Commission investigations began in 2006\n- Multiple leniency applications\n- Annulment of the 2010 Decision by the General Court in 2015\n- New decisions being proposed after the annulment\n\n**Pattern of Conduct**:\nThe data shows systematic coordination among major airlines to increase surcharges, with evidence of collusive behavior spanning 15+ years, involving both fuel surcharges and security surcharges, with particular focus on commission payments to freight forwarders.\n\nThis appears to be a detailed record of the EU Commission's investigation into airline cartel behavior in the freight sector.""",2026-01-28 22:06:20.376138
+AT_39317_5430708_2139_6,cartel_period,2010-01-01 : 2015-10-01,"""2010-01-01 : 2015-10-01""",2026-01-28 22:20:55.682621
+AT_39839_8432000_2174_3,cartel_period,2010-07-28 : 2011-01-04,"""2010-07-28 : 2011-01-04""",2026-01-28 22:24:34.751173
+AT_40135_8399817_5458_10,cartel_period,2011-05-25 : 2012-07-12,"""2011-05-25 : 2012-07-12""",2026-01-28 22:25:59.487143
+AT_40136_7970992_6095_3,cartel_period,"Looking at this extensive dataset, I need to identify the key dates that define the beginning and end of the cartel infringement period.
+
+Let me analyze the chronological pattern:
+
+**Earliest date mentioned**: 2006-01-01 (January 2006) - This appears to be when CUP meetings started, with the first mention of ""CUP meeting"" in 2006.
+
+**Latest date mentioned**: 2018-03-21 (21 March 2018) - This is the most recent official act/Commission meeting mentioned.
+
+However, looking more carefully at the pattern of cartel activities:
+
+- **2006-01-01**: CUP meetings begin (mentioned in multiple entries)
+- **2007-01-01**: EU enlargement affecting markets
+- **2008-01-01**: Financial failure and market changes due to earthquake
+- **2009-08-01**: Increase in fine imposed on NEC Corporation for repeated infringement
+- **2010-05-19**: Commission decision on infringement
+- **2010-05-31**: Nichicon's involvement in cartel continued uninterruptedly until 31 May 2010
+- **2011-01-01**: Price increase implemented
+- **2012-04-23**: End of duration for multiple companies
+- **2018-03-21**: Most recent Commission meeting
+
+The most comprehensive period showing continuous cartel activity is from early 2006 through 2010, with the final activity ending in May 2010, but the formal end date is given as 2012-04-23 (23 April 2012).
+
+However, looking at the specific date ranges mentioned in the data, the most accurate answer based on the clear beginning and end dates in the dataset would be:
+
+**2006-01-01 to 2012-04-23**
+
+This covers the period from when the cartel activities began (CUP meetings starting in 2006) to when the infringement period officially ended (23 April 2012).
+
+2006-01-01 to 2012-04-23","""Looking at this extensive dataset, I need to identify the key dates that define the beginning and end of the cartel infringement period.\n\nLet me analyze the chronological pattern:\n\n**Earliest date mentioned**: 2006-01-01 (January 2006) - This appears to be when CUP meetings started, with the first mention of \""CUP meeting\"" in 2006.\n\n**Latest date mentioned**: 2018-03-21 (21 March 2018) - This is the most recent official act/Commission meeting mentioned.\n\nHowever, looking more carefully at the pattern of cartel activities:\n\n- **2006-01-01**: CUP meetings begin (mentioned in multiple entries)\n- **2007-01-01**: EU enlargement affecting markets\n- **2008-01-01**: Financial failure and market changes due to earthquake\n- **2009-08-01**: Increase in fine imposed on NEC Corporation for repeated infringement\n- **2010-05-19**: Commission decision on infringement\n- **2010-05-31**: Nichicon's involvement in cartel continued uninterruptedly until 31 May 2010\n- **2011-01-01**: Price increase implemented\n- **2012-04-23**: End of duration for multiple companies\n- **2018-03-21**: Most recent Commission meeting\n\nThe most comprehensive period showing continuous cartel activity is from early 2006 through 2010, with the final activity ending in May 2010, but the formal end date is given as 2012-04-23 (23 April 2012).\n\nHowever, looking at the specific date ranges mentioned in the data, the most accurate answer based on the clear beginning and end dates in the dataset would be:\n\n**2006-01-01 to 2012-04-23**\n\nThis covers the period from when the cartel activities began (CUP meetings starting in 2006) to when the infringement period officially ended (23 April 2012).\n\n2006-01-01 to 2012-04-23""",2026-01-28 22:11:33.406983
+AT_40178_8022289_3048_5,cartel_period,2009-06-25 : 2014-10-01,"""2009-06-25 : 2014-10-01""",2026-01-28 22:11:36.95618
+AT_40305_8638841_4187_5,cartel_period,2015-06-01 : 2033-10-28,"""2015-06-01 : 2033-10-28""",2026-01-28 22:26:18.993166
+AT_40324_7971056_3662_3,cartel_period,2007-01-01 : 2011-11-28,"""2007-01-01 : 2011-11-28""",2026-01-28 22:11:55.700209
+AT_40330_7947754_1178_9,cartel_period,2008-12-01 : 2014-04-30,"""2008-12-01 : 2014-04-30""",2026-01-28 22:11:56.815196
+AT_40346_8399848_2719_3,cartel_period,2010-01-19 : 2015-01-27,"""2010-01-19 : 2015-01-27""",2026-01-28 22:12:01.699793
+AT_40410_7557494_1654_9,cartel_period,2005-01-01 : 2017-03-28,"""2005-01-01 : 2017-03-28""",2026-01-28 22:26:25.102502
+AT_40413_8465169_1613_3,cartel_period,2007-03-14 : 2018-11-08,"""2007-03-14 : 2018-11-08""",2026-01-28 22:26:37.516598
+AT_40414_8465254_1496_3,cartel_period,2004-01-01 : 2018-07-27,"""2004-01-01 : 2018-07-27""",2026-01-28 22:26:47.06054
+AT_40414_8465464_1500_3,cartel_period,2004-01-01 : 2015-04-30,"""2004-01-01 : 2015-04-30""",2026-01-28 22:26:45.602545
+AT_40420_8465317_1450_3,cartel_period,2009-09-01 : 2015-10-09,"""2009-09-01 : 2015-10-09""",2026-01-28 22:26:50.126882
+AT_40422_8465328_1527_3,cartel_period,2012-03-13 : 2015-03-31,"""2012-03-13 : 2015-03-31""",2026-01-28 22:26:51.386833
+AT_40424_8465426_1521_3,cartel_period,2013-02-13 : 2014-11-17,"""2013-02-13 : 2014-11-17""",2026-01-28 22:26:52.448711
+AT_40462_8990760_8322_4,cartel_period,2017-01-01 : 2020-06-01,"""2017-01-01 : 2020-06-01""",2026-01-28 22:26:58.9212
+AT_40511_8511226_4076_3,cartel_period,2009-01-01 : 2015-01-01,"""2009-01-01 : 2015-01-01""",2026-01-28 22:27:03.835759
+AT_40522_8986595_2868_7,cartel_period,2011-03-11 : 2014-09-18,"""2011-03-11 : 2014-09-18""",2026-01-28 22:12:14.182984
+AT_40547_9160373_2598_6,cartel_period,2012-05-01 : 2018-06-30,"""2012-05-01 : 2018-06-30""",2026-01-28 22:12:18.054972
+AT_40703_8990760_1533_5,cartel_period,2015-01-01 : 2020-06-01,"""2015-01-01 : 2020-06-01""",2026-01-28 22:27:06.782045
+AT_40735_9970535_1360_8,cartel_period,2019-01-01 : 2024-06-30,"""2019-01-01 : 2024-06-30""",2026-01-28 22:27:08.177734
+AT_40760_9770404_1218_4,cartel_period,2007-11-07 : 2021-11-23,"""2007-11-07 : 2021-11-23""",2026-01-28 22:27:09.255692
+c1417,cartel_period,1995-06-22 : 1998-01-29,"""1995-06-22 : 1998-01-29""",2026-01-28 22:14:28.275622
+CELEX-31964D0233,cartel_period,1964-03-11 : 1964-03-11,"""1964-03-11 : 1964-03-11""",2026-01-28 21:47:04.609023
+CELEX-31964D0344,cartel_period,1953-10-01 : 1964-06-01,"""1953-10-01 : 1964-06-01""",2026-01-28 21:48:35.151925
+CELEX-31964D0502,cartel_period,1962-07-11 : 1969-01-01,"""1962-07-11 : 1969-01-01""",2026-01-28 21:47:05.905936
+CELEX-31964D0566,cartel_period,1962-07-15 : 1964-09-01,"""1962-07-15 : 1964-09-01""",2026-01-28 21:48:40.213849
+CELEX-31964D0599,cartel_period,1962-05-02 : 1964-10-22,"""1962-05-02 : 1964-10-22""",2026-01-28 21:47:05.29069
+CELEX-31965D0366,cartel_period,1965-07-08 : 1970-03-13,"""1965-07-08 : 1970-03-13""",2026-01-28 21:48:39.578891
+CELEX-31965D0426,cartel_period,1965-09-01 : 1970-09-01,"""1965-09-01 : 1970-09-01""",2026-01-28 21:48:37.175298
+CELEX-31966D0005,cartel_period,1965-12-01 : 1965-12-01,"""1965-12-01 : 1965-12-01""",2026-01-28 21:49:00.73701
+CELEX-31967D0454,cartel_period,1959-01-01 : 1959-01-01,"""1959-01-01 : 1959-01-01""",2026-01-28 22:12:20.525407
+CELEX-31968D0128,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:49:12.697641
+CELEX-31968D0318,cartel_period,1968-07-17 : 1968-07-17,"""1968-07-17 : 1968-07-17""",2026-01-28 21:47:07.159141
+CELEX-31968D0319,cartel_period,1971-12-31 : 1986-12-31,"""1971-12-31 : 1986-12-31""",2026-01-28 21:49:11.028416
+CELEX-31968D0374,cartel_period,1962-07-01 : 1967-07-01,"""1962-07-01 : 1967-07-01""",2026-01-28 21:48:27.941091
+CELEX-31968D0375,cartel_period,1967-04-24 : 1967-07-01,"""1967-04-24 : 1967-07-01""",2026-01-28 21:48:24.322138
+CELEX-31968D0376,cartel_period,1953-01-01 : 1953-06-16,"""1953-01-01 : 1953-06-16""",2026-01-28 21:49:02.271706
+CELEX-31968D0377,cartel_period,1967-05-29 : 1971-01-01,"""1967-05-29 : 1971-01-01""",2026-01-28 21:48:31.283583
+CELEX-31969D0090,cartel_period,1969-03-13 : 1978-12-31,"""1969-03-13 : 1978-12-31""",2026-01-28 22:13:26.218283
+CELEX-31969D0152,cartel_period,1936-03-10 : 1966-01-01,"""1936-03-10 : 1966-01-01""",2026-01-28 21:48:36.577007
+CELEX-31969D0195,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:49:01.084514
+CELEX-31969D0202,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:48:30.113715
+CELEX-31969D0240,cartel_period,1958-06-13 : 1962-12-31,"""1958-06-13 : 1962-12-31""",2026-01-28 21:49:16.767521
+CELEX-31969D0241,cartel_period,1967-01-11 : 1977-01-01,"""1967-01-11 : 1977-01-01""",2026-01-28 21:49:17.901507
+CELEX-31969D0242,cartel_period,1967-01-01 : 1967-07-01,"""1967-01-01 : 1967-07-01""",2026-01-28 22:12:26.183156
+CELEX-31969D0243,cartel_period,1964-01-01 : 1967-01-01,"""1964-01-01 : 1967-01-01""",2026-01-28 21:49:11.70604
+CELEX-31969D0477,cartel_period,1959-02-27 : 1969-12-01,"""1959-02-27 : 1969-12-01""",2026-01-28 21:49:03.548368
+CELEX-31970D0332,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:49:02.656426
+CELEX-31970D0333,cartel_period,1969-07-29 : 1970-06-30,"""1969-07-29 : 1970-06-30""",2026-01-28 21:48:13.735805
+CELEX-31970D0346,cartel_period,1962-05-23 : 1970-06-29,"""1962-05-23 : 1970-06-29""",2026-01-28 21:48:19.600539
+CELEX-31970D0487,cartel_period,1952-02-15 : 1968-01-01,"""1952-02-15 : 1968-01-01""",2026-01-28 21:47:06.543141
+CELEX-31970D0488,cartel_period,1967-08-01 : 1967-10-02,"""1967-08-01 : 1967-10-02""",2026-01-28 21:48:57.963852
+CELEX-31971D0022,cartel_period,1969-04-15 : 1970-12-01,"""1969-04-15 : 1970-12-01""",2026-01-28 21:48:15.802218
+CELEX-31971D0023,cartel_period,1958-12-19 : 1958-12-19,"""1958-12-19 : 1958-12-19""",2026-01-28 21:49:07.347251
+CELEX-31971D0085,cartel_period,- : -,"""- : -""",2026-01-28 21:49:20.185509
+CELEX-31971D0222,cartel_period,1967-11-27 : 1978-03-26,"""1967-11-27 : 1978-03-26""",2026-01-28 21:49:17.36995
+CELEX-31971D0224,cartel_period,0000-00-00 : 0000-00-00,"""0000-00-00 : 0000-00-00""",2026-01-28 21:49:19.863914
+CELEX-31971D0257,cartel_period,1969-01-01 : 1971-07-18,"""1969-01-01 : 1971-07-18""",2026-01-28 22:13:19.295522
+CELEX-31971D0258,cartel_period,1970-05-14 : 1971-06-18,"""1970-05-14 : 1971-06-18""",2026-01-28 22:13:20.485881
+CELEX-31971D0259,cartel_period,1967-01-01 : 1971-08-18,"""1967-01-01 : 1971-08-18""",2026-01-28 22:13:19.899411
+CELEX-31971D0268,cartel_period,"No infringement period can be determined from the provided timeline. The events described are related to procedural steps under Regulation No 17 and the EEC Treaty, but do not specify a period of collusive conduct or competition rule violations. Dates related to the actual infringement are not present in the table.","""No infringement period can be determined from the provided timeline. The events described are related to procedural steps under Regulation No 17 and the EEC Treaty, but do not specify a period of collusive conduct or competition rule violations. Dates related to the actual infringement are not present in the table.""",2026-01-28 21:48:10.615317
+CELEX-31971D0337,cartel_period,1959-01-01 : 1971-09-24,"""1959-01-01 : 1971-09-24""",2026-01-28 22:12:18.871838
+CELEX-31971D0375,cartel_period,No infringement period found.,"""No infringement period found.""",2026-01-28 21:49:31.570057
+CELEX-31971D0400,cartel_period,1958-12-31 : 1969-09-03,"""1958-12-31 : 1969-09-03""",2026-01-28 21:49:36.064494
+CELEX-31972D0021,cartel_period,1969-07-01 : 1972-07-01,"""1969-07-01 : 1972-07-01""",2026-01-28 21:49:21.178684
+CELEX-31972D0022,cartel_period,1969-01-01 : 1971-12-16,"""1969-01-01 : 1971-12-16""",2026-01-28 21:48:15.249292
+CELEX-31972D0024,cartel_period,1965-02-03 : 1977-02-08,"""1965-02-03 : 1977-02-08""",2026-01-28 21:49:13.285316
+CELEX-31972D0025,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:48:54.355463
+CELEX-31972D0026,cartel_period,1963-01-31 : 1971-12-22,"""1963-01-31 : 1971-12-22""",2026-01-28 21:48:55.015673
+CELEX-31972D0041,cartel_period,1971-12-23 : 1971-12-23,"""1971-12-23 : 1971-12-23""",2026-01-28 21:49:34.010051
+CELEX-31972D0068,cartel_period,1947-01-01 : 1963-01-01,"""1947-01-01 : 1963-01-01""",2026-01-28 21:48:29.792661
+CELEX-31972D0088,cartel_period,1970-01-01 : 1972-01-17,"""1970-01-01 : 1972-01-17""",2026-01-28 21:49:15.87281
+CELEX-31972D0128,cartel_period,1970-07-15 : 1972-02-01,"""1970-07-15 : 1972-02-01""",2026-01-28 21:49:22.97109
+CELEX-31972D0237,cartel_period,1959-01-01 : 1979-06-26,"""1959-01-01 : 1979-06-26""",2026-01-28 21:48:56.713114
+CELEX-31972D0238,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:49:21.487443
+CELEX-31972D0291,cartel_period,1972-07-26 : 1972-07-26,"""1972-07-26 : 1972-07-26""",2026-01-28 21:48:30.69729
+CELEX-31972D0390,cartel_period,1967-02-01 : 1967-12-20,"""1967-02-01 : 1967-12-20""",2026-01-28 21:48:23.715219
+CELEX-31972D0396,cartel_period,1972-09-30 : 1972-09-30,"""1972-09-30 : 1972-09-30""",2026-01-28 21:48:57.312661
+CELEX-31972D0397,cartel_period,No infringement period found.,"""No infringement period found.""",2026-01-28 21:49:02.959213
+CELEX-31972D0403,cartel_period,1970-01-01 : 1972-03-21,"""1970-01-01 : 1972-03-21""",2026-01-28 21:49:31.226512
+CELEX-31972D0457,cartel_period,1962-01-01 : 1972-01-01,"""1962-01-01 : 1972-01-01""",2026-01-28 21:49:32.367003
+CELEX-31972D0468,cartel_period,1904-01-01 : 1972-12-18,"""1904-01-01 : 1972-12-18""",2026-01-28 21:48:28.721393
+CELEX-31972D0474,cartel_period,1948-06-15 : 1973-01-01,"""1948-06-15 : 1973-01-01""",2026-01-28 21:48:11.424765
+CELEX-31972D0478,cartel_period,1960-01-01 : 1970-01-01,"""1960-01-01 : 1970-01-01""",2026-01-28 21:49:12.337871
+CELEX-31972D0480,cartel_period,1972-12-22 : 1972-12-22,"""1972-12-22 : 1972-12-22""",2026-01-28 21:49:37.509821
+CELEX-31973D0109,cartel_period,1968-01-01 : 1973-01-02,"""1968-01-01 : 1973-01-02""",2026-01-28 21:49:35.418909
+CELEX-31973D0196,cartel_period,1963-01-31 : 1971-02-01,"""1963-01-31 : 1971-02-01""",2026-01-28 21:48:58.755464
+CELEX-31973D0212,cartel_period,1962-02-06 : 1970-01-01,"""1962-02-06 : 1970-01-01""",2026-01-28 21:48:32.875797
+CELEX-31973D0232,cartel_period,1965-12-29 : 1970-12-31,"""1965-12-29 : 1970-12-31""",2026-01-28 21:49:10.319109
+CELEX-31973D0322,cartel_period,1967-03-01 : 1972-10-25,"""1967-03-01 : 1972-10-25""",2026-01-28 21:49:38.950749
+CELEX-31973D0323,cartel_period,1970-12-31 : 1972-10-10,"""1970-12-31 : 1972-10-10""",2026-01-28 21:49:22.374138
+CELEX-31974D0016,cartel_period,1959-01-01 : 1978-12-31,"""1959-01-01 : 1978-12-31""",2026-01-28 22:12:21.197669
+CELEX-31974D0017,cartel_period,1970-07-06 : 1980-12-31,"""1970-07-06 : 1980-12-31""",2026-01-28 21:48:33.612507
+CELEX-31974D0292,cartel_period,1955-03-01 : 1971-12-31,"""1955-03-01 : 1971-12-31""",2026-01-28 21:48:19.061728
+CELEX-31974D0431,cartel_period,1971-10-01 : 1973-07-03,"""1971-10-01 : 1973-07-03""",2026-01-28 21:48:21.892553
+CELEX-31974D0432,cartel_period,1938-02-01 : 1974-07-24,"""1938-02-01 : 1974-07-24""",2026-01-28 21:49:49.269783
+CELEX-31974D0433,cartel_period,1952-01-01 : 1974-07-25,"""1952-01-01 : 1974-07-25""",2026-01-28 21:49:14.463314
+CELEX-31974D0634,cartel_period,1972-01-01 : 1973-12-31,"""1972-01-01 : 1973-12-31""",2026-01-28 21:49:41.736595
+CELEX-31975D0073,cartel_period,1973-11-16 : 1977-12-01,"""1973-11-16 : 1977-12-01""",2026-01-28 21:48:59.38231
+CELEX-31975D0074,cartel_period,1962-03-13 : 1982-12-31,"""1962-03-13 : 1982-12-31""",2026-01-28 21:48:27.260926
+CELEX-31975D0075,cartel_period,1972-09-01 : 1973-07-31,"""1972-09-01 : 1973-07-31""",2026-01-28 21:49:58.947275
+CELEX-31975D0076,cartel_period,1967-09-01 : 1973-12-01,"""1967-09-01 : 1973-12-01""",2026-01-28 21:49:15.310145
+CELEX-31975D0077,cartel_period,1973-01-08 : 1975-01-01,"""1973-01-08 : 1975-01-01""",2026-01-28 21:49:39.979035
+CELEX-31975D0094,cartel_period,1963-05-01 : 1973-08-07,"""1963-05-01 : 1973-08-07""",2026-01-28 21:49:01.702478
+CELEX-31975D0095,cartel_period,1969-10-22 : 1974-12-20,"""1969-10-22 : 1974-12-20""",2026-01-28 21:49:30.639038
+CELEX-31975D0297,cartel_period,1964-01-01 : 1975-03-05,"""1964-01-01 : 1975-03-05""",2026-01-28 21:49:46.094091
+CELEX-31975D0358,cartel_period,1952-01-01 : 1972-12-31,"""1952-01-01 : 1972-12-31""",2026-01-28 21:48:32.222325
+CELEX-31975D0482,cartel_period,1973-01-01 : 1975-07-14,"""1973-01-01 : 1975-07-14""",2026-01-28 21:49:54.928019
+CELEX-31975D0494,cartel_period,1962-01-16 : 1977-12-31,"""1962-01-16 : 1977-12-31""",2026-01-28 21:49:00.139667
+CELEX-31975D0497,cartel_period,1972-04-27 : 1975-02-18,"""1972-04-27 : 1975-02-18""",2026-01-28 21:49:38.145472
+CELEX-31975D0498,cartel_period,1974-05-01 : 1983-12-31,"""1974-05-01 : 1983-12-31""",2026-01-28 22:12:38.488727
+CELEX-31975D0570,cartel_period,1971-06-17 : 1974-07-03,"""1971-06-17 : 1974-07-03""",2026-01-28 21:50:02.721378
+CELEX-31975D0649,cartel_period,1975-10-01 : 1978-12-31,"""1975-10-01 : 1978-12-31""",2026-01-28 22:12:21.843383
+CELEX-31975D0781,cartel_period,1972-01-01 : 1975-11-01,"""1972-01-01 : 1975-11-01""",2026-01-28 21:48:12.292572
+CELEX-31976D0029,cartel_period,1951-09-15 : 1971-08-07,"""1951-09-15 : 1971-08-07""",2026-01-28 21:49:36.942241
+CELEX-31976D0159,cartel_period,1965-01-01 : 1980-07-21,"""1965-01-01 : 1980-07-21""",2026-01-28 21:48:34.572603
+CELEX-31976D0172,cartel_period,1969-05-07 : 1975-06-01,"""1969-05-07 : 1975-06-01""",2026-01-28 21:49:40.845963
+CELEX-31976D0248,cartel_period,1971-10-11 : 1986-12-31,"""1971-10-11 : 1986-12-31""",2026-01-28 22:12:28.013373
+CELEX-31976D0249,cartel_period,1971-08-23 : 1986-01-01,"""1971-08-23 : 1986-01-01""",2026-01-28 22:12:28.830491
+CELEX-31976D0353,cartel_period,1967-01-01 : 1975-02-11,"""1967-01-01 : 1975-02-11""",2026-01-28 21:49:19.37199
+CELEX-31976D0593,cartel_period,1967-03-13 : 1976-06-25,"""1967-03-13 : 1976-06-25""",2026-01-28 22:12:24.197701
+CELEX-31976D0642,cartel_period,1964-01-01 : 1974-12-31,"""1964-01-01 : 1974-12-31""",2026-01-28 21:50:06.870954
+CELEX-31976D0684,cartel_period,1974-05-01 : 1975-02-08,"""1974-05-01 : 1975-02-08""",2026-01-28 21:50:03.538676
+CELEX-31976D0743,cartel_period,1969-01-01 : 1979-06-30,"""1969-01-01 : 1979-06-30""",2026-01-28 21:50:04.434917
+CELEX-31976D0915,cartel_period,1975-05-07 : 1975-11-03,"""1975-05-07 : 1975-11-03""",2026-01-28 21:50:06.059202
+CELEX-31977D0066,cartel_period,1975-11-07 : 1976-12-22,"""1975-11-07 : 1976-12-22""",2026-01-28 21:49:04.206732
+CELEX-31977D0100,cartel_period,1948-06-15 : 1982-12-31,"""1948-06-15 : 1982-12-31""",2026-01-28 21:48:56.016908
+CELEX-31977D0129,cartel_period,1956-09-08 : 1976-12-21,"""1956-09-08 : 1976-12-21""",2026-01-28 21:49:53.144191
+CELEX-31977D0160,cartel_period,1970-03-25 : 1980-03-25,"""1970-03-25 : 1980-03-25""",2026-01-28 22:12:33.20132
+CELEX-31977D0327,cartel_period,1973-11-01 : 1974-02-28,"""1973-11-01 : 1974-02-28""",2026-01-28 21:49:55.979913
+CELEX-31977D0543,cartel_period,1971-01-01 : 1977-07-01,"""1971-01-01 : 1977-07-01""",2026-01-28 22:12:29.676517
+CELEX-31977D0592,cartel_period,1958-01-01 : 1976-06-30,"""1958-01-01 : 1976-06-30""",2026-01-28 21:48:14.626277
+CELEX-31977D0722,cartel_period,1962-03-13 : 1982-05-17,"""1962-03-13 : 1982-05-17""",2026-01-28 22:13:24.496816
+CELEX-31977D0781,cartel_period,1977-03-21 : 1989-01-01,"""1977-03-21 : 1989-01-01""",2026-01-28 21:50:22.079844
+CELEX-31978D0024,cartel_period,1977-12-01 : 1977-12-01,"""1977-12-01 : 1977-12-01""",2026-01-28 21:48:16.361032
+CELEX-31978D0059,cartel_period,1976-01-01 : 1976-07-16,"""1976-01-01 : 1976-07-16""",2026-01-28 21:47:08.020705
+CELEX-31978D0066,cartel_period,1961-11-22 : 1975-03-19,"""1961-11-22 : 1975-03-19""",2026-01-28 21:50:01.390395
+CELEX-31978D0068,cartel_period,1972-05-01 : 1977-12-08,"""1972-05-01 : 1977-12-08""",2026-01-28 21:50:10.452736
+CELEX-31978D0155,cartel_period,1975-01-01 : 1976-12-31,"""1975-01-01 : 1976-12-31""",2026-01-28 21:50:12.738885
+CELEX-31978D0156,cartel_period,1975-05-16 : 1975-12-31,"""1975-05-16 : 1975-12-31""",2026-01-28 21:50:14.874463
+CELEX-31978D0163,cartel_period,1973-01-01 : 1977-12-20,"""1973-01-01 : 1977-12-20""",2026-01-28 21:49:48.378877
+CELEX-31978D0172,cartel_period,1973-00-00 : 1977-03-00,"""1973-00-00 : 1977-03-00""",2026-01-28 21:50:21.244846
+CELEX-31978D0193,cartel_period,1974-04-04 : 1976-12-31,"""1974-04-04 : 1976-12-31""",2026-01-28 21:50:17.279956
+CELEX-31978D0194,cartel_period,1967-01-11 : 1977-01-10,"""1967-01-11 : 1977-01-10""",2026-01-28 22:12:27.004228
+CELEX-31978D0251,cartel_period,1975-04-17 : 1981-02-26,"""1975-04-17 : 1981-02-26""",2026-01-28 22:12:39.977257
+CELEX-31978D0252,cartel_period,1971-05-01 : 1974-12-31,"""1971-05-01 : 1974-12-31""",2026-01-28 21:50:16.143075
+CELEX-31978D0253,cartel_period,1962-03-13 : 1977-11-01,"""1962-03-13 : 1977-11-01""",2026-01-28 21:49:46.934689
+CELEX-31978D0516,cartel_period,1978-05-01 : 1978-05-26,"""1978-05-01 : 1978-05-26""",2026-01-28 21:50:28.585889
+CELEX-31978D0571,cartel_period,1977-02-23 : 1978-06-01,"""1977-02-23 : 1978-06-01""",2026-01-28 21:50:24.605256
+CELEX-31978D0670,cartel_period,1967-05-01 : 1977-10-15,"""1967-05-01 : 1977-10-15""",2026-01-28 21:50:14.221093
+CELEX-31978D0696,cartel_period,1973-01-01 : 1977-10-14,"""1973-01-01 : 1977-10-14""",2026-01-28 21:50:23.967008
+CELEX-31978D0697,cartel_period,1974-08-01 : 1974-08-01,"""1974-08-01 : 1974-08-01""",2026-01-28 21:49:59.730897
+CELEX-31978D0732,cartel_period,1963-04-11 : 1978-07-20,"""1963-04-11 : 1978-07-20""",2026-01-28 22:12:25.541641
+CELEX-31978D0823,cartel_period,1960-12-01 : 1978-09-21,"""1960-12-01 : 1978-09-21""",2026-01-28 21:49:54.269564
+CELEX-31978D0921,cartel_period,1974-01-01 : 1976-10-01,"""1974-01-01 : 1976-10-01""",2026-01-28 21:50:11.295121
+CELEX-31978D0922,cartel_period,1977-05-01 : 1978-10-23,"""1977-05-01 : 1978-10-23""",2026-01-28 21:48:35.861619
+CELEX-31979D0037,cartel_period,1969-03-01 : 1988-12-31,"""1969-03-01 : 1988-12-31""",2026-01-28 22:13:27.053761
+CELEX-31979D0068,cartel_period,1975-05-28 : 1977-04-01,"""1975-05-28 : 1977-04-01""",2026-01-28 21:50:23.122473
+CELEX-31979D0086,cartel_period,1973-11-23 : 1973-11-23,"""1973-11-23 : 1973-11-23""",2026-01-28 21:48:37.963522
+CELEX-31979D0090,cartel_period,1970-01-01 : 1972-12-31,"""1970-01-01 : 1972-12-31""",2026-01-28 21:50:27.964729
+CELEX-31979D0253,cartel_period,1962-02-01 : 1979-01-31,"""1962-02-01 : 1979-01-31""",2026-01-28 21:48:16.955028
+CELEX-31979D0298,cartel_period,1974-01-28 : 1978-05-01,"""1974-01-28 : 1978-05-01""",2026-01-28 21:49:52.115978
+CELEX-31979D0670,cartel_period,1964-07-09 : 1979-07-09,"""1964-07-09 : 1979-07-09""",2026-01-28 21:48:17.608158
+CELEX-31979D0934,cartel_period,1973-07-01 : 1979-06-30,"""1973-07-01 : 1979-06-30""",2026-01-28 21:50:08.592903
+CELEX-31980D0182,cartel_period,1968-05-10 : 1978-07-01,"""1968-05-10 : 1978-07-01""",2026-01-28 21:50:33.380946
+CELEX-31980D0183,cartel_period,1976-04-29 : 1982-06-30,"""1976-04-29 : 1982-06-30""",2026-01-28 21:50:18.347261
+CELEX-31980D0184,cartel_period,1959-01-01 : 1978-12-31,"""1959-01-01 : 1978-12-31""",2026-01-28 22:12:22.689825
+CELEX-31980D0234,cartel_period,1979-01-01 : 1979-12-01,"""1979-01-01 : 1979-12-01""",2026-01-28 21:50:05.286193
+CELEX-31980D0256,cartel_period,1975-12-31 : 1976-02-28,"""1975-12-31 : 1976-02-28""",2026-01-28 21:50:30.226194
+CELEX-31980D0334,cartel_period,1976-03-30 : 1979-12-20,"""1976-03-30 : 1979-12-20""",2026-01-28 22:13:23.045636
+CELEX-31980D0335,cartel_period,1976-03-30 : 1976-04-01,"""1976-03-30 : 1976-04-01""",2026-01-28 22:13:21.840698
+CELEX-31980D0489,cartel_period,1975-08-01 : 1980-04-01,"""1975-08-01 : 1980-04-01""",2026-01-28 21:49:49.860635
+CELEX-31980D0789,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:49:13.672982
+CELEX-31980D0917,cartel_period,1956-01-01 : 1988-12-31,"""1956-01-01 : 1988-12-31""",2026-01-28 22:12:35.411755
+CELEX-31980D1071,cartel_period,1973-01-01 : 1979-10-10,"""1973-01-01 : 1979-10-10""",2026-01-28 21:49:06.763066
+CELEX-31980D1074,cartel_period,1961-08-02 : 1980-06-30,"""1961-08-02 : 1980-06-30""",2026-01-28 21:47:08.739947
+CELEX-31980D1283,cartel_period,1967-01-01 : 1978-02-28,"""1967-01-01 : 1978-02-28""",2026-01-28 21:50:36.180435
+CELEX-31980D1332,cartel_period,1970-03-25 : 1988-03-31,"""1970-03-25 : 1988-03-31""",2026-01-28 22:12:34.42841
+CELEX-31980D1333,cartel_period,1960-02-25 : 1980-12-01,"""1960-02-25 : 1980-12-01""",2026-01-28 21:49:33.387914
+CELEX-31980D1334,cartel_period,1976-03-30 : 1978-03-30,"""1976-03-30 : 1978-03-30""",2026-01-28 21:50:40.813205
+CELEX-31981D0881,cartel_period,1975-07-25 : 1977-11-21,"""1975-07-25 : 1977-11-21""",2026-01-28 21:50:46.971044
+CELEX-31981D0969,cartel_period,1975-01-01 : 1978-12-31,"""1975-01-01 : 1978-12-31""",2026-01-28 21:50:25.711049
+CELEX-31981D1030,cartel_period,1980-11-01 : 1980-11-21,"""1980-11-01 : 1980-11-21""",2026-01-28 21:50:39.79443
+CELEX-31981D1066,cartel_period,1981-02-27 : 1991-02-26,"""1981-02-27 : 1991-02-26""",2026-01-28 22:12:40.754298
+CELEX-31982D0053,cartel_period,1978-07-26 : 1978-10-25,"""1978-07-26 : 1978-10-25""",2026-01-28 21:51:06.302422
+CELEX-31982D0071,cartel_period,1977-03-31 : 1984-12-31,"""1977-03-31 : 1984-12-31""",2026-01-28 21:50:46.000235
+CELEX-31982D0123,cartel_period,1949-01-21 : 1979-06-18,"""1949-01-21 : 1979-06-18""",2026-01-28 21:48:22.908435
+CELEX-31982D0124,cartel_period,1972-01-01 : 1978-11-01,"""1972-01-01 : 1978-11-01""",2026-01-28 21:50:44.30409
+CELEX-31982D0174,cartel_period,1980-08-01 : 1981-03-31,"""1980-08-01 : 1981-03-31""",2026-01-28 22:12:42.887678
+CELEX-31982D0203,cartel_period,1980-01-01 : 1981-10-23,"""1980-01-01 : 1981-10-23""",2026-01-28 21:51:05.308705
+CELEX-31982D0204,cartel_period,No cartel period found.,"""No cartel period found.""",2026-01-28 21:50:45.373143
+CELEX-31982D0260,cartel_period,1979-06-27 : 1981-12-11,"""1979-06-27 : 1981-12-11""",2026-01-28 21:48:25.849838
+CELEX-31982D0267,cartel_period,1976-05-01 : 1980-02-29,"""1976-05-01 : 1980-02-29""",2026-01-28 21:49:51.508111
+CELEX-31982D0349,cartel_period,1919-01-01 : 1992-05-17,"""1919-01-01 : 1992-05-17""",2026-01-28 22:13:25.584759
+CELEX-31982D0367,cartel_period,1974-01-01 : 1980-12-01,"""1974-01-01 : 1980-12-01""",2026-01-28 21:49:09.711952
+CELEX-31982D0371,cartel_period,1979-01-01 : 1981-12-17,"""1979-01-01 : 1981-12-17""",2026-01-28 21:50:48.019187
+CELEX-31982D0465,cartel_period,1976-01-01 : 1982-06-21,"""1976-01-01 : 1982-06-21""",2026-01-28 21:48:25.081175
+CELEX-31982D0506,cartel_period,1971-12-01 : 1978-02-01,"""1971-12-01 : 1978-02-01""",2026-01-28 21:50:51.960674
+CELEX-31982D0628,cartel_period,1982-05-01 : 1982-05-01,"""1982-05-01 : 1982-05-01""",2026-01-28 22:18:47.179974
+CELEX-31982D0742,cartel_period,1971-10-13 : 1982-10-01,"""1971-10-13 : 1982-10-01""",2026-01-28 21:51:20.174026
+CELEX-31982D0756,cartel_period,1981-11-01 : 1982-10-27,"""1981-11-01 : 1982-10-27""",2026-01-28 21:48:26.596919
+CELEX-31982D0853,cartel_period,1976-03-01 : 1978-12-31,"""1976-03-01 : 1978-12-31""",2026-01-28 21:50:57.949671
+CELEX-31982D0860,cartel_period,1978-01-01 : 1982-12-10,"""1978-01-01 : 1982-12-10""",2026-01-28 21:50:58.755578
+CELEX-31982D0861,cartel_period,1978-01-21 : 1982-12-01,"""1978-01-21 : 1982-12-01""",2026-01-28 21:50:41.704497
+CELEX-31982D0866,cartel_period,1976-10-21 : 1976-12-31,"""1976-10-21 : 1976-12-31""",2026-01-28 21:50:32.494652
+CELEX-31982D0896,cartel_period,1957-01-01 : 1978-12-12,"""1957-01-01 : 1978-12-12""",2026-01-28 21:50:43.423667
+CELEX-31982D0897,cartel_period,1975-01-16 : 1978-01-01,"""1975-01-16 : 1978-01-01""",2026-01-28 21:48:39.012192
+CELEX-31983D0205,cartel_period,1983-01-10 : 1983-01-10,"""1983-01-10 : 1983-01-10""",2026-01-28 21:51:30.448645
+CELEX-31983D0252,cartel_period,1971-09-24 : 1982-11-30,"""1971-09-24 : 1982-11-30""",2026-01-28 22:12:19.958615
+CELEX-31983D0361,cartel_period,1980-05-27 : 1980-09-01,"""1980-05-27 : 1980-09-01""",2026-01-28 21:51:02.465174
+CELEX-31983D0390,cartel_period,1982-03-02 : 1993-03-01,"""1982-03-02 : 1993-03-01""",2026-01-28 21:51:19.443683
+CELEX-31983D0400,cartel_period,1978-01-01 : 1982-01-01,"""1978-01-01 : 1982-01-01""",2026-01-28 21:50:20.453487
+CELEX-31983D0462,cartel_period,1979-12-03 : 1983-07-29,"""1979-12-03 : 1983-07-29""",2026-01-28 22:18:48.43117
+CELEX-31983D0546,cartel_period,1968-01-01 : 1980-06-25,"""1968-01-01 : 1980-06-25""",2026-01-28 21:50:56.706106
+CELEX-31983D0560,cartel_period,1982-04-01 : 1982-05-01,"""1982-04-01 : 1982-05-01""",2026-01-28 21:51:27.240281
+CELEX-31983D0610,cartel_period,1963-01-01 : 1983-12-01,"""1963-01-01 : 1983-12-01""",2026-01-28 21:51:25.639944
+CELEX-31983D0622,cartel_period,1979-12-10 : 1985-03-31,"""1979-12-10 : 1985-03-31""",2026-01-28 21:50:59.412327
+CELEX-31983D0666,cartel_period,1973-01-01 : 1994-12-31,"""1973-01-01 : 1994-12-31""",2026-01-28 21:49:43.479867
+CELEX-31983D0667,cartel_period,1979-01-01 : 1980-05-31,"""1979-01-01 : 1980-05-31""",2026-01-28 21:51:26.41983
+CELEX-31983D0668,cartel_period,1976-11-04 : 1987-12-31,"""1976-11-04 : 1987-12-31""",2026-01-28 21:50:18.996436
+CELEX-31983D0669,cartel_period,1979-05-29 : 1989-12-31,"""1979-05-29 : 1989-12-31""",2026-01-28 21:50:44.932358
+CELEX-31983D0670,cartel_period,1982-01-01 : 1983-10-01,"""1982-01-01 : 1983-10-01""",2026-01-28 21:51:18.629602
+CELEX-31983D0671,cartel_period,1982-01-05 : 1993-12-31,"""1982-01-05 : 1993-12-31""",2026-01-28 22:12:44.974939
+CELEX-31983D0672,cartel_period,1980-07-21 : 1988-07-21,"""1980-07-21 : 1988-07-21""",2026-01-28 21:50:31.282866
+CELEX-31984D0191,cartel_period,1983-06-22 : 2010-12-31,"""1983-06-22 : 2010-12-31""",2026-01-28 21:51:34.112573
+CELEX-31984D0233,cartel_period,1984-04-18 : 1984-04-18,"""1984-04-18 : 1984-04-18""",2026-01-28 21:51:40.272957
+CELEX-31984D0282,cartel_period,1978-01-18 : 1982-04-30,"""1978-01-18 : 1982-04-30""",2026-01-28 21:51:23.642138
+CELEX-31984D0379,cartel_period,1981-01-01 : 1982-06-28,"""1981-01-01 : 1982-06-28""",2026-01-28 21:51:22.793101
+CELEX-31984D0380,cartel_period,1978-01-01 : 1985-12-31,"""1978-01-01 : 1985-12-31""",2026-01-28 21:51:36.114841
+CELEX-31984D0381,cartel_period,1970-05-01 : 1991-09-30,"""1970-05-01 : 1991-09-30""",2026-01-28 21:51:01.673888
+CELEX-31984D0387,cartel_period,1982-08-01 : 1998-01-27,"""1982-08-01 : 1998-01-27""",2026-01-28 21:51:41.219034
+CELEX-31984D0388,cartel_period,1978-01-01 : 1981-12-31,"""1978-01-01 : 1981-12-31""",2026-01-28 21:51:48.818045
+CELEX-31984D0405,cartel_period,1964-07-09 : 1977-12-31,"""1964-07-09 : 1977-12-31""",2026-01-28 21:51:15.383591
+CELEX-31984D0588,cartel_period,1975-07-17 : 1983-12-31,"""1975-07-17 : 1983-12-31""",2026-01-28 22:12:39.277725
+CELEX-31985D0044,cartel_period,1981-02-01 : 1984-12-01,"""1981-02-01 : 1984-12-01""",2026-01-28 21:51:09.48732
+CELEX-31985D0045,cartel_period,1981-01-06 : 1984-12-10,"""1981-01-06 : 1984-12-10""",2026-01-28 21:51:07.247878
+CELEX-31985D0074,cartel_period,1958-01-01 : 1981-01-01,"""1958-01-01 : 1981-01-01""",2026-01-28 21:51:44.00692
+CELEX-31985D0075,cartel_period,1980-06-01 : 1983-01-01,"""1980-06-01 : 1983-01-01""",2026-01-28 22:12:44.35523
+CELEX-31985D0076,cartel_period,1973-04-25 : 1980-01-01,"""1973-04-25 : 1980-01-01""",2026-01-28 21:50:00.534455
+CELEX-31985D0077,cartel_period,1980-10-30 : 1986-04-30,"""1980-10-30 : 1986-04-30""",2026-01-28 21:51:29.8235
+CELEX-31985D0078,cartel_period,1980-01-01 : 1985-04-22,"""1980-01-01 : 1985-04-22""",2026-01-28 21:51:25.040378
+CELEX-31985D0079,cartel_period,1975-01-01 : 1984-12-14,"""1975-01-01 : 1984-12-14""",2026-01-28 21:51:34.995804
+CELEX-31985D0121,cartel_period,1984-01-01 : 1985-05-01,"""1984-01-01 : 1985-05-01""",2026-01-28 21:52:05.660868
+CELEX-31985D0202,cartel_period,1973-01-01 : 1981-12-31,"""1973-01-01 : 1981-12-31""",2026-01-28 21:50:39.044614
+CELEX-31985D0206,cartel_period,1963-01-01 : 1976-12-31,"""1963-01-01 : 1976-12-31""",2026-01-28 21:49:30.027207
+CELEX-31985D0383,cartel_period,1983-10-01 : 1983-10-17,"""1983-10-01 : 1983-10-17""",2026-01-28 21:51:51.860931
+CELEX-31985D0404,cartel_period,1977-04-01 : 1989-03-28,"""1977-04-01 : 1989-03-28""",2026-01-28 22:12:41.386073
+CELEX-31985D0410,cartel_period,1958-10-14 : 1977-12-15,"""1958-10-14 : 1977-12-15""",2026-01-28 21:48:53.986409
+CELEX-31985D0559,cartel_period,1985-11-01 : 1993-01-31,"""1985-11-01 : 1993-01-31""",2026-01-28 21:51:39.521986
+CELEX-31985D0560,cartel_period,1983-06-01 : 1990-05-01,"""1983-06-01 : 1990-05-01""",2026-01-28 21:51:45.390801
+CELEX-31985D0561,cartel_period,1980-01-28 : 1985-12-01,"""1980-01-28 : 1985-12-01""",2026-01-28 21:50:53.090398
+CELEX-31985D0562,cartel_period,1985-12-13 : 1986-12-31,"""1985-12-13 : 1986-12-31""",2026-01-28 21:51:21.745218
+CELEX-31985D0563,cartel_period,1985-05-20 : 1985-12-13,"""1985-05-20 : 1985-12-13""",2026-01-28 21:49:44.068258
+CELEX-31985D0564,cartel_period,1985-12-13 : 1985-12-13,"""1985-12-13 : 1985-12-13""",2026-01-28 21:49:44.65166
+CELEX-31985D0565,cartel_period,1985-12-01 : 1985-12-13,"""1985-12-01 : 1985-12-13""",2026-01-28 21:49:45.256941
+CELEX-31985D0609,cartel_period,1979-01-01 : 1982-12-31,"""1979-01-01 : 1982-12-31""",2026-01-28 21:51:29.050757
+CELEX-31985D0615,cartel_period,1981-06-18 : 1985-02-20,"""1981-06-18 : 1985-02-20""",2026-01-28 21:51:17.757495
+CELEX-31985D0616,cartel_period,1962-02-01 : 1985-12-16,"""1962-02-01 : 1985-12-16""",2026-01-28 21:51:24.291637
+CELEX-31985D0617,cartel_period,1976-01-01 : 1982-12-17,"""1976-01-01 : 1982-12-17""",2026-01-28 21:51:38.795572
+CELEX-31985D0618,cartel_period,1975-01-01 : 1983-04-19,"""1975-01-01 : 1983-04-19""",2026-01-28 21:51:31.549195
+CELEX-31986D0398,cartel_period,1977-01-01 : 1983-12-31,"""1977-01-01 : 1983-12-31""",2026-01-28 21:52:03.648668
+CELEX-31986D0399,cartel_period,1978-01-01 : 1980-08-01,"""1978-01-01 : 1980-08-01""",2026-01-28 21:52:17.716366
+CELEX-31986D0405,cartel_period,1975-01-01 : 1985-12-31,"""1975-01-01 : 1985-12-31""",2026-01-28 21:51:10.318799
+CELEX-31986D0499,cartel_period,1973-12-01 : 1996-12-31,"""1973-12-01 : 1996-12-31""",2026-01-28 21:50:01.94076
+CELEX-31986D0506,cartel_period,1982-05-01 : 1985-06-30,"""1982-05-01 : 1985-06-30""",2026-01-28 21:51:58.359991
+CELEX-31986D0507,cartel_period,1984-10-15 : 1986-09-01,"""1984-10-15 : 1986-09-01""",2026-01-28 21:52:14.510216
+CELEX-31986D0596,cartel_period,1974-09-24 : 1984-06-01,"""1974-09-24 : 1984-06-01""",2026-01-28 21:52:10.261795
+CELEX-31987D0001,cartel_period,1976-01-01 : 1982-12-31,"""1976-01-01 : 1982-12-31""",2026-01-28 21:51:57.001792
+CELEX-31987D0003,cartel_period,1981-01-01 : 1998-10-18,"""1981-01-01 : 1998-10-18""",2026-01-28 21:51:52.742231
+CELEX-31987D0013,cartel_period,1976-01-01 : 1986-01-01,"""1976-01-01 : 1986-01-01""",2026-01-28 21:48:13.170525
+CELEX-31987D0014,cartel_period,1970-01-01 : 1993-01-01,"""1970-01-01 : 1993-01-01""",2026-01-28 21:52:20.438776
+CELEX-31987D0017,cartel_period,1986-12-17 : 1991-04-21,"""1986-12-17 : 1991-04-21""",2026-01-28 21:51:44.707309
+CELEX-31987D0044,cartel_period,1983-07-01 : 1986-12-01,"""1983-07-01 : 1986-12-01""",2026-01-28 21:50:09.229091
+CELEX-31987D0045,cartel_period,"No infringement period can be determined from the provided timeline. The events listed pertain to procedural steps such as notifications, decisions, and regulatory frameworks, but none indicate active collusion or competition law violations. Therefore, no valid cartel period exists within the specified date range (1900–2030).
+
+2000-01-01 : 2000-01-01","""No infringement period can be determined from the provided timeline. The events listed pertain to procedural steps such as notifications, decisions, and regulatory frameworks, but none indicate active collusion or competition law violations. Therefore, no valid cartel period exists within the specified date range (1900\u20132030).\n\n2000-01-01 : 2000-01-01""",2026-01-28 21:50:34.752068
+CELEX-31987D0046,cartel_period,1986-02-01 : 1986-12-10,"""1986-02-01 : 1986-12-10""",2026-01-28 21:51:03.133831
+CELEX-31987D0047,cartel_period,1986-06-02 : 1986-12-01,"""1986-06-02 : 1986-12-01""",2026-01-28 21:52:37.425993
+CELEX-31987D0069,cartel_period,1985-09-01 : 1990-11-30,"""1985-09-01 : 1990-11-30""",2026-01-28 21:52:21.095678
+CELEX-31987D0100,cartel_period,1984-07-01 : 1994-07-04,"""1984-07-01 : 1994-07-04""",2026-01-28 21:52:13.166408
+CELEX-31987D0103,cartel_period,1970-01-01 : 1982-03-31,"""1970-01-01 : 1982-03-31""",2026-01-28 21:52:13.973622
+CELEX-31987D0123,cartel_period,1986-12-15 : 1988-09-30,"""1986-12-15 : 1988-09-30""",2026-01-28 21:52:12.46112
+CELEX-31987D0406,cartel_period,1979-01-01 : 1981-12-31,"""1979-01-01 : 1981-12-31""",2026-01-28 21:52:07.223631
+CELEX-31987D0407,cartel_period,1987-07-10 : 1997-12-31,"""1987-07-10 : 1997-12-31""",2026-01-28 21:53:00.465466
+CELEX-31987D0409,cartel_period,1984-01-01 : 1985-01-01,"""1984-01-01 : 1985-01-01""",2026-01-28 21:52:43.533243
+CELEX-31987D0500,cartel_period,1987-03-01 : 1987-12-31,"""1987-03-01 : 1987-12-31""",2026-01-28 21:53:07.298296
+CELEX-31987D0509,cartel_period,2000-12-01 : 2016-05-01,"""2000-12-01 : 2016-05-01""",2026-01-28 21:52:42.676101
+CELEX-31988D0084,cartel_period,1986-02-28 : 1993-02-28,"""1986-02-28 : 1993-02-28""",2026-01-28 21:52:54.659285
+CELEX-31988D0086,cartel_period,1982-11-01 : 1985-08-01,"""1982-11-01 : 1985-08-01""",2026-01-28 21:51:50.984717
+CELEX-31988D0087,cartel_period,1986-02-12 : 1991-03-25,"""1986-02-12 : 1991-03-25""",2026-01-28 21:52:44.362607
+CELEX-31988D0088,cartel_period,1987-04-01 : 1999-04-01,"""1987-04-01 : 1999-04-01""",2026-01-28 21:53:08.159024
+CELEX-31988D0109,cartel_period,1962-04-01 : 1987-12-18,"""1962-04-01 : 1987-12-18""",2026-01-28 21:52:42.057974
+CELEX-31988D0110,cartel_period,1977-01-01 : 1986-12-01,"""1977-01-01 : 1986-12-01""",2026-01-28 22:12:30.574172
+CELEX-31988D0138,cartel_period,1981-01-01 : 1985-02-26,"""1981-01-01 : 1985-02-26""",2026-01-28 22:13:30.556642
+CELEX-31988D0143,cartel_period,1983-07-31 : 1988-07-31,"""1983-07-31 : 1988-07-31""",2026-01-28 21:52:10.98822
+CELEX-31988D0172,cartel_period,1984-10-01 : 1985-07-01,"""1984-10-01 : 1985-07-01""",2026-01-28 21:52:23.999732
+CELEX-31988D0330,cartel_period,1988-03-01 : 1998-10-02,"""1988-03-01 : 1998-10-02""",2026-01-28 22:13:05.386035
+CELEX-31988D0469,cartel_period,1986-04-15 : 1995-12-31,"""1986-04-15 : 1995-12-31""",2026-01-28 21:52:49.672737
+CELEX-31988D0477,cartel_period,1981-09-01 : 1985-12-17,"""1981-09-01 : 1985-12-17""",2026-01-28 21:52:36.887128
+CELEX-31988D0491,cartel_period,1970-01-01 : 1988-05-01,"""1970-01-01 : 1988-05-01""",2026-01-28 21:52:18.987228
+CELEX-31988D0501,cartel_period,1981-08-01 : 1988-07-26,"""1981-08-01 : 1988-07-26""",2026-01-28 22:12:47.336542
+CELEX-31988D0518,cartel_period,1985-07-01 : 1986-12-31,"""1985-07-01 : 1986-12-31""",2026-01-28 21:51:04.613209
+CELEX-31988D0541,cartel_period,1987-06-17 : 1987-11-20,"""1987-06-17 : 1987-11-20""",2026-01-28 21:53:12.049161
+CELEX-31988D0555,cartel_period,1983-11-04 : 2008-12-31,"""1983-11-04 : 2008-12-31""",2026-01-28 21:53:02.405857
+CELEX-31988D0563,cartel_period,1984-01-01 : 2004-12-31,"""1984-01-01 : 2004-12-31""",2026-01-28 21:52:21.886754
+CELEX-31988D0568,cartel_period,1986-05-01 : 1993-05-01,"""1986-05-01 : 1993-05-01""",2026-01-28 21:53:15.441432
+CELEX-31988D0587,cartel_period,1985-01-04 : 1988-10-01,"""1985-01-04 : 1988-10-01""",2026-01-28 21:48:08.740714
+CELEX-31988D0589,cartel_period,1987-04-01 : 1987-05-25,"""1987-04-01 : 1987-05-25""",2026-01-28 21:53:09.061148
+CELEX-31988D0604,cartel_period,1962-02-01 : 1962-02-01,"""1962-02-01 : 1962-02-01""",2026-01-28 21:53:09.68344
+CELEX-31988D0635,cartel_period,1959-01-01 : 1998-12-01,"""1959-01-01 : 1998-12-01""",2026-01-28 22:12:23.343699
+CELEX-31989D0022,cartel_period,1985-01-01 : 1986-12-31,"""1985-01-01 : 1986-12-31""",2026-01-28 21:52:48.783022
+CELEX-31989D0044,cartel_period,1957-01-01 : 1988-12-12,"""1957-01-01 : 1988-12-12""",2026-01-28 21:49:42.701475
+CELEX-31989D0093,cartel_period,1982-01-01 : 1986-12-31,"""1982-01-01 : 1986-12-31""",2026-01-28 21:52:54.040082
+CELEX-31989D0094,cartel_period,1988-12-01 : 1988-12-01,"""1988-12-01 : 1988-12-01""",2026-01-28 21:52:38.632829
+CELEX-31989D0095,cartel_period,1984-06-29 : 1988-12-19,"""1984-06-29 : 1988-12-19""",2026-01-28 21:52:11.719764
+CELEX-31989D0096,cartel_period,1989-01-01 : 2003-12-31,"""1989-01-01 : 2003-12-31""",2026-01-28 22:13:28.574593
+CELEX-31989D0113,cartel_period,1981-01-01 : 1987-01-01,"""1981-01-01 : 1987-01-01""",2026-01-28 21:51:47.465935
+CELEX-31989D0190,cartel_period,1980-01-01 : 1981-01-01,"""1980-01-01 : 1981-01-01""",2026-01-28 22:12:59.522366
+CELEX-31989D0191,cartel_period,1976-01-01 : 1983-10-01,"""1976-01-01 : 1983-10-01""",2026-01-28 21:52:47.061622
+CELEX-31989D0205,cartel_period,1986-04-04 : 1986-06-01,"""1986-04-04 : 1986-06-01""",2026-01-28 21:52:45.12781
+CELEX-31989D0408,cartel_period,1980-01-01 : 1990-01-01,"""1980-01-01 : 1990-01-01""",2026-01-28 22:12:36.160509
+CELEX-31989D0467,cartel_period,1981-11-01 : 1991-10-31,"""1981-11-01 : 1991-10-31""",2026-01-28 21:51:21.066196
+CELEX-31989D0512,cartel_period,1987-01-26 : 1988-10-01,"""1987-01-26 : 1988-10-01""",2026-01-28 21:52:22.802839
+CELEX-31989D0515,cartel_period,1980-05-27 : 1988-06-03,"""1980-05-27 : 1988-06-03""",2026-01-28 21:52:35.310186
+CELEX-31989D0536,cartel_period,1984-01-01 : 1998-12-31,"""1984-01-01 : 1998-12-31""",2026-01-28 21:52:41.220932
+CELEX-31990D0022,cartel_period,1981-03-06 : 1989-12-31,"""1981-03-06 : 1989-12-31""",2026-01-28 21:53:12.703161
+CELEX-31990D0025,cartel_period,1988-01-01 : 2010-01-01,"""1988-01-01 : 2010-01-01""",2026-01-28 21:53:04.771604
+CELEX-31990D0033,cartel_period,1986-12-01 : 1989-12-14,"""1986-12-01 : 1989-12-14""",2026-01-28 21:53:04.126136
+CELEX-31990D0038,cartel_period,1986-07-10 : 1989-11-13,"""1986-07-10 : 1989-11-13""",2026-01-28 21:52:58.77608
+CELEX-31990D0045,cartel_period,1975-10-04 : 1989-09-29,"""1975-10-04 : 1989-09-29""",2026-01-28 21:53:14.582763
+CELEX-31990D0046,cartel_period,1986-02-11 : 1996-12-31,"""1986-02-11 : 1996-12-31""",2026-01-28 21:52:55.345984
+CELEX-31990D0186,cartel_period,1987-05-01 : 1998-06-01,"""1987-05-01 : 1998-06-01""",2026-01-28 21:53:23.818128
+CELEX-31990D0363,cartel_period,1990-06-01 : 1990-06-26,"""1990-06-01 : 1990-06-26""",2026-01-28 21:53:28.276778
+CELEX-31990D0410,cartel_period,1986-04-23 : 1990-07-13,"""1986-04-23 : 1990-07-13""",2026-01-28 21:52:55.993148
+CELEX-31990D0446,cartel_period,1988-04-07 : 1993-12-31,"""1988-04-07 : 1993-12-31""",2026-01-28 21:53:21.472921
+CELEX-31990D0456,cartel_period,1987-00-00 : 1990-08-01,"""1987-00-00 : 1990-08-01""",2026-01-28 22:13:31.345132
+CELEX-31990D0535,cartel_period,1982-01-01 : 1999-04-26,"""1982-01-01 : 1999-04-26""",2026-01-28 21:53:20.681547
+CELEX-31990D0645,cartel_period,1988-03-01 : 1990-11-28,"""1988-03-01 : 1990-11-28""",2026-01-28 21:53:29.208463
+CELEX-31991D0038,cartel_period,1985-11-05 : 1995-01-01,"""1985-11-05 : 1995-01-01""",2026-01-28 21:53:11.375426
+CELEX-31991D0039,cartel_period,1987-12-14 : 1989-06-22,"""1987-12-14 : 1989-06-22""",2026-01-28 21:53:18.957285
+CELEX-31991D0050,cartel_period,1986-05-22 : 1991-01-16,"""1986-05-22 : 1991-01-16""",2026-01-28 21:53:22.978924
+CELEX-31991D0055,cartel_period,1981-07-01 : 1988-07-13,"""1981-07-01 : 1988-07-13""",2026-01-28 22:13:08.234224
+CELEX-31991D0128,cartel_period,1985-01-01 : 1991-02-15,"""1985-01-01 : 1991-02-15""",2026-01-28 21:52:35.981685
+CELEX-31991D0130,cartel_period,1988-12-01 : 1989-02-05,"""1988-12-01 : 1989-02-05""",2026-01-28 21:53:18.344932
+CELEX-31991D0153,cartel_period,1985-07-01 : 1991-01-11,"""1985-07-01 : 1991-01-11""",2026-01-28 21:52:38.088166
+CELEX-31991D0213,cartel_period,1990-02-13 : 1991-03-01,"""1990-02-13 : 1991-03-01""",2026-01-28 21:53:59.607387
+CELEX-31991D0297,cartel_period,1945-01-01 : 1972-12-31,"""1945-01-01 : 1972-12-31""",2026-01-28 22:13:13.073031
+CELEX-31991D0298,cartel_period,1986-01-01 : 1989-12-31,"""1986-01-01 : 1989-12-31""",2026-01-28 22:13:14.26513
+CELEX-31991D0299,cartel_period,1955-01-01 : 1982-12-31,"""1955-01-01 : 1982-12-31""",2026-01-28 22:13:16.462057
+CELEX-31991D0300,cartel_period,1983-01-01 : 1990-01-01,"""1983-01-01 : 1990-01-01""",2026-01-28 22:13:18.676656
+CELEX-31991D0301,cartel_period,1989-07-03 : 1990-12-19,"""1989-07-03 : 1990-12-19""",2026-01-28 21:53:31.07217
+CELEX-31991D0329,cartel_period,1990-03-31 : 2005-03-31,"""1990-03-31 : 2005-03-31""",2026-01-28 21:54:07.824908
+CELEX-31991D0335,cartel_period,1986-04-01 : 1987-12-01,"""1986-04-01 : 1987-12-01""",2026-01-28 21:53:03.487104
+CELEX-31991D0480,cartel_period,1988-03-21 : 1998-03-20,"""1988-03-21 : 1998-03-20""",2026-01-28 21:53:19.778982
+CELEX-31991D0481,cartel_period,1988-07-07 : 1998-07-06,"""1988-07-07 : 1998-07-06""",2026-01-28 21:53:26.909185
+CELEX-31991D0532,cartel_period,1983-01-01 : 1988-12-01,"""1983-01-01 : 1988-12-01""",2026-01-28 21:53:30.243469
+CELEX-31991D0562,cartel_period,1988-02-23 : 2001-07-31,"""1988-02-23 : 2001-07-31""",2026-01-28 21:53:24.85107
+CELEX-31992D0033,cartel_period,1991-06-01 : 1997-05-31,"""1991-06-01 : 1997-05-31""",2026-01-28 21:53:58.904905
+CELEX-31992D0096,cartel_period,1998-02-01 : 2019-03-01,"""1998-02-01 : 2019-03-01""",2026-01-28 22:13:37.489891
+CELEX-31992D0154,cartel_period,1985-01-01 : 1989-05-09,"""1985-01-01 : 1989-05-09""",2026-01-28 21:53:57.173711
+CELEX-31992D0157,cartel_period,1975-11-01 : 1988-11-24,"""1975-11-01 : 1988-11-24""",2026-01-28 22:18:02.915825
+CELEX-31992D0163,cartel_period,1975-01-01 : 1984-12-31,"""1975-01-01 : 1984-12-31""",2026-01-28 22:12:55.947141
+CELEX-31992D0204,cartel_period,1963-12-10 : 1980-10-01,"""1963-12-10 : 1980-10-01""",2026-01-28 22:18:05.125581
+CELEX-31992D0212,cartel_period,1983-12-01 : 1991-05-31,"""1983-12-01 : 1991-05-31""",2026-01-28 22:18:52.115954
+CELEX-31992D0213,cartel_period,1989-04-07 : 1992-04-01,"""1989-04-07 : 1992-04-01""",2026-01-28 22:13:40.52396
+CELEX-31992D0261,cartel_period,1985-01-01 : 1990-01-01,"""1985-01-01 : 1990-01-01""",2026-01-28 22:13:34.553678
+CELEX-31992D0426,cartel_period,1987-03-01 : 1989-09-01,"""1987-03-01 : 1989-09-01""",2026-01-28 22:13:36.815197
+CELEX-31992D0428,cartel_period,1992-07-24 : 1997-05-31,"""1992-07-24 : 1997-05-31""",2026-01-28 22:13:38.38672
+CELEX-31992D0500,cartel_period,1990-12-06 : 1992-10-07,"""1990-12-06 : 1992-10-07""",2026-01-28 21:54:13.352717
+CELEX-31992D0521,cartel_period,1987-06-26 : 1990-12-31,"""1987-06-26 : 1990-12-31""",2026-01-28 21:54:03.076488
+CELEX-31993D0003,cartel_period,1989-02-09 : 1991-04-25,"""1989-02-09 : 1991-04-25""",2026-01-28 21:53:27.58684
+CELEX-31993D0046,cartel_period,1964-10-29 : 1992-12-15,"""1964-10-29 : 1992-12-15""",2026-01-28 21:52:19.825432
+CELEX-31993D0047,cartel_period,1987-01-01 : 1992-12-17,"""1987-01-01 : 1992-12-17""",2026-01-28 22:13:35.408691
+CELEX-31993D0048,cartel_period,1992-06-12 : 2001-12-31,"""1992-06-12 : 2001-12-31""",2026-01-28 21:53:31.661992
+CELEX-31993D0049,cartel_period,1991-02-04 : 2004-12-31,"""1991-02-04 : 2004-12-31""",2026-01-28 21:54:17.200769
+CELEX-31993D0050,cartel_period,1987-12-17 : 1991-01-30,"""1987-12-17 : 1991-01-30""",2026-01-28 21:53:26.080473
+CELEX-31993D0082,cartel_period,1987-01-01 : 1989-12-31,"""1987-01-01 : 1989-12-31""",2026-01-28 22:13:10.6059
+CELEX-31993D0126,cartel_period,1977-05-10 : 1995-12-31,"""1977-05-10 : 1995-12-31""",2026-01-28 21:53:55.86405
+CELEX-31993D0174,cartel_period,1992-01-01 : 1997-01-31,"""1992-01-01 : 1997-01-31""",2026-01-28 21:54:38.731751
+CELEX-31993D0252,cartel_period,1990-01-02 : 1992-01-01,"""1990-01-02 : 1992-01-01""",2026-01-28 21:54:08.65743
+CELEX-31993D0403,cartel_period,1990-07-03 : 1993-02-26,"""1990-07-03 : 1993-02-26""",2026-01-28 21:53:01.532412
+CELEX-31993D0405,cartel_period,1991-12-19 : 1992-12-23,"""1991-12-19 : 1992-12-23""",2026-01-28 21:52:24.870672
+CELEX-31993D0406,cartel_period,1991-01-01 : 1997-12-31,"""1991-01-01 : 1997-12-31""",2026-01-28 21:54:28.34224
+CELEX-31993D0438,cartel_period,1988-03-21 : 1993-06-30,"""1988-03-21 : 1993-06-30""",2026-01-28 21:54:05.617838
+CELEX-31993D0554,cartel_period,1976-11-19 : 1984-12-31,"""1976-11-19 : 1984-12-31""",2026-01-28 21:52:27.047324
+CELEX-31993D0668,cartel_period,1992-07-08 : 1993-07-24,"""1992-07-08 : 1993-07-24""",2026-01-28 21:52:59.611245
+CELEX-31994D0019,cartel_period,1993-05-01 : 1993-07-16,"""1993-05-01 : 1993-07-16""",2026-01-28 21:54:53.859467
+CELEX-31994D0029,cartel_period,1993-12-21 : 1999-03-28,"""1993-12-21 : 1999-03-28""",2026-01-28 22:12:42.066182
+CELEX-31994D0153,cartel_period,1993-12-31 : 2003-12-31,"""1993-12-31 : 2003-12-31""",2026-01-28 22:12:46.330598
+CELEX-31994D0210,cartel_period,1988-04-01 : 1992-12-31,"""1988-04-01 : 1992-12-31""",2026-01-28 21:54:25.336431
+CELEX-31994D0272,cartel_period,1991-01-01 : 1993-07-06,"""1991-01-01 : 1993-07-06""",2026-01-28 21:48:09.577926
+CELEX-31994D0296,cartel_period,1991-08-19 : 1997-09-30,"""1991-08-19 : 1997-09-30""",2026-01-28 21:54:37.867324
+CELEX-31994D0322,cartel_period,1989-01-26 : 1992-05-29,"""1989-01-26 : 1992-05-29""",2026-01-28 21:54:09.7134
+CELEX-31994D0384,cartel_period,1987-10-03 : 1994-12-31,"""1987-10-03 : 1994-12-31""",2026-01-28 22:13:06.556019
+CELEX-31994D0579,cartel_period,1993-09-13 : 2000-11-01,"""1993-09-13 : 2000-11-01""",2026-01-28 21:54:57.200954
+CELEX-31994D0594,cartel_period,1992-02-02 : 1994-07-27,"""1992-02-02 : 1994-07-27""",2026-01-28 21:54:42.4685
+CELEX-31994D0599,cartel_period,1980-01-01 : 1984-12-31,"""1980-01-01 : 1984-12-31""",2026-01-28 22:13:03.557556
+CELEX-31994D0601,cartel_period,1975-01-01 : 1991-12-31,"""1975-01-01 : 1991-12-31""",2026-01-28 21:48:51.161784
+CELEX-31994D0663,cartel_period,1995-01-01 : 2002-12-31,"""1995-01-01 : 2002-12-31""",2026-01-28 21:54:45.995407
+CELEX-31994D0735,cartel_period,1993-09-01 : 1994-10-14,"""1993-09-01 : 1994-10-14""",2026-01-28 21:54:57.974044
+CELEX-31994D0770,cartel_period,1993-05-25 : 2006-12-31,"""1993-05-25 : 2006-12-31""",2026-01-28 21:54:56.373169
+CELEX-31994D0771,cartel_period,1993-04-01 : 1997-06-25,"""1993-04-01 : 1997-06-25""",2026-01-28 21:54:34.285311
+CELEX-31994D0815,cartel_period,1981-07-01 : 1988-12-31,"""1981-07-01 : 1988-12-31""",2026-01-28 21:53:53.064508
+CELEX-31994D0823,cartel_period,1993-10-21 : 1994-12-12,"""1993-10-21 : 1994-12-12""",2026-01-28 21:54:59.181703
+CELEX-31994D0894,cartel_period,1987-07-29 : 2019-12-31,"""1987-07-29 : 2019-12-31""",2026-01-28 21:53:17.476209
+CELEX-31994D0895,cartel_period,1993-06-28 : 1994-12-15,"""1993-06-28 : 1994-12-15""",2026-01-28 21:54:54.733813
+CELEX-31994D0896,cartel_period,1990-03-30 : 2005-12-07,"""1990-03-30 : 2005-12-07""",2026-01-28 21:54:18.083143
+CELEX-31994D0980,cartel_period,1875-01-01 : 1994-10-19,"""1875-01-01 : 1994-10-19""",2026-01-28 21:54:36.90436
+CELEX-31994D0985,cartel_period,1971-01-01 : 1994-12-21,"""1971-01-01 : 1994-12-21""",2026-01-28 21:53:58.093268
+CELEX-31994D0986,cartel_period,1992-03-03 : 1994-12-21,"""1992-03-03 : 1994-12-21""",2026-01-28 21:54:30.412188
+CELEX-31994D0987,cartel_period,1987-01-01 : 1989-04-17,"""1987-01-01 : 1989-04-17""",2026-01-28 21:54:43.760431
+CELEX-31995D0188,cartel_period,1926-02-27 : 1995-01-30,"""1926-02-27 : 1995-01-30""",2026-01-28 21:54:12.572468
+CELEX-31995D0373,cartel_period,1989-08-25 : 1990-01-12,"""1989-08-25 : 1990-01-12""",2026-01-28 21:54:00.447281
+CELEX-31995D0477,cartel_period,1982-01-01 : 1991-12-31,"""1982-01-01 : 1991-12-31""",2026-01-28 21:54:16.45895
+CELEX-31995D0551,cartel_period,1979-12-15 : 1992-04-28,"""1979-12-15 : 1992-04-28""",2026-01-28 21:54:29.673273
+CELEX-31996D0180,cartel_period,1995-05-11 : 1996-01-31,"""1995-05-11 : 1996-01-31""",2026-01-28 21:55:10.281153
+CELEX-31996D0438,cartel_period,1989-01-10 : 1993-07-31,"""1989-01-10 : 1993-07-31""",2026-01-28 21:55:00.33252
+CELEX-31996D0454,cartel_period,1993-01-27 : 2005-01-22,"""1993-01-27 : 2005-01-22""",2026-01-28 21:54:46.757202
+CELEX-31996D0478,cartel_period,1989-04-04 : 1996-01-10,"""1989-04-04 : 1996-01-10""",2026-01-28 21:54:33.295371
+CELEX-31996D0546,cartel_period,2000-01-01 : 2005-01-01,"""2000-01-01 : 2005-01-01""",2026-01-28 21:55:08.569088
+CELEX-31996D0547,cartel_period,1998-01-01 : 2003-01-01,"""1998-01-01 : 2003-01-01""",2026-01-28 21:55:11.163901
+CELEX-31997D0039,cartel_period,2003-07-31 : 2003-07-31,"""2003-07-31 : 2003-07-31""",2026-01-28 21:55:09.279033
+CELEX-31997D0084,cartel_period,1992-09-16 : 1992-12-31,"""1992-09-16 : 1992-12-31""",2026-01-28 21:54:41.731046
+CELEX-31997D0123,cartel_period,1984-04-02 : 1996-04-02,"""1984-04-02 : 1996-04-02""",2026-01-28 21:55:12.417922
+CELEX-31997D0624,cartel_period,1985-01-01 : 1994-12-31,"""1985-01-01 : 1994-12-31""",2026-01-28 21:54:52.126069
+CELEX-31998D0273,cartel_period,1987-12-30 : 1995-01-01,"""1987-12-30 : 1995-01-01""",2026-01-28 21:55:19.661496
+CELEX-31998D0538,cartel_period,1985-01-01 : 1998-12-31,"""1985-01-01 : 1998-12-31""",2026-01-28 22:14:35.740145
+CELEX-31999D0006,cartel_period,1994-10-26 : 2004-10-01,"""1994-10-26 : 2004-10-01""",2026-01-28 21:55:07.640048
+CELEX-31999D0060,cartel_period,1990-11-01 : 1996-04-01,"""1990-11-01 : 1996-04-01""",2026-01-28 22:14:23.706562
+CELEX-31999D0198,cartel_period,1977-01-01 : 1999-01-01,"""1977-01-01 : 1999-01-01""",2026-01-28 22:14:25.948163
+CELEX-31999D0199,cartel_period,1990-03-21 : 1998-06-23,"""1990-03-21 : 1998-06-23""",2026-01-28 22:14:07.254905
+CELEX-31999D0230,cartel_period,1990-01-01 : 2008-12-31,"""1990-01-01 : 2008-12-31""",2026-01-28 22:14:04.576906
+CELEX-31999D0242,cartel_period,1996-04-18 : 1999-12-15,"""1996-04-18 : 1999-12-15""",2026-01-28 22:14:49.142397
+CELEX-31999D0243,cartel_period,1994-01-01 : 1996-12-31,"""1994-01-01 : 1996-12-31""",2026-01-28 21:55:07.025425
+CELEX-31999D0267,cartel_period,1997-10-03 : 2000-04-23,"""1997-10-03 : 2000-04-23""",2026-01-28 22:14:45.582206
+CELEX-31999D0329,cartel_period,1985-02-01 : 2009-02-20,"""1985-02-01 : 2009-02-20""",2026-01-28 22:18:46.176173
+CELEX-31999D0421,cartel_period,1996-01-01 : 2000-03-10,"""1996-01-01 : 2000-03-10""",2026-01-28 22:14:50.647686
+CELEX-31999D0473,cartel_period,1989-01-01 : 1997-12-31,"""1989-01-01 : 1997-12-31""",2026-01-28 22:14:44.585183
+CELEX-31999D0474,cartel_period,1985-01-01 : 1998-12-31,"""1985-01-01 : 1998-12-31""",2026-01-28 22:14:33.831775
+CELEX-31999D0485,cartel_period,1992-09-01 : 1997-05-01,"""1992-09-01 : 1997-05-01""",2026-01-28 22:13:43.772964
+CELEX-31999D0573,cartel_period,1998-01-01 : 1998-12-31,"""1998-01-01 : 1998-12-31""",2026-01-28 22:18:29.058073
+CELEX-31999D0574,cartel_period,1997-04-11 : 1998-02-01,"""1997-04-11 : 1998-02-01""",2026-01-28 22:14:57.583771
+CELEX-31999D0687,cartel_period,1991-01-21 : 1999-01-21,"""1991-01-21 : 1999-01-21""",2026-01-28 22:18:06.327795
+CELEX-31999D0695,cartel_period,1995-06-02 : 2001-12-31,"""1995-06-02 : 2001-12-31""",2026-01-28 22:15:08.573729
+CELEX-31999D0781,cartel_period,1998-08-04 : 1999-09-15,"""1998-08-04 : 1999-09-15""",2026-01-28 22:14:56.577038
+CELEX-32000D0012,cartel_period,1996-01-01 : 1998-06-10,"""1996-01-01 : 1998-06-10""",2026-01-28 22:15:11.254786
+CELEX-32000D0074,cartel_period,1993-07-09 : 1999-02-08,"""1993-07-09 : 1999-02-08""",2026-01-28 22:13:55.787518
+CELEX-32000D0117,cartel_period,1986-04-28 : 1994-02-25,"""1986-04-28 : 1994-02-25""",2026-01-28 21:54:22.195553
+CELEX-32000D0146,cartel_period,1995-01-01 : 1998-08-04,"""1995-01-01 : 1998-08-04""",2026-01-28 21:46:50.33051
+CELEX-32000D0182,cartel_period,1996-08-16 : 2004-12-31,"""1996-08-16 : 2004-12-31""",2026-01-28 22:14:46.42104
+CELEX-32000D0400,cartel_period,1985-01-01 : 2005-12-31,"""1985-01-01 : 2005-12-31""",2026-01-28 22:18:53.797888
+CELEX-32000D0475,cartel_period,1995-01-01 : 2001-12-31,"""1995-01-01 : 2001-12-31""",2026-01-28 22:15:05.480704
+CELEX-32000D0484,cartel_period,1997-01-01 : 1998-03-28,"""1997-01-01 : 1998-03-28""",2026-01-28 22:18:28.238391
+CELEX-32000D0521,cartel_period,2000-01-01 : 2002-01-01,"""2000-01-01 : 2002-01-01""",2026-01-28 22:14:24.787366
+CELEX-32000D0627,cartel_period,1991-06-04 : 1994-05-10,"""1991-06-04 : 1994-05-10""",2026-01-28 21:54:27.258179
+CELEX-32001D0135,cartel_period,1993-04-01 : 1997-04-21,"""1993-04-01 : 1997-04-21""",2026-01-28 22:14:55.310954
+CELEX-32001D0143,cartel_period,2000-12-31 : 2000-12-31,"""2000-12-31 : 2000-12-31""",2026-01-28 22:15:09.328413
+CELEX-32001D0146,cartel_period,1996-09-01 : 1998-01-20,"""1996-09-01 : 1998-01-20""",2026-01-28 22:15:03.083818
+CELEX-32001D0176,cartel_period,2000-05-16 : 2001-03-21,"""2000-05-16 : 2001-03-21""",2026-01-28 22:15:59.565664
+CELEX-32001D0354,cartel_period,1990-01-01 : 2000-10-01,"""1990-01-01 : 2000-10-01""",2026-01-28 22:14:06.537885
+CELEX-32001D0418,cartel_period,1990-06-01 : 1995-06-30,"""1990-06-01 : 1995-06-30""",2026-01-28 21:55:47.325186
+CELEX-32001D0463,cartel_period,1993-06-24 : 2001-04-20,"""1993-06-24 : 2001-04-20""",2026-01-28 22:13:53.157679
+CELEX-32001D0478,cartel_period,1998-07-16 : 2001-04-01,"""1998-07-16 : 2001-04-01""",2026-01-28 22:15:55.414223
+CELEX-32001D0663,cartel_period,1992-01-01 : 2004-12-31,"""1992-01-01 : 2004-12-31""",2026-01-28 22:13:59.509856
+CELEX-32001D0696,cartel_period,1999-01-01 : 1999-04-06,"""1999-01-01 : 1999-04-06""",2026-01-28 22:15:21.767947
+CELEX-32001D0711,cartel_period,1996-09-26 : 1999-09-10,"""1996-09-26 : 1999-09-10""",2026-01-28 22:15:04.726202
+CELEX-32001D0716,cartel_period,1998-05-05 : 2001-03-07,"""1998-05-05 : 2001-03-07""",2026-01-28 21:56:58.00015
+CELEX-32001D0791,cartel_period,1998-03-09 : 1998-10-26,"""1998-03-09 : 1998-10-26""",2026-01-28 22:18:39.113843
+CELEX-32001D0892,cartel_period,1996-01-01 : 2000-10-17,"""1996-01-01 : 2000-10-17""",2026-01-28 22:15:14.364461
+CELEX-32002D0180,cartel_period,1998-10-01 : 2001-06-20,"""1998-10-01 : 2001-06-20""",2026-01-28 22:16:10.579853
+CELEX-32002D0190,cartel_period,1975-01-01 : 2000-12-21,"""1975-01-01 : 2000-12-21""",2026-01-28 22:14:32.339149
+CELEX-32002D0271,cartel_period,1992-05-01 : 1998-02-13,"""1992-05-01 : 1998-02-13""",2026-01-28 21:55:39.334277
+CELEX-32002D0344,cartel_period,1990-01-01 : 1999-12-31,"""1990-01-01 : 1999-12-31""",2026-01-28 22:15:15.609068
+CELEX-32002D0405,cartel_period,1980-01-01 : 1999-06-28,"""1980-01-01 : 1999-06-28""",2026-01-28 22:14:41.439135
+CELEX-32002D0742,cartel_period,1991-03-06 : 1995-05-01,"""1991-03-06 : 1995-05-01""",2026-01-28 21:56:01.447804
+CELEX-32002D0746,cartel_period,2000-01-01 : 2005-12-31,"""2000-01-01 : 2005-12-31""",2026-01-28 22:16:00.520253
+CELEX-32002D0758_01,cartel_period,1985-01-01 : 1999-06-10,"""1985-01-01 : 1999-06-10""",2026-01-28 22:14:53.956941
+CELEX-32002D0759,cartel_period,1985-10-01 : 2000-02-16,"""1985-10-01 : 2000-02-16""",2026-01-28 21:58:19.640862
+CELEX-32002D0914,cartel_period,2002-12-31 : 2007-12-31,"""2002-12-31 : 2007-12-31""",2026-01-28 22:18:43.624595
+CELEX-32003D0002,cartel_period,1989-09-01 : 1994-06-30,"""1989-09-01 : 1994-06-30""",2026-01-28 21:57:12.727215
+CELEX-32003D0005,cartel_period,1986-01-01 : 1990-12-31,"""1986-01-01 : 1990-12-31""",2026-01-28 22:03:37.372539
+CELEX-32003D0006,cartel_period,1981-01-01 : 1990-12-31,"""1981-01-01 : 1990-12-31""",2026-01-28 22:03:39.885777
+CELEX-32003D0007,cartel_period,1983-01-01 : 1989-12-31,"""1983-01-01 : 1989-12-31""",2026-01-28 22:03:46.649825
+CELEX-32003D0025,cartel_period,1997-10-01 : 1999-01-01,"""1997-10-01 : 1999-01-01""",2026-01-28 21:58:38.664115
+CELEX-32003D0207,cartel_period,1989-01-01 : 1997-12-31,"""1989-01-01 : 1997-12-31""",2026-01-28 21:56:07.787366
+CELEX-32003D0300,cartel_period,2002-05-22 : 2004-12-31,"""2002-05-22 : 2004-12-31""",2026-01-28 22:16:24.324097
+CELEX-32003D0382,cartel_period,1975-01-01 : 1995-01-01,"""1975-01-01 : 1995-01-01""",2026-01-28 22:03:44.206427
+CELEX-32003D0437,cartel_period,1994-03-24 : 1998-05-13,"""1994-03-24 : 1998-05-13""",2026-01-28 21:56:30.783397
+CELEX-32003D0569,cartel_period,1991-12-31 : 1996-07-01,"""1991-12-31 : 1996-07-01""",2026-01-28 21:57:38.034265
+CELEX-32003D0570,cartel_period,2001-09-20 : 2007-06-30,"""2001-09-20 : 2007-06-30""",2026-01-28 22:17:12.932491
+CELEX-32003D0600,cartel_period,2001-10-24 : 2002-06-24,"""2001-10-24 : 2002-06-24""",2026-01-28 21:59:58.591038
+CELEX-32003D0674,cartel_period,1985-01-01 : 1999-02-01,"""1985-01-01 : 1999-02-01""",2026-01-28 21:57:23.750092
+CELEX-32003D0675,cartel_period,1991-01-01 : 1997-12-31,"""1991-01-01 : 1997-12-31""",2026-01-28 22:18:27.070668
+CELEX-32003D0707,cartel_period,1998-01-01 : 2001-12-31,"""1998-01-01 : 2001-12-31""",2026-01-28 22:18:42.473143
+CELEX-32003D0778,cartel_period,2002-01-01 : 2002-05-15,"""2002-01-01 : 2002-05-15""",2026-01-28 22:15:21.1187
+CELEX-32004D0104,cartel_period,1990-11-22 : 1999-12-31,"""1990-11-22 : 1999-12-31""",2026-01-28 21:58:56.90487
+CELEX-32004D0139,cartel_period,1999-01-01 : 2001-12-31,"""1999-01-01 : 2001-12-31""",2026-01-28 22:16:49.691654
+CELEX-32004D0206,cartel_period,1986-01-01 : 1998-06-30,"""1986-01-01 : 1998-06-30""",2026-01-28 21:57:57.104856
+CELEX-32004D0207,cartel_period,2002-01-01 : 2008-12-31,"""2002-01-01 : 2008-12-31""",2026-01-28 22:17:11.642252
+CELEX-32004D0337,cartel_period,1992-01-01 : 1995-09-01,"""1992-01-01 : 1995-09-01""",2026-01-28 21:55:31.112477
+iv34801_en,cartel_period,1994-05-10 : 1997-09-29,"""1994-05-10 : 1997-09-29""",2026-01-28 22:14:29.505865

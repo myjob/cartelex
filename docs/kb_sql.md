@@ -38,8 +38,8 @@ Because `value_md` is polymorphic, queries must handle casting appropriately dep
 | Data Type | Fact Names (`name`) | `value_md` Format | Safe Casting / Filter Pattern |
 |---|---|---|---|
 | **Boolean** | `leniency_case`, `exemption_case`, `market_outside_eu`, `market_oligopoly`, `is_court_involved`, `case_commission_decision`, `case_commission_no_action`, `case_commission_info_request`, `leniency_case_match`, `infringement_category_abuse_of_dominance`, `infringement_category_procedural`, `infringement_category_member_states` | `'True'` or `'False'` | `name = 'leniency_case' AND value_md = 'True'` |
-| **Date** | `eu_commisssion_decision_date` | `'YYYY-MM-DD'` | Requires length/regex guard:<br>`LENGTH(value_md) = 10 AND value_md::date`<br>or `value_md ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'` |
-| **Date Range** | `heideltime_cartel_period`, `legal_assessment_period` | `'YYYY-MM-DD : YYYY-MM-DD'` | Text parsing required. |
+| **Date** | `eu_commission_decision_date` | `'YYYY-MM-DD'` | Requires length/regex guard:<br>`LENGTH(value_md) = 10 AND value_md::date`<br>or `value_md ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'` |
+| **Date Range** | `cartel_period`, `legal_assessment_period` | `'YYYY-MM-DD : YYYY-MM-DD'` | Text parsing required. |
 | **Categories** | `infringement_category_hor_vert_lic_joint`, `infringement_subcategory_horizontal_restraints`, `infringement_subcategory_vertical_restraints`, `infringement_gravity`, `OECD_sector`, `NACE_group_code`, `NACE_class_code` | Short label string | `name = 'OECD_sector' AND value_md ILIKE '%chemical%'` |
 | **Free Text / Markdown** | `leniency_applicants`, `fines`, `companies_investigated`, `companies_country`, `company_recidivism`, `case_commissioner`, `case_summary`, `case_title`, `court_list_raw` | Markdown, Tables, or Paragraphs | `name = 'case_commissioner' AND LENGTH(value_md) > 2` |
 

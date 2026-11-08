@@ -12,9 +12,15 @@ Exports:
     engine               — default engine built from settings.DATABASE_URL.
     Session              — sessionmaker bound to the default engine; suitable
                            for use when no custom db_url override is needed.
+    column_exists(conn, table, column) — probe for a column that a pending
+                           migration adds, so writers work before and after it.
+    warn_once(logger, key, message, *args) — log a warning once per process.
 """
 
-from sqlalchemy import create_engine
+import logging
+import threading
+
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from pipelines.rag.pgvector.vector_config import DATABASE_URL, SEARCH_PATH
@@ -35,6 +41,55 @@ def make_engine(db_url: str = DATABASE_URL):
         pool_pre_ping=True,
         connect_args={"options": f"-csearch_path={SEARCH_PATH}"},
     )
+
+
+_COLUMN_EXISTS = text(
+    "SELECT 1 FROM pg_attribute "
+    "WHERE attrelid = to_regclass(:table) AND attname = :column "
+    "AND attnum > 0 AND NOT attisdropped"
+)
+
+#: Keys already warned about by :func:`warn_once` in this process.
+_WARNED_ONCE: set[str] = set()
+_WARNED_LOCK = threading.Lock()
+
+
+def column_exists(conn, table: str, column: str) -> bool:
+    """Return whether ``table`` (resolved via ``search_path``) has ``column``.
+
+    A missing table counts as a missing column (``to_regclass`` yields NULL).
+
+    Args:
+        conn: SQLAlchemy connection or session exposing ``execute``.
+        table: Table name, optionally schema-qualified.
+        column: Column name.
+
+    Returns:
+        True if the column exists.
+
+    Raises:
+        sqlalchemy.exc.SQLAlchemyError: On database errors.
+    """
+    return conn.execute(_COLUMN_EXISTS, {"table": table, "column": column}).first() is not None
+
+
+def warn_once(logger: logging.Logger, key: str, message: str, *args: object) -> None:
+    """Log ``message`` at WARNING the first time ``key`` is seen in this process.
+
+    Args:
+        logger: Logger to emit on.
+        key: Deduplication key (one warning per key per process).
+        message: ``logging`` format string.
+        *args: Format arguments.
+
+    Returns:
+        None.
+    """
+    with _WARNED_LOCK:
+        if key in _WARNED_ONCE:
+            return
+        _WARNED_ONCE.add(key)
+    logger.warning(message, *args)
 
 
 # Default engine and session factory — use these when no custom URL is needed.

@@ -13,6 +13,7 @@ from batch.BatchJobRunner import BatchJobRunner
 
 from pipelines.rag.pgvector.fact_repository import FactRepository
 from pipelines.rag.pgvector.chunk_repository import ChunkRepository
+from pipelines.rag.pgvector.source_document_resolver import SourceDocumentResolver
 from pipelines.rag.pgvector.lineage_repository import LineageRepository
 from tools.celex_tools import CelexDatabaseToolkit
 from tools.PipelineFactIngestor import FactIngestor
@@ -30,6 +31,8 @@ from pipelines.agent_dspy.universal_modules import (
     DocHybridSearchModule,
     KeywordRegexModule,
     InfringementConceptModule,
+    RecitalCountModule,
+    UndertakingCountModule,
     BookKeywordModule,
     BookFactModule,
     BookFactChapterTitleModule,
@@ -52,6 +55,7 @@ from pipelines.heideltime.heideltime_module import (
     HeideltimeCartelPeriodModule,
 )
 from pipelines.heideltime.extract_heideltime import HeidelTime
+from pipelines.heideltime.period_inheritance import PeriodInheritor
 from pipelines.rag.pgvector.book_chunk_repository import BookChunkRepository
 from pipelines.rag.pgvector.heideltime_ingestor import HeidelTimeIngestor
 from pipelines.nace.nace_tree import NaceTree
@@ -72,6 +76,8 @@ PIPELINE_DSPY_MODULE_CLASSES: dict[str, type[dspy.Module]] = {
     "keyword_search": DocKeywordSearchModule,
     "keyword_regex": KeywordRegexModule,
     "infringement_concept": InfringementConceptModule,
+    "recital_count": RecitalCountModule,
+    "undertaking_count": UndertakingCountModule,
     "doc_search": DocHybridSearchModule,
     "hybrid_search": FactContextModule,
     "fact_context": FactContextModule,
@@ -561,6 +567,12 @@ class FactIngestionOrchestrator:
             "infringement_concept": cls["infringement_concept"](
                 sql_store=shared_repo
             ),
+            "recital_count": cls["recital_count"](
+                sql_store=shared_repo, chunk_repo=chunk_repo
+            ),
+            "undertaking_count": cls["undertaking_count"](
+                sql_store=shared_repo
+            ),
             "doc_search": cls["doc_search"](
                 sql_store=shared_repo, searcher=hybrid_search
             ),
@@ -607,6 +619,9 @@ class FactIngestionOrchestrator:
             ),
             "heideltime_cartel_period": cls["heideltime_cartel_period"](
                 sql_store=shared_repo,
+                inheritor=PeriodInheritor(
+                    fact_store=shared_repo, chunk_store=chunk_repo
+                ),
             ),
         }
 
@@ -812,7 +827,21 @@ class FactIngestionOrchestrator:
                     )
 
     def _topological_order(self, active_structs: list) -> list | None:
-        """Return a topologically-sorted list of target_fact_name values."""
+        """Return a topologically-sorted list of target_fact_name values.
+
+        ``predecessors`` are hard edges: a missing one is still scheduled first
+        and gates the fact at runtime. ``context_facts`` are ordering-only
+        edges, so a reader such as ``case_summary`` runs after those of its
+        inputs that are selected in this run, never pulls unselected ones in,
+        and is never gated by them.
+
+        Args:
+            active_structs: Selected fact configs with normalized
+                ``predecessors`` and optional ``context_facts``.
+
+        Returns:
+            Fact names in execution order, or ``None`` on a dependency cycle.
+        """
         defined_tasks = {s["target_fact_name"] for s in active_structs}
         missing = {
             s["target_fact_name"]: [
@@ -829,6 +858,7 @@ class FactIngestionOrchestrator:
 
         graph = {
             s["target_fact_name"]: set(s.get("predecessors", []))
+            | (set(s.get("context_facts") or []) & defined_tasks)
             for s in active_structs
         }
         try:
@@ -845,9 +875,13 @@ class FactIngestionOrchestrator:
         A single ``LineageRepository`` and ``ChunkRepository`` are shared across
         all ingestors so that fact provenance is recorded (chunk lineage derived
         from ``references_doc``) on the same connection pool as ``shared_repo``.
+        One ``SourceDocumentResolver`` is shared too, so each decision's source
+        document is looked up once per run; without the registry tables it
+        resolves to NULL after one warning and extraction proceeds.
         """
         lineage_repo = LineageRepository(engine=shared_repo.engine)
         chunk_repo = ChunkRepository()
+        source_documents = SourceDocumentResolver.from_engine(shared_repo.engine)
         pipelines = []
         for s in active_structs:
             target_fact_name = s.get("target_fact_name", "")
@@ -859,6 +893,7 @@ class FactIngestionOrchestrator:
                         fact_table=shared_repo,
                         lineage_repo=lineage_repo,
                         chunk_repo=chunk_repo,
+                        source_documents=source_documents,
                     ),
                     fact_embedding_loader=FactEmbeddingLoaderQwen(
                         session_factory=Session
@@ -1128,7 +1163,7 @@ PYTHONPATH=~/a/celex-facts:~/a/celex-facts/src .venv/bin/python src/batch/Main_i
 
 .venv/bin/python src/batch/Main_ingest_generic_facts.py \
     --filter-celex-id CELEX-31965D0426 \
-    --filter-fact heideltime_cartel_period 
+    --filter-fact cartel_period 
     --limit 1
 
 .venv/bin/python src/batch/Main_ingest_generic_facts.py \
@@ -1147,7 +1182,7 @@ PYTHONPATH=~/a/celex-facts:~/a/celex-facts/src .venv/bin/python src/batch/Main_i
     
 .venv/bin/python src/batch/Main_ingest_generic_facts.py \
     --celex-list-file reports/heideltime_qa_event_20260506.txt \
-    --filter-fact heideltime_cartel_period
+    --filter-fact cartel_period
     
 
 
@@ -1344,4 +1379,17 @@ PYTHONPATH=~/a/celex-facts:~/a/celex-facts/src .venv/bin/python src/batch/Main_i
 .venv/bin/python src/batch/Main_ingest_generic_facts.py \
     --filter-fact  case_summary
 
+    
+ --filter-celex-id DEC-AT36212-20100623
+
+ 
+
+.venv/bin/python src/batch/Main_ingest_generic_facts.py \
+    --filter-celex-id 'DEC-AT39847-20121212' \
+    --filter-fact  products \
+    --overwrite
+ 
+.venv/bin/python src/batch/Main_ingest_generic_facts.py \
+    --filter-fact  recitals_max
+    
     """

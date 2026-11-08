@@ -11,6 +11,8 @@ from tools.PipelineFactIngestor import (
     _is_gate_predecessor,
 )
 from pipelines.rag.pgvector.vector_config import DATABASE_URL
+from pipelines.rag.pgvector import session as session_module
+from pipelines.rag.pgvector.source_document_resolver import SourceDocumentResolver
 from pipelines.agent_dspy.fact_extractor_param import FactExtractorParamVO
 
 class TestFactIngestor(unittest.TestCase):
@@ -462,6 +464,44 @@ class TestSaveFactLineageAssembly(unittest.TestCase):
         self.repo.select_fact4celex.assert_not_called()
 
 
+class TestPersistLineageRetractsCrossDocumentLinks(unittest.TestCase):
+    """Every lineage write retracts cross-document edges it did not link."""
+
+    def setUp(self):
+        self.fact_id = uuid.uuid4()
+        self.repo = MagicMock()
+        self.repo.upsert_fact.return_value = self.fact_id
+        self.lineage_repo = MagicMock()
+        self.donor_source = uuid.uuid4()
+        self.lineage_repo.register_fact_source.return_value = self.donor_source
+        self.ingestor = FactIngestor(
+            target_fact_name="cartel_period",
+            fact_table=self.repo,
+            lineage_repo=self.lineage_repo,
+            chunk_repo=MagicMock(),
+        )
+        self.ingestor._derive_chunk_lineage = lambda *args, **kwargs: []
+
+    def _retract_call(self):
+        self.lineage_repo.retract_cross_document_fact_links.assert_called_once()
+        return self.lineage_repo.retract_cross_document_fact_links.call_args
+
+    def test_current_donor_link_is_kept(self):
+        donor = LineageSourceVO(
+            source_type="fact", celex_id="38589_4669_7", source_fact_id=uuid.uuid4(),
+            extraction_method="period_inheritance", relation_type="derived_from",
+        )
+        self.ingestor.save_fact("DEC-AT38589-20160629_2", [{"date_range": "1987 : 2000"}],
+                                lineage_sources=[donor])
+        call = self._retract_call()
+        self.assertEqual(call.args, (self.fact_id, [self.donor_source]))
+
+    def test_write_without_sources_still_retracts(self):
+        """A re-run that no longer inherits (NA, own period) drops the old donor edge."""
+        self.ingestor.save_fact("DEC-AT38589-20160629_2", [], lineage_sources=[])
+        self.assertEqual(self._retract_call().args, (self.fact_id, []))
+
+
 class TestLineageSourceVOFactType(unittest.TestCase):
     """The 'fact' source type is guarded by the same natural-key validator."""
 
@@ -492,6 +532,55 @@ class TestLineageSourceVOFactType(unittest.TestCase):
         )
         self.assertEqual(vo.source_fact_id, source_fact_id)
         self.assertEqual(vo.relation_type, "derived_from")
+
+
+class TestSaveFactSourceDocument(unittest.TestCase):
+    """save_fact stamps the decision's source document via the injected resolver."""
+
+    def setUp(self):
+        self.repo = MagicMock()
+        self.repo.upsert_fact.return_value = uuid.uuid4()
+        self.calls: list[str] = []
+        session_module._WARNED_ONCE.clear()
+
+    def _lookup(self, decision_id: str) -> str | None:
+        self.calls.append(decision_id)
+        return {"CELEX-32002D0180": "CELEX-32002D0180_EN"}.get(decision_id)
+
+    def _ingestor(self, name: str, resolver: SourceDocumentResolver | None) -> FactIngestor:
+        return FactIngestor(
+            target_fact_name=name, fact_table=self.repo, source_documents=resolver
+        )
+
+    def test_ingestor_resolves_document_once_per_celex(self):
+        resolver = SourceDocumentResolver(self._lookup)
+        fines = self._ingestor("fines", resolver)
+        courts = self._ingestor("court_list", resolver)
+        fines.save_fact("CELEX-32002D0180", ["a"])
+        courts.save_fact("CELEX-32002D0180", ["b"])
+        fines.save_fact("CELEX-32002D0180", ["c"])
+        self.assertEqual(self.calls, ["CELEX-32002D0180"])
+        for call in self.repo.upsert_fact.call_args_list:
+            self.assertEqual(call.kwargs["document_id"], "CELEX-32002D0180_EN")
+
+    def test_missing_registry_lookup_writes_null(self):
+        """A decision not registered yet writes NULL; the fact is still saved."""
+        ingestor = self._ingestor("fines", SourceDocumentResolver(self._lookup))
+        ingestor.save_fact("CELEX-UNREGISTERED", ["a"])
+        self.assertIsNone(self.repo.upsert_fact.call_args.kwargs["document_id"])
+
+    def test_lookup_error_writes_null(self):
+        def failing(decision_id: str) -> str | None:
+            raise RuntimeError("relation document_registry does not exist")
+
+        ingestor = self._ingestor("fines", SourceDocumentResolver(failing))
+        with self.assertLogs("pipelines.rag.pgvector.source_document_resolver", "WARNING"):
+            ingestor.save_fact("CELEX-32002D0180", ["a"])
+        self.assertIsNone(self.repo.upsert_fact.call_args.kwargs["document_id"])
+
+    def test_without_resolver_writes_null(self):
+        self._ingestor("fines", None).save_fact("CELEX-32002D0180", ["a"])
+        self.assertIsNone(self.repo.upsert_fact.call_args.kwargs["document_id"])
 
 
 if __name__ == '__main__':

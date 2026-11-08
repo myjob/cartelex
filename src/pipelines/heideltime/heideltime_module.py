@@ -26,12 +26,31 @@ from pipelines.agent_dspy.dspy_protocols import (
     SQLFactStore,
 )
 from pipelines.agent_dspy.dspy_signature import (
+    HeidelTimeCriticalEvent,
     HeidelTimeEventAggregateSignature,
     HeidelTimeEventSignature,
     HeideltimeCartelPeriodSignature,
+    HeideltimeConductEventsSignature,
 )
 from pipelines.agent_dspy.fact_extractor_param import FactExtractorParamVO
+from pipelines.agent_dspy.universal_modules import (
+    _check_context_token_limit,
+    _get_tiktoken_enc,
+)
+from pipelines.heideltime.event_dates import parse_partial_date
+from pipelines.heideltime.event_digest import (
+    EventLine,
+    digest_events,
+    render_digest,
+    split_batches,
+)
 from pipelines.heideltime.extract_heideltime import HeidelTime
+from pipelines.heideltime.period_inheritance import (
+    INHERITANCE_METHOD,
+    InheritanceBasis,
+    InheritedPeriod,
+    PeriodInheritor,
+)
 from pipelines.rag.pgvector.heideltime_ingestor import HeidelTimeIngestor
 from tools.PipelineFactIngestor import LineageSourceVO
 
@@ -445,26 +464,92 @@ class HeidelTimeEventModule(dspy.Module):
         return sources
 
 
+def _count_tokens(text_value: str) -> int:
+    """Count prompt tokens with the same encoder as the context guard."""
+    return len(_get_tiktoken_enc().encode(text_value))
+
+
+def _load_digest(sql_store: SQLFactStore, celex_id: str) -> list[EventLine]:
+    """Return the digest of the latest ``heideltime_event`` fact, or ``[]``."""
+    event_facts = sql_store.select_fact4celex(celex_id, "heideltime_event")
+    if not event_facts or not event_facts[-1].value_json:
+        return []
+    return digest_events(event_facts[-1].value_json)
+
+
+def _batches(lines: list[EventLine]) -> list[list[EventLine]]:
+    """Split a digest into prompt batches under ``HEIDELTIME_AGG_BATCH_TOKENS``."""
+    return split_batches(lines, settings.HEIDELTIME_AGG_BATCH_TOKENS, _count_tokens)
+
+
+def _ask(predictor: dspy.Module, lines: list[EventLine], identifier: str):
+    """Send rendered events to ``predictor`` behind the prompt-token guard.
+
+    Raises:
+        ValueError: When the rendered prompt exceeds
+            ``settings.OLLAMA_LLM_INFERENCE_PROMPT_TOKEN_LIMIT``.
+    """
+    prompt = render_digest(lines)
+    _check_context_token_limit(prompt, identifier)
+    return predictor(heideltime_event_result=prompt).output
+
+
+def _as_lines(events: list[HeidelTimeCriticalEvent]) -> list[EventLine]:
+    """Turn LLM-selected events back into digest lines for a reduce prompt."""
+    return [EventLine(date=e.event, actor=e.actor, predicate=e.predicate_object) for e in events]
+
+
+def _bracket(events: list[HeidelTimeCriticalEvent]) -> list[HeidelTimeCriticalEvent]:
+    """Keep only the earliest and the latest validly dated event.
+
+    The conduct step is asked for at most two events per batch, but a model
+    that copies the batch back would unbound the period prompt again (canary
+    20261104: ~6.5k output tokens per batch, 150s timeouts). The period only
+    needs the outer conduct dates, so the cap is enforced here as well.
+    """
+    dated = [(parsed.first_day, e) for e in events if (parsed := parse_partial_date(e.event))]
+    if not dated:
+        return []
+    dated.sort(key=lambda item: item[0])
+    first, last = dated[0][1], dated[-1][1]
+    return [first] if first is last else [first, last]
+
+
 class HeidelTimeEventAggregateModule(dspy.Module):
-    """Aggregate ``heideltime_event`` rows into the 1-2 most critical events.
+    """Aggregate ``heideltime_event`` rows into the case's critical events.
 
-    Reads the persisted ``heideltime_event`` JSON produced by
-    :class:`HeidelTimeEventModule`, sends the raw payload to the LLM for
-    critical-event filtering/deduplication, and returns rows formatted for this
-    markdown table:
+    Reads the persisted ``heideltime_event`` fact as a compact digest (real,
+    validly dated events, one line each) and asks the LLM for up to 12
+    critical events spanning the whole case. A digest above
+    ``settings.HEIDELTIME_AGG_BATCH_TOKENS`` is map-reduced: the critical
+    events of each date-ordered batch, then one selection over all batch
+    candidates, so the earliest conduct and the final outcome both reach the
+    last prompt (#186, #224). Every prompt passes the context-token guard.
 
-    ``| EVENT | ACTOR | PREDICATE OBJECT |``
+    Rows formatted for: ``| EVENT | ACTOR | PREDICATE OBJECT |``
 
     pipeline: heideltime_event_agg
     """
 
     def __init__(self, sql_store: SQLFactStore) -> None:
+        """Inject the fact store and build the aggregation predictor."""
         super().__init__()
         self.sql_store = sql_store
         self.aggregate = dspy.ChainOfThought(HeidelTimeEventAggregateSignature)
 
     def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
-        """Return the most critical aggregated HeidelTime events for a CELEX document."""
+        """Return the most critical aggregated HeidelTime events for a CELEX document.
+
+        Args:
+            params: Extraction parameters; ``celex_id`` selects the events.
+
+        Returns:
+            dspy.Prediction: ``output`` holds the chronologically sorted rows,
+            empty when the document has no real dated event.
+
+        Raises:
+            ValueError: When a prompt exceeds the context-token limit.
+        """
         if not params.force_override:
             facts = self.sql_store.select_fact4celex(
                 params.celex_id, params.target_fact_name
@@ -474,21 +559,33 @@ class HeidelTimeEventAggregateModule(dspy.Module):
                     output=FactOutput(items=facts[-1].value_json, source="sql")
                 )
 
-        event_facts = self.sql_store.select_fact4celex(
-            params.celex_id, "heideltime_event"
-        )
-        if not event_facts or not (event_source := event_facts[-1].value_json):
-            logger.info("No heideltime_event fact found for CELEX %s.", params.celex_id)
+        lines = _load_digest(self.sql_store, params.celex_id)
+        if not lines:
+            logger.info("No dated heideltime_event rows for CELEX %s.", params.celex_id)
             return dspy.Prediction(output=FactOutput(items=[], source="none"))
 
-        pred = self.aggregate(heideltime_event_result=str(event_source))
+        batches = _batches(lines)
+        if len(batches) == 1:
+            events = _ask(self.aggregate, lines, params.celex_id).events
+        else:
+            logger.info(
+                "heideltime_event_agg %s: map-reduce over %d batches (%d events)",
+                params.celex_id, len(batches), len(lines),
+            )
+            candidates = [
+                event
+                for batch in batches
+                for event in _ask(self.aggregate, batch, params.celex_id).events
+            ]
+            events = _ask(self.aggregate, _as_lines(candidates), params.celex_id).events
+
         items = [
             {
                 "event": ev.event,
                 "actor": ev.actor,
                 "predicate object": ev.predicate_object,
             }
-            for ev in pred.output.events
+            for ev in events
         ]
         items.sort(key=self._event_sort_key)
 
@@ -514,20 +611,52 @@ class HeidelTimeEventAggregateModule(dspy.Module):
 
 class HeideltimeCartelPeriodModule(dspy.Module):
     """DSPy pipeline to extract the cartel period from heideltime_event.
-    
-    Reads the persisted ``heideltime_event`` JSON and extracts the global
-    start and end dates of the infringement.
-    
+
+    Reads the persisted ``heideltime_event`` fact as a compact digest and asks
+    for the infringement's global start and end. A digest above
+    ``settings.HEIDELTIME_AGG_BATCH_TOKENS`` is map-reduced: each date-ordered
+    batch is reduced to its earliest and latest conduct event, and the period
+    is decided over those alone, so Commission and court steps -- the dates the model latched
+    onto as the "end" of oversized documents (#188) -- never reach the period
+    prompt. Every prompt passes the context-token guard.
+
+    When the events yield no period, a follow-up (amending / re-adopting)
+    decision inherits the period of the original decision of its case via the
+    injected :class:`PeriodInheritor`; the borrowed value is linked
+    ``derived_from`` the donor's fact, so the evidence verifier treats it as a
+    derived fact.
+
     pipeline: heideltime_cartel_period
     """
 
-    def __init__(self, sql_store: SQLFactStore) -> None:
+    def __init__(self, sql_store: SQLFactStore, inheritor: PeriodInheritor) -> None:
+        """Inject the stores and build the conduct and period predictors.
+
+        Args:
+            sql_store: Reads the persisted ``heideltime_event`` digest.
+            inheritor: Resolves the original decision's period for a
+                follow-up decision without one of its own.
+        """
         super().__init__()
         self.sql_store = sql_store
+        self.inheritor = inheritor
+        self.select_conduct = dspy.ChainOfThought(HeideltimeConductEventsSignature)
         self.extract_period = dspy.ChainOfThought(HeideltimeCartelPeriodSignature)
 
     def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
-        """Return the minimal start and maximal end date in the specified format."""
+        """Return the cartel period of a CELEX document as ``START : END``.
+
+        Args:
+            params: Extraction parameters; ``celex_id`` selects the events.
+
+        Returns:
+            dspy.Prediction: ``output`` holds one ``date_range`` row, or no
+            rows when neither the events nor an original decision of the
+            same case yield a period.
+
+        Raises:
+            ValueError: When a prompt exceeds the context-token limit.
+        """
         if not params.force_override:
             facts = self.sql_store.select_fact4celex(
                 params.celex_id, params.target_fact_name
@@ -537,21 +666,30 @@ class HeideltimeCartelPeriodModule(dspy.Module):
                     output=FactOutput(items=facts[-1].value_json, source="sql")
                 )
 
-        event_facts = self.sql_store.select_fact4celex(
-            params.celex_id, "heideltime_event"
-        )
-        if not event_facts or not (event_source := event_facts[-1].value_json):
-            logger.info("No heideltime_event fact found for CELEX %s.", params.celex_id)
-            return dspy.Prediction(output=FactOutput(items=[], source="none"))
+        lines = _load_digest(self.sql_store, params.celex_id)
+        batches = _batches(lines)
+        if len(batches) > 1:
+            logger.info(
+                "heideltime_cartel_period %s: conduct selection over %d batches (%d events)",
+                params.celex_id, len(batches), len(lines),
+            )
+            lines = _as_lines(
+                [
+                    event
+                    for batch in batches
+                    for event in _bracket(_ask(self.select_conduct, batch, params.celex_id).events)
+                ]
+            )
+        if not lines:
+            logger.info("No dated conduct events for CELEX %s.", params.celex_id)
+            return self._inherit(params)
 
-        pred = self.extract_period(heideltime_event_result=str(event_source))
-
-        date_range = pred.output.date_range
+        date_range = _ask(self.extract_period, lines, params.celex_id).date_range
         if not date_range:
             logger.info(
                 "No cartel period date range extracted for CELEX %s.", params.celex_id
             )
-            return dspy.Prediction(output=FactOutput(items=[], source="none"))
+            return self._inherit(params)
 
         return dspy.Prediction(
             output=FactOutput(
@@ -559,3 +697,57 @@ class HeideltimeCartelPeriodModule(dspy.Module):
                 source="heideltime_cartel_period",
             )
         )
+
+    def _inherit(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Return the original decision's period, or the empty answer.
+
+        Args:
+            params: Extraction parameters of the decision without a period.
+
+        Returns:
+            dspy.Prediction: one inherited ``date_range`` row with a
+            ``derived_from`` lineage source per donor, or no rows.
+        """
+        inherited = self.inheritor.find(params.celex_id, params.target_fact_name)
+        if inherited is None:
+            return dspy.Prediction(output=FactOutput(items=[], source="none"))
+        return dspy.Prediction(
+            output=FactOutput(
+                items=[{"date_range": inherited.date_range}],
+                source=INHERITANCE_METHOD,
+                lineage_sources=self._donor_lineage(params, inherited),
+            )
+        )
+
+    def _donor_lineage(
+        self, params: FactExtractorParamVO, inherited: InheritedPeriod
+    ) -> list[LineageSourceVO]:
+        """Cite each donor's period fact as the source of the inherited value.
+
+        Args:
+            params: Extraction parameters supplying the fact name and pipeline.
+            inherited: The chosen period and its donors.
+
+        Returns:
+            One ``fact`` source per donor; a union is linked at the lower
+            ``settings.PERIOD_INHERITANCE_UNION_TRUST_RANK``.
+        """
+        trust_rank = (
+            settings.PERIOD_INHERITANCE_UNION_TRUST_RANK
+            if inherited.basis is InheritanceBasis.SIBLING_UNION
+            else None
+        )
+        return [
+            LineageSourceVO(
+                source_type="fact",
+                celex_id=donor.celex_id,
+                source_fact_id=donor.fact_id,
+                description=f"fact:{params.target_fact_name}",
+                extraction_method=INHERITANCE_METHOD,
+                relation_type="derived_from",
+                pipeline=params.pipeline,
+                dspy_module=self.__class__.__name__,
+                trust_rank=trust_rank,
+            )
+            for donor in inherited.donors
+        ]

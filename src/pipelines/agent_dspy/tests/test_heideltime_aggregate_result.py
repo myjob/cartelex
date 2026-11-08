@@ -18,8 +18,11 @@ from pydantic import ValidationError
 from pipelines.agent_dspy.dspy_signature import (
     HeidelTimeCriticalEvent,
     HeidelTimeCriticalEventResult,
+    HeidelTimeEvent,
     HeidelTimeEventAggregateSignature,
     HeideltimeCartelPeriodResult,
+    HeideltimeCartelPeriodSignature,
+    HeideltimeConductEventsSignature,
 )
 
 
@@ -86,6 +89,29 @@ class TestHeidelTimeEventAggregateSchema(unittest.TestCase):
         self.assertIn("EARLIEST conduct event", HeidelTimeEventAggregateSignature.__doc__)
         self.assertIn("12", output_desc.json_schema_extra["desc"])
         self.assertIn("earliest conduct event", output_desc.json_schema_extra["desc"])
+
+
+class TestConductEventsSchema(unittest.TestCase):
+    """The conduct-selection output must not ask for the final outcome (#188).
+
+    The JSON schema the LLM sees wins over the instruction text: an output
+    envelope that says "always including the final outcome" or caps at 12
+    would put the decision date back into the period prompt.
+    """
+
+    def test_output_schema_excludes_final_outcome_and_cap(self) -> None:
+        annotation = HeideltimeConductEventsSignature.output_fields["output"].annotation
+        description = annotation.model_fields["events"].description.lower()
+        self.assertNotIn("final outcome", description)
+        self.assertNotIn("12", description)
+        self.assertIn("conduct", description)
+        self.assertIn("earliest", description)
+        self.assertIn("latest", description)
+
+    def test_bare_list_answer_is_still_accepted(self) -> None:
+        annotation = HeideltimeConductEventsSignature.output_fields["output"].annotation
+        result = annotation.model_validate([{"event": "1994", "actor": "A", "predicate_object": "met"}, "event"])
+        self.assertEqual([e.event for e in result.events], ["1994"])
 
 
 class TestHeidelTimeCriticalEvent(unittest.TestCase):
@@ -178,6 +204,21 @@ class TestPartialEventDates(unittest.TestCase):
 
 class TestHeideltimeCartelPeriodResult(unittest.TestCase):
     """The period keeps the precision the decision states -- no more, no less."""
+
+    def test_null_output_means_no_period(self) -> None:
+        """A model answering ``output: null`` states "no period", not a crash.
+
+        Corpus run 20261105: CELEX-31987D0014 and CELEX-32002D0746 failed with
+        "Input should be a valid dictionary" because the whole envelope was null.
+        """
+        result = HeideltimeCartelPeriodResult.model_validate(None)
+        self.assertIsNone(result.date_range)
+
+    def test_output_field_puts_null_on_date_range(self) -> None:
+        """The output-field description must not invite a null envelope."""
+        desc = HeideltimeCartelPeriodSignature.output_fields["output"].json_schema_extra["desc"]
+        self.assertNotIn("or null when", desc)
+        self.assertIn("date_range", desc)
 
     def test_full_precision_range_is_preserved(self) -> None:
         """The common case must be untouched."""
@@ -277,6 +318,39 @@ class TestHeideltimeCartelPeriodResult(unittest.TestCase):
         """A half-answer is absence, not a range against a missing bound."""
         result = HeideltimeCartelPeriodResult.model_validate({"start": "1994"})
         self.assertIsNone(result.date_range)
+
+
+    def test_impossible_calendar_bound_becomes_none(self) -> None:
+        """A shaped-but-impossible side (Feb 30, month 00) is no period."""
+        for value in ("1994-02-30 : 1999", "1994 : 2011-00-27"):
+            with self.subTest(value=value):
+                result = HeideltimeCartelPeriodResult(date_range=value)
+                self.assertIsNone(result.date_range)
+
+    def test_out_of_range_year_bound_becomes_none(self) -> None:
+        """HeidelTime's far-out years (#187) never become a cartel bound."""
+        result = HeideltimeCartelPeriodResult(date_range="0010-01-02 : 1999")
+        self.assertIsNone(result.date_range)
+
+
+class TestHeidelTimeEventDate(unittest.TestCase):
+    """``heideltime_event`` rows never store an impossible date (#187, #190)."""
+
+    def _event(self, event_date: str) -> HeidelTimeEvent:
+        return HeidelTimeEvent(event_date=event_date, actor="Akzo", predicate_object="met")
+
+    def test_valid_dates_are_kept_at_their_precision(self) -> None:
+        for value in ("1994-03-15", "1994-03", "1994"):
+            with self.subTest(value=value):
+                self.assertEqual(self._event(value).event_date, value)
+
+    def test_impossible_dates_become_unknown(self) -> None:
+        for value in ("2011-00-27", "0010-01-02", "2202-03-11", "1994-02-30"):
+            with self.subTest(value=value):
+                self.assertEqual(self._event(value).event_date, "unknown")
+
+    def test_null_sentinel_still_becomes_unknown(self) -> None:
+        self.assertEqual(self._event("NA").event_date, "unknown")
 
 
 if __name__ == "__main__":

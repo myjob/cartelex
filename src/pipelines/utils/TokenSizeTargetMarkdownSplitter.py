@@ -13,7 +13,18 @@ class TokenTargetMarkdownSplitter:
         headers_to_split_on: List[tuple],
         chunk_size: int = 500,
         model_name: str = "gpt-3.5-turbo",
-    ):
+        separators: list[str] | None = None,
+    ) -> None:
+        """Build the splitter.
+
+        Args:
+            headers_to_split_on: (markdown prefix, metadata key) pairs.
+            chunk_size: Target chunk size in tiktoken tokens.
+            model_name: tiktoken model whose encoding measures tokens.
+            separators: Separators of the recursive fallback for a block above
+                the chunk size, tried in order; kept at the end of a chunk.
+                None keeps LangChain's default (paragraph, line, space, char).
+        """
         self.chunk_size = chunk_size
         self.tokenizer = tiktoken.encoding_for_model(model_name)
 
@@ -22,8 +33,12 @@ class TokenTargetMarkdownSplitter:
         )
 
         # Recursive splitter for breaking down merged blocks that exceed limit
+        fallback_kwargs: dict = {}
+        if separators is not None:
+            fallback_kwargs = {"separators": separators, "keep_separator": "end"}
         self.recursive_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-            model_name=model_name, chunk_size=chunk_size, chunk_overlap=0
+            model_name=model_name, chunk_size=chunk_size, chunk_overlap=0,
+            **fallback_kwargs,
         )
 
     def _token_len(self, text: str) -> int:

@@ -18,6 +18,7 @@ from pydantic import ValidationError as PydValidationError
 from sqlalchemy import Engine, text
 from sqlalchemy.dialects import postgresql
 
+from pipelines.rag.pgvector.fact_repository import FactRepository
 from pipelines.rag.pgvector.lineage_repository import (
     FactProvenanceRow,
     LineageRepository,
@@ -483,6 +484,94 @@ class TestRetractFactLinksIntegration(unittest.TestCase):
         )
         self.assertEqual(removed, 2)
         self.assertEqual(self._linked_sources(), {foreign})
+
+
+class TestCrossDocumentFactLinksIntegration(unittest.TestCase):
+    """Cross-document fact edges (inherited periods) on a live database.
+
+    A target fact in one document is derived from a donor fact in another and
+    from a same-document predecessor; only the donor edge is cross-document.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = LineageRepository(DATABASE_URL)
+        cls.facts = FactRepository(DATABASE_URL)
+        cls.engine = make_engine(DATABASE_URL)
+
+    def setUp(self):
+        """Create target, same-document predecessor and donor, all linked."""
+        self.target_celex = f"TEST_TARGET_{uuid.uuid4()}"
+        self.donor_celex = f"TEST_DONOR_{uuid.uuid4()}"
+        with self.engine.begin() as conn:
+            self.target_id = _make_fact(conn, self.target_celex)
+            self.sibling_id = _make_fact(conn, self.target_celex)
+            self.donor_id = _make_fact(conn, self.donor_celex)
+            # _make_fact leaves created_at NULL (the ORM, not the DB, stamps it).
+            conn.execute(
+                text("UPDATE celex_facts.facts SET created_at = CASE WHEN id = :t"
+                     " THEN now() ELSE now() - interval '1 hour' END"
+                     " WHERE id IN (:t, :a, :b)"),
+                {"t": str(self.target_id), "a": str(self.donor_id), "b": str(self.sibling_id)},
+            )
+        self.donor_source = self.repo.register_fact_source(self.donor_celex, self.donor_id)
+        self.sibling_source = self.repo.register_fact_source(self.target_celex, self.sibling_id)
+        for source_id, method in ((self.donor_source, "period_inheritance"),
+                                  (self.sibling_source, "heideltime_cartel_period")):
+            self.repo.link_fact_to_source(
+                fact_id=self.target_id, source_id=source_id, extraction_method=method,
+                relation_type="derived_from", source_type="fact",
+            )
+        with self.engine.connect() as conn:
+            self.target_name = conn.execute(
+                text("SELECT name FROM celex_facts.facts WHERE id = :id"),
+                {"id": str(self.target_id)},
+            ).scalar_one()
+
+    def tearDown(self):
+        """Delete the target first: its links block the donor's registry cascade."""
+        _purge_lineage_rows(
+            self.engine, fact_ids=[self.target_id, self.sibling_id, self.donor_id]
+        )
+
+    def _touch(self, fact_id: UUID) -> None:
+        with self.engine.begin() as conn:
+            conn.execute(
+                text("UPDATE celex_facts.facts SET created_at = now() + interval '1 minute'"
+                     " WHERE id = :id"),
+                {"id": str(fact_id)},
+            )
+
+    def _linked_sources(self) -> set[UUID]:
+        return {link.source_id for link in self.repo.get_sources_for_fact(self.target_id)}
+
+    def test_fresh_target_has_no_newer_source(self):
+        self.assertEqual(
+            self.facts.select_newer_cross_document_sources(self.target_celex, self.target_name), []
+        )
+
+    def test_re_extracted_donor_makes_target_stale(self):
+        self._touch(self.donor_id)
+        self.assertEqual(
+            self.facts.select_newer_cross_document_sources(self.target_celex, self.target_name),
+            [self.donor_celex],
+        )
+
+    def test_newer_same_document_predecessor_is_ignored(self):
+        self._touch(self.sibling_id)
+        self.assertEqual(
+            self.facts.select_newer_cross_document_sources(self.target_celex, self.target_name), []
+        )
+
+    def test_retract_drops_unkept_donor_and_keeps_same_document_edge(self):
+        removed = self.repo.retract_cross_document_fact_links(self.target_id, [])
+        self.assertEqual(removed, 1)
+        self.assertEqual(self._linked_sources(), {self.sibling_source})
+
+    def test_retract_keeps_a_donor_linked_again(self):
+        removed = self.repo.retract_cross_document_fact_links(self.target_id, [self.donor_source])
+        self.assertEqual(removed, 0)
+        self.assertEqual(self._linked_sources(), {self.donor_source, self.sibling_source})
 
 
 class TestSourceRegistrationIntegration(unittest.TestCase):

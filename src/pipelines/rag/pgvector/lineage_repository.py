@@ -591,6 +591,55 @@ class LineageRepository:
         )
         return removed
 
+    def retract_cross_document_fact_links(
+        self,
+        fact_id: UUID,
+        keep_source_ids: list[UUID],
+        session: Session | None = None,
+    ) -> int:
+        """Delete a fact's links to fact sources of other documents not kept.
+
+        A fact copied from another decision (e.g. an inherited cartel period)
+        owns its cross-document edges only through its latest extraction:
+        when a re-run takes a different donor, finds its own value or none,
+        the earlier donor edge must go, or the verifier keeps treating the
+        fact as derived from it. ``link_fact_to_source`` only upserts, so the
+        writer calls this after linking the current sources. Same-document
+        fact edges and every non-fact edge are untouched.
+
+        Parameters
+        ----------
+        fact_id:
+            UUID of the ``celex_facts.facts`` row just written.
+        keep_source_ids:
+            Registry ids linked by the current extraction; their links stay.
+        session:
+            Optional session to enroll in for atomic multi-step writes.
+
+        Returns
+        -------
+        int
+            Number of links deleted.
+        """
+        stmt = text("""
+            DELETE FROM celex_facts.fact_source_link l
+             USING celex_facts.fact_source_registry r,
+                   celex_facts.facts s, celex_facts.facts f
+             WHERE l.fact_id = :fact_id
+               AND r.source_id = l.source_id AND r.source_type = 'fact'
+               AND s.id = r.source_fact_id AND f.id = l.fact_id
+               AND s.celex_id <> f.celex_id
+               AND NOT (l.source_id = ANY(CAST(:keep AS uuid[])))
+        """)
+        params = {"fact_id": fact_id, "keep": [str(sid) for sid in keep_source_ids]}
+        with self._session_scope(session) as active_session:
+            removed = active_session.execute(stmt, params).rowcount
+        if removed:
+            logger.info(
+                "Retracted %d cross-document fact link(s) for fact %s", removed, fact_id
+            )
+        return removed
+
     def flag_conflict(
         self,
         fact_id: UUID,

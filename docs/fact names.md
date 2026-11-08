@@ -37,7 +37,7 @@ market_oligopoly
 leniency_case_match
 cartel_period
 heideltime_event_agg
-eu_commisssion_decision_date
+eu_commission_decision_date
 infringement_subcategory_horizontal_restraints_category
 case_summary
 companies_industry

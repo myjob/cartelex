@@ -119,7 +119,7 @@ _LOG_INTERVAL = 100  # log progress every N documents
 
 def _decision_date_value(facts_by_name: dict[str, dict[str, Any]]) -> str | None:
     """Return the raw decision-date value for treaty-era resolution, if present."""
-    fact = facts_by_name.get("eu_commisssion_decision_date")
+    fact = facts_by_name.get("eu_commission_decision_date")
     if fact is None:
         return None
     return fact.get("value_md") or fact.get("value_json")

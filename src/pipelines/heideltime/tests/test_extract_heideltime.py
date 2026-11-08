@@ -1363,7 +1363,12 @@ class TestHeidelTimeEventAggregateModule(unittest.TestCase):
         passed_source = mock_cot.return_value.call_args.kwargs[
             "heideltime_event_result"
         ]
-        self.assertEqual(passed_source, event_fact.value_json)
+        # The prompt carries the compact digest, not the raw serialised fact (#186).
+        self.assertEqual(
+            passed_source,
+            "1998-01-01 | Producers | created cartel arrangement\n"
+            "2007-02-21 | Commission | adopted decision imposing fines",
+        )
 
     def test_event_sort_key_keeps_unknown_dates_last(self):
         items = [

@@ -232,7 +232,7 @@ Snapshot queried from the live DB on 2026-09-13. The ledger was last written by 
 | no surface found in book | 302 | genuinely absent or other spelling |
 | facts in the 341 CELEX | 18,715 | |
 | ledger rows | 18,453 | |
-| facts without a ledger row | 262 | all created after the run (`heideltime_*` x3, `eu_commisssion_decision_date`) |
+| facts without a ledger row | 262 | all created after the run (`heideltime_*` x3, `eu_commission_decision_date`) |
 
 ### 3.2 Verdicts
 
@@ -266,7 +266,7 @@ The most corroborated fact names are `infringement_concept` 196, `exemption_case
 | `infringement_subcategory_vertical_restraints` | 44 | 3 |
 | `infringement_subcategory_horizontal_restraints` | 39 | 7 |
 | `infringement_category_abuse_of_dominance` | 23 | 3 |
-| `eu_commisssion_decision_date` | – | 17 |
+| `eu_commission_decision_date` | – | 17 |
 | `market_outside_eu` | – | 3 |
 | `infringement_category_member_states` | 2 | – |
 | 5 other landmark facts | – | 1 each |
@@ -321,7 +321,7 @@ The book's level-1 chapters map almost one to one onto the `hor_vert_lic_joint` 
 This is the same anchor-drift defect that was fixed for the ledger on 2026-08-04, still present in the lineage tables.
 *Status 2026-09-13: fixed in code* (see §2.2). All 3,939 existing book links are `extraction_method='book_cross_check'`, and every corroborated ledger row still has its anchor link. The existing data was healed on 2026-09-13 by the 20260913 section of `migrate_fact2book_checks.sql`, applied with a post-condition check: 1,432 links were deleted, leaving 2,507 links for 2,507 corroborated ledger rows and no fact with more than one book link.
 
-**F-5 Case-specific scalar facts are judged against other cases' text.** The candidate pool is every chunk of the chapter, and a landmark chapter covers several cases. All 17 landmark `eu_commisssion_decision_date` mismatches read like "the chunk states the decision date as 28 July 1978, which contradicts 2001-12-02": the reranker picked a date paragraph and the judge was not told which case the paragraph belongs to. Facts that identify a specific case (dates, fines, parties) should only use chunks that contain the case surface, or the judge should receive `case_id`.
+**F-5 Case-specific scalar facts are judged against other cases' text.** The candidate pool is every chunk of the chapter, and a landmark chapter covers several cases. All 17 landmark `eu_commission_decision_date` mismatches read like "the chunk states the decision date as 28 July 1978, which contradicts 2001-12-02": the reranker picked a date paragraph and the judge was not told which case the paragraph belongs to. Facts that identify a specific case (dates, fines, parties) should only use chunks that contain the case surface, or the judge should receive `case_id`.
 
 *Status 2026-09-17 (F-5): fixed in code* -- two candidate pools and the case-surface guard (§1.4), plus `case_reference` on the judge (§1.5). The ledger changes on the `book-20260917` run.
 

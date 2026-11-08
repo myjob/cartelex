@@ -311,6 +311,59 @@ def export_report_to_excel(
     # log.info("Report saved to: %s", filepath)
     return filepath
 
+def create_celex_fact_report(output_dir: str, db_url: str = DATABASE_URL) -> str | None:
+    """Fetch all report frames from the database and write the Excel report.
+
+    Args:
+        output_dir: Directory the workbook is written to (created if missing).
+        db_url: The database URL connection string.
+
+    Returns:
+        Path of the written workbook, or ``None`` when every frame was empty.
+
+    Raises:
+        Exception: Any database or file error, propagated to the caller.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+
+    log.info("Fetching pivoted facts from the database...")
+    df_pivoted = fetch_and_pivot_celex_facts(db_url=db_url)
+    log.info("Pivoted data: %d CELEX documents.", df_pivoted.height)
+
+    log.info("Fetching markdown facts from the database...")
+    df_markdown = fetch_celex_facts_markdown(db_url=db_url)
+    log.info("Markdown data: %d rows.", df_markdown.height)
+
+    log.info("Converting markdown facts to plain text...")
+    df_plaintext = convert_markdown_to_plaintext(df_markdown)
+    log.info("Plain-text data: %d rows.", df_plaintext.height)
+
+    log.info("Fetching distinct fact names from the database...")
+    df_fact_names = fetch_distinct_fact_names(db_url=db_url)
+    log.info("Distinct fact names: %d rows.", df_fact_names.height)
+
+    log.info("Fetching ingestion errors from the audit trail...")
+    df_ingestion_errors = fetch_ingestion_errors(db_url=db_url)
+    log.info("Ingestion errors: %d rows.", df_ingestion_errors.height)
+
+    log.info("Fetching ingestion error pivot from the audit trail...")
+    df_ingestion_error_pivot = fetch_ingestion_error_pivot(db_url=db_url)
+    log.info("Ingestion error pivot: %d rows.", df_ingestion_error_pivot.height)
+
+    filepath = export_report_to_excel(
+        df_pivoted=df_pivoted,
+        df_markdown=df_markdown,
+        df_plaintext=df_plaintext,
+        df_fact_names=df_fact_names,
+        df_ingestion_errors=df_ingestion_errors,
+        df_ingestion_error_pivot=df_ingestion_error_pivot,
+        output_dir=output_dir,
+    )
+    if filepath:
+        log.info("Report written to: %s", filepath)
+    return filepath
+
+
 def main() -> None:
     """Entry point: fetch facts from the database and write the Excel report."""
     log.info("Starting CELEX facts reporting...")
@@ -320,47 +373,10 @@ def main() -> None:
         return
 
     try:
-        output_directory = settings.REPORT_PATH
-        os.makedirs(output_directory, exist_ok=True)
-
-        log.info("Fetching pivoted facts from the database...")
-        df_pivoted = fetch_and_pivot_celex_facts(db_url=DATABASE_URL)
-        log.info("Pivoted data: %d CELEX documents.", df_pivoted.height)
-
-        log.info("Fetching markdown facts from the database...")
-        df_markdown = fetch_celex_facts_markdown(db_url=DATABASE_URL)
-        log.info("Markdown data: %d rows.", df_markdown.height)
-
-        log.info("Converting markdown facts to plain text...")
-        df_plaintext = convert_markdown_to_plaintext(df_markdown)
-        log.info("Plain-text data: %d rows.", df_plaintext.height)
-
-        log.info("Fetching distinct fact names from the database...")
-        df_fact_names = fetch_distinct_fact_names(db_url=DATABASE_URL)
-        log.info("Distinct fact names: %d rows.", df_fact_names.height)
-
-        log.info("Fetching ingestion errors from the audit trail...")
-        df_ingestion_errors = fetch_ingestion_errors(db_url=DATABASE_URL)
-        log.info("Ingestion errors: %d rows.", df_ingestion_errors.height)
-
-        log.info("Fetching ingestion error pivot from the audit trail...")
-        df_ingestion_error_pivot = fetch_ingestion_error_pivot(db_url=DATABASE_URL)
-        log.info("Ingestion error pivot: %d rows.", df_ingestion_error_pivot.height)
-
-        filepath = export_report_to_excel(
-            df_pivoted=df_pivoted,
-            df_markdown=df_markdown,
-            df_plaintext=df_plaintext,
-            df_fact_names=df_fact_names,
-            df_ingestion_errors=df_ingestion_errors,
-            df_ingestion_error_pivot=df_ingestion_error_pivot,
-            output_dir=output_directory,
-        )
-        if filepath:
-            log.info("Report written to: %s", filepath)
-
+        create_celex_fact_report(output_dir=settings.REPORT_PATH, db_url=DATABASE_URL)
     except Exception as e:
         log.exception("An error occurred during reporting: %s", e)
+
 
 if __name__ == "__main__":
     main()

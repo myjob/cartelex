@@ -56,7 +56,7 @@ class TestInfringementConceptModule(unittest.TestCase):
         store = _FakeStore(
             {
                 "law_article_all_relevant": [_row("Article 101, Article 102")],
-                "eu_commisssion_decision_date": [_row("1988-12-21")],
+                "eu_commission_decision_date": [_row("1988-12-21")],
             }
         )
         module = InfringementConceptModule(sql_store=store)
@@ -75,7 +75,7 @@ class TestInfringementConceptModule(unittest.TestCase):
         eec_store = _FakeStore(
             {
                 "law_article_all_relevant": [_row("Article 86")],
-                "eu_commisssion_decision_date": [_row("NA")],
+                "eu_commission_decision_date": [_row("NA")],
             }
         )
         out = InfringementConceptModule(sql_store=eec_store).forward(
@@ -86,7 +86,7 @@ class TestInfringementConceptModule(unittest.TestCase):
         ec_store = _FakeStore(
             {
                 "law_article_all_relevant": [_row("Article 86")],
-                "eu_commisssion_decision_date": [_row("NA")],
+                "eu_commission_decision_date": [_row("NA")],
             }
         )
         out = InfringementConceptModule(sql_store=ec_store).forward(
@@ -99,7 +99,7 @@ class TestInfringementConceptModule(unittest.TestCase):
         store = _FakeStore(
             {
                 "law_article_all_relevant": [_row("Article 3")],
-                "eu_commisssion_decision_date": [_row("NA")],
+                "eu_commission_decision_date": [_row("NA")],
             }
         )
         out = InfringementConceptModule(sql_store=store).forward(

@@ -87,6 +87,18 @@ class TestClassifyChunkByRules(unittest.TestCase):
         text = "HAS  ADOPTED THE\nFOLLOWING DECISION:"
         self.assertIs(classify_chunk_by_rules(text, 40), SectionType.OPERATIVE)
 
+    def test_older_operative_marker_phrasings(self) -> None:
+        for marker in (
+            "HAS ISSUED THE FOLLOWING DECISION:",
+            "has made the\nfollowing decision:",
+            "HAS  GIVEN THE FOLLOWING ARRANGEMENT:",
+        ):
+            with self.subTest(marker=marker):
+                text = f"concluding recitals,\n\n{marker}\n\nArticle 1\n..."
+                self.assertIs(
+                    classify_chunk_by_rules(text, 40), SectionType.OPERATIVE
+                )
+
     def test_first_classifiable_heading(self) -> None:
         text = "# 3.4.4. FINAL AMOUNT OF THE FINES\nThe fines are set as follows."
         self.assertIs(classify_chunk_by_rules(text, 42), SectionType.FINES)

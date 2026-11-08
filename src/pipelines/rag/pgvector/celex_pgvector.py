@@ -27,7 +27,7 @@ import sqlalchemy
 from langchain_core.documents import Document
 from sqlalchemy import String, Integer, DateTime, select, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID, JSON
-from sqlalchemy.orm import relationship, Session, declarative_base
+from sqlalchemy.orm import deferred, relationship, Session, declarative_base
 from pgvector.sqlalchemy import Vector
 
 from langchain_postgres.vectorstores import (
@@ -35,7 +35,11 @@ from langchain_postgres.vectorstores import (
 )
 from sqlalchemy.dialects.postgresql import insert
 
+from pipelines.rag.pgvector.session import column_exists, warn_once
+
 logger = logging.getLogger(__name__)
+
+_LINEAGE_MIGRATION = "src/pipelines/rag/pgvector/migrate_document_lineage.sql"
 
 # Separate declarative base for LangChain vector-store models.
 # See module docstring for why this is distinct from models.Base.
@@ -152,6 +156,10 @@ class PgEmbeddingQwenStore(VectorBase):
     ingestion_timestamp = sqlalchemy.Column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+    # Source document (document_registry), added by migrate_document_lineage.sql.
+    # Deferred so no ORM SELECT names it (searches work before the migration);
+    # add_embeddings writes it only after probing that the column exists.
+    document_id = deferred(sqlalchemy.Column(String, nullable=True))
 
 
 class PgEmbeddingBookQwen3Store(VectorBase):
@@ -265,6 +273,12 @@ class CelexPGVector(PGVector):
     _PROMOTED_COLUMNS: tuple[str, ...] = (
         "doc_type", "token_count", "path", "chunk_hash", "doc_pos",
     )
+    #: Metadata key promoted to a lineage column of the same name, or None when
+    #: the store's table has none. Unlike ``_PROMOTED_COLUMNS`` it is never
+    #: kept in ``cmetadata`` and is written only once the column is probed.
+    _LINEAGE_COLUMN: str | None = None
+    #: Metadata key that carries the lineage value on every input chunk.
+    _LINEAGE_KEY: str = "document_id"
     #: Columns a metadata filter may address directly instead of via JSONB.
     _FILTER_COLUMNS: frozenset[str] = frozenset({
         "celex_id", "doc_type", "token_count", "path", "chunk_hash",
@@ -284,6 +298,12 @@ class CelexPGVector(PGVector):
         A chunk whose ``(_DEDUP_KEY_FIELD, chunk_hash)`` signature already
         exists in the collection is skipped rather than re-inserted; an id
         collision on a new chunk upserts the row.
+
+        The ``document_id`` metadata key is stripped from ``cmetadata`` and
+        written to ``_LINEAGE_COLUMN`` when the store has one and the column
+        exists (probed once per store; absence logs one warning per process
+        and the chunks are written without it). An id-collision upsert keeps
+        a stored ``document_id`` when the new one is NULL.
 
         Args:
             texts: Document text chunks.
@@ -311,10 +331,14 @@ class CelexPGVector(PGVector):
             if not collection:
                 raise ValueError("Collection not found")
 
+            lineage_key = self._LINEAGE_KEY
             input_records = [
                 {
                     "text": text,
-                    "metadata": metadata or {},
+                    "metadata": {
+                        k: v for k, v in (metadata or {}).items() if k != lineage_key
+                    },
+                    "document_id": (metadata or {}).get(lineage_key),
                     "embedding": embedding,
                     "id": id_,
                     "key": (metadata or {}).get(key_field),
@@ -336,6 +360,13 @@ class CelexPGVector(PGVector):
                     if row.chunk_hash:
                         existing_signatures.add((row[0], row.chunk_hash))
 
+            lineage_column = self._LINEAGE_COLUMN
+            write_lineage = (
+                lineage_column is not None
+                and any(r["document_id"] is not None for r in input_records)
+                and self._has_lineage_column(session)
+            )
+
             data = []
             skipped_count = 0
             for r in input_records:
@@ -356,6 +387,8 @@ class CelexPGVector(PGVector):
                     key_field: r["key"],
                 }
                 record.update({column: md.get(column) for column in self._PROMOTED_COLUMNS})
+                if write_lineage:
+                    record[lineage_column] = r["document_id"]
                 data.append(record)
 
             if skipped_count > 0:
@@ -367,15 +400,60 @@ class CelexPGVector(PGVector):
             if data:
                 stmt = insert(self.EmbeddingStore).values(data)
                 refreshed = ["embedding", "document", "cmetadata", key_field, *self._PROMOTED_COLUMNS]
+                set_ = {column: getattr(stmt.excluded, column) for column in refreshed}
+                if write_lineage:
+                    set_[lineage_column] = func.coalesce(
+                        getattr(stmt.excluded, lineage_column),
+                        getattr(self.EmbeddingStore, lineage_column),
+                    )
                 on_conflict_stmt = stmt.on_conflict_do_update(
-                    index_elements=["id"],
-                    set_={column: getattr(stmt.excluded, column) for column in refreshed},
+                    index_elements=["id"], set_=set_,
                 )
                 session.execute(on_conflict_stmt)
 
             session.commit()
 
         return ids_
+
+    def _has_lineage_column(self, session: Session) -> bool:
+        """Return whether ``_LINEAGE_COLUMN`` exists on the store's table.
+
+        Probed once per store instance, before anything is written in
+        ``session``. A failed probe rolls the session back, counts as absent
+        and logs the exception in one warning per process; a genuinely absent
+        column logs a separate one-time "missing" warning.
+
+        Args:
+            session: Open session used for the probe.
+
+        Returns:
+            True once ``migrate_document_lineage.sql`` has been applied.
+        """
+        cached = getattr(self, "_lineage_column_present", None)
+        if cached is not None:
+            return cached
+        table = self.EmbeddingStore.__tablename__
+        try:
+            present = column_exists(session, table, self._LINEAGE_COLUMN)
+        except Exception as exc:
+            # Nothing is written yet; clear an aborted transaction so the
+            # insert can still run.
+            session.rollback()
+            warn_once(
+                logger, f"{table}.{self._LINEAGE_COLUMN}.probe",
+                "%s.%s lineage probe failed, writing NULL: %s",
+                table, self._LINEAGE_COLUMN, exc,
+            )
+            self._lineage_column_present = False
+            return False
+        if not present:
+            warn_once(
+                logger, f"{table}.{self._LINEAGE_COLUMN}",
+                "Column %s.%s is missing; chunks are written without lineage. "
+                "Apply %s.", table, self._LINEAGE_COLUMN, _LINEAGE_MIGRATION,
+            )
+        self._lineage_column_present = present
+        return present
 
     def _results_to_docs_and_scores(self, results: Any) -> List[Tuple[Document, float]]:
         """Return docs and scores, with the promoted columns copied into metadata.
@@ -435,6 +513,8 @@ class CelexPGVectorPgQwen(CelexPGVector):
     table has no FK to ``langchain_pg_collection``, but the ``collection_id``
     column is retained for schema compatibility.
     """
+
+    _LINEAGE_COLUMN = "document_id"
 
     def __post_init__(self) -> None:
         """Initialise the store using the pg_embedding_qwen table."""

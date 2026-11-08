@@ -221,3 +221,9 @@ node_modules/
 
 # Large binary artifacts (e.g. downloaded .deb packages) — never commit
 *.deb
+
+config_main/master_doc_descriptors.json.bak-*
+
+# Stray spec-kit scaffold and editor rules, not part of the release
+/celex-facts/
+/.cursorrules

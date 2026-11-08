@@ -962,7 +962,7 @@ class TestToolDispatcher(unittest.TestCase):
         step = RetrievalStep(
             step_id=1,
             tool="kb_sql",
-            query="SELECT EXTRACT(YEAR FROM value_md::date) AS yr, COUNT(*) AS cnt FROM celex_facts.facts WHERE name = 'eu_commisssion_decision_date' AND LENGTH(value_md) = 10 GROUP BY yr",
+            query="SELECT EXTRACT(YEAR FROM value_md::date) AS yr, COUNT(*) AS cnt FROM celex_facts.facts WHERE name = 'eu_commission_decision_date' AND LENGTH(value_md) = 10 GROUP BY yr",
             rationale="count by year",
         )
         result = self.dispatcher.dispatch(step).text

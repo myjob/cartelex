@@ -11,10 +11,12 @@ import unittest
 from contextlib import contextmanager
 from unittest.mock import MagicMock
 
-from sqlalchemy import text
+from sqlalchemy import select, text
 
 from pipelines.agent_dspy.dspy_protocols import FirstPageVO
+from pipelines.rag.pgvector import session as session_module
 from pipelines.rag.pgvector.fact_repository import FactRepository, FactTable
+from pipelines.rag.pgvector.models import Facts
 from pipelines.rag.pgvector.session import make_engine
 
 
@@ -279,6 +281,199 @@ class TestSelectFirstPage4Celex(unittest.TestCase):
     def test_returns_none_when_no_row(self):
         repo = self._repo_with_session_returning(None)
         self.assertIsNone(repo.select_first_page4celex("CELEX-TEST-001"))
+
+
+# ---------------------------------------------------------------------------
+# Lineage: upsert_fact(document_id=...) against fakes (no live DB)
+# ---------------------------------------------------------------------------
+
+
+class _FakeQuery:
+    """Chainable ``session.query(Facts)`` stand-in returning canned rows."""
+
+    def __init__(self, rows: list) -> None:
+        self._rows = rows
+
+    def filter(self, *args: object) -> "_FakeQuery":
+        return self
+
+    def order_by(self, *args: object) -> "_FakeQuery":
+        return self
+
+    def with_for_update(self) -> "_FakeQuery":
+        return self
+
+    def all(self) -> list:
+        return self._rows
+
+
+class _FakeSession:
+    """ORM session stand-in recording adds, text statements and commits."""
+
+    def __init__(self, rows: list, events: list[str] | None = None) -> None:
+        self.rows = rows
+        self.added: list = []
+        self.statements: list[tuple[str, dict]] = []
+        self.commits = 0
+        self.events = events if events is not None else []
+
+    def __enter__(self) -> "_FakeSession":
+        self.events.append("session")
+        return self
+
+    def __exit__(self, *exc: object) -> bool:
+        return False
+
+    def query(self, *args: object) -> _FakeQuery:
+        return _FakeQuery(self.rows)
+
+    def add(self, obj: object) -> None:
+        self.added.append(obj)
+
+    def delete(self, obj: object) -> None:
+        pass
+
+    def flush(self) -> None:
+        pass
+
+    def execute(self, statement: object, params: dict | None = None) -> None:
+        self.statements.append((str(statement), params or {}))
+
+    def commit(self) -> None:
+        self.commits += 1
+
+    def rollback(self) -> None:
+        pass
+
+
+class _ProbeConn:
+    """Connection answering the column probe with a canned row (or none)."""
+
+    def __init__(self, engine: "_ProbeEngine") -> None:
+        self._engine = engine
+
+    def __enter__(self) -> "_ProbeConn":
+        return self
+
+    def __exit__(self, *exc: object) -> bool:
+        return False
+
+    def execute(self, statement: object, params: dict | None = None) -> MagicMock:
+        self._engine.probes.append((str(statement), params or {}))
+        self._engine.events.append("probe")
+        if self._engine.probe_error is not None:
+            raise self._engine.probe_error
+        result = MagicMock()
+        result.first.return_value = (1,) if self._engine.column_present else None
+        return result
+
+
+class _ProbeEngine:
+    """Engine stand-in for the one-off ``document_id`` column probe."""
+
+    def __init__(self, column_present: bool, probe_error: Exception | None = None) -> None:
+        self.column_present = column_present
+        self.probe_error = probe_error
+        self.probes: list[tuple[str, dict]] = []
+        self.events: list[str] = []
+
+    def connect(self) -> _ProbeConn:
+        return _ProbeConn(self)
+
+
+def _repo(
+    rows: list, column_present: bool, probe_error: Exception | None = None
+) -> tuple[FactRepository, _FakeSession, _ProbeEngine]:
+    """Build a FactRepository wired to fakes; returns (repo, session, engine).
+
+    The engine and the session share one ``events`` list, so tests can check
+    that the column probe runs before the row-locking session opens.
+    """
+    engine = _ProbeEngine(column_present, probe_error)
+    fake_session = _FakeSession(rows, engine.events)
+    repo = FactRepository.__new__(FactRepository)
+    repo.engine = engine
+    repo.Session = lambda: fake_session
+    repo._document_id_column = None
+    return repo, fake_session, engine
+
+
+def _lineage_writes(fake_session: _FakeSession) -> list[tuple[str, dict]]:
+    """Statements that touch ``facts.document_id``."""
+    return [(sql, p) for sql, p in fake_session.statements if "document_id" in sql]
+
+
+class TestUpsertFactDocumentLineage(unittest.TestCase):
+    """``upsert_fact`` records the source document only when the column exists."""
+
+    def setUp(self) -> None:
+        session_module._WARNED_ONCE.clear()
+
+    def test_upsert_fact_insert_sets_document_id(self) -> None:
+        repo, fake_session, _ = _repo(rows=[], column_present=True)
+        fact_id = repo.upsert_fact("C1", "fines", "md", "[]", document_id="C1_EN")
+        (sql, params), = _lineage_writes(fake_session)
+        self.assertIn("UPDATE celex_facts.facts SET document_id", sql)
+        self.assertEqual(params, {"document_id": "C1_EN", "fact_id": fact_id})
+        self.assertEqual(fake_session.commits, 1)
+
+    def test_upsert_fact_update_sets_document_id(self) -> None:
+        survivor = MagicMock(id=uuid.uuid4())
+        repo, fake_session, _ = _repo(rows=[survivor], column_present=True)
+        repo.upsert_fact("C1", "fines", "md", "[]", document_id="C1_EN")
+        (_, params), = _lineage_writes(fake_session)
+        self.assertEqual(params, {"document_id": "C1_EN", "fact_id": survivor.id})
+
+    def test_upsert_fact_update_keeps_document_id_when_none(self) -> None:
+        survivor = MagicMock(id=uuid.uuid4())
+        repo, fake_session, engine = _repo(rows=[survivor], column_present=True)
+        repo.upsert_fact("C1", "fines", "md2", "[]", document_id=None)
+        self.assertEqual(_lineage_writes(fake_session), [])
+        self.assertEqual(engine.probes, [], "no probe without a document id")
+        self.assertEqual(survivor.value_md, "md2")
+        self.assertEqual(fake_session.commits, 1)
+
+    def test_works_without_document_id_column(self) -> None:
+        repo, fake_session, engine = _repo(rows=[], column_present=False)
+        with self.assertLogs(
+            "pipelines.rag.pgvector.fact_repository", "WARNING"
+        ) as logs:
+            repo.upsert_fact("C1", "fines", "md", "[]", document_id="C1_EN")
+            repo.upsert_fact("C2", "fines", "md", "[]", document_id="C2_EN")
+        self.assertEqual(len(logs.records), 1, "one warning per process")
+        self.assertIn("migrate_document_lineage.sql", logs.output[0])
+        self.assertEqual(len(engine.probes), 1, "probed once, then cached")
+        self.assertEqual(_lineage_writes(fake_session), [])
+        self.assertEqual(fake_session.commits, 2, "facts are still written")
+
+    def test_probe_runs_before_the_row_locking_session(self) -> None:
+        """The probe needs its own pooled connection; never while row locks are held."""
+        survivor = MagicMock(id=uuid.uuid4())
+        repo, _, engine = _repo(rows=[survivor], column_present=True)
+        repo.upsert_fact("C1", "fines", "md", "[]", document_id="C1_EN")
+        self.assertEqual(engine.events, ["probe", "session"])
+
+    def test_probe_error_still_commits_and_warns_with_the_exception(self) -> None:
+        repo, fake_session, engine = _repo(
+            rows=[], column_present=True, probe_error=RuntimeError("pool timeout")
+        )
+        with self.assertLogs(
+            "pipelines.rag.pgvector.fact_repository", "WARNING"
+        ) as logs:
+            repo.upsert_fact("C1", "fines", "md", "[]", document_id="C1_EN")
+            repo.upsert_fact("C2", "fines", "md", "[]", document_id="C2_EN")
+        self.assertEqual(len(logs.records), 1)
+        self.assertIn("lineage probe failed, writing NULL", logs.output[0])
+        self.assertIn("pool timeout", logs.output[0])
+        self.assertNotIn("is missing", logs.output[0])
+        self.assertEqual(len(engine.probes), 1, "failure cached for the process")
+        self.assertEqual(_lineage_writes(fake_session), [])
+        self.assertEqual(fake_session.commits, 2, "facts are still written")
+
+    def test_orm_model_never_selects_or_inserts_document_id(self) -> None:
+        """Pre-migration ORM reads and inserts of Facts must not name the column."""
+        self.assertNotIn("document_id", str(select(Facts)))
+        self.assertNotIn("document_id", Facts.__table__.columns)
 
 
 if __name__ == "__main__":
