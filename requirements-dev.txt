@@ -153,7 +153,7 @@ fastuuid==0.14.0
     # via
     #   -c requirements.txt
     #   litellm
-filelock==3.25.2
+filelock==4.2.1
     # via
     #   -c requirements.txt
     #   huggingface-hub
