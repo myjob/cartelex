@@ -10,6 +10,8 @@ Uses unittest with MagicMock — no live DB or LLM required.
 """
 
 import unittest
+
+from pydantic import ValidationError
 import uuid
 from unittest.mock import MagicMock, patch
 
@@ -184,6 +186,22 @@ class TestQARetrievalPipelineCelexGate(unittest.TestCase):
 # ---------------------------------------------------------------------------
 # SQL Safety Gate
 # ---------------------------------------------------------------------------
+
+
+class TestRetrievalStepQuery(unittest.TestCase):
+    """Only case_facts, which never reads its query, may leave it out."""
+
+    def test_case_facts_without_query_is_accepted(self):
+        step = RetrievalStep.model_validate(
+            {"step_id": 1, "tool": "case_facts", "case_id": "38344_5856_3", "rationale": "r"})
+        self.assertEqual(step.query, "")
+
+    def test_other_tools_still_need_a_query(self):
+        with self.assertRaises(ValidationError):
+            RetrievalStep.model_validate({"step_id": 1, "tool": "rag_search", "rationale": "r"})
+
+    def test_query_stays_required_in_the_llm_schema(self):
+        self.assertIn("query", RetrievalStep.model_json_schema()["required"])
 
 
 class TestValidateReadOnlySQL(unittest.TestCase):
@@ -631,6 +649,22 @@ class TestToolDispatcher(unittest.TestCase):
             ],
         )
         self.assertEqual(evidence.fact_names, ["leniency_applicants", "fines"])
+
+    def test_case_facts_labels_each_fact_with_its_status(self):
+        """ISSUES #355: a fact never reaches the answer without its verdict."""
+        self.mock_sql_store.select_facts4celex_with_ids.return_value = [
+            ("11111111-1111-1111-1111-111111111111", "leniency_applicants", "Company A"),
+            ("22222222-2222-2222-2222-222222222222", "fines", "1M"),
+        ]
+        self.mock_sql_store.select_fact_statuses4celex.return_value = {
+            "leniency_applicants": "contradicted",
+        }
+        step = RetrievalStep(
+            step_id=1, tool="case_facts", query="", case_id="38344_5856_3", rationale="test"
+        )
+        text = self.dispatcher.dispatch(step).text
+        self.assertIn("  leniency_applicants [contradicted]: Company A", text)
+        self.assertIn("  fines [unverified]: 1M", text)
 
     def test_kb_sql_delegates_to_aggregator(self):
         self.mock_aggregator.aggregate_facts.return_value = [

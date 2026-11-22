@@ -16,7 +16,8 @@
 # non-leniency case) is skipped. Every name must be a target_fact_name of this
 # catalog (test_fact_extractor_yaml_integrity), so a retired fact can no longer
 # leak into the summary from stale DB rows. A stored summary is rebuilt when
-# any of these facts was written after it. Raw/intermediate facts
+# the value of any of these facts changed after it (an unchanged
+# re-extraction keeps facts.created_at). Raw/intermediate facts
 # (heideltime_raw, heideltime_event, court_list_raw, companies_address,
 # leniency_case_match) are left out on purpose.
 - target_fact_name: case_summary
@@ -27,12 +28,12 @@
     - celex_case_id
     - case_title
     - eu_commission_decision_date
+    - cartel_period
     - case_commissioner
     - companies_investigated
     - companies_country
     - companies_industry
     - products
-    - services
     - OECD_sector
     - NACE_group_code
     - NACE_class_code
@@ -81,7 +82,7 @@
   output_schema: ""
   pipeline: keyword_regex
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # The articles the decision actually applies: the same regex restricted to
 # chunks classified as the operative part ("HAS ADOPTED THIS DECISION ...
@@ -94,7 +95,7 @@
   pipeline: keyword_regex
   section_scope: [operative]
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # Canonical infringement concept(s) derived deterministically from
 # law_article_all_relevant, mapped across the EU treaty renumbering (EEC/EC/TFEU)
@@ -108,7 +109,7 @@
   output_type: str
   pipeline: infringement_concept
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # Highest recital number of the decision, for corpus statistics. Deterministic
 # (pipelines/legal/recital_count.py): longest +1..+gap chain of line-start (n)
@@ -122,7 +123,7 @@
   output_type: dict
   pipeline: recital_count
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # --------- infringements --------------
 
@@ -140,7 +141,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_category_member_states
   question: |
@@ -156,7 +157,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('public_undertaking', 'law_article_operative')
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_category_abuse_of_dominance
   question: |
@@ -169,7 +170,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('abuse_of_dominance', 'law_article_operative')
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_category_hor_vert_lic_joint
   question: |
@@ -185,7 +186,7 @@
   condition: |
     exists("law_article_all_relevant") and same_concept('anticompetitive_agreement', 'law_article_operative')
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_subcategory_horizontal_restraints
   question: |
@@ -207,7 +208,7 @@
   pipeline: universal
   condition: "'horizontal' in infringement_category_hor_vert_lic_joint"
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_subcategory_vertical_restraints
   question: |
@@ -226,7 +227,7 @@
   pipeline: universal
   condition: "'vertical' in infringement_category_hor_vert_lic_joint"
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: market_oligopoly
   question: |
@@ -244,7 +245,7 @@
   output_type: str
   pipeline: universal
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: infringement_gravity
   question: "How severe is the infringement? respond with one of the following categories: low, medium, high, NA. Consider factors such as the duration of the infringement, the market share of the involved companies, and the potential harm to consumers."
@@ -302,22 +303,20 @@
   predecessors: ["products", "NACE_group_code"]
   pipeline: nace_class_code
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: NACE_group_code
-  question: |
-    Task: Match the product list to one single matching NACE group code and title from the provided list. \n 
-    return a matching row formatted STRICTLY as: [NACE-code]:[group_title]
-    Example:
-      Product: Mining of hard coal
-    Output: 05.1:Mining of hard coal
-    === NACE LIST ===:   \n Extraction of natural gas \n === \n NACE \n 01.1:Growing of non-perennial crops\n01.2:Growing of perennial crops\n01.3:Plant propagation\n01.4:Animal production\n01.5:Mixed farming\n01.6:Support activities to agriculture and post-harvest crop activities\n01.7:Hunting, trapping and related service activities\n02.1:Silviculture and other forestry activities\n02.2:Logging\n02.3:Gathering of wild growing non-wood products\n02.4:Support services to forestry\n03.1:Fishing\n03.2:Aquaculture\n05.1:Mining of hard coal\n05.2:Mining of lignite\n06.1:Extraction of crude petroleum\n06.2:Extraction of natural gas\n07.1:Mining of iron ores\n07.2:Mining of non-ferrous metal ores\n08.1:Quarrying of stone, sand and clay\n08.9:Mining and quarrying n.e.c.\n09.1:Support activities for petroleum and natural gas extraction\n09.9:Support activities for other mining and quarrying\n10.1:Processing and preserving of meat and production of meat products\n10.2:Processing and preserving of fish, crustaceans and molluscs\n10.3:Processing and preserving of fruit and vegetables\n10.4:Manufacture of vegetable and animal oils and fats\n10.5:Manufacture of dairy products\n10.6:Manufacture of grain mill products, starches and starch products\n10.7:Manufacture of bakery and farinaceous products\n10.8:Manufacture of other food products\n10.9:Manufacture of prepared animal feeds\n11.0:Manufacture of beverages\n12.0:Manufacture of tobacco products\n13.1:Preparation and spinning of textile fibres\n13.2:Weaving of textiles\n13.3:Finishing of textiles\n13.9:Manufacture of other textiles\n14.1:Manufacture of wearing apparel, except fur apparel\n14.2:Manufacture of articles of fur\n14.3:Manufacture of knitted and crocheted apparel\n15.1:Tanning and dressing of leather; manufacture of luggage, handbags, saddlery and harness; dressing and dyeing of fur\n15.2:Manufacture of footwear\n16.1:Sawmilling and planing of wood\n16.2:Manufacture of products of wood, cork, straw and plaiting materials\n17.1:Manufacture of pulp, paper and paperboard\n17.2:Manufacture of articles of paper and paperboard\n18.1:Printing and service activities related to printing\n18.2:Reproduction of recorded media\n19.1:Manufacture of coke oven products\n19.2:Manufacture of refined petroleum products\n20.1:Manufacture of basic chemicals, fertilisers and nitrogen compounds, plastics and synthetic rubber in primary forms\n20.2:Manufacture of pesticides and other agrochemical products\n20.3:Manufacture of paints, varnishes and similar coatings, printing ink and mastics\n20.4:Manufacture of soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations\n20.5:Manufacture of other chemical products\n20.6:Manufacture of man-made fibres\n21.1:Manufacture of basic pharmaceutical products\n21.2:Manufacture of pharmaceutical preparations\n22.1:Manufacture of rubber products\n22.2:Manufacture of plastics products\n23.1:Manufacture of glass and glass products\n23.2:Manufacture of refractory products\n23.3:Manufacture of clay building materials\n23.4:Manufacture of other porcelain and ceramic products\n23.5:Manufacture of cement, lime and plaster\n23.6:Manufacture of articles of concrete, cement and plaster\n23.7:Cutting, shaping and finishing of stone\n23.9:Manufacture of abrasive products and non-metallic mineral products n.e.c.\n24.1:Manufacture of basic iron and steel and of ferro-alloys\n24.2:Manufacture of tubes, pipes, hollow profiles and related fittings, of steel\n24.3:Manufacture of other products of first processing of steel\n24.4:Manufacture of basic precious and other non-ferrous metals\n24.5:Casting of metals\n25.1:Manufacture of structural metal products\n25.2:Manufacture of tanks, reservoirs and containers of metal\n25.3:Manufacture of steam generators, except central heating hot water boilers\n25.4:Manufacture of weapons and ammunition\n25.5:Forging, pressing, stamping and roll-forming of metal; powder metallurgy\n25.6:Treatment and coating of metals; machining\n25.7:Manufacture of cutlery, tools and general hardware\n25.9:Manufacture of other fabricated metal products\n26.1:Manufacture of electronic components and boards\n26.2:Manufacture of computers and peripheral equipment\n26.3:Manufacture of communication equipment\n26.4:Manufacture of consumer electronics\n26.5:Manufacture of instruments and appliances for measuring, testing and navigation; watches and clocks\n26.6:Manufacture of irradiation, electromedical and electrotherapeutic equipment\n26.7:Manufacture of optical instruments and photographic equipment\n26.8:Manufacture of magnetic and optical media\n27.1:Manufacture of electric motors, generators, transformers and electricity distribution and control apparatus\n27.2:Manufacture of batteries and accumulators\n27.3:Manufacture of wiring and wiring devices\n27.4:Manufacture of electric lighting equipment\n27.5:Manufacture of domestic appliances\n27.9:Manufacture of other electrical equipment\n28.1:Manufacture of general — purpose machinery\n28.2:Manufacture of other general-purpose machinery\n28.3:Manufacture of agricultural and forestry machinery\n28.4:Manufacture of metal forming machinery and machine tools\n28.9:Manufacture of other special-purpose machinery\n29.1:Manufacture of motor vehicles\n29.2:Manufacture of bodies (coachwork) for motor vehicles; manufacture of trailers and semi-trailers\n29.3:Manufacture of parts and accessories for motor vehicles\n30.1:Building of ships and boats\n30.2:Manufacture of railway locomotives and rolling stock\n30.3:Manufacture of air and spacecraft and related machinery\n30.4:Manufacture of military fighting vehicles\n30.9:Manufacture of transport equipment n.e.c.\n31.0:Manufacture of furniture\n32.1:Manufacture of jewellery, bijouterie and related articles\n32.2:Manufacture of musical instruments\n32.3:Manufacture of sports goods\n32.4:Manufacture of games and toys\n32.5:Manufacture of medical and dental instruments and supplies\n32.9:Manufacturing n.e.c.\n33.1:Repair of fabricated metal products, machinery and equipment\n33.2:Installation of industrial machinery and equipment\n35.1:Electric power generation, transmission and distribution\n35.2:Manufacture of gas; distribution of gaseous fuels through mains\n35.3:Steam and air conditioning supply\n36.0:Water collection, treatment and supply\n37.0:Sewerage\n38.1:Waste collection\n38.2:Waste treatment and disposal\n38.3:Materials recovery\n39.0:Remediation activities and other waste management services\n41.1:Development of building projects\n41.2:Construction of residential and non-residential buildings\n42.1:Construction of roads and railways\n42.2:Construction of utility projects\n42.9:Construction of other civil engineering projects\n43.1:Demolition and site preparation\n43.2:Electrical, plumbing and other construction installation activities\n43.3:Building completion and finishing\n43.9:Other specialised construction activities\n45.1:Sale of motor vehicles\n45.2:Maintenance and repair of motor vehicles\n45.3:Sale of motor vehicle parts and accessories\n45.4:Sale, maintenance and repair of motorcycles and related parts and accessories\n46.1:Wholesale on a fee or contract basis\n46.2:Wholesale of agricultural raw materials and live animals\n46.3:Wholesale of food, beverages and tobacco\n46.4:Wholesale of household goods\n46.5:Wholesale of information and communication equipment\n46.6:Wholesale of other machinery, equipment and supplies\n46.7:Other specialised wholesale\n46.9:Non-specialised wholesale trade\n47.1:Retail sale in non-specialised stores\n47.2:Retail sale of food, beverages and tobacco in specialised stores\n47.3:Retail sale of automotive fuel in specialised stores\n47.4:Retail sale of information and communication equipment in specialised stores\n47.5:Retail sale of other household equipment in specialised stores\n47.6:Retail sale of cultural and recreation goods in specialised stores\n47.7:Retail sale of other goods in specialised stores\n47.8:Retail sale via stalls and markets\n47.9:Retail trade not in stores, stalls or markets\n49.1:Passenger rail transport, interurban\n49.2:Freight rail transport\n49.3:Other passenger land transport\n49.4:Freight transport by road and removal services\n49.5:Transport via pipeline\n50.1:Sea and coastal passenger water transport\n50.2:Sea and coastal freight water transport\n50.3:Inland passenger water transport\n50.4:Inland freight water transport\n51.1:Passenger air transport\n51.2:Freight air transport and space transport\n52.1:Warehousing and storage\n52.2:Support activities for transportation\n53.1:Postal activities under universal service obligation\n53.2:Other postal and courier activities\n55.1:Hotels and similar accommodation\n55.2:Holiday and other short-stay accommodation\n55.3:Camping grounds, recreational vehicle parks and trailer parks\n55.9:Other accommodation\n56.1:Restaurants and mobile food service activities\n56.2:Event catering and other food service activities\n56.3:Beverage serving activities\n58.1:Publishing of books, periodicals and other publishing activities\n58.2:Software publishing\n59.1:Motion picture, video and television programme activities\n59.2:Sound recording and music publishing activities\n60.1:Radio broadcasting\n60.2:Television programming and broadcasting activities\n61.1:Wired telecommunications activities\n61.2:Wireless telecommunications activities\n61.3:Satellite telecommunications activities\n61.9:Other telecommunications activities\n62.0:Computer programming, consultancy and related activities\n63.1:Data processing, hosting and related activities; web portals\n63.9:Other information service activities\n64.1:Monetary intermediation\n64.2:Activities of holding companies\n64.3:Trusts, funds and similar financial entities\n64.9:Other financial service activities, except insurance and pension funding\n65.1:Insurance\n65.2:Reinsurance\n65.3:Pension funding\n66.1:Activities auxiliary to financial services, except insurance and pension funding\n66.2:Activities auxiliary to insurance and pension funding\n66.3:Fund management activities\n68.1:Buying and selling of own real estate\n68.2:Renting and operating of own or leased real estate\n68.3:Real estate activities on a fee or contract basis\n69.1:Legal activities\n69.2:Accounting, bookkeeping and auditing activities; tax consultancy\n70.1:Activities of head offices\n70.2:Management consultancy activities\n71.1:Architectural and engineering activities and related technical consultancy\n71.2:Technical testing and analysis\n72.1:Research and experimental development on natural sciences and engineering\n72.2:Research and experimental development on social sciences and humanities\n73.1:Advertising\n73.2:Market research and public opinion polling\n74.1:Specialised design activities\n74.2:Photographic activities\n74.3:Translation and interpretation activities\n74.9:Other professional, scientific and technical activities n.e.c.\n75.0:Veterinary activities\n77.1:Renting and leasing of motor vehicles\n77.2:Renting and leasing of personal and household goods\n77.3:Renting and leasing of other machinery, equipment and tangible goods\n77.4:Leasing of intellectual property and similar products, except copyrighted works\n78.1:Activities of employment placement agencies\n78.2:Temporary employment agency activities\n78.3:Other human resources provision\n79.1:Travel agency and tour operator activities\n79.9:Other reservation service and related activities\n80.1:Private security activities\n80.2:Security systems service activities\n80.3:Investigation activities\n81.1:Combined facilities support activities\n81.2:Cleaning activities\n81.3:Landscape service activities\n82.1:Office administrative and support activities\n82.2:Activities of call centres\n82.3:Organisation of conventions and trade shows\n82.9:Business support service activities n.e.c.\n84.1:Administration of the State and the economic and social policy of the community\n84.2:Provision of services to the community as a whole\n84.3:Compulsory social security activities\n85.1:Pre-primary education\n85.2:Primary education\n85.3:Secondary education\n85.4:Higher education\n85.5:Other education\n85.6:Educational support activities\n86.1:Hospital activities\n86.2:Medical and dental practice activities\n86.9:Other human health activities\n87.1:Residential nursing care activities\n87.2:Residential care activities for mental retardation, mental health and substance abuse\n87.3:Residential care activities for the elderly and disabled\n87.9:Other residential care activities\n88.1:Social work activities without accommodation for the elderly and disabled\n88.9:Other social work activities without accommodation\n90.0:Creative, arts and entertainment activities\n91.0:Libraries, archives, museums and other cultural activities\n92.0:Gambling and betting activities\n93.1:Sports activities\n93.2:Amusement and recreation activities\n94.1:Activities of business, employers and professional membership organisations\n94.2:Activities of trade unions\n94.9:Activities of other membership organisations\n95.1:Repair of computers and communication equipment\n95.2:Repair of personal and household goods\n96.0:Other personal service activities\n97.0:Activities of households as employers of domestic personnel\n98.1:Undifferentiated goods-producing activities of private households for own use\n98.2:Undifferentiated service-producing activities of private households for own use \n
+  # Shortlist-then-pick (NaceModule, level=group): the reranker ranks all NACE
+  # 2.1 classes against case_title + products, the LLM picks one of the top
+  # settings.NACE_SHORTLIST_TOP_K, and its parent group is stored as
+  # '<code>:<title>'. The NACE list comes from settings.NACE_JSON_PATH.
+  question: "Classify the economic activity of the market concerned by the infringement into one NACE class."
   output_schema: ""
   output_type: str
   predecessors: ["products"]
-  pipeline: fact_context
+  pipeline: nace_group_code
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: OECD_sector
   question: "Which economic sector is involved? Choose the most fitting out of the following 10 OECD sectors:\nagriculture; \nmining;\nmanufacturing; \nelectricity and gas; \nconstruction; \ntrade (wholesaling and retailing) and hotels; \ntransport; \nbanking and insurance (including real estate); \ncommunication;\npublic service"
@@ -330,7 +329,7 @@
   # `fact_context` feeds it directly.
   pipeline: fact_context
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # --------- market --------------
 - target_fact_name: market_turbulence
@@ -357,19 +356,18 @@
   run_state_active: false
 
 - target_fact_name: products
-  question: list all products 
+  # 'products' means goods OR services of the relevant product market (as in
+  # CPA/NACE); it is the sole input of NACE_group_code and OECD_sector.
+  question: list all goods and services concerned by the infringement, i.e. the relevant product market
   output_schema: products
   pipeline: universal
-  force_override: false
-  run_state_active: true
-
-
-- target_fact_name: services
-  question: list all services
-  output_schema: products
-  pipeline: universal
+  # When the decision text yields no product, infer it from the stored
+  # case_title (titles usually name the product market, e.g. 'Industrial bags',
+  # or a company whose goods/services are then used, e.g. 'MasterCard II').
+  na_fallback_fact: case_title
   force_override: false
   run_state_active: false
+
 
 #-- LENIENCY
 
@@ -394,7 +392,7 @@
   output_schema: ""
   pipeline: keyword_search
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: leniency_case_match
   question: Are both facts similar? Ignore formatting differences, abbreviations, unit placements, casing, and minor stylistic variations.
@@ -411,7 +409,7 @@
   predecessors: ["companies_investigated", "leniency_case"]
   condition: 'exists("leniency_case") and leniency_case == true'
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: leniency_granted
   question: Which companies got which amount fine reduction?
@@ -420,7 +418,7 @@
   predecessors: ["companies_investigated", "leniency_case", "leniency_applicants"]
   condition: 'exists("leniency_case") and leniency_case == true'
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: leniency_rejected
   question: Identify which companies from the leniency_applicants list are NOT present in the leniency_granted list. Ignore company names suffixes like "S.A.", "SA", "AG", "GmbH", etc. ?
@@ -445,7 +443,7 @@
   # Restrict retrieval to the sections where amounts and orders live
   # (section_type metadata from Main_classify_sections.py).
   section_scope: [fines, operative]
-  run_state_active: true
+  run_state_active: false
 
 # -- companies --
 - target_fact_name: companies_investigated
@@ -476,7 +474,7 @@
   output_schema: companies, location
   pipeline: universal
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # Number of distinct legal units (companies, subsidiaries named individually,
 # trade/professional associations) the decision assessed. Deterministic
@@ -493,7 +491,7 @@
   predecessors: ["companies_investigated"]
   condition: 'exists("companies_investigated")'
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 
 
@@ -559,7 +557,7 @@
   output_schema: ""
   pipeline: heideltime_raw
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # -- HeidelTime Event Enrichment --------------
 - target_fact_name: heideltime_event
@@ -569,7 +567,7 @@
   predecessors:
     - heideltime_raw
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: heideltime_event_agg
   question: "Analyze the following input and extract up to 12 critical events spanning the whole case: always the earliest conduct event (agreement concluded, cartel creation), the last conduct event, and the final outcome (decision, fines). skip any trivia"
@@ -596,14 +594,20 @@
     - case_commission_infringement
   condition: 'not exists("case_commission_infringement") or case_commission_infringement != false'
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 # -- events --
+# Read from the decision's own "Done at Brussels, <date>" line, else its title
+# (ISSUES #369, review A26). The aggregated events are only the LLM fallback for
+# a text that states no date, so they are an ordering-only context fact: as a
+# predecessor a missing or NA event list would skip or blank the date. The
+# question is the fallback's prompt.
 - target_fact_name: eu_commission_decision_date
   question: "When did the EU commission decided this case? Reply with date format YYYY-MM-DD or NA"
-  predecessors: ["heideltime_event_agg"]
+  context_facts:
+    - heideltime_event_agg
   output_schema: "str"
-  pipeline: "fact_context"
+  pipeline: "decision_date"
   force_override: false
   run_state_active: false
 
@@ -674,7 +678,7 @@
   # The outcome is stated in the operative articles, not in the recitals.
   section_scope: [operative]
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: case_commission_decision
   question: |
@@ -683,7 +687,7 @@
   output_schema: ""
   pipeline: universal
   force_override: false
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: case_commissioner
   question:  |
@@ -695,7 +699,7 @@
   pipeline: universal
   predecessors: []
   force_override: true
-  run_state_active: true
+  run_state_active: false
 
 - target_fact_name: celex_case_id
   question: ingest celex_id and case_id
@@ -707,4 +711,4 @@
     Extract the case id and the full title of the legal case from the input text.
   pipeline: case_title
   force_override: false
-  run_state_active: true
+  run_state_active: false

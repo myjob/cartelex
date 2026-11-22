@@ -1,9 +1,31 @@
 """Tests for NaceTree."""
 
 import unittest
+from types import SimpleNamespace
 
 from config.settings import settings
-from pipelines.nace.nace_tree import NaceTree, NaceVo
+from pipelines.nace.nace_tree import NaceRagVo, NaceTree, NaceVo
+
+#: Minimal one-branch NACE tree in the JSON file's shape.
+MINI_TREE: list[dict] = [
+    {
+        "code": "A",
+        "title": "AGRICULTURE",
+        "divisions": [
+            {
+                "code": "01",
+                "title": "Crop production",
+                "groups": [
+                    {
+                        "code": "01.1",
+                        "title": "Growing of non-perennial crops",
+                        "classes": [{"code": "01.11", "title": "Growing of cereals", "isic_code": "0111"}],
+                    }
+                ],
+            }
+        ],
+    }
+]
 
 
 class TestNaceTreeInit(unittest.TestCase):
@@ -21,6 +43,26 @@ class TestNaceTreeInit(unittest.TestCase):
         for section in tree.root_sections:
             self.assertIsInstance(section, NaceVo)
             self.assertEqual(section.type, "section")
+
+
+    def test_init_from_loaded_data(self):
+        """NaceTree also accepts the JSON content already loaded (legacy NACE_Tree API)."""
+        tree = NaceTree(MINI_TREE)
+        cls = tree.select_class_by_title("Growing of cereals")
+        self.assertEqual(cls.isic_code, "0111")
+        self.assertEqual(cls.parent.code, "01.1")
+
+
+class TestNaceRagVo(unittest.TestCase):
+    """Tests for the RAG result value object merged in from NACE_Tree."""
+
+    def test_copies_fields_from_query_result(self):
+        """Every query-spec and distance field is copied and serialised."""
+        fields = ("rag_query", "doc_type", "max_hits", "distance_crit", "tk",
+                  "sentnumof", "dist_avg", "dist_min", "dist_max", "query_fit")
+        result = SimpleNamespace(**{f: f + "_v" for f in fields})
+        vo = NaceRagVo(result, '{"code": "01.11"}')
+        self.assertEqual(vo.to_dict(), {**{f: f + "_v" for f in fields}, "nace_json": '{"code": "01.11"}'})
 
 
 class TestNaceTreeClassesOfGroup(unittest.TestCase):

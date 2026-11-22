@@ -138,6 +138,26 @@ def _non_negative(text: str) -> int:
     return value
 
 
+def _select_ids(decisions: list[DecisionRequest], ids: list[str] | None) -> list[DecisionRequest]:
+    """Keep the decisions named by ``--ids``, in loader order.
+
+    Args:
+        decisions: Mapped decisions.
+        ids: ``--ids`` values, or None to keep every decision.
+
+    Returns:
+        The selected decisions; an id the loader does not map is logged.
+    """
+    if not ids:
+        return decisions
+    wanted = set(ids)
+    selected = [d for d in decisions if d.decision_id in wanted]
+    missing = sorted(wanted - {d.decision_id for d in selected})
+    if missing:
+        logger.warning("--ids not in the loader: %s", ", ".join(missing))
+    return selected
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse the command line.
 
@@ -180,6 +200,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--limit", type=_non_negative, default=0,
                    help="Limit the number of decisions (after mapping). 0 for all. "
                         "Mapper row failures beyond the limit are still reported.")
+    p.add_argument("--ids", action="append", metavar="ID", default=None,
+                   help="Decision id to process (repeatable); other mapped "
+                        "decisions are skipped. Combine with --force to "
+                        "re-download a decision whose URL changed.")
     p.add_argument("--max-workers", type=int,
                    default=settings.DOWNLOAD_DEFAULT_MAX_WORKERS,
                    help="Concurrent download threads.")
@@ -376,7 +400,8 @@ def main(argv: list[str] | None = None) -> int:
             pl.exceptions.PolarsError) as exc:
         logger.error("cannot read or map loader %s: %s", args.loader_file, exc)
         return EXIT_USAGE
-    decisions = mapped.decisions[: args.limit] if args.limit > 0 else mapped.decisions
+    decisions = _select_ids(mapped.decisions, args.ids)
+    decisions = decisions[: args.limit] if args.limit > 0 else decisions
     logger.info("mapped %d decisions, %d row failures; using %d", len(mapped.decisions),
                 len(mapped.failures), len(decisions))
     try:

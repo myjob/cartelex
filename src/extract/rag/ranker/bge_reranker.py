@@ -12,6 +12,17 @@ from pipelines.nace.nace_tree import NaceVo, RankedNaceVo
 
 logger = logging.getLogger(__name__)
 
+# Accepted settings.RERANKER_DTYPE values for a CUDA-resident model. "auto" is
+# resolved separately in BgeReranker._resolve_dtype (float16 on CUDA).
+_CUDA_DTYPES: dict[str, torch.dtype] = {
+    "float16": torch.float16,
+    "bfloat16": torch.bfloat16,
+    "float32": torch.float32,
+}
+_AUTO_DTYPE = "auto"
+_CUDA_AUTO_DTYPE = "float16"
+_CPU_DTYPE = "float32"
+
 
 class BgeReranker:
     """CrossEncoder-backed reranker, drop-in for :class:`FlashRanker`.
@@ -50,6 +61,13 @@ class BgeReranker:
     ``ranker_factory.create_ranker`` shares one instance per backend across
     every call site in the process, a single downgrade covers them all.
 
+    Precision follows the device: under ``settings.RERANKER_DTYPE="auto"`` a
+    CUDA model runs float16 (3.5x the float32 throughput at half the VRAM on
+    the RTX 5070, with ranking effects inside the LLM's own noise per the
+    20261107 A/B) while a CPU model always stays float32. The cast happens
+    before the construction probe, so a card that cannot run the precision
+    takes the same CPU fallback as any other CUDA failure.
+
     Model resolution is offline-capable. ``settings.RERANKER_MODEL_ID`` may be a
     directory of downloaded weights instead of a Hub repo id, and
     ``settings.RERANKER_LOCAL_FILES_ONLY`` forces a repo id to resolve from
@@ -69,6 +87,10 @@ class BgeReranker:
             ``"cpu"`` by a downgrade.
         batch_size: ``(query, passage)`` pairs per forward pass. Bounds peak
             activation memory; see ``settings.RERANKER_BATCH_SIZE``.
+        dtype: Name of the floating-point precision the loaded weights run in
+            (``"float16"``, ``"bfloat16"`` or ``"float32"``). Resolved from
+            ``settings.RERANKER_DTYPE`` against ``resolved_device``: a CPU model
+            is always ``"float32"``. Rewritten by a CPU downgrade.
     """
 
     def __init__(
@@ -77,6 +99,7 @@ class BgeReranker:
         max_length: Optional[int] = None,
         device: Optional[str] = None,
         batch_size: Optional[int] = None,
+        dtype: Optional[str] = None,
     ):
         """Load the CrossEncoder reranker.
 
@@ -90,8 +113,13 @@ class BgeReranker:
                 Defaults to ``settings.RERANKER_DEVICE``.
             batch_size: ``(query, passage)`` pairs scored per forward pass.
                 Defaults to ``settings.RERANKER_BATCH_SIZE``.
+            dtype: Weight precision on CUDA: ``"auto"`` (float16 on CUDA),
+                ``"float16"``, ``"bfloat16"`` or ``"float32"``. Ignored on CPU,
+                which always runs float32. Defaults to
+                ``settings.RERANKER_DTYPE``.
 
         Raises:
+            ValueError: If *dtype* is not one of the accepted names.
             torch.OutOfMemoryError: If the model fits on neither the requested
                 CUDA device nor, after the fallback, the CPU.
             RuntimeError: If a non-CUDA failure occurs while loading or probing
@@ -111,6 +139,12 @@ class BgeReranker:
         self.max_length = max_length or settings.RERANKER_MAX_LENGTH
         self.batch_size = batch_size or settings.RERANKER_BATCH_SIZE
         requested_device = device or settings.RERANKER_DEVICE
+        self.requested_dtype = (dtype or settings.RERANKER_DTYPE).strip().lower()
+        if self.requested_dtype != _AUTO_DTYPE and self.requested_dtype not in _CUDA_DTYPES:
+            raise ValueError(
+                f"BgeReranker: unknown dtype '{self.requested_dtype}'; expected "
+                f"'{_AUTO_DTYPE}' or one of {sorted(_CUDA_DTYPES)} (RERANKER_DTYPE)."
+            )
         self.device = None if requested_device.strip().lower() == "auto" else requested_device
 
         # On CPU torch pins to physical cores by default; use every logical CPU
@@ -127,17 +161,22 @@ class BgeReranker:
         # at construction, never inside a ranking call.
         logger.debug(
             "Initializing BgeReranker with model '%s' (cache '%s', max_length %d, "
-            "batch_size %d, torch_threads %d, device %s, local_files_only %s)",
+            "batch_size %d, torch_threads %d, device %s, dtype %s, "
+            "local_files_only %s)",
             self.model_name,
             self.cache_dir,
             self.max_length,
             self.batch_size,
             settings.RERANKER_TORCH_THREADS,
             requested_device_label,
+            self.requested_dtype,
             self.local_files_only,
         )
         try:
             self.model = self._load_model(self.device)
+            # Cast before the probe so a GPU that cannot run the requested
+            # precision fails here, where the CPU fallback below still applies.
+            self._apply_dtype()
             self._probe_model()
         except (torch.OutOfMemoryError, RuntimeError) as cuda_error:
             # Two distinct CUDA failures land here, both of which the CPU can
@@ -167,22 +206,57 @@ class BgeReranker:
                 torch.cuda.empty_cache()
             self.device = "cpu"
             self.model = self._load_model(self.device)
+            self._apply_dtype()
             self._probe_model()
 
         # With device="auto" the requested device stays None, so this is the only
         # way an operator can tell from the logs whether the cross-encoder ended
         # up on the GPU or the CPU.
-        self.resolved_device = str(
-            getattr(self.model, "device", None) or self.device or "cpu"
-        )
+        self.resolved_device = self._model_device()
         logger.info(
-            "BgeReranker ready: model '%s' on device '%s' (requested %s, "
+            "BgeReranker ready: model '%s' on device '%s' in %s (requested %s, "
             "batch_size %d)",
             self.model_name,
             self.resolved_device,
+            self.dtype,
             requested_device_label,
             self.batch_size,
         )
+
+    def _model_device(self) -> str:
+        """The device the loaded model sits on, ``"cpu"`` when unknown.
+
+        Returns:
+            A torch device string such as ``"cuda:0"`` or ``"cpu"``.
+        """
+        return str(getattr(self.model, "device", None) or self.device or "cpu")
+
+    def _resolve_dtype(self, device: str) -> str:
+        """Map ``requested_dtype`` to the precision used on *device*.
+
+        Args:
+            device: The device string of the loaded model.
+
+        Returns:
+            ``"float32"`` on CPU; on CUDA the requested name, with ``"auto"``
+            resolved to ``"float16"``.
+        """
+        if not device.startswith("cuda"):
+            return _CPU_DTYPE
+        if self.requested_dtype == _AUTO_DTYPE:
+            return _CUDA_AUTO_DTYPE
+        return self.requested_dtype
+
+    def _apply_dtype(self) -> None:
+        """Cast the loaded weights to the resolved precision and record it.
+
+        The CrossEncoder loads float32 weights; only a CUDA model with a
+        non-float32 target is cast. The underlying transformers module is the
+        ``model`` attribute of the CrossEncoder.
+        """
+        self.dtype = self._resolve_dtype(self._model_device())
+        if self.dtype != _CPU_DTYPE:
+            self.model.model.to(_CUDA_DTYPES[self.dtype])
 
     @staticmethod
     def _is_cuda_failure(error: BaseException) -> bool:
@@ -343,6 +417,7 @@ class BgeReranker:
         self.device = "cpu"
         self.model = self._load_model("cpu")
         self.resolved_device = "cpu"
+        self.dtype = _CPU_DTYPE
 
     def rank_chunkvo(
         self,

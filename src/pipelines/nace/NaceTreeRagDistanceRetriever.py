@@ -7,7 +7,7 @@ import bisect
 from time import sleep
 from Job_Utils import loadJsonFor
 
-from nace.NACE_Tree import  NaceTree,NaceRagVo
+from pipelines.nace.nace_tree import NaceTree, NaceRagVo
 
 from llm_clients.LlmClientFactory import LlmClientFactory
 from llm_clients.LlmClientOpenAiGpt import LlmClientOpenAiGpt

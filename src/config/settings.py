@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 import logging
@@ -447,6 +448,13 @@ class Config:
     # single knob has to disarm both layers.
     LLM_NUM_RETRIES = int(os.getenv("LLM_NUM_RETRIES", "0"))
 
+    # Smallest batch for which "every case timed out, none succeeded" counts as
+    # a hung or overloaded server (BatchJobRunner exit 1, the orchestrator
+    # stops) rather than tolerable runaway requests. Below it the signal says
+    # nothing: run 20261110203740 stopped on a 1-case facts step whose single
+    # request ran into OLLAMA_TIMEOUT while the DGX kept answering.
+    LLM_HUNG_SERVER_MIN_BATCH = int(os.getenv("LLM_HUNG_SERVER_MIN_BATCH", "3"))
+
     # Penalty applied to already-emitted tokens. Default 0.0 (no penalty) so
     # extraction output is bit-identical to the greedy baseline. Raise it (0.1
     # to 0.3) only when a run is confirmed to loop: it is the mitigation for a
@@ -606,9 +614,15 @@ class Config:
     # such as EnumerationSearch, which deliberately reranks its whole pool.
     # This is what bounds peak VRAM/activation memory: for bge-reranker-v2-m3
     # (XLM-R large) one batch holds batch_size x RERANKER_MAX_LENGTH tokens of
-    # attention buffers per layer. 32 is the sentence-transformers default; use
-    # 8 when the GPU is shared with the backend container on the 6GB card.
-    RERANKER_BATCH_SIZE = int(os.getenv("RERANKER_BATCH_SIZE", "32"))
+    # attention buffers per layer. It is NOT a throughput lever: measured on the
+    # RTX 5070 (20261107, 512-token pairs, fp32) throughput is flat at ~41-51
+    # pairs/s from batch 8 to 128 because the card is compute-bound, while peak
+    # VRAM grows 2.4 GB (bs 8) -> 2.9 GB (bs 32) -> 5.0 GB (bs 128). With mixed
+    # chunk lengths smaller batches are slightly *faster* (less padding): CPU
+    # 3.0 pairs/s at 16 vs 2.7 at 32, half precision 195 vs 189. 16 therefore
+    # dominates the sentence-transformers default of 32; drop to 8 only when the
+    # GPU is shared with another resident model.
+    RERANKER_BATCH_SIZE = int(os.getenv("RERANKER_BATCH_SIZE", "16"))
     # torch intra-op thread count for the CPU cross-encoder. Defaults to all
     # logical CPUs (torch otherwise pins to physical cores). Only affects the
     # CrossEncoder — Qwen3 embeddings run out-of-process via Ollama.
@@ -624,6 +638,16 @@ class Config:
     # raises OutOfMemoryError. Set "cpu" to skip the GPU attempt entirely, which
     # is the recommended setting for batch runs alongside a running container.
     RERANKER_DEVICE = os.getenv("RERANKER_DEVICE", "auto")
+    # Floating-point precision of the CrossEncoder weights on a CUDA device:
+    #   "auto" (default) -- float16 on CUDA, float32 on CPU.
+    #   "float16" / "bfloat16" / "float32" -- pin explicitly (CUDA only).
+    # A CPU model is always float32: half precision there is slower and not
+    # supported by every op, and it keeps the CUDA->CPU fallback unchanged.
+    # A/B 20261107 (reports/reranker_fp16_ab_*20261107.csv): float16 returned
+    # the identical chunk set in 6146/6146 retrievals and the identical NACE
+    # class in 716/716 decisions, extraction changes stayed inside the LLM's own
+    # repeat noise, at 3.5x the speed and half the VRAM of float32.
+    RERANKER_DTYPE = os.getenv("RERANKER_DTYPE", "auto")
     CELEX_FACTS_PROMPT_DEBUG = os.getenv("CELEX_FACTS_PROMPT_DEBUG", "True")
 
     # --- Entity graph (Phase 5.1) ---
@@ -691,6 +715,21 @@ class Config:
             str(Path(CELEX_DOCS_DIR) / "filtered_final_manifest.xlsx"),
         )
     )
+    # Hand-maintained index of Commission decisions, reconciled against the
+    # extracted facts by batch.Main_recon_human_index
+    # (docs/human_index2facts_recon.md).
+    HUMAN_INDEX_XLSX_PATH = os.path.expanduser(
+        os.getenv(
+            "HUMAN_INDEX_XLSX_PATH",
+            str(Path(CELEX_DOCS_DIR) / "cases_1964_2024_clean_20250103_long2_JoB.xlsx"),
+        )
+    )
+    # Content-size bands of a decision, in tokens stored in EMBEDDING_TABLE: a
+    # decision above the first value is medium, above the second large. The
+    # defaults are the two limits the extraction path already switches on
+    # (SMALL_DOC_CONTEXT_TOKEN_LIMIT, OLLAMA_LLM_INFERENCE_PROMPT_TOKEN_LIMIT).
+    SIZE_BAND_MEDIUM_FROM_TOKENS = int(os.getenv("SIZE_BAND_MEDIUM_FROM_TOKENS", "12000"))
+    SIZE_BAND_LARGE_FROM_TOKENS = int(os.getenv("SIZE_BAND_LARGE_FROM_TOKENS", "40000"))
     # The Russo/Schinkel/Guenster/Carree 2010 monograph the book cross-check
     # judges facts against: its ``book_name`` key in pg_embedding_book_qwen and
     # the MinerU markdown it was ingested from. Resolved from CELEX_DOCS_DIR so
@@ -797,6 +836,14 @@ class Config:
     # original beside a non-English source, or a same-language text at least
     # this many times longer (user decision 2026-11-01: "switch to the better copy").
     DECIDE_BETTER_COPY_MIN_RATIO = float(os.getenv("DECIDE_BETTER_COPY_MIN_RATIO", "1.5"))
+    # Adoption date of a decision (ISSUES #369, review A26): read from the
+    # decision's own "Done at Brussels, <date>" line, else its title (the title
+    # region is DECIDE_TITLE_REGION_CHARS). The human index facts and the date
+    # in a DEC-AT<case>-YYYYMMDD id are checks only, never a source: registry
+    # dates are wrong for some amending decisions (ISSUES #275).
+    DECISION_DATE_FACT = "eu_commission_decision_date"
+    DECISION_DATE_HUMAN_DATE_FACT = "human_index_decision_date"
+    DECISION_DATE_HUMAN_YEAR_FACT = "human_index_year"
     # Registry language code -> name given to the LLM.
     TRANSLATE_LANGUAGE_NAMES = {
         "DE": "German", "FR": "French", "IT": "Italian", "NL": "Dutch",
@@ -828,6 +875,48 @@ class Config:
     NACE_JSON_PATH = os.getenv(
         "NACE_JSON_PATH", str(Path(CELEX_DOCS_DIR) / "NACE_2_1.json")
     )
+    # NaceModule shortlist: the reranker narrows the ~650 NACE classes to the
+    # top NACE_SHORTLIST_TOP_K for the LLM pick. Measured 20261108 against 139
+    # human-labelled decisions: gold group inside top-20/25/60 for 92/93/98%;
+    # shortlist + pick scored division 74% / group 65% / class 62% vs 61/45/26%
+    # for the former full-list LLM pick + in-group rerank.
+    NACE_SHORTLIST_TOP_K = int(os.getenv("NACE_SHORTLIST_TOP_K", "25"))
+
+    # Main_Main_Pipeline (end-to-end orchestrator, docs/Design Main_Main_Pipeline.md).
+    # Runs estimated above PIPELINE_ASK_THRESHOLD_MIN minutes ask the operator
+    # first; steps are called with PIPELINE_BATCH_SIZE cases per subprocess so
+    # progress and the restart state advance per batch. Run plans (JSON) and
+    # per-step subprocess logs live under PIPELINE_STATE_DIR.
+    # Loader file whose added rows / changed download URLs start chapter 1.
+    PIPELINE_LOADER_FILE = os.path.expanduser(
+        os.getenv("PIPELINE_LOADER_FILE", REPORT_EDDY_MANIFEST_PATH)
+    )
+    PIPELINE_ASK_THRESHOLD_MIN = float(os.getenv("PIPELINE_ASK_THRESHOLD_MIN", "30"))
+    PIPELINE_BATCH_SIZE = int(os.getenv("PIPELINE_BATCH_SIZE", "25"))
+    PIPELINE_STATE_DIR = os.path.expanduser(
+        os.getenv("PIPELINE_STATE_DIR", str(Path(CELEX_DOCS_DIR) / "pipeline_state"))
+    )
+    PIPELINE_LOG_DIR = os.path.expanduser(
+        os.getenv("PIPELINE_LOG_DIR", str(Path(PIPELINE_STATE_DIR) / "logs"))
+    )
+    # Free local-GPU memory (MiB) a chapter needs before it starts: MinerU in
+    # document preparation, the BGE reranker (~2.9 GB resident) in fact ingest.
+    PIPELINE_GPU_MIN_FREE_MB_MINERU = int(os.getenv("PIPELINE_GPU_MIN_FREE_MB_MINERU", "6000"))
+    PIPELINE_GPU_MIN_FREE_MB_BGE = int(os.getenv("PIPELINE_GPU_MIN_FREE_MB_BGE", "3000"))
+    # Opt-in trigger for re-chunking (e.g. after a splitter change): facts of
+    # a case whose chunks are newer than its facts are re-extracted.
+    PIPELINE_CHUNK_AGE_TRIGGER = os.getenv("PIPELINE_CHUNK_AGE_TRIGGER", "false").lower() == "true"
+    # Rough seconds per case for steps without an audit duration (estimate only).
+    PIPELINE_STEP_SECONDS_PER_CASE: dict[str, float] = json.loads(
+        os.getenv(
+            "PIPELINE_STEP_SECONDS_PER_CASE",
+            '{"download": 20, "convert": 180, "decide": 2, "translate": 300, '
+            '"embed": 60, "classify": 60, "enrich": 120, "entity_graph": 15, '
+            '"report": 0, "fact": 10}',
+        )
+    )
+    # Characters of the title + products query sent to the reranker and the LLM.
+    NACE_QUERY_MAX_CHARS = int(os.getenv("NACE_QUERY_MAX_CHARS", "2000"))
 
     # GLEIF Accepted Legal Jurisdictions code list (ISO 3166-1 country codes plus
     # the ISO 3166-2 subdivision codes GLEIF accepts as legal jurisdictions),

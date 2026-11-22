@@ -169,10 +169,10 @@ Install from a generated lock file, never from `pyproject.toml` directly --
 `pip install -e .` resolves the wrong (CUDA 13) build:
 
 ```bash
-# GPU host (torch 2.13.0+cu126, carries sm_50..sm_90)
+# GPU host (torch 2.13.0+cu130, carries sm_75..sm_120 incl. the RTX 5070; driver >= 580)
 .venv/bin/pip install -r requirements.txt
 
-# CPU-only host (~4.8 GB smaller, no nvidia-* wheels)
+# CPU-only host (several GB smaller, no nvidia-* wheels)
 .venv/bin/pip install -r requirements-cpu.txt
 
 # development (adds ruff, pip-tools, playwright)
@@ -567,6 +567,10 @@ and talk to the same database.
   issue.
 
 ---
+# Golden Set and Reconcilation
+The extracted facts were match against a human indexed list of cases.
+see: [human_index2facts_recon](docs/human_index2facts_recon)
+
 
 ## Contributing
 
@@ -608,7 +612,7 @@ Notes and options are in [docs/ci-cd/CICD.md](docs/ci-cd/CICD.md).
 | Issue | Solution |
 |---|---|
 | Query returns zero chunks for a known decision | Use the stored id format with the prefix: `CELEX-31990D0645`, not `31990D0645`. |
-| `torch` kernel launches fail on the workstation GPU | The PyPI `torch` is the CUDA 13 build and dropped Pascal (sm_61). Install from `requirements.txt`, which pins `2.13.0+cu126`. |
+| `torch` kernel launches fail on the workstation GPU (`no kernel image is available`, `sm_120 is not compatible`) | The installed wheel lacks kernels for the RTX 5070 (sm_120); `+cu126` stops at sm_90. Install from `requirements.txt`, which pins `2.13.0+cu130` (needs driver >= 580). After the swap, force-reinstall the `nvidia-*` / `cuda-*` packages: uninstalling the old `nvidia-*-cu12` wheels deletes shared files under `site-packages/nvidia/` (`ImportError: libcudnn.so.9`). |
 | `pip-compile` dies with `ImportError: stdlib_pkgs` | pip 26.2 removed it; pip-tools 7.6 still imports it. Hold `pip<26.2` in the venv. |
 | Reranker re-downloads ~2.3 GB on every container recreate | Set `RERANKER_CACHE_DIR=/app/data/cache/huggingface` so the weights land in the `hf_cache` volume. |
 | Backend raises `RuntimeError` naming sentence-transformers at startup | `UI_RERANKER_BACKEND=bge` on an image built from `requirements-ui.txt`, which has no BGE stack. Rebuild with `docker-compose.cpu.yml` or set the backend back to `flashrank`. |

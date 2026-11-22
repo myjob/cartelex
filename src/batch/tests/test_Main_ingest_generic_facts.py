@@ -829,3 +829,103 @@ class TestOverwriteCascadeConfirmation(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestForceFacts(unittest.TestCase):
+    """--force-facts forces exactly the named facts, never their predecessors."""
+
+    _STRUCTS = [
+        {"target_fact_name": "products", "question": "p", "output_schema": ""},
+        {"target_fact_name": "NACE_group_code", "question": "g", "output_schema": "", "predecessors": ["products"]},
+        {
+            "target_fact_name": "NACE_class_code",
+            "question": "c",
+            "output_schema": "",
+            "predecessors": ["products", "NACE_group_code"],
+        },
+        {"target_fact_name": "unrelated", "question": "u", "output_schema": ""},
+    ]
+
+    def _run(self, argv: list[str]) -> tuple[FactIngestionOrchestrator, MagicMock]:
+        orchestrator = FactIngestionOrchestrator(description="test")
+        executor_cls = MagicMock()
+        with (
+            patch.object(sys, "argv", ["Main_ingest_generic_facts.py", *argv]),
+            patch.object(orchestrator, "_load_yaml_configs", return_value=[dict(s) for s in self._STRUCTS]),
+            patch.object(orchestrator, "_configure_llm"),
+            patch.object(orchestrator, "_build_agents", return_value={}),
+            patch.object(orchestrator, "_build_pipelines", return_value=[]),
+            patch.object(orchestrator.runner, "run"),
+            patch("batch.Main_ingest_generic_facts.FactRepository"),
+            patch("batch.Main_ingest_generic_facts.PipelineExecutor", executor_cls),
+        ):
+            orchestrator.run()
+        return orchestrator, executor_cls
+
+    def test_force_facts_selects_predecessors(self) -> None:
+        _, executor_cls = self._run(["--force-facts", "NACE_class_code"])
+        names = [s["target_fact_name"] for s in executor_cls.call_args.kwargs["yaml_params"]]
+        self.assertEqual(names, ["products", "NACE_group_code", "NACE_class_code"])
+
+    def test_force_facts_passed_to_executor(self) -> None:
+        _, executor_cls = self._run(["--force-facts", "NACE_group_code,NACE_class_code"])
+        kwargs = executor_cls.call_args.kwargs
+        self.assertEqual(kwargs["force_facts"], frozenset({"NACE_group_code", "NACE_class_code"}))
+        self.assertFalse(kwargs["overwrite"])
+
+    def test_force_facts_forces_only_named_facts(self) -> None:
+        pipes = [MagicMock(), MagicMock()]
+        for pipe in pipes:
+            pipe.process = AsyncMock(return_value={"status": "success", "data": "x"})
+        executor = PipelineExecutor(
+            agents={"universal": MagicMock()},
+            pipelines=pipes,
+            yaml_params=[dict(self._STRUCTS[0]), dict(self._STRUCTS[2], predecessors=[])],
+            overwrite=False,
+            force_facts=frozenset({"NACE_class_code"}),
+        )
+        executor.process_celex("CELEX-TEST", dry_run=False)
+        self.assertFalse(pipes[0].process.call_args[0][0].force_override)
+        self.assertTrue(pipes[1].process.call_args[0][0].force_override)
+
+    def _assert_usage_error(self, argv: list[str], text: str) -> None:
+        with contextlib.redirect_stderr(io.StringIO()) as stderr, self.assertRaises(SystemExit) as raised:
+            self._run(argv)
+        self.assertEqual(raised.exception.code, 2)
+        self.assertIn(text, stderr.getvalue())
+
+    def test_force_facts_conflicts_with_filter_fact(self) -> None:
+        self._assert_usage_error(["--force-facts", "products", "--filter-fact", "products"], "mutually exclusive")
+
+    def test_force_facts_conflicts_with_all_facts(self) -> None:
+        self._assert_usage_error(["--force-facts", "products", "--all-facts"], "mutually exclusive")
+
+    def test_force_facts_unknown_name_exits_2(self) -> None:
+        self._assert_usage_error(["--force-facts", "products,nope"], "nope")
+
+
+class TestSelectFacts(TestForceFacts):
+    """--select-facts selects closures unforced, overruling run_state_active."""
+
+    def test_select_facts_selects_closure_unforced(self) -> None:
+        structs = [dict(s, run_state_active=False) for s in self._STRUCTS]
+        with patch.object(self, "_STRUCTS", structs):
+            _, executor_cls = self._run(["--select-facts", "NACE_class_code"])
+        kwargs = executor_cls.call_args.kwargs
+        names = [s["target_fact_name"] for s in kwargs["yaml_params"]]
+        self.assertEqual(names, ["products", "NACE_group_code", "NACE_class_code"])
+        self.assertEqual(kwargs["force_facts"], frozenset())
+        self.assertFalse(kwargs["overwrite"])
+
+    def test_select_and_force_combine(self) -> None:
+        _, executor_cls = self._run(["--select-facts", "unrelated", "--force-facts", "NACE_group_code"])
+        kwargs = executor_cls.call_args.kwargs
+        names = {s["target_fact_name"] for s in kwargs["yaml_params"]}
+        self.assertEqual(names, {"unrelated", "products", "NACE_group_code"})
+        self.assertEqual(kwargs["force_facts"], frozenset({"NACE_group_code"}))
+
+    def test_select_facts_conflicts_with_filter_fact(self) -> None:
+        self._assert_usage_error(["--select-facts", "products", "--filter-fact", "products"], "mutually exclusive")
+
+    def test_select_facts_unknown_name_exits_2(self) -> None:
+        self._assert_usage_error(["--select-facts", "ghost"], "ghost")

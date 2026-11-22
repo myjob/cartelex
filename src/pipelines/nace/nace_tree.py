@@ -3,6 +3,8 @@ import logging
 import logging.config
 from dataclasses import dataclass
 from difflib import SequenceMatcher
+from pathlib import Path
+from typing import Any
 
 
 logger = logging.getLogger(__name__)
@@ -85,15 +87,76 @@ class RankedNaceVo:
         return self.vo.type
 
 
+class NaceRagVo:
+    """RAG distance result for one NACE node, from the legacy NACE retriever.
+
+    Copies the query spec and distance statistics of a vector-DB query result
+    and keeps the NACE node it was run for as JSON.
+
+    Args:
+        rag_vo: Vector-DB query result; any object exposing ``rag_query``,
+            ``doc_type``, ``max_hits``, ``distance_crit``, ``tk``,
+            ``sentnumof``, ``dist_avg``, ``dist_min``, ``dist_max`` and
+            ``query_fit`` (the legacy ``VectorDbQueryResultVo``).
+        nace_json: JSON of the NACE node the query was run for.
+    """
+
+    def __init__(self, rag_vo: Any, nace_json: str):
+        # query spec
+        self.rag_query = rag_vo.rag_query
+        self.doc_type = rag_vo.doc_type
+        self.max_hits = rag_vo.max_hits
+        self.distance_crit = rag_vo.distance_crit
+
+        # -- result
+        self.tk = rag_vo.tk
+        self.sentnumof = rag_vo.sentnumof
+
+        self.dist_avg = rag_vo.dist_avg
+        self.dist_min = rag_vo.dist_min
+        self.dist_max = rag_vo.dist_max
+        self.query_fit = rag_vo.query_fit
+        self.nace_json = nace_json
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return the fields as a JSON-serialisable dict."""
+        return {
+            'rag_query': self.rag_query,
+            'doc_type': self.doc_type,
+            'max_hits': self.max_hits,
+            'distance_crit': self.distance_crit,
+            'tk': self.tk,
+            'sentnumof': self.sentnumof,
+            'dist_avg': self.dist_avg,
+            'dist_min': self.dist_min,
+            'dist_max': self.dist_max,
+            'query_fit': self.query_fit,
+            'nace_json': self.nace_json,
+        }
+
+    def __repr__(self) -> str:
+        return f"NaceRagVo(rag_query={self.rag_query},  max_hits={self.dist_min}, nace_json={self.nace_json})"
+
+
 class NaceTree:
-    def __init__(self, nace_tree_json: str):
-        """Construct NaceTree from loaded JSON data (as Python objects)."""
-        # We'll build a list of top-level NaceVo objects ("sections")
+    def __init__(self, nace_tree_json: str | Path | list[dict[str, Any]]):
+        """Build the NACE tree.
 
-        # Suppose your JSON data like above is in a file "nace.json" or loaded as a string
-        with open(nace_tree_json) as f:
-            json_data = json.load(f)
+        Args:
+            nace_tree_json: Path of the NACE JSON file, or its content already
+                loaded as a list of section dicts.
 
+        Raises:
+            OSError: If a path is given and the file cannot be read.
+            json.JSONDecodeError: If the file is not valid JSON.
+        """
+        if isinstance(nace_tree_json, (str, Path)):
+            with open(nace_tree_json, encoding="utf-8") as f:
+                json_data = json.load(f)
+        else:
+            json_data = nace_tree_json
+
+        # top-level NaceVo objects ("sections")
         self.root_sections = []
         for section in json_data:
             self.root_sections.append(self._build_vo(section, parent=None, node_type="section"))

@@ -160,7 +160,7 @@ depends_on = ["config.settings", "pipelines.agent_dspy", "extract.rag.models.chu
 
 [[modules ]]
 path = "pipelines.legal"
-depends_on = ["config.settings", "extract.rag.models.chunk_vo"]
+depends_on = ["config.settings", "extract.rag.models.chunk_vo", "pipelines.graph", "tools.country_normalizer"]
 
 [[modules ]]
 path = "reporting.utils"
@@ -365,6 +365,14 @@ depends_on = ["config.settings"]
 [[modules ]]
 path = "pipelines.rag.pgvector.fact2book_check_repository"
 depends_on = ["pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "pipelines.rag.pgvector.human_index_recon_repository"
+depends_on = ["config.settings", "pipelines.legal", "pipelines.rag.pgvector.session", "pipelines.rag.pgvector.vector_config"]
+
+[[modules ]]
+path = "batch.Main_recon_human_index"
+depends_on = ["config.settings", "pipelines.legal", "pipelines.rag.pgvector.human_index_recon_repository"]
 
 [[modules ]]
 path = "pipelines.rag.pgvector.lineage_repository"

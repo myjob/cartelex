@@ -241,6 +241,57 @@ def fetch_distinct_fact_names(db_url: str = DATABASE_URL) -> pl.DataFrame:
     return df
 
 
+def fetch_fact_status(db_url: str = DATABASE_URL) -> pl.DataFrame:
+    """Fetch each latest fact with its verification status and chunk lineage.
+
+    One row per ``(celex_id, name)``: the value, ``verification_status``,
+    ``verification_score``, ``verification_updated_at`` (UTC) and the chunks the
+    fact was extracted from (``fact_source_link`` to chunk sources), as their
+    ``doc_pos`` positions and chunk ids. A fact with no chunk lineage (derived
+    facts, human index facts) has empty chunk columns (ISSUES #355).
+
+    Args:
+        db_url: The database URL connection string.
+
+    Returns:
+        A Polars DataFrame ordered by ``celex_id`` and ``name``.
+    """
+    query = f"""
+    WITH NewestFacts AS (
+        SELECT
+            id, celex_id, name, value_md,
+            verification_status, verification_score, verification_updated_at,
+            ROW_NUMBER() OVER (PARTITION BY celex_id, name ORDER BY created_at DESC) AS rn
+        FROM {SCHEMA}.facts
+    )
+    SELECT
+        n.celex_id,
+        n.name,
+        n.value_md,
+        n.verification_status::text AS verification_status,
+        n.verification_score::float8 AS verification_score,
+        -- Excel has no time zones: UTC, naive.
+        n.verification_updated_at AT TIME ZONE 'UTC' AS verification_updated_at_utc,
+        string_agg(DISTINCT array_to_string(r.chunk_seq, ','), '; ') AS chunk_doc_pos,
+        string_agg(DISTINCT r.chunk_id, '; ') AS chunk_ids
+    FROM NewestFacts n
+    LEFT JOIN {SCHEMA}.fact_source_link l ON l.fact_id = n.id
+    LEFT JOIN {SCHEMA}.fact_source_registry r
+      ON r.source_id = l.source_id AND r.source_type = 'chunk'
+    WHERE n.rn = 1
+    GROUP BY n.celex_id, n.name, n.value_md, n.verification_status,
+             n.verification_score, n.verification_updated_at
+    ORDER BY n.celex_id, n.name
+    """
+    clean_db_url = db_url.replace("+psycopg2", "").replace("+psycopg", "")
+    df = pl.read_database_uri(query=query, uri=clean_db_url)
+
+    if df.is_empty():
+        log.warning("No facts found for the status sheet.")
+
+    return df
+
+
 def export_report_to_excel(
     df_pivoted: pl.DataFrame,
     df_markdown: pl.DataFrame,
@@ -249,9 +300,10 @@ def export_report_to_excel(
     df_ingestion_errors: pl.DataFrame,
     df_ingestion_error_pivot: pl.DataFrame,
     output_dir: str = ".",
+    df_status: pl.DataFrame | None = None,
 ) -> str | None:
     """
-    Exports DataFrames to a single Excel workbook with six worksheets.
+    Exports DataFrames to a single Excel workbook with up to seven worksheets.
 
     Sheet 1 – ``Facts (json)``: celex_id vs fact names (value_json).
     Sheet 2 – ``Facts (markdown)``: celex_id vs fact names (value_md).
@@ -259,6 +311,8 @@ def export_report_to_excel(
     Sheet 4 – ``fact_names``: distinct list of fact names ordered alphabetically.
     Sheet 5 – ``ingestion_errors``: failed extractions from the audit trail.
     Sheet 6 – ``ingestion_error_pivot``: error/success counts per fact name.
+    Sheet 7 – ``Facts (status)``: one row per fact with its verification
+    status, score and source chunks.
 
     Args:
         df_pivoted: Pivoted DataFrame produced by :func:`fetch_and_pivot_celex_facts`.
@@ -268,6 +322,8 @@ def export_report_to_excel(
         df_ingestion_errors: DataFrame produced by :func:`fetch_ingestion_errors`.
         df_ingestion_error_pivot: DataFrame produced by :func:`fetch_ingestion_error_pivot`.
         output_dir: Directory where the file will be saved.
+        df_status: DataFrame produced by :func:`fetch_fact_status`; ``None``
+            or empty leaves the sheet out.
 
     Returns:
         Absolute path of the generated file, or ``None`` when all frames are empty.
@@ -279,6 +335,7 @@ def export_report_to_excel(
         and df_fact_names.is_empty()
         and df_ingestion_errors.is_empty()
         and df_ingestion_error_pivot.is_empty()
+        and (df_status is None or df_status.is_empty())
     ):
         log.warning("All DataFrames are empty. Skipping export.")
         return None
@@ -305,6 +362,8 @@ def export_report_to_excel(
         df_ingestion_errors.write_excel(workbook=workbook, worksheet="ingestion_errors")
     if not df_ingestion_error_pivot.is_empty():
         df_ingestion_error_pivot.write_excel(workbook=workbook, worksheet="ingestion_error_pivot")
+    if df_status is not None and not df_status.is_empty():
+        df_status.write_excel(workbook=workbook, worksheet="Facts (status)", autofilter=True)
 
     workbook.close()
 
@@ -350,6 +409,10 @@ def create_celex_fact_report(output_dir: str, db_url: str = DATABASE_URL) -> str
     df_ingestion_error_pivot = fetch_ingestion_error_pivot(db_url=db_url)
     log.info("Ingestion error pivot: %d rows.", df_ingestion_error_pivot.height)
 
+    log.info("Fetching verification status and chunk lineage...")
+    df_status = fetch_fact_status(db_url=db_url)
+    log.info("Status data: %d rows.", df_status.height)
+
     filepath = export_report_to_excel(
         df_pivoted=df_pivoted,
         df_markdown=df_markdown,
@@ -358,6 +421,7 @@ def create_celex_fact_report(output_dir: str, db_url: str = DATABASE_URL) -> str
         df_ingestion_errors=df_ingestion_errors,
         df_ingestion_error_pivot=df_ingestion_error_pivot,
         output_dir=output_dir,
+        df_status=df_status,
     )
     if filepath:
         log.info("Report written to: %s", filepath)

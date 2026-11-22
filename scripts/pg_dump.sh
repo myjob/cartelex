@@ -4,7 +4,7 @@
 #
 # Values are derived from ../postgres-docker/docker-compose.yml:
 #   service "postgres_db" (project "postgres-docker")
-#       -> container "postgres-docker-postgres_db-1"
+#       -> container "celex-facts-postgres_db-1" (pinned via container_name)
 #   image pgvector/pgvector:pg18-trixie, host port 5433 -> 5432
 #   POSTGRES_PASSWORD is set, but no POSTGRES_USER / POSTGRES_DB,
 #   so the application database is "celex", owned by role "job".
@@ -31,7 +31,7 @@
 set -euo pipefail
 
 CONTAINER="${PG_CONTAINER:-celex-facts-postgres_db-1}"
-DB_USER="${PG_USER:-job}"
+DB_USER="${PG_USER:-postgres}"
 DB_NAME="${PG_DATABASE:-celex}"
 HOST_BACKUP_DIR="${HOST_BACKUP_DIR:-~/a/postgres-docker/backups}"
 

@@ -69,6 +69,27 @@ class TestExportReportToExcel(unittest.TestCase):
             self.assertTrue(os.path.isfile(filepath))
             self.assertTrue(filepath.endswith(".xlsx"))
 
+    def test_status_sheet_is_written(self):
+        """ISSUES #355: the workbook carries status, score and chunk lineage."""
+        from openpyxl import load_workbook
+
+        df_status = pl.DataFrame({
+            "celex_id": ["C1"], "name": ["fines"], "value_md": ["1M"],
+            "verification_status": ["verified_supported"], "verification_score": [0.9],
+            "chunk_doc_pos": ["12"], "chunk_ids": ["abc"],
+        })
+        df_empty = pl.DataFrame()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            filepath = export_report_to_excel(
+                df_empty, df_markdown=df_empty, df_plaintext=df_empty, df_fact_names=df_empty,
+                df_ingestion_errors=df_empty, df_ingestion_error_pivot=df_empty,
+                output_dir=tmp_dir, df_status=df_status,
+            )
+            sheet = load_workbook(filepath)["Facts (status)"]
+            header = [cell.value for cell in sheet[1]]
+            self.assertIn("verification_status", header)
+            self.assertEqual(sheet.cell(row=2, column=header.index("chunk_ids") + 1).value, "abc")
+
     def test_export_report_empty_df(self):
         """Test export behavior with all empty DataFrames."""
         df_empty = pl.DataFrame()

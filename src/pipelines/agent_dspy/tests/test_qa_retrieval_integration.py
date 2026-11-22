@@ -484,7 +484,12 @@ class TestQAFullPipelineIntegration(_QAIntegrationBase):
         self.assertGreater(len(pred.answer), 10)
 
     def test_e2e_aggregation_cases_nace(self):
-        """Full pipeline: look up the NACE group code for a single known case."""
+        """Full pipeline: look up the NACE group code for a single known case.
+
+        Eirpage (IV/32.737) is a radio paging service joint venture; the
+        20261108 NACE shortlist re-extraction stores 61.2 (formerly 26.3,
+        Manufacture of communication equipment).
+        """
         pipeline = QARetrievalPipeline(
             sql_store=self.fact_repo,
             kb_searcher=self.toolkit,
@@ -504,10 +509,10 @@ class TestQAFullPipelineIntegration(_QAIntegrationBase):
 
         self.assertIsInstance(pred.answer, str)
         self.assertGreater(len(pred.answer), 10)
-        self.assertIn("26.3", pred.answer)
+        self.assertIn("61.2", pred.answer)
 
     def test_e2e_aggregation_cases_nace_desc(self):
-        """Full pipeline: look up the NACE group  for a single known case."""
+        """Full pipeline: look up the NACE group title for a single known case (61.2, see above)."""
         pipeline = QARetrievalPipeline(
             sql_store=self.fact_repo,
             kb_searcher=self.toolkit,
@@ -526,7 +531,7 @@ class TestQAFullPipelineIntegration(_QAIntegrationBase):
 
         self.assertIsInstance(pred.answer, str)
         self.assertGreater(len(pred.answer), 10)
-        self.assertIn("communication equipment", pred.answer)
+        self.assertIn("Wireless telecommunications", pred.answer)
 
     def test_e2e_aggregation_cases_infringement_gravity(self):
         """Full pipeline: look up the infringement_gravity  for a single known case."""

@@ -32,6 +32,7 @@ from pipelines.agent_dspy.universal_modules import (
     KeywordRegexModule,
     InfringementConceptModule,
     RecitalCountModule,
+    DecisionDateModule,
     UndertakingCountModule,
     BookKeywordModule,
     BookFactModule,
@@ -77,12 +78,14 @@ PIPELINE_DSPY_MODULE_CLASSES: dict[str, type[dspy.Module]] = {
     "keyword_regex": KeywordRegexModule,
     "infringement_concept": InfringementConceptModule,
     "recital_count": RecitalCountModule,
+    "decision_date": DecisionDateModule,
     "undertaking_count": UndertakingCountModule,
     "doc_search": DocHybridSearchModule,
     "hybrid_search": FactContextModule,
     "fact_context": FactContextModule,
     "detail_retriever": FactDetailRetriever,
     "fact_comparison": FactComparisonModule,
+    "nace_group_code": NaceModule,
     "nace_class_code": NaceModule,
     "case_summary": FactSummaryModule,
     "book_keywords": BookKeywordModule,
@@ -138,11 +141,22 @@ class PipelineExecutor:
         pipelines: list,
         yaml_params: list,
         overwrite: bool,
+        force_facts: frozenset[str] = frozenset(),
     ):
+        """Hold the run's shared state.
+
+        Args:
+            agents: DSPy agents keyed by pipeline name.
+            pipelines: One pipeline per entry of ``yaml_params``, same order.
+            yaml_params: Selected fact configs in execution order.
+            overwrite: ``--overwrite``; forces every selected fact.
+            force_facts: ``--force-facts``; forces only these fact names.
+        """
         self.agents = agents
         self.pipelines = pipelines
         self.yaml_params = yaml_params
         self.overwrite = overwrite
+        self.force_facts = force_facts
         self.logger = logging.getLogger(__name__)
 
     def process_celex(self, celex_id: str, context=None, dry_run: bool = False) -> list:
@@ -173,7 +187,10 @@ class PipelineExecutor:
         context_data: dict = {}
         for pipe, struct in zip(self.pipelines, self.yaml_params):
             param_vo = FactExtractorParamVO.from_yaml_struct(
-                celex_id=celex_id, struct=struct, force_override=self.overwrite
+                celex_id=celex_id,
+                struct=struct,
+                force_override=self.overwrite
+                or struct["target_fact_name"] in self.force_facts,
             )
 
             if dry_run:
@@ -330,6 +347,13 @@ class FactIngestionOrchestrator:
             self.runner.parser.error(
                 "--all-facts and --filter-fact are mutually exclusive"
             )
+        force_facts = [n.strip() for n in (args.force_facts or "").split(",") if n.strip()]
+        select_facts = [n.strip() for n in (args.select_facts or "").split(",") if n.strip()]
+        if (force_facts or select_facts) and (args.all_facts or args.filter_fact):
+            self.runner.parser.error(
+                "--force-facts / --select-facts are mutually exclusive with "
+                "--filter-fact and --all-facts"
+            )
 
         yaml_path = self._resolve_yaml_path(args)
 
@@ -337,9 +361,22 @@ class FactIngestionOrchestrator:
         if structs is None:
             return
 
-        active_structs = self._filter_active_structs(
-            structs, args.filter_fact, args.all_facts
-        )
+        if force_facts or select_facts:
+            unknown = sorted(
+                set(force_facts + select_facts)
+                - {s.get("target_fact_name") for s in structs}
+            )
+            if unknown:
+                self.runner.parser.error(
+                    f"--force-facts / --select-facts name unknown facts: {', '.join(unknown)}"
+                )
+            active_structs = self._select_fact_closures(
+                structs, list(dict.fromkeys(select_facts + force_facts))
+            )
+        else:
+            active_structs = self._filter_active_structs(
+                structs, args.filter_fact, args.all_facts
+            )
         if active_structs is None:
             return
         if not active_structs:
@@ -370,6 +407,7 @@ class FactIngestionOrchestrator:
             pipelines=pipelines,
             yaml_params=active_structs,
             overwrite=args.overwrite,
+            force_facts=frozenset(force_facts),
         )
         self.runner.run(executor.process_celex)
 
@@ -386,6 +424,29 @@ class FactIngestionOrchestrator:
                 "already exists. OR-ed with the per-fact force_override in the "
                 "YAML config, so it applies to every selected fact but cannot "
                 "switch a YAML 'force_override: true' back off."
+            ),
+        )
+        self.runner.parser.add_argument(
+            "--force-facts",
+            type=str,
+            default=None,
+            help=(
+                "Comma-separated facts to re-extract even when they exist. "
+                "Selects them plus their predecessors (like --filter-fact) but "
+                "forces only the named facts; predecessors are served from the "
+                "store. Mutually exclusive with --filter-fact and --all-facts."
+            ),
+        )
+        self.runner.parser.add_argument(
+            "--select-facts",
+            type=str,
+            default=None,
+            help=(
+                "Comma-separated facts to extract where missing, regardless of "
+                "run_state_active: selects them plus their predecessors, forces "
+                "nothing (existing facts are served from the store). Combines "
+                "with --force-facts; mutually exclusive with --filter-fact and "
+                "--all-facts."
             ),
         )
         self.runner.parser.add_argument(
@@ -570,6 +631,11 @@ class FactIngestionOrchestrator:
             "recital_count": cls["recital_count"](
                 sql_store=shared_repo, chunk_repo=chunk_repo
             ),
+            "decision_date": cls["decision_date"](
+                sql_store=shared_repo,
+                chunk_repo=chunk_repo,
+                fallback=cls["fact_context"](sql_store=shared_repo),
+            ),
             "undertaking_count": cls["undertaking_count"](
                 sql_store=shared_repo
             ),
@@ -584,10 +650,17 @@ class FactIngestionOrchestrator:
                 hybrid_search=hybrid_search,
             ),
             "fact_comparison": cls["fact_comparison"](sql_store=shared_repo),
-            "nace_class_code": cls["nace_class_code"](
-                sql_store=shared_repo, nace_tree=nace_tree, ranker=ranker
+            "nace_group_code": cls["nace_group_code"](
+                sql_store=shared_repo, nace_tree=nace_tree, ranker=ranker, level="group"
             ),
-            "case_summary": cls["case_summary"](sql_store=shared_repo),
+            "nace_class_code": cls["nace_class_code"](
+                sql_store=shared_repo, nace_tree=nace_tree, ranker=ranker, level="class"
+            ),
+            "case_summary": cls["case_summary"](
+                sql_store=shared_repo,
+                lineage_repo=LineageRepository(engine=shared_repo.engine),
+                chunk_repo=chunk_repo,
+            ),
             "book_keywords": cls["book_keywords"](
                 sql_store=shared_repo, book_searcher=book_keyword_search_tool
             ),
@@ -698,6 +771,38 @@ class FactIngestionOrchestrator:
         self._log_run_state_overrides(selected_structs, "--filter-fact")
         selected_by_name = {s["target_fact_name"]: s for s in selected_structs}
         self._log_missing_predecessors(selected_structs, selected_by_name)
+        return selected_structs
+
+    def _select_fact_closures(self, structs: list, names: list[str]) -> list | None:
+        """Select ``names`` plus their recursive predecessors, regardless of run state.
+
+        Args:
+            structs: Raw fact-config dicts parsed from the YAML file.
+            names: Facts requested by ``--select-facts`` / ``--force-facts``;
+                all must exist.
+
+        Returns:
+            The selected configs with normalized predecessors, or None when a
+            config is malformed.
+        """
+        candidates = self._normalize_predecessors(list(structs))
+        if candidates is None:
+            return None
+        struct_by_name = self._index_structs_by_target(candidates)
+        if struct_by_name is None:
+            return None
+        self.logger.info("Applying --select-facts/--force-facts: %s", ", ".join(names))
+        selected: set[str] = set()
+        for name in names:
+            closure = self._collect_fact_with_predecessors(name, struct_by_name)
+            if closure is None:
+                return None
+            selected |= closure
+        selected_structs = [s for s in candidates if s["target_fact_name"] in selected]
+        self._log_run_state_overrides(selected_structs, "--force-facts")
+        self._log_missing_predecessors(
+            selected_structs, {s["target_fact_name"]: s for s in selected_structs}
+        )
         return selected_structs
 
     def _candidate_structs(

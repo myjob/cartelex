@@ -7,6 +7,9 @@ import concurrent.futures
 import sys
 import uuid
 from datetime import datetime
+
+import httpx
+import openai
 from tqdm import tqdm
 from batch.utils.Filter_MasterJsnOrg_CELEX import filterMasterJsonListFor  # type: ignore
 from batch.utils.Job_Utils import save_list_to_file  # type: ignore
@@ -26,7 +29,27 @@ from config.ollama_health_gate import (
 )
 from config.settings import settings
 
-__all__ = ["BatchJobRunner", "EXIT_CODE_THERMAL_ABORT"]
+__all__ = [
+    "BatchJobRunner",
+    "EXIT_CODE_LLM_TIMEOUTS",
+    "EXIT_CODE_THERMAL_ABORT",
+    "batch_exit_code",
+    "is_llm_timeout",
+]
+
+# Exit code of a run whose only failures are LLM request timeouts, with at
+# least one CELEX done. Callers that re-plan from stored state (the main
+# pipeline) may carry on: the timed-out facts stay missing or stale and the
+# next plan picks them up. 1 stays "a failure that needs a look".
+EXIT_CODE_LLM_TIMEOUTS = 3
+
+# litellm.Timeout subclasses openai.APITimeoutError; httpx and the builtin
+# cover a timeout that surfaces unwrapped.
+_TIMEOUT_TYPES: tuple[type[BaseException], ...] = (
+    openai.APITimeoutError,
+    httpx.TimeoutException,
+    TimeoutError,
+)
 
 _BOLD = "\033[1m"
 _RESET = "\033[0m"
@@ -41,6 +64,52 @@ class _AuditEncoder(json.JSONEncoder):
         return super().default(o)
 
 
+def is_llm_timeout(exc: BaseException) -> bool:
+    """Tell whether an exception is, or was caused by, an LLM request timeout.
+
+    Walks the ``__cause__`` / ``__context__`` chain, since a pipeline may
+    re-raise the LiteLLM timeout inside its own exception.
+
+    Args:
+        exc: The exception a CELEX failed with.
+
+    Returns:
+        True when any exception in the chain is a request timeout.
+    """
+    seen: set[int] = set()
+    current: BaseException | None = exc
+    while current is not None and id(current) not in seen:
+        if isinstance(current, _TIMEOUT_TYPES):
+            return True
+        seen.add(id(current))
+        current = current.__cause__ or current.__context__
+    return False
+
+
+def batch_exit_code(failed: set[str], timed_out: set[str], succeeded: int) -> int:
+    """Choose the exit code of a finished per-CELEX loop.
+
+    Args:
+        failed: CELEX ids that failed for any reason.
+        timed_out: The subset that failed on an LLM request timeout.
+        succeeded: Number of CELEX ids that finished without error.
+
+    Returns:
+        0 without failures; :data:`EXIT_CODE_LLM_TIMEOUTS` when every failure
+        is a timeout; 1 otherwise. A batch of at least
+        ``settings.LLM_HUNG_SERVER_MIN_BATCH`` cases where nothing succeeded
+        gets 1 even if all timed out: that is a hung or overloaded server, not
+        an occasional runaway request. A smaller batch is too small to tell
+        the two apart, so its timeouts stay tolerable.
+    """
+    if not failed:
+        return 0
+    if not failed <= timed_out:
+        return 1
+    hung = succeeded == 0 and len(failed) >= settings.LLM_HUNG_SERVER_MIN_BATCH
+    return 1 if hung else EXIT_CODE_LLM_TIMEOUTS
+
+
 class BatchJobRunner:
     def __init__(self, description="Batch Process"):
         self.parser = argparse.ArgumentParser(description=description)
@@ -49,6 +118,9 @@ class BatchJobRunner:
         # Built in run() once the CLI is parsed; None means "no gate", which is
         # also the correct state when _safe_process_wrapper is exercised alone.
         self._gate: OllamaHealthGate | None = None
+        # CELEX ids whose failure was an LLM timeout; filled by
+        # _safe_process_wrapper (set.add is safe across the pool workers).
+        self._timed_out: set[str] = set()
 
     def _setup_default_args(self):
         self.parser.add_argument(
@@ -276,6 +348,7 @@ class BatchJobRunner:
 
         count = 0
         failures: dict[str, str] = {}  # celex_id -> error message
+        self._timed_out = set()
 
         # One gate for the whole run, shared by every worker. Pre-flighted here
         # so a run that cannot start fails in seconds rather than after the
@@ -410,8 +483,16 @@ class BatchJobRunner:
         # failure, so without this a run that silently dropped rows looks
         # identical to a clean one to any caller (shell wrapper, cron, CI).
         # Post-stage failures are logged above but deliberately do not affect
-        # the exit code -- they are not per-CELEX data loss.
-        sys.exit(1 if failures else 0)
+        # the exit code -- they are not per-CELEX data loss. Timeout-only
+        # failures get their own code so a re-planning caller can carry on.
+        code = batch_exit_code(set(failures), self._timed_out, success_count)
+        if code == EXIT_CODE_LLM_TIMEOUTS:
+            self.logger.warning(
+                "%d CELEX IDs failed on LLM timeouts only; exit %d (tolerable)",
+                error_count,
+                code,
+            )
+        sys.exit(code)
 
     def _write_audit_line(
         self, audit_file: str, celex_id: str, results, usage: UsageTotals
@@ -473,7 +554,9 @@ class BatchJobRunner:
         Returns:
             (result, None, usage) on success; (False, error_message, usage) on
             failure. The usage totals are returned either way: a CELEX that
-            failed after twenty LLM calls consumed twenty LLM calls.
+            failed after twenty LLM calls consumed twenty LLM calls. A
+            failure caused by an LLM timeout is also added to
+            ``self._timed_out`` for the exit code.
 
         Raises:
             ThermalAbort: If the DGX stayed unhealthy past the cooldown budget.
@@ -496,4 +579,6 @@ class BatchJobRunner:
                 return process_fn(celex_id, context, dry_run), None, usage
             except Exception as e:
                 self.logger.error(f"Error processing {celex_id}: {e}")
+                if is_llm_timeout(e):
+                    self._timed_out.add(celex_id)
                 return False, str(e), usage

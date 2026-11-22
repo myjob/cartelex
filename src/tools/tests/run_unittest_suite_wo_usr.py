@@ -1,9 +1,11 @@
 """Test suite that discovers all tests under ``src/`` and the top-level ``tests/``."""
 
+import contextlib
 import inspect
 import os
 import sys
 import unittest
+from unittest import mock
 
 # Test modules that drive a real browser (Playwright) against a live backend
 # and Open WebUI instance. This runner is the "without UI" suite, so these
@@ -127,6 +129,52 @@ class _VsCodeReportResult(unittest.TextTestResult):
         self.stream.writeln()
 
 
+def no_live_dgx() -> contextlib.ExitStack:
+    """Make the suite unable to reach the real DGX or serve a real cooldown.
+
+    Tests that exercise the thermal gate inject their own ``ping_fn``,
+    ``probe_fn`` and ``sleep_fn``, so only a test that forgot to stub the gate
+    falls through to the defaults patched here. Those defaults raise
+    ``AssertionError`` -- which ``OllamaHealthGate`` does not catch -- so the
+    offending test fails in milliseconds instead of SSHing to the Spark and
+    sleeping ``THERMAL_COOLDOWN_SECONDS`` per cycle. The cooldown is also set
+    to zero as a second net in case something swallows the assertion.
+
+    Returns
+    -------
+    contextlib.ExitStack
+        The entered stack of patches; use it as a context manager (or close
+        it) so they are undone when the run ends.
+
+    Raises
+    ------
+    ImportError
+        If ``src`` is not on ``sys.path`` (call after ``suite()``).
+    """
+    from config import ollama_health_gate
+    from config.settings import settings
+
+    stack = contextlib.ExitStack()
+    stack.enter_context(mock.patch.object(
+        ollama_health_gate,
+        "_run_remote_probe",
+        side_effect=AssertionError(
+            "a test reached the live DGX over SSH; inject probe_fn or stub the gate"
+        ),
+    ))
+    stack.enter_context(mock.patch.object(
+        ollama_health_gate,
+        "_ping_ollama",
+        side_effect=AssertionError(
+            "a test pinged the live Ollama server; inject ping_fn or stub the gate"
+        ),
+    ))
+    stack.enter_context(
+        mock.patch.object(settings, "THERMAL_COOLDOWN_SECONDS", 0.0)
+    )
+    return stack
+
+
 class _VsCodeReportRunner(unittest.TextTestRunner):
     """TextTestRunner that uses _VsCodeReportResult for enriched output."""
 
@@ -145,7 +193,8 @@ class _VsCodeReportRunner(unittest.TextTestRunner):
         unittest.TestResult
             The result object after the run completes.
         """
-        result = super().run(test)
+        with no_live_dgx():
+            result = super().run(test)
         result._print_vscode_report()  # type: ignore[attr-defined]
         return result
 

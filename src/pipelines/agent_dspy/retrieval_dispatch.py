@@ -75,6 +75,9 @@ Columns:
   - name       TEXT   — fact name (determines the type/meaning of value_md)
   - value_md   TEXT   — the fact value (type depends on `name`, see below)
   - value_json JSONB  — structured JSON value (may be NULL)
+  - verification_status TEXT — evidence verdict on value_md, e.g.
+      'verified_supported', 'weak_support', 'contradicted' (NULL = never verified)
+  - verification_score  NUMERIC — verifier score 0..1 (may be NULL)
 
 Fact names and their value_md TYPES:
   Boolean facts (value_md is 'True' or 'False'):
@@ -854,11 +857,15 @@ class _ToolDispatcher:
             return EvidenceResult(
                 text=f"[case_facts] No facts found for celex_id='{case_id}'."
             )
+        # Each fact carries its verification status, so an answer can say how
+        # well a value is supported instead of presenting every fact as
+        # equally certain (ISSUES #355). Labels only: nothing is filtered out.
+        statuses = self.sql_store.select_fact_statuses4celex(case_id)
         lines: list[str] = []
         fact_ids: list[str] = []
         fact_names: list[str] = []
         for fact_id, name, value in rows:
-            lines.append(f"  {name}: {value[:500]}")
+            lines.append(f"  {name} [{statuses.get(name, 'unverified')}]: {value[:500]}")
             # Structural labels (e.g. case_title) never anchor an edge.
             if name in _NON_FACT_NAMES:
                 continue

@@ -192,6 +192,21 @@ class MainDownloadDocumentsTest(unittest.TestCase):
         self._run(["--loader-file", str(self.loader), "--limit", "2"], orch)
         self.assertEqual(len(orch.calls[0]["decisions"]), 2)
 
+    def test_ids_filters_decisions(self) -> None:
+        """--ids keeps only the listed decisions, in loader order."""
+        everything = FakeOrchestrator()
+        self._run(["--loader-file", str(self.loader)], everything)
+        all_ids = [d.decision_id for d in everything.calls[0]["decisions"]]
+        orch = FakeOrchestrator()
+        self._run(["--loader-file", str(self.loader), "--ids", all_ids[1]], orch)
+        self.assertEqual([d.decision_id for d in orch.calls[0]["decisions"]], [all_ids[1]])
+
+    def test_unknown_id_warns(self) -> None:
+        """An --ids value absent from the loader is logged, not silently dropped."""
+        with self.assertLogs(cli.logger, "WARNING") as logs:
+            self._run(["--loader-file", str(self.loader), "--ids", "NOT-THERE"], FakeOrchestrator())
+        self.assertTrue(any("NOT-THERE" in line for line in logs.output), logs.output)
+
     def test_probe_failure_exits_2(self) -> None:
         """Missing registry tables exit 2 with a clear message."""
         with patch.object(cli, "_build_pipeline",

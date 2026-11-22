@@ -150,6 +150,7 @@ Governed by [settings.py](file://~/a/celex-facts/src/config/settings.py):
 | `RERANKER_LOCAL_FILES_ONLY` | `false` | Resolve a *repo id* from `RERANKER_CACHE_DIR` only, never from the hub. Requires a populated cache; construction otherwise fails fast naming the `hf download` command. Implied (and needs no setting) when `RERANKER_MODEL_ID` is a directory. |
 | `RERANKER_MAX_LENGTH` | `512` | Max tokens per `(query, chunk)` pair. bge-m3 supports up to **8192**; higher = better recall on long chunks, slower on CPU. |
 | `RERANKER_DEVICE` | `auto` | torch device for the CrossEncoder: `auto` lets sentence-transformers choose (CUDA when visible), or pin `cpu` / `cuda` / `cuda:1`. On a CUDA OOM at load time `BgeReranker` logs a warning and retries on CPU — the local GPU also serves the Qwen3 embeddings via Ollama. |
+| `RERANKER_DTYPE` | `auto` | weight precision: `auto` runs float16 on CUDA and float32 on CPU; pin `float16` / `bfloat16` / `float32` (CUDA only, CPU is always float32). Cast before the construction probe, so an unsupported precision takes the normal CPU fallback. A/B 20261107: identical chunk set in 6146/6146 retrievals, identical NACE class in 716/716 decisions, extraction changes inside the LLM's repeat noise (27.3% fp32-vs-fp32 vs 30.1% fp16-vs-fp32 on 176 reordered prompts); 3.5x faster, half the VRAM. |
 
 All are env-overridable (e.g. `RERANKER_BACKEND=bge`).
 

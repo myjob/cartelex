@@ -130,6 +130,32 @@ COMMENT ON COLUMN celex_facts.fact2book_case_runs.absence_reason IS
 COMMENT ON COLUMN celex_facts.fact2book_case_runs.already_checked IS
   $$Facts left untouched by a --skip-existing pass (neither judged nor written).$$;
 
+COMMENT ON TABLE celex_facts.human_index_recon IS
+  $$Reconciliation of the hand-maintained case index workbook against the
+    extracted facts: one row per (celex_id, target) with the human cell, the
+    extracted value, both normalised forms and the outcome. Rewritten by
+    Main_recon_human_index.py; verdict and verdict_note are written by hand.$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.target IS
+  $$Column family compared, CHECK-constrained: formal_decision,
+    nature_of_conduct, responsible_commissioner or firms.$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.status IS
+  $$Outcome, CHECK-constrained: agree, conflict, extraction_superset (firms
+    only: every human firm is covered, the roster names more), human_blank,
+    extraction_blank or not_comparable (no extracted counterpart).$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.detail IS
+  $$Why the status was assigned: missing / extra lists, counts, the fuzzy
+    surname matched, or the reason a pair is not comparable.$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.content_tokens IS
+  $$Tokens stored for the decision in the chunk table at reconciliation time;
+    the measure of how much text the extraction had to work with.$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.size_band IS
+  $$S, M or L by content_tokens (settings.SIZE_BAND_*_FROM_TOKENS); NULL when
+    the decision has no chunks.$$;
+COMMENT ON COLUMN celex_facts.human_index_recon.verdict IS
+  $$Human adjudication of a conflict: human_wrong, extraction_wrong,
+    both_wrong or both_acceptable. A re-run clears it when either compared
+    value has changed.$$;
+
 COMMENT ON TABLE celex_facts.fact_ingestion_audit_trail IS
   $$Append-only run log of every fact-extraction attempt. Never updated in place;
     query the newest row per (celex_id, target_fact_name) for current state.$$;

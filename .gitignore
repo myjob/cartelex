@@ -11,6 +11,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+.claude/settings.json
+
 # C extensions
 *.so
 
@@ -224,6 +227,5 @@ node_modules/
 
 config_main/master_doc_descriptors.json.bak-*
 
-# Stray spec-kit scaffold and editor rules, not part of the release
-/celex-facts/
-/.cursorrules
+# local clone of wilicc/gpu-burn (GPU stress test), not part of this repo
+gpu-burn/
