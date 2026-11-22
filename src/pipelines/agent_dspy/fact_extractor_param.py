@@ -26,6 +26,7 @@ class FactExtractorParamVO(BaseModel):
     section_scope: Optional[List[str]] = Field(default=None, description="Optional decision-section filter for retrieval; SectionType values, e.g. ['fines', 'operative']")
     normalize_iso_country: bool = Field(default=False, description="When true, the extracted 'country' field of each row is normalized to its ISO 3166-1 alpha-2 code after extraction")
     context_facts: List[str] = Field(default_factory=list, description="Ordered fact names read best-effort as LLM context (e.g. by case_summary). Unlike predecessors, a missing entry never skips the fact and never pulls the entry into a --filter-fact run")
+    na_fallback_fact: Optional[str] = Field(default=None, description="Stored title fact (e.g. 'case_title') the universal module infers the value from when regular extraction comes back NA. Read best-effort: a missing title leaves the fact NA")
 
     @field_validator("section_scope")
     @classmethod
@@ -51,7 +52,7 @@ class FactExtractorParamVO(BaseModel):
             return None
         return [SectionType(entry).value for entry in value]
 
-    def __init__(self, target_fact_name: str, question: str, celex_id: str, output_schema: str, output_type: str = "dict", pipeline: str = "universal", run_state_active: bool = True, verify_fact_name: Optional[str] = None, force_override: bool = False, predecessors: Optional[List[str]] = None, condition: Optional[str] = None, dependency_condition: Optional[str] = None, section_scope: Optional[List[str]] = None, normalize_iso_country: bool = False, context_facts: Optional[List[str]] = None, **data: Any):
+    def __init__(self, target_fact_name: str, question: str, celex_id: str, output_schema: str, output_type: str = "dict", pipeline: str = "universal", run_state_active: bool = True, verify_fact_name: Optional[str] = None, force_override: bool = False, predecessors: Optional[List[str]] = None, condition: Optional[str] = None, dependency_condition: Optional[str] = None, section_scope: Optional[List[str]] = None, normalize_iso_country: bool = False, context_facts: Optional[List[str]] = None, na_fallback_fact: Optional[str] = None, **data: Any):
         super().__init__(
             target_fact_name=target_fact_name,
             question=question,
@@ -68,6 +69,7 @@ class FactExtractorParamVO(BaseModel):
             section_scope=section_scope,
             normalize_iso_country=normalize_iso_country,
             context_facts=context_facts or [],
+            na_fallback_fact=na_fallback_fact,
             **data
         )
 
@@ -93,6 +95,7 @@ class FactExtractorParamVO(BaseModel):
             section_scope=struct.get("section_scope"),
             normalize_iso_country=struct.get("normalize_iso_country", False),
             context_facts=struct.get("context_facts", []),
+            na_fallback_fact=struct.get("na_fallback_fact"),
         )
 
     @classmethod
@@ -136,6 +139,8 @@ class FactExtractorParamVO(BaseModel):
             struct["section_scope"] = self.section_scope
         if self.context_facts:
             struct["context_facts"] = self.context_facts
+        if self.na_fallback_fact:
+            struct["na_fallback_fact"] = self.na_fallback_fact
         return struct
 
     @classmethod

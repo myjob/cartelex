@@ -207,6 +207,14 @@ class HealthCheckResult(BaseModel):
         default=None,
         description="The thermal reading, absent when it could not be taken.",
     )
+    recoverable: bool = Field(
+        default=True,
+        description=(
+            "False when waiting cannot fix the breach -- the probe cannot be "
+            "run or read (SSH refused, probe missing, bad payload). The gate "
+            "then aborts at once instead of serving cooldowns."
+        ),
+    )
 
 
 def _ping_ollama() -> bool:
@@ -449,9 +457,17 @@ class OllamaHealthGate:
             reading = self._read_temperature()
         except (ProbeUnavailable, ValueError) as exc:
             if settings.THERMAL_GATE_STRICT:
+                # A cooldown cures heat, not a refused SSH key or a missing
+                # probe: serving the budget would only stall the run.
                 return HealthCheckResult(
                     healthy=False,
-                    reason=f"temperature unreadable ({exc}); gate is strict",
+                    reason=(
+                        f"temperature unreadable ({exc}); gate is strict. Fix "
+                        "the probe (passwordless SSH to the DGX, "
+                        "scripts/deploy_dgx_thermal_probe.sh) or pass "
+                        "--no-thermal-gate"
+                    ),
+                    recoverable=False,
                 )
             logger.warning(
                 "Temperature unreadable (%s); THERMAL_GATE_STRICT is off, "
@@ -549,7 +565,10 @@ class OllamaHealthGate:
         """Admit work now, or wait out a breach, or abort the run.
 
         Returns immediately when the gate is disabled or the box is healthy.
-        On a breach it caps the GPU boost clock, alerts, sleeps
+        A breach that waiting cannot fix (``recoverable`` False: the probe
+        cannot be run or read) aborts at once, so a run never starts and a
+        running batch stops on its next item. On any other breach it caps the
+        GPU boost clock, alerts, sleeps
         ``settings.THERMAL_COOLDOWN_SECONDS`` and re-measures, up to
         ``settings.THERMAL_MAX_COOLDOWN_CYCLES`` times. Once the box is cool
         enough the cap is lifted again.
@@ -585,7 +604,7 @@ class OllamaHealthGate:
                     )
                 return result
 
-            if cycle >= max_cycles:
+            if not result.recoverable or cycle >= max_cycles:
                 self._aborted.set()
                 raise ThermalAbort(result)
 

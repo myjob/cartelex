@@ -238,9 +238,12 @@ class FactRepository:
 
         A fact copied from another decision (``fact_source_link`` to a ``fact``
         source of a different ``celex_id``, e.g. an inherited cartel period) is
-        stale once that source fact is re-extracted: ``upsert_fact`` keeps the
-        source's id and moves its ``created_at``. Same-document predecessors
-        are not considered; the batch orders those itself.
+        stale once that source fact's value changes: ``upsert_fact`` keeps the
+        source's id and moves its ``created_at`` on a value change only. The
+        dependent counts as checked after a successful re-extraction even when
+        its own value did not change (its ``created_at`` then stays put), so an
+        unchanged result cannot trigger re-extraction forever. Same-document
+        predecessors are not considered; the batch orders those itself.
 
         Parameters
         ----------
@@ -265,7 +268,11 @@ class FactRepository:
               JOIN celex_facts.facts s ON s.id = r.source_fact_id
              WHERE f.celex_id = :celex_id AND f.name = :name
                AND s.celex_id <> f.celex_id
-               AND s.created_at > f.created_at
+               AND s.created_at > GREATEST(f.created_at, COALESCE((
+                     SELECT max(a.created_at)
+                       FROM celex_facts.fact_ingestion_audit_trail a
+                      WHERE a.celex_id = f.celex_id AND a.target_fact_name = f.name
+                        AND a.success), f.created_at))
              ORDER BY s.celex_id
         """)
         with self.engine.connect() as conn:
@@ -331,6 +338,31 @@ class FactRepository:
             return [
                 (str(row.id), row.name, row.value_md or "") for row in rows
             ]
+
+    def select_fact_statuses4celex(self, celex_id: str) -> Dict[str, str]:
+        """Return ``{fact name: verification_status}`` for one CELEX ID.
+
+        Lets a reader label each fact with how well it is verified (ISSUES
+        #355) without changing the row shape of :meth:`select_facts4celex_with_ids`.
+
+        Parameters
+        ----------
+        celex_id:
+            The CELEX document identifier.
+
+        Returns
+        -------
+        Dict[str, str]
+            The status of each fact; ``"unverified"`` for a fact the verifier
+            never saw (NULL status).
+        """
+        with self.Session() as session:
+            rows = (
+                session.query(Facts.name, Facts.verification_status)
+                .filter(Facts.celex_id == celex_id)
+                .all()
+            )
+            return {row.name: row.verification_status or "unverified" for row in rows}
 
     def select_facts_by_ids(
         self, fact_ids: List[str]
@@ -619,6 +651,12 @@ class FactRepository:
         a prior race or migration), the extras are deleted in the same
         transaction so the table converges back to at most one row per key.
 
+        ``created_at`` records the last *value change*: an update that stores
+        the same ``value_md`` and ``value_json`` keeps the old timestamp, so
+        every "written after" comparison (summary staleness, cross-document
+        lineage, the main pipeline planner) means "changed after". Each write
+        attempt is still recorded in ``fact_ingestion_audit_trail``.
+
         ``document_id`` is written in the same transaction by a separate
         UPDATE, and only when it is not None and the ``facts.document_id``
         column exists (probed once per repository). A None never clears a
@@ -677,10 +715,14 @@ class FactRepository:
                     )
                     session.delete(dup)
 
+                value_changed = (
+                    survivor.value_md != value_md or survivor.value_json != value_json
+                )
                 survivor.value_md = value_md
                 survivor.value_json = value_json
                 survivor.references_doc_json = references_doc_json
-                survivor.created_at = datetime.datetime.now()
+                if value_changed:
+                    survivor.created_at = datetime.datetime.now()
                 fact_id = survivor.id
             else:
                 new_id = uuid.uuid4()

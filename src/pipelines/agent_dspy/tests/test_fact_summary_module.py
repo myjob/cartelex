@@ -1,5 +1,6 @@
 import re
 import unittest
+import uuid
 from datetime import datetime
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
@@ -18,11 +19,13 @@ T0 = datetime(2026, 8, 1, 12, 0)
 T1 = datetime(2026, 9, 1, 12, 0)
 
 
-def _fact(name: str, value_md: str, created_at: datetime) -> SimpleNamespace:
+def _fact(
+    name: str, value_md: str, created_at: datetime, status: str | None = "verified_supported"
+) -> SimpleNamespace:
     """Build a stand-in for a ``Facts`` ORM row."""
     return SimpleNamespace(
-        celex_id="12345", name=name, value_md=value_md, value_json=None,
-        created_at=created_at,
+        id=uuid.uuid5(uuid.NAMESPACE_URL, name), celex_id="12345", name=name, value_md=value_md,
+        value_json=None, created_at=created_at, verification_status=status,
     )
 
 
@@ -86,12 +89,53 @@ class TestFactSummaryModule(unittest.TestCase):
         self.assertEqual(len(items), 1)
         summary_md = items[0]["case_summary"]
         self.assertIsInstance(summary_md, str)
-        # Markdown headings are generated from CaseSummaryChapters field names
-        self.assertIn("### Overview", summary_md)
+        # Headings follow the layout; generated chapters hold the LLM text,
+        # copy-only chapters the stored value (ISSUES #355).
+        self.assertIn("### Overview\noverview", summary_md)
         self.assertIn("### Leniency", summary_md)
         self.assertIn("### Book Reference", summary_md)
+        self.assertIn("### Fines\n100M EUR\n\n*Sources: fines (verified_supported)*", summary_md)
+        self.assertIn("### References\nNA", summary_md)
         self.assertNotIn("### Legal Assessment Period", summary_md)
-        self.assertIn("*(reported:", summary_md)
+        self.assertNotIn("reported:", summary_md)
+
+        # Every input fact is recorded as derived_from lineage.
+        lineage = prediction.output.lineage_sources
+        self.assertEqual(
+            [(src.description, src.relation_type) for src in lineage],
+            [("fact:companies_investigated", "derived_from"), ("fact:fines", "derived_from")],
+        )
+
+    @patch("pipelines.agent_dspy.universal_modules._check_context_token_limit")
+    def test_references_list_the_supporting_chunk_of_each_source(self, _mock_token_check):
+        lineage_repo, chunk_repo = MagicMock(), MagicMock()
+        lineage_repo.get_fact_provenance.side_effect = lambda celex, name: (
+            [SimpleNamespace(chunk_id="c-fines")] if name == "fines" else [])
+        chunk_repo.get_chunk_by_id.return_value = {"doc_pos": 412}
+        module = FactSummaryModule(
+            sql_store=self.sql_store_mock, lineage_repo=lineage_repo, chunk_repo=chunk_repo)
+        module.summarize = self.mock_summarize
+        self.sql_store_mock.select_fact4celex.return_value = []
+        self.sql_store_mock.select_named_facts4celex.return_value = [
+            _fact("companies_investigated", "Acme Corp", T0),
+            _fact("fines", "100M EUR", T0),
+        ]
+
+        summary_md = module(_summary_params()).output.items[0]["case_summary"]
+
+        self.assertIn("### References\n- fines: chunk 412 (`c-fines`)", summary_md)
+        lineage_repo.get_fact_provenance.assert_any_call("12345", "fines")
+
+    @patch("pipelines.agent_dspy.universal_modules._check_context_token_limit")
+    def test_same_inputs_render_the_same_summary(self, _mock_token_check):
+        """No timestamp: an unchanged input is no value change (ISSUES #355)."""
+        self.sql_store_mock.select_fact4celex.return_value = []
+        self.sql_store_mock.select_named_facts4celex.return_value = [_fact("fines", "100M EUR", T0)]
+
+        first = self.module(_summary_params()).output.items[0]["case_summary"]
+        second = self.module(_summary_params()).output.items[0]["case_summary"]
+
+        self.assertEqual(first, second)
 
     @patch("pipelines.agent_dspy.universal_modules._check_context_token_limit")
     def test_empty_input_facts_are_left_out_of_the_context(self, _mock_token_check):
@@ -162,7 +206,7 @@ class TestCaseSummaryChapters(unittest.TestCase):
             chapters = CaseSummaryChapters.model_validate(payload)
 
         self.assertEqual(chapters.remedies, "NA")
-        self.assertEqual(chapters.fines, "fines")
+        self.assertEqual(chapters.leniency, "leniency")
 
     def test_chapters_stay_required_in_the_schema(self):
         """The LLM-facing JSON schema still demands every chapter."""

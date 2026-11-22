@@ -106,11 +106,22 @@ class TestRouting(unittest.TestCase):
         # A temporal-named fact with only fact lineage is still derived.
         self.assertEqual(
             self._strategy(
+                "cartel_period",
+                value_md="1981-11-01 : 1985-01-01",
+                source_type_counts={"fact": 1},
+            ),
+            VerificationStrategy.DERIVED,
+        )
+
+    def test_decision_date_is_never_derived(self):
+        # ISSUES #369 / #354(c): the date is checked against text, not inherited.
+        self.assertEqual(
+            self._strategy(
                 "eu_commission_decision_date",
                 value_md="1981-11-01",
                 source_type_counts={"fact": 1},
             ),
-            VerificationStrategy.DERIVED,
+            VerificationStrategy.DETERMINISTIC_TEMPORAL,
         )
 
     def test_temporal_name_with_dates_is_deterministic_temporal(self):
@@ -403,6 +414,61 @@ class TestEntityDeterministic(unittest.TestCase):
         self.assertEqual(
             evidence_repo.upsert_evidence.call_args.kwargs["chunk_id"], "c-7"
         )
+
+
+class TestDecisionDate(unittest.TestCase):
+    """The decision date is checked against its cited date line and the references."""
+
+    _CLOSING = "Article 3\n\nDone at Brussels, 31 March 2011.\n\nFor the Commission"
+
+    def _module(self, value_md, *, celex_id="DEC-AT39168-20110331", references=None, chunk_text=None):
+        fact = _fact("eu_commission_decision_date", value_md=value_md, celex_id=celex_id)
+        chunk_repo = MagicMock()
+        chunk_repo.get_chunk_by_id.return_value = (
+            {"document": chunk_text, "doc_pos": 41} if chunk_text else None
+        )
+        module, evidence_repo = _build_module(fact, chunk_repo=chunk_repo)
+        rows = {name: [_fact(name, value_md=v)] for name, v in (references or {}).items()}
+        module.fact_repo.select_fact4celex.side_effect = lambda c, name: (
+            [fact] if name == "eu_commission_decision_date" else rows.get(name, [])
+        )
+        module._provenance_chunks = lambda fid: [("c-41", 1)] if chunk_text else []
+        module._heideltime_match = lambda celex, iso, years: ("c-9", "31 March 2011", "2011-03-31")
+        return module
+
+    def test_date_line_supports_and_references_agree(self):
+        module = self._module(
+            "2011-03-31",
+            references={"human_index_decision_date": "2011-03-31", "human_index_year": "2011"},
+            chunk_text=self._CLOSING,
+        )
+        result = module.forward("DEC-AT39168-20110331", "eu_commission_decision_date")
+        self.assertEqual(result.status, VerificationStatus.VERIFIED_SUPPORTED)
+        self.assertEqual(result.best_chunk_id, "c-41")
+        self.assertIn("Done at Brussels, 31 March 2011", result.evidence_quote)
+        self.assertEqual(result.missing_elements, [])
+
+    def test_date_line_contradicts_cited_decision_date(self):
+        # The A26 example: the event table gave the cited "Closures" decision.
+        module = self._module("2002-09-19", chunk_text=self._CLOSING)
+        result = module.forward("DEC-AT39168-20110331", "eu_commission_decision_date")
+        self.assertEqual(result.status, VerificationStatus.CONTRADICTED)
+        self.assertEqual(result.missing_elements, ["2011-03-31", "dec_id_date=2011-03-31"])
+
+    def test_reference_conflict_downgrades_and_flags(self):
+        module = self._module(
+            "2011-03-31", references={"human_index_year": "2010"}, chunk_text=self._CLOSING
+        )
+        result = module.forward("DEC-AT39168-20110331", "eu_commission_decision_date")
+        self.assertEqual(result.status, VerificationStatus.WEAK_SUPPORT)
+        self.assertEqual(result.support_label, "reference_conflict")
+        self.assertEqual(result.missing_elements, ["human_index_year=2010"])
+
+    def test_without_cited_date_line_heideltime_decides(self):
+        module = self._module("2011-03-31", celex_id="40436_949_5")
+        result = module.forward("40436_949_5", "eu_commission_decision_date")
+        self.assertEqual(result.status, VerificationStatus.VERIFIED_SUPPORTED)
+        self.assertEqual(result.best_chunk_id, "c-9")
 
 
 class TestTemporalDeterministic(unittest.TestCase):

@@ -2,7 +2,6 @@ import json
 import logging
 import re
 import time
-from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Optional
 
@@ -10,6 +9,7 @@ import dspy
 import tiktoken
 
 from config.settings import settings
+from pipelines.agent_dspy.case_summary_layout import ChunkReference, StoredFact, render_summary, source_facts
 from pipelines.agent_dspy.fact_extractor_param import FactExtractorParamVO
 from pipelines.agent_dspy.dspy_protocols import (
     SQLFactStore,
@@ -30,6 +30,8 @@ from pipelines.agent_dspy.dspy_signature import (
     FactComparisonSignature,
     CaseSummarySignature,
     FactCaseTitleSignature,
+    FactFromTitleSignature,
+    NaceClassPickSignature,
 )
 from extract.rag.ranker.ranker_factory import RankerProtocol
 from pipelines.agent_dspy.book_cross_check_module import (
@@ -38,6 +40,7 @@ from pipelines.agent_dspy.book_cross_check_module import (
     classify_book_reference,
 )
 from pipelines.download.local_pdf import conventional_markdown_path
+from pipelines.legal.decision_date import AdoptionDate, DateSource, adoption_date, parse_date_value
 from pipelines.legal.infringement_concept import concepts_for
 from pipelines.legal.recital_count import (
     REASON_CHUNK_GAP,
@@ -57,6 +60,7 @@ from tools.PipelineFactIngestor import LineageSourceVO
 
 if TYPE_CHECKING:
     from pipelines.rag.pgvector.chunk_repository import ChunkRepository
+    from pipelines.rag.pgvector.lineage_repository import LineageRepository
 
 logger = logging.getLogger(__name__)
 
@@ -200,6 +204,128 @@ def _check_fact_exists(
     return None, facts if facts else []
 
 
+def _items_are_na(items: list[dict[str, Any]]) -> bool:
+    """Return True when an extraction result carries no usable value.
+
+    A result is "not found" when it has no rows, or when every value of every
+    row is empty or an NA sentinel (``'NA'``, ``'n/a'``, ``'none'``, ...).
+
+    Args:
+        items: Extracted rows as returned by an extraction signature.
+
+    Returns:
+        True if no row holds a real value.
+    """
+    for row in items:
+        for value in row.values():
+            values = value if isinstance(value, list) else [value]
+            if any(
+                str(v).strip() and str(v).strip().lower() not in _NA_SENTINELS
+                for v in values
+                if v is not None
+            ):
+                return False
+    return True
+
+
+class TitleFallbackModule(dspy.Module):
+    """Infer a fact from the stored case title when extraction found nothing.
+
+    Decision titles usually name the product market concerned ("Industrial
+    bags", "Car glass"), so a fact such as ``products`` that came back NA from
+    the decision text can often still be recovered from the title. The title
+    fact named by ``params.na_fallback_fact`` is read best-effort: a missing
+    or NA title, or a title that names no value, yields ``None`` so the caller
+    keeps its original NA result.
+
+    Args:
+        sql_store: Fact store used to read the stored title fact.
+    """
+
+    def __init__(self, sql_store: SQLFactStore):
+        super().__init__()
+        self.sql_store = sql_store
+        self.infer = dspy.ChainOfThought(FactFromTitleSignature)
+
+    @staticmethod
+    def _title_rows_are_na(title_row: Any) -> bool:
+        """Return True when the stored title's JSON rows hold only NA values.
+
+        Catches titles stored as e.g. ``('NA', 'NA')``, whose markdown is not a
+        bare sentinel but whose rows carry no value. Unparseable or non-list
+        JSON is not treated as NA, so the markdown title is still used.
+
+        Args:
+            title_row: The stored title ``facts`` row.
+
+        Returns:
+            True if ``value_json`` parses to rows that are all NA.
+        """
+        try:
+            rows = json.loads(title_row.value_json or "")
+        except (TypeError, ValueError):
+            return False
+        return isinstance(rows, list) and bool(rows) and _items_are_na(rows)
+
+    def forward(self, params: FactExtractorParamVO) -> Optional[dspy.Prediction]:
+        """Infer ``params.target_fact_name`` from the stored title fact.
+
+        Args:
+            params: Extraction parameters; ``na_fallback_fact`` names the
+                title fact to read.
+
+        Returns:
+            A prediction whose ``FactOutput`` carries the inferred rows and a
+            ``derived_from`` lineage edge to the title fact, or ``None`` when
+            no title is stored or the title names no value.
+        """
+        title_name = params.na_fallback_fact
+        rows = self.sql_store.select_fact4celex(params.celex_id, title_name)
+        title_row = rows[-1] if rows else None
+        title = (title_row.value_md or "").strip() if title_row else ""
+        if not title or title.lower() in _NA_SENTINELS or self._title_rows_are_na(title_row):
+            logger.info(
+                "No '%s' stored for %s; '%s' stays NA.",
+                title_name, params.celex_id, params.target_fact_name,
+            )
+            return None
+
+        prediction = self.infer(
+            case_title=title,
+            target_fact_name=params.target_fact_name,
+            schema_description=_resolve_schema_description(params),
+            question=params.question,
+        )
+        _log_dspy_history("TitleFallback", params.target_fact_name)
+        items = prediction.output.extracted_facts
+        if _items_are_na(items):
+            logger.info(
+                "Title %r of %s names no '%s'; fact stays NA.",
+                title, params.celex_id, params.target_fact_name,
+            )
+            return None
+
+        logger.info(
+            "Inferred '%s' of %s from '%s': %s",
+            params.target_fact_name, params.celex_id, title_name, items,
+        )
+        lineage = LineageSourceVO(
+            source_type="fact",
+            celex_id=params.celex_id,
+            source_fact_id=title_row.id,
+            description=f"fact:{title_name}",
+            extraction_method=params.target_fact_name,
+            relation_type="derived_from",
+            pipeline=params.pipeline,
+            dspy_module=type(self).__name__,
+        )
+        return dspy.Prediction(
+            output=FactOutput(
+                items=items, source="title_fallback", lineage_sources=[lineage]
+            )
+        )
+
+
 # --- The Universal Module (Rule 2) ---
 
 
@@ -224,6 +350,29 @@ class UniversalFactModule(dspy.Module):
         self.find_doc_references = dspy.ChainOfThought(
             DetermineSupportingChunksSignature
         )
+        self.title_fallback = TitleFallbackModule(sql_store=sql_store)
+
+    def _with_na_fallback(
+        self, params: FactExtractorParamVO, prediction: dspy.Prediction
+    ) -> dspy.Prediction:
+        """Replace an NA extraction with a title-inferred value when configured.
+
+        Only fresh extractions pass through here, never stored values, so a
+        fallback result is recomputed on every forced re-run.
+
+        Args:
+            params: Extraction parameters; the fallback runs only when
+                ``na_fallback_fact`` is set.
+            prediction: The regular extraction result.
+
+        Returns:
+            The fallback prediction when the result is NA and the title yields
+            a value, otherwise *prediction* unchanged.
+        """
+        if not params.na_fallback_fact or not _items_are_na(prediction.output.items):
+            return prediction
+        fallback = self.title_fallback(params=params)
+        return fallback if fallback is not None else prediction
 
     def _use_full_document(self, params: FactExtractorParamVO) -> bool:
         """Decide whether to feed the entire document instead of retrieving.
@@ -291,7 +440,9 @@ class UniversalFactModule(dspy.Module):
         logger.debug(f"Context for '{params.target_fact_name}': {context[:40]}...")
 
         if not context:
-            return dspy.Prediction(output=FactOutput(items=[], source="none"))
+            return self._with_na_fallback(
+                params, dspy.Prediction(output=FactOutput(items=[], source="none"))
+            )
 
         _check_context_token_limit(context, params.target_fact_name)
 
@@ -359,10 +510,13 @@ class UniversalFactModule(dspy.Module):
                 references_doc = refs[:3]
             logger.debug(f"Found references: {references_doc}")
 
-        return dspy.Prediction(
-            output=FactOutput(
-                items=final_items, source=source_tag, references_doc=references_doc
-            )
+        return self._with_na_fallback(
+            params,
+            dspy.Prediction(
+                output=FactOutput(
+                    items=final_items, source=source_tag, references_doc=references_doc
+                )
+            ),
         )
 
 
@@ -916,6 +1070,22 @@ class InfringementConceptModule(dspy.Module):
         return facts[-1].value_md or ""
 
 
+def _resolve_markdown(chunk_repo: "ChunkRepository", celex_id: str) -> Path | None:
+    """Return the first existing markdown file for the decision, or None.
+
+    Args:
+        chunk_repo: Chunk store providing the ingested source paths.
+        celex_id: Decision key.
+
+    Returns:
+        The ingested markdown (chunk ``path``), else the conventional MinerU
+        path, else None.
+    """
+    candidates = [Path(p) for p in chunk_repo.select_source_paths(celex_id)]
+    candidates.append(conventional_markdown_path(Path(settings.CELEX_DOCS_DIR), celex_id))
+    return next((p for p in candidates if p.is_file()), None)
+
+
 class RecitalCountModule(dspy.Module):
     """Highest recital number of a decision (fact ``recitals_max``).
 
@@ -972,7 +1142,7 @@ class RecitalCountModule(dspy.Module):
 
         celex_id = params.celex_id
         chunks = self.chunk_repo.select_chunks_for_sections(celex_id)
-        md_path = self._resolve_markdown(celex_id)
+        md_path = _resolve_markdown(self.chunk_repo, celex_id)
         if md_path is not None:
             result = count_recitals(md_path.read_text(encoding="utf-8"), self.thresholds)
             result = result.model_copy(
@@ -1007,20 +1177,6 @@ class RecitalCountModule(dspy.Module):
                 references_doc=references,
             )
         )
-
-    def _resolve_markdown(self, celex_id: str) -> Path | None:
-        """Return the first existing markdown file for the decision, or None.
-
-        Args:
-            celex_id: Decision key.
-
-        Returns:
-            The ingested markdown (chunk ``path``), else the conventional MinerU
-            path, else None.
-        """
-        candidates = [Path(p) for p in self.chunk_repo.select_source_paths(celex_id)]
-        candidates.append(conventional_markdown_path(Path(settings.CELEX_DOCS_DIR), celex_id))
-        return next((p for p in candidates if p.is_file()), None)
 
     @staticmethod
     def _locate(result: RecitalCount, chunks: list[dict]) -> list[int] | None:
@@ -1074,6 +1230,139 @@ class RecitalCountModule(dspy.Module):
                 update={"status": RecitalStatus.DOUBTFUL, "reason": REASON_CHUNK_GAP}
             )
         return result
+
+
+class DecisionDateModule(dspy.Module):
+    """Adoption date of a decision (fact ``eu_commission_decision_date``).
+
+    Slick pipe, deterministic first (ISSUES #369, review A26): the decision's
+    own "Done at Brussels, <date>" line, else the date in its title, both read
+    by :func:`pipelines.legal.decision_date.adoption_date` from the markdown
+    (chunks joined by ``doc_pos`` when no file is found). Only when the text
+    states no date does the LLM fallback run over the ``context_facts`` (the
+    aggregated HeidelTime events) -- the former sole path, which picked dates of
+    decisions cited in the text. The date in a ``DEC-*`` id and the human
+    index facts are checks applied by the verifier, never a source here.
+
+    pipeline: decision_date
+    """
+
+    _SOURCE = "decision_date"
+    _CHUNK_JOIN = "\n\n"
+
+    def __init__(
+        self,
+        sql_store: SQLFactStore,
+        chunk_repo: "ChunkRepository",
+        fallback: dspy.Module,
+    ):
+        """Inject the stores and the LLM fallback.
+
+        Args:
+            sql_store: Fact store for the existence check.
+            chunk_repo: Chunk store providing source paths and chunk text.
+            fallback: Module answering from predecessor facts (normally
+                ``FactContextModule``); it receives the ``context_facts`` as
+                its predecessors.
+        """
+        super().__init__()
+        self.sql_store = sql_store
+        self.chunk_repo = chunk_repo
+        self.fallback = fallback
+
+    def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Read the adoption date of ``params.celex_id``.
+
+        Args:
+            params: Extraction parameters; ``celex_id`` selects the decision,
+                ``force_override`` bypasses the existing-fact check and
+                ``context_facts`` names the fallback's input facts.
+
+        Returns:
+            dspy.Prediction: ``output`` is a ``FactOutput`` with one item
+            ``{target_fact_name: "YYYY-MM-DD"}`` and ``references_doc`` holding
+            the doc_pos of the chunk the date was read from; no items (stored as
+            ``NA``) when neither the text nor the fallback yields a date.
+        """
+        prediction, _ = _check_fact_exists(self.sql_store, params)
+        if prediction:
+            return prediction
+
+        celex_id = params.celex_id
+        chunks = self.chunk_repo.select_chunks_for_sections(celex_id)
+        md_path = _resolve_markdown(self.chunk_repo, celex_id)
+        if md_path is not None:
+            text = md_path.read_text(encoding="utf-8")
+        else:
+            text = self._CHUNK_JOIN.join(c["document"] for c in chunks)
+        found = adoption_date(text)
+        if found.date is None:
+            return self._from_fallback(params)
+
+        logger.info("%s %s: %s (%s)", params.target_fact_name, celex_id, found.date, found.source)
+        return dspy.Prediction(
+            output=FactOutput(
+                items=[{params.target_fact_name: found.date.isoformat()}],
+                source=f"{self._SOURCE}:{found.source.value}",
+                references_doc=self._locate(found, chunks),
+            )
+        )
+
+    def _from_fallback(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Ask the LLM fallback and keep only a parseable date from its answer.
+
+        Args:
+            params: The extraction parameters of the fact.
+
+        Returns:
+            dspy.Prediction: one ``{target_fact_name: "YYYY-MM-DD"}`` item, or no
+            items when the fallback has no input facts or answers no date.
+        """
+        logger.warning(
+            "%s %s: no date line or title date in the text; LLM fallback over %s",
+            params.target_fact_name, params.celex_id, params.context_facts,
+        )
+        empty = dspy.Prediction(output=FactOutput(items=[], source=f"{self._SOURCE}:none"))
+        if not params.context_facts:
+            return empty
+        fallback_params = params.model_copy(
+            update={"predecessors": list(params.context_facts), "force_override": True}
+        )
+        try:
+            answer = self.fallback(fallback_params)
+        except ValueError as exc:  # a context fact is missing
+            logger.warning("%s %s: fallback skipped: %s", params.target_fact_name, params.celex_id, exc)
+            return empty
+        values = [str(v) for item in answer.output.items for v in item.values()]
+        date = next((d for d in map(parse_date_value, values) if d is not None), None)
+        if date is None:
+            return empty
+        return dspy.Prediction(
+            output=FactOutput(
+                items=[{params.target_fact_name: date.isoformat()}],
+                source=f"{self._SOURCE}:{DateSource.NONE.value}_llm_fallback",
+            )
+        )
+
+    @staticmethod
+    def _locate(found: AdoptionDate, chunks: list[dict]) -> list[int] | None:
+        """Find the doc_pos of the chunk the date was read from.
+
+        Args:
+            found: The adoption date read from the whole text.
+            chunks: The decision's chunks in doc_pos order.
+
+        Returns:
+            ``[doc_pos]`` of the last chunk (date line) or first chunk (title)
+            that yields the same date from the same source; None when a chunk
+            boundary splits the line or the decision has no chunks.
+        """
+        ordered = reversed(chunks) if found.source is DateSource.DATE_LINE else chunks
+        for chunk in ordered:
+            own = adoption_date(chunk["document"])
+            if own.date == found.date and own.source is found.source:
+                return [chunk["doc_pos"]]
+        return None
 
 
 class UndertakingCountModule(dspy.Module):
@@ -1554,64 +1843,156 @@ class FactComparisonModule(dspy.Module):
 
 
 class NaceModule(dspy.Module):
+    """Classify a decision's market into NACE by shortlist-then-pick.
+
+    The reranker scores NACE class titles against the case title plus the
+    ``products`` fact and keeps the top ``settings.NACE_SHORTLIST_TOP_K``; the
+    LLM then picks one class from that shortlist. ``level`` decides what is
+    emitted:
+
+    - ``"group"`` (``NACE_group_code``): shortlist over all classes, emit the
+      picked class's parent group as ``{"value": "51.2:<group title>"}``.
+    - ``"class"`` (``NACE_class_code``): shortlist only the classes of the
+      stored ``NACE_group_code`` (all classes when it is missing or unknown),
+      so class and group never disagree; emit
+      ``{"nace_class_code": "51.21: <class title>"}``.
+
+    A pick outside the shortlist falls back to the reranker's top-1 class.
+
+    Args:
+        sql_store: Fact store for the ``products``, ``case_title`` and
+            ``NACE_group_code`` facts.
+        nace_tree: Loaded NACE Rev. 2.1 tree.
+        ranker: Reranker providing ``rank_nacevo``.
+        level: ``"group"`` or ``"class"``.
+
+    Raises:
+        ValueError: If ``level`` is not ``"group"`` or ``"class"``.
     """
-    A specialized pipeline to match a NACE class code for a product and a NACE group code.
-    DSPy agent is used but not the LLM invoker dspy.Prediction
-    Output is standard FactOutput with dynamic flag [fact_name]_match.
-    """
+
+    _LEVELS = ("group", "class")
+    _PRODUCTS_FACT = "products"
+    _TITLE_FACT = "case_title"
+    _GROUP_FACT = "NACE_group_code"
 
     def __init__(
-        self, sql_store: SQLFactStore, nace_tree: NaceTree, ranker: RankerProtocol
+        self,
+        sql_store: SQLFactStore,
+        nace_tree: NaceTree,
+        ranker: RankerProtocol,
+        level: str = "class",
     ):
         super().__init__()
-
+        if level not in self._LEVELS:
+            raise ValueError(f"NaceModule level must be one of {self._LEVELS}, got '{level}'")
         self.sql_store = sql_store
         self.nace_tree = nace_tree
         self.ranker = ranker
+        self.level = level
+        self.pick = dspy.ChainOfThought(NaceClassPickSignature)
 
-    def forward(self, params: FactExtractorParamVO):
+    def _latest(self, celex_id: str, fact_name: str) -> Any:
+        """Return the latest stored row of *fact_name*, or None."""
+        rows = self.sql_store.select_fact4celex(celex_id, fact_name)
+        return rows[-1] if rows else None
 
-        nace_group_code = None
-        product = None
-        fact_list = params.predecessors
-        for fact_name in fact_list:
-            if "product" in fact_name.lower():
-                product_facts = self.sql_store.select_fact4celex(
-                    params.celex_id, fact_name
-                )
-                product = product_facts[-1].value_md if product_facts else None
-            elif "nace_group_code" in fact_name.lower():
-                nace_group_facts = self.sql_store.select_fact4celex(
-                    params.celex_id, fact_name
-                )
-                nace_group_code = (
-                    nace_group_facts[-1].value_md if nace_group_facts else None
-                )
+    def _candidate_classes(self, celex_id: str) -> list:
+        """Return the classes to shortlist from for the configured level.
 
-        # build NACE VO nace_group_code
-        if not product or not nace_group_code:
+        Args:
+            celex_id: Document whose stored group bounds a class-level run.
+
+        Returns:
+            Classes of the stored group at ``class`` level when that group is
+            known, otherwise every NACE class.
+        """
+        all_classes = self.nace_tree.list_nacetree_classes()
+        if self.level == "group":
+            return all_classes
+        group_row = self._latest(celex_id, self._GROUP_FACT)
+        group_code = (group_row.value_md or "").split(":", 1)[0].strip() if group_row else ""
+        in_group = [c for c in all_classes if c.parent is not None and c.parent.code == group_code]
+        if not in_group:
             logger.info(
-                "No product or NACE group code available; skipping NACE lookup."
+                "No known NACE group '%s' for %s; shortlisting all classes.",
+                group_code, celex_id,
             )
+            return all_classes
+        return in_group
+
+    def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
+        """Classify ``params.celex_id`` at the configured NACE level.
+
+        Args:
+            params: Extraction parameters of ``NACE_group_code`` or
+                ``NACE_class_code``.
+
+        Returns:
+            A prediction whose ``FactOutput`` holds one group or class row, or
+            no rows when ``products`` is missing or NA. ``lineage_sources``
+            records the ``case_title`` fact when it was used.
+        """
+        product_row = self._latest(params.celex_id, self._PRODUCTS_FACT)
+        products = (product_row.value_md or "").strip() if product_row else ""
+        if not products or products.lower() in _NA_SENTINELS:
+            logger.info("No products for %s; skipping NACE %s.", params.celex_id, self.level)
             return dspy.Prediction(output=FactOutput(items=[], source="nace"))
 
-        parts = nace_group_code.split(":", 1)
-        nace_title = parts[1].strip() if len(parts) > 1 else nace_group_code.strip()
-        naceVo = self.nace_tree.select_group_by_title(nace_title)
-        classes = self.nace_tree.list_nacetree_classes_of_group(naceVo)
-        if not classes:
-            logger.info(f"No NACE classes found for group code '{nace_group_code}'.")
-            return dspy.Prediction(output=FactOutput(items=[], source="nace"))
+        title_row = self._latest(params.celex_id, self._TITLE_FACT)
+        title = (title_row.value_md or "").strip() if title_row else ""
+        if title.lower() in _NA_SENTINELS:
+            title, title_row = "", None
+        query = "\n".join(part for part in (title, products) if part)
+        query = query[: settings.NACE_QUERY_MAX_CHARS]
 
-        ranked = self.ranker.rank_nacevo(product, classes, top_k=1)
-        top = ranked[0]
-        logger.debug(
-            f"Top ranked NACE class for product '{product}' and group '{nace_group_code}': {top.code} {top.title}"
+        ranked = self.ranker.rank_nacevo(
+            query, self._candidate_classes(params.celex_id), top_k=settings.NACE_SHORTLIST_TOP_K
         )
-        # rank with flashranker
-        dict_nace = {}
-        dict_nace["nace_class_code"] = str(top.code) + ": " + str(top.title)
-        return dspy.Prediction(output=FactOutput(items=[dict_nace], source="nace"))
+        if not ranked:
+            return dspy.Prediction(output=FactOutput(items=[], source="nace"))
+        shortlist = {r.code: r.vo for r in ranked}
+        candidates = "\n".join(
+            f"{vo.code}: {vo.title} (group: {vo.parent.title if vo.parent else ''})"
+            for vo in shortlist.values()
+        )
+        picked = self.pick(
+            case_title=title,
+            products=products[: settings.NACE_QUERY_MAX_CHARS],
+            candidates=candidates,
+        ).output.nace_class_code.strip()
+        _log_dspy_history("NacePick", params.target_fact_name)
+        chosen = shortlist.get(picked)
+        if chosen is None:
+            logger.warning(
+                "NACE pick '%s' for %s is not in the shortlist; using reranker top-1 %s.",
+                picked, params.celex_id, ranked[0].code,
+            )
+            chosen = ranked[0].vo
+
+        if self.level == "group":
+            group = chosen.parent
+            items = [{"value": f"{group.code}:{group.title}"}]
+        else:
+            items = [{"nace_class_code": f"{chosen.code}: {chosen.title}"}]
+        logger.info("NACE %s for %s: %s", self.level, params.celex_id, items[0])
+
+        lineage = []
+        if title_row is not None:
+            lineage.append(
+                LineageSourceVO(
+                    source_type="fact",
+                    celex_id=params.celex_id,
+                    source_fact_id=title_row.id,
+                    description=f"fact:{self._TITLE_FACT}",
+                    extraction_method=params.target_fact_name,
+                    relation_type="derived_from",
+                    pipeline=params.pipeline,
+                    dspy_module=type(self).__name__,
+                )
+            )
+        return dspy.Prediction(
+            output=FactOutput(items=items, source="nace", lineage_sources=lineage)
+        )
 
 
 class FactSummaryModule(dspy.Module):
@@ -1621,18 +2002,40 @@ class FactSummaryModule(dspy.Module):
     ``context_facts:`` list of the ``case_summary`` YAML entry), read
     best-effort: a fact with no stored row is skipped, never fatal. A stored
     summary is served from the fact table unless ``force_override`` is set or
-    one of its input facts was written after it, in which case it is rebuilt.
+    the value of one of its input facts changed after it, in which case it is
+    rebuilt. ``facts.created_at`` moves only on a value change (see
+    ``FactRepository.upsert_fact``), so an unchanged re-extraction of an input
+    never triggers a rebuild.
+
+    The layout (``case_summary_layout.CHAPTERS``) decides who writes what: the
+    LLM writes the generated and synthesis chapters, the copy-only chapters
+    (fines, cartel period, commissioner, ...) are the stored values. Every
+    chapter names its source facts with their verification status, a
+    ``References`` chapter lists the chunk that best supports each source fact,
+    and each input fact is recorded as ``derived_from`` lineage, so the summary
+    is verified from its inputs (ISSUES #355).
     """
 
-    def __init__(self, sql_store: SQLFactStore):
-        """Provision the fact store and the summarizing predictor.
+    def __init__(
+        self,
+        sql_store: SQLFactStore,
+        lineage_repo: "LineageRepository | None" = None,
+        chunk_repo: "ChunkRepository | None" = None,
+    ):
+        """Provision the stores and the summarizing predictor.
 
         Args:
             sql_store: Fact store providing ``select_fact4celex`` and
                 ``select_named_facts4celex``.
+            lineage_repo: Provides ``get_fact_provenance`` for the References
+                chapter; None leaves the chapter ``NA``.
+            chunk_repo: Provides ``get_chunk_by_id`` for the chunk positions;
+                None lists the chunk ids only.
         """
         super().__init__()
         self.sql_store = sql_store
+        self.lineage_repo = lineage_repo
+        self.chunk_repo = chunk_repo
         self.summarize = dspy.ChainOfThought(CaseSummarySignature)
 
     def forward(self, params: FactExtractorParamVO) -> dspy.Prediction:
@@ -1694,36 +2097,73 @@ class FactSummaryModule(dspy.Module):
 
         logger.debug(f"Summary Generation took {time.perf_counter() - t0:.4f}s")
 
-        # Format the Pydantic model into a nice Markdown wiki-style string with headings
-        summary_dict = prediction_output.case_summary.model_dump()
-        md_lines = []
-        for key, value in summary_dict.items():
-            # Create a nice human-readable title from the field name (e.g., 'key_timeline' -> 'Key Timeline')
-            title = " ".join(word.capitalize() for word in key.split("_"))
-            md_lines.append(f"### {title}\n{value}\n")
-
-        formatted_summary = "\n".join(md_lines)
-
-        # add a suffix to the  formatted_summary with current datetime in format YYYY-MM-DD HH:MM:SS and in brackets and font italics
-        current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        formatted_summary += f"\n\n*(reported: {current_datetime})*"
-
+        by_name = {
+            fact.name: StoredFact(
+                name=fact.name, value_md=fact.value_md, verification_status=fact.verification_status
+            )
+            for fact in input_facts
+        }
+        formatted_summary = render_summary(
+            prediction_output.case_summary.model_dump(),
+            by_name,
+            self._references(params.celex_id, by_name),
+        )
         items = [{"case_summary": formatted_summary}]
+        lineage = [
+            LineageSourceVO(
+                source_type="fact",
+                celex_id=params.celex_id,
+                source_fact_id=fact.id,
+                description=f"fact:{fact.name}",
+                extraction_method=params.target_fact_name,
+                relation_type="derived_from",
+                pipeline=params.pipeline,
+                dspy_module=type(self).__name__,
+            )
+            for fact in input_facts
+        ]
 
         return dspy.Prediction(
-            output=FactOutput(items=items, source=source, references_doc=None)
+            output=FactOutput(items=items, source=source, references_doc=None, lineage_sources=lineage)
         )
+
+    def _references(self, celex_id: str, stored: dict[str, StoredFact]) -> list[ChunkReference]:
+        """Return the chunk that best supports each stored source fact.
+
+        Args:
+            celex_id: The decision.
+            stored: The stored input facts by name.
+
+        Returns:
+            One reference per source fact with recorded chunk lineage, in
+            chapter order; empty without a lineage repository.
+        """
+        if self.lineage_repo is None:
+            return []
+        references: list[ChunkReference] = []
+        for name in source_facts():
+            if name not in stored:
+                continue
+            rows = self.lineage_repo.get_fact_provenance(celex_id, name)
+            chunk_id = rows[0].chunk_id if rows else None
+            if chunk_id is None:
+                continue
+            chunk = self.chunk_repo.get_chunk_by_id(chunk_id) if self.chunk_repo is not None else None
+            references.append(ChunkReference(
+                fact_name=name, chunk_id=chunk_id, doc_pos=(chunk or {}).get("doc_pos")))
+        return references
 
     @staticmethod
     def _is_stale(summary: Any, input_facts: list) -> bool:
-        """Return True when an input fact was written after the stored summary.
+        """Return True when an input fact's value changed after the stored summary.
 
         Args:
             summary: The stored summary ``Facts`` row.
             input_facts: The ``Facts`` rows the summary is built from.
 
         Returns:
-            True if any input fact's ``created_at`` is newer than the summary's.
+            True if any input fact's ``created_at`` (time of its last value
+            change) is newer than the summary's.
         """
         newer = [
             fact.name

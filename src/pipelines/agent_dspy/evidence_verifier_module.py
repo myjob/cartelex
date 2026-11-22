@@ -14,6 +14,11 @@ Strategies (see :class:`VerificationStrategy`):
   * ``derived``                — verified transitively from predecessor facts.
   * ``deterministic_entity``   — SQL surface match (companies, courts, …).
   * ``deterministic_temporal`` — HeidelTime ``timex_value`` match (dates).
+                                 The decision date is checked against the
+                                 date line of its cited chunk instead, and
+                                 against the ``DEC-*`` id date and human index
+                                 (a disagreement downgrades a verified value to
+                                 ``weak_support`` / ``reference_conflict``).
   * ``boolean``                — True/False facts; deterministic marker, then a
                                  polarity-aware LLM judge (False asserts absence).
   * ``llm_support``            — concept/relation facts; LLM judge, last resort.
@@ -30,6 +35,7 @@ Provisioner pattern for injected DB clients.
 import json
 import logging
 import re
+from collections.abc import Iterable
 from enum import StrEnum
 from typing import Any
 
@@ -37,6 +43,7 @@ import dspy
 from pydantic import BaseModel, Field
 
 from config.settings import settings
+from pipelines.legal.decision_date import adoption_date, parse_date_value, reference_conflicts
 from pipelines.agent_dspy.evidence_support import (
     EvidenceSupportResult,
     EvidenceSupportSignature,
@@ -53,6 +60,10 @@ from pipelines.rag.pgvector.lineage_repository import LineageRepository
 __all__ = ["EvidenceSupportResult", "EvidenceSupportSignature"]
 
 logger = logging.getLogger(__name__)
+
+# support_label of a decision date whose text evidence holds but which a
+# reference (DEC-* id date, human index) contradicts: flagged for review.
+_REFERENCE_CONFLICT_LABEL = "reference_conflict"
 
 
 # ---------------------------------------------------------------------------
@@ -85,6 +96,34 @@ class VerificationStatus(StrEnum):
     MANUAL_APPROVED = "manual_approved"
     UNVERIFIED = "unverified"
     MANUAL_REJECTED = "manual_rejected"
+
+
+_VERIFIED_STATUSES = frozenset({VerificationStatus.VERIFIED_SUPPORTED.value, VerificationStatus.MANUAL_APPROVED.value})
+
+
+def weakest_status(statuses: Iterable[str | None]) -> VerificationStatus:
+    """Combine the verdicts of several facts, the weakest wins.
+
+    Any ``contradicted`` gives ``contradicted``, else any
+    ``insufficient_evidence`` gives that; only a non-empty set of verified or
+    approved verdicts gives ``verified_supported``. Everything else, an empty
+    set and a never-verified fact (``None``) included, is ``weak_support``.
+
+    Args:
+        statuses: ``facts.verification_status`` values; ``None`` for a fact
+            that was never verified.
+
+    Returns:
+        The combined verdict.
+    """
+    found = set(statuses)
+    if VerificationStatus.CONTRADICTED.value in found:
+        return VerificationStatus.CONTRADICTED
+    if VerificationStatus.INSUFFICIENT_EVIDENCE.value in found:
+        return VerificationStatus.INSUFFICIENT_EVIDENCE
+    if found and found <= _VERIFIED_STATUSES:
+        return VerificationStatus.VERIFIED_SUPPORTED
+    return VerificationStatus.WEAK_SUPPORT
 
 
 class CandidateEvidence(BaseModel):
@@ -608,6 +647,8 @@ class EvidenceVerifierModule(dspy.Module):
                 result = self._verify_derived(fact, seen)
             case VerificationStrategy.DETERMINISTIC_ENTITY:
                 result = self._verify_entity(fact)
+            case VerificationStrategy.DETERMINISTIC_TEMPORAL if fact.name == settings.DECISION_DATE_FACT:
+                result = self._verify_decision_date(fact)
             case VerificationStrategy.DETERMINISTIC_TEMPORAL:
                 result = self._verify_temporal(fact)
             case VerificationStrategy.BOOLEAN:
@@ -646,6 +687,11 @@ class EvidenceVerifierModule(dspy.Module):
         name = (fact.name or "").lower()
         if name.startswith("human_index_") or name.startswith("human_"):
             return VerificationStrategy.TRUSTED_HUMAN
+        # The decision date is read from the text, never derived: it is checked
+        # against its date line, HeidelTime and the references whatever its
+        # lineage (ISSUES #369, #354(c)).
+        if name == settings.DECISION_DATE_FACT.lower():
+            return VerificationStrategy.DETERMINISTIC_TEMPORAL
 
         counts = self.evidence_repo.get_source_type_counts(fact.id)
         has_chunk = counts.get("chunk", 0) + counts.get("book_case", 0) > 0
@@ -720,25 +766,9 @@ class EvidenceVerifierModule(dspy.Module):
                 self._verify_by_name(fact.celex_id, predecessor["name"], seen)
             predecessors = self.evidence_repo.get_predecessor_facts(fact.id)
 
-        statuses = {p["verification_status"] for p in predecessors}
-
-        verified = {
-            VerificationStatus.VERIFIED_SUPPORTED.value,
-            VerificationStatus.MANUAL_APPROVED.value,
-        }
-        weak = []
-        status = VerificationStatus.VERIFIED_SUPPORTED
-        if any(s == VerificationStatus.CONTRADICTED.value for s in statuses):
-            status = VerificationStatus.CONTRADICTED
-        elif any(
-            s == VerificationStatus.INSUFFICIENT_EVIDENCE.value for s in statuses
-        ):
-            status = VerificationStatus.INSUFFICIENT_EVIDENCE
-        elif not statuses or not statuses.issubset(verified):
-            status = VerificationStatus.WEAK_SUPPORT
-
+        status = weakest_status(p["verification_status"] for p in predecessors)
         weak = [
-            p["name"] for p in predecessors if p["verification_status"] not in verified
+            p["name"] for p in predecessors if p["verification_status"] not in _VERIFIED_STATUSES
         ]
         return self._summary_result(
             fact,
@@ -892,6 +922,89 @@ class EvidenceVerifierModule(dspy.Module):
             missing_elements=[d for d in dates if d != matched_value],
             candidates=[candidate],
         )
+
+    def _verify_decision_date(self, fact: Any) -> FactVerificationResult:
+        """Verify the decision date by its date line, then check the references (no LLM).
+
+        The cited chunk's own date line or title (``adoption_date``) must state
+        the stored date: equal -> ``verified_supported``, different ->
+        ``contradicted``. Without a cited chunk stating a date (LLM fallback
+        values, rows from the former event-table path) the HeidelTime match of
+        :meth:`_verify_temporal` decides. Every reference that disagrees (the
+        ``DEC-*`` id date, the human index date and year) is appended to
+        ``missing_elements`` as ``reference=value`` and downgrades a
+        ``verified_supported`` verdict to ``weak_support`` with support label
+        ``reference_conflict``; the reference is never taken as the truth, the
+        registry dates are themselves wrong in places (ISSUES #275).
+        """
+        value = parse_date_value(fact.value_md)
+        result = self._decision_date_from_text(fact, value) if value else None
+        if result is None:
+            result = self._verify_temporal(fact)
+        if value is None:
+            return result
+        conflicts = reference_conflicts(
+            value,
+            fact.celex_id,
+            self._reference_value(fact.celex_id, settings.DECISION_DATE_HUMAN_DATE_FACT),
+            self._reference_value(fact.celex_id, settings.DECISION_DATE_HUMAN_YEAR_FACT),
+        )
+        if not conflicts:
+            return result
+        labels = [c.label() for c in conflicts]
+        logger.warning("%s %s=%s disagrees with %s", fact.celex_id, fact.name, value, ", ".join(labels))
+        update: dict[str, Any] = {"missing_elements": [*result.missing_elements, *labels]}
+        if result.status is VerificationStatus.VERIFIED_SUPPORTED:
+            update |= {"status": VerificationStatus.WEAK_SUPPORT, "support_label": _REFERENCE_CONFLICT_LABEL}
+        return result.model_copy(update=update)
+
+    def _decision_date_from_text(self, fact: Any, value: Any) -> FactVerificationResult | None:
+        """Compare the stored date with the date its first cited dated chunk states.
+
+        Args:
+            fact: The decision date fact.
+            value: The stored date (``datetime.date``).
+
+        Returns:
+            The verdict from the first cited chunk with a date line or title
+            date, or None when no cited chunk states one.
+        """
+        for chunk_id, _rank in self._provenance_chunks(fact.id):
+            chunk = self.chunk_repo.get_chunk_by_id(chunk_id)
+            if not chunk:
+                continue
+            own = adoption_date(chunk["document"])
+            if own.date is None:
+                continue
+            agrees = own.date == value
+            score = 1.0 if agrees else 0.0
+            candidate = CandidateEvidence(
+                chunk_id=chunk_id,
+                doc_pos=chunk.get("doc_pos") or 0,
+                chunk_text=chunk["document"],
+                temporal_score=score,
+                final_score=score,
+                candidate_source=f"decision_date:{own.source.value}",
+            )
+            return FactVerificationResult(
+                fact_id=str(fact.id),
+                celex_id=fact.celex_id,
+                fact_name=fact.name,
+                strategy=VerificationStrategy.DETERMINISTIC_TEMPORAL,
+                status=VerificationStatus.VERIFIED_SUPPORTED if agrees else VerificationStatus.CONTRADICTED,
+                best_chunk_id=chunk_id,
+                final_score=score,
+                support_label="supports" if agrees else "contradicts",
+                evidence_quote=own.quote,
+                missing_elements=[] if agrees else [own.date.isoformat()],
+                candidates=[candidate],
+            )
+        return None
+
+    def _reference_value(self, celex_id: str, fact_name: str) -> str | None:
+        """Return the ``value_md`` of a reference fact, or None when absent."""
+        rows = self.fact_repo.select_fact4celex(celex_id, fact_name)
+        return rows[0].value_md if rows else None
 
     def _verify_boolean(self, fact: Any) -> FactVerificationResult:
         """Verify a True/False fact by polarity, deterministic-marker-first.

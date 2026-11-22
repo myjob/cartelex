@@ -31,7 +31,7 @@
 # lock is installed (see the ARG below):
 #     requirements-ui.txt   no torch at all, 2.09GB image -- what compose builds
 #     requirements-cpu.txt  torch +cpu,      2.67GB image -- docker-compose.cpu.yml
-#     requirements.txt      torch +cu126,    8.48GB image -- bge on a GPU
+#     requirements.txt      torch +cu130,    ~8.5GB image -- bge on a GPU (pre-cu130 build measured 8.48GB)
 # The choice is not cosmetic: it decides which reranker *backends exist* in the
 # image. requirements-ui.txt omits torch and sentence-transformers entirely,
 # because BgeReranker is their only importer in the tree, so that image can run
@@ -39,12 +39,12 @@
 # rebuild rather than an env flip. That is the right trade for the chat service,
 # whose ui profile is FlashRank by default; build one of the other two when the
 # container must be free to load the cross-encoder.
-# The +cu126 wheels do run on a CPU-only host, so requirements-cpu.txt is a size
-# optimisation, not a correctness fix -- but it drops ~4.8GB of nvidia-*-cu12
+# The +cu130 wheels do run on a CPU-only host, so requirements-cpu.txt is a size
+# optimisation, not a correctness fix -- but it drops several GB of nvidia-*
 # libraries that such a host can never load.
 #
 # Why not a nvidia/cuda base image: torch's own wheels already vendor the whole
-# CUDA 12.6 runtime (the nvidia-*-cu12 packages pinned in requirements.txt,
+# CUDA 13.0 runtime (the nvidia-* / cuda-toolkit packages pinned in requirements.txt,
 # ~3GB of this image). A CUDA base would ship those libraries a second time for
 # no benefit -- the only thing that must come from outside is the *driver*, and
 # nvidia-container-toolkit injects that at run time. So this stays a slim
@@ -103,10 +103,10 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Dependencies first: this layer only rebuilds when the pin file changes.
-# Each lock carries its own PyTorch index URL near the top (cu126 for
+# Each lock carries its own PyTorch index URL near the top (cu130 for
 # requirements.txt, cpu for requirements-cpu.txt), so pip resolves the right
-# torch build with no flags here -- plain `torch` from PyPI is the CUDA 13
-# build, which dropped Pascal, and must never be what wins.
+# torch build with no flags here -- plain `torch` from PyPI is a different CUDA
+# build than the pinned one and must never be what wins.
 # Runtime locks only: dev tooling (ruff, pip-tools, playwright, build) lives in
 # requirements-dev.txt and must never be installed here -- this image serves the
 # FastAPI app and nothing else.

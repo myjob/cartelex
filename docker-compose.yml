@@ -12,6 +12,11 @@ services:
       # this path -- keep the postgres-docker project's postgres_db stopped.
       - ~/a/postgres-docker/pg-data:/var/lib/postgresql
     command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
+    # Come back after a power loss or daemon restart (exited 255 and stayed
+    # down on 20261117 and 20261121). Safe only while this is the sole service
+    # with a restart policy on the cluster above: postgres-docker's postgres_db
+    # mounts the same directory and must never get one.
+    restart: unless-stopped
     environment:
       # Credentials come from the OS environment (shell export or ./.env);
       # never literals in this file. These only take effect on initdb of an
@@ -259,9 +264,12 @@ services:
       - 'RERANKER_DEVICE=${RERANKER_DEVICE-auto}'
       # Only when UI_RERANKER_BACKEND=bge -- pairs scored per cross-encoder
       # forward pass, the knob that bounds peak
-      # VRAM without dropping candidates. 32 is the sentence-transformers
-      # default; drop to 8 if this service must share the card.
-      - 'RERANKER_BATCH_SIZE=${RERANKER_BATCH_SIZE-32}'
+      # VRAM without dropping candidates. 16 (not the sentence-transformers
+      # default 32) measured fastest; drop to 8 if this service must share the card.
+      - 'RERANKER_BATCH_SIZE=${RERANKER_BATCH_SIZE-16}'
+      # Only when UI_RERANKER_BACKEND=bge -- weight precision on CUDA: auto =
+      # float16 on a GPU, float32 on CPU (see settings.RERANKER_DTYPE).
+      - 'RERANKER_DTYPE=${RERANKER_DTYPE-auto}'
     # No GPU reservation, and no `deploy:` key at all. The image this service
     # builds has no torch in it, so there is nothing here that could use a
     # device -- and a reservation is not free to leave behind: it REQUIRES

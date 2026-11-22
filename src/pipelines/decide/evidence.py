@@ -43,19 +43,19 @@ _PLACE_LEAD = re.compile(r"(?:Brussels|Bruxelles|Brüssel)\s*,?\s*(?:le|den|the)
 _VOCABULARY_WORD = re.compile(r"[a-zà-ÿ]{6,}")
 _SUBJECT_CHARS = 120
 
-_MONTHS: dict[str, int] = {}
+MONTH_NUMBERS: dict[str, int] = {}
 for _names in (
     "january february march april may june july august september october november december",
     "janvier février mars avril mai juin juillet août septembre octobre novembre décembre",
     "januar februar märz april mai juni juli august september oktober november dezember",
 ):
     for _i, _name in enumerate(_names.split(), start=1):
-        _MONTHS.setdefault(_name, _i)
+        MONTH_NUMBERS.setdefault(_name, _i)
 _NUMERIC_DATE = re.compile(r"\b(\d{1,2})\s*[./]\s*(\d{1,2})\s*[./]\s*(\d{4})\b")
 _ROMAN_MONTHS = {r: i for i, r in enumerate("I II III IV V VI VII VIII IX X XI XII".split(), start=1)}
 _ROMAN_DATE = re.compile(r"\b(\d{1,2})\s*[./ ]\s*(XII|XI|X|IX|VIII|VII|VI|V|IV|III|II|I)\s*[./ ]\s*(\d{4})\b")
 _WRITTEN_DATE = re.compile(
-    r"\b(\d{1,2})(?:er|st|nd|rd|th)?\.?\s+(" + "|".join(sorted(_MONTHS, key=len, reverse=True)) + r")\s+(\d{4})\b",
+    r"\b(\d{1,2})(?:er|st|nd|rd|th)?\.?\s+(" + "|".join(sorted(MONTH_NUMBERS, key=len, reverse=True)) + r")\s+(\d{4})\b",
     re.I)
 
 
@@ -90,7 +90,7 @@ def _parse_date(m: re.Match[str]) -> dt.date | None:
     if month.isdigit():
         number = int(month)
     else:
-        number = _ROMAN_MONTHS.get(month) or _MONTHS.get(month.lower(), 0)
+        number = _ROMAN_MONTHS.get(month) or MONTH_NUMBERS.get(month.lower(), 0)
     try:
         return dt.date(int(year), number, int(day))
     except ValueError:
@@ -100,8 +100,18 @@ def _parse_date(m: re.Match[str]) -> dt.date | None:
 _DATE_PATTERNS = (_NUMERIC_DATE, _ROMAN_DATE, _WRITTEN_DATE)
 
 
-def _date_starting(text: str) -> dt.date | None:
-    """Return the date the text starts with (after whitespace), if any."""
+def date_starting(text: str) -> dt.date | None:
+    """Return the date the text starts with (after whitespace), if any.
+
+    Args:
+        text: Noise-stripped text; numeric (``31.03.2011``), Roman-month
+            (``31.III.2011``) and English/French/German written dates
+            (``31 March 2011``) are recognised. Years must have four digits,
+            so section numbers such as ``9.3.10.`` never parse.
+
+    Returns:
+        The date, or None when the text does not start with a valid date.
+    """
     head = text.lstrip()
     for pattern in _DATE_PATTERNS:
         m = pattern.match(head)
@@ -119,13 +129,29 @@ def _title_date(head: str, title_end: int) -> dt.date | None:
     """
     lead = _DATE_LEAD.match(head, title_end)
     if lead is not None:
-        own = _date_starting(head[lead.end():])
+        own = date_starting(head[lead.end():])
         if own is not None:
             return own
     place = None
     for m in _PLACE_LEAD.finditer(head, 0, title_end):
-        place = _date_starting(head[m.end():]) or place
+        place = date_starting(head[m.end():]) or place
     return place
+
+
+def title_date(head: str) -> dt.date | None:
+    """Return the date a decision states in its own title.
+
+    Args:
+        head: Noise-stripped beginning of the document.
+
+    Returns:
+        The date directly after "of/du/vom" following the decision title (the
+        rule that skips an amended decision's date), else the last
+        "Brussels, <date>" before the title, else None (also when no decision
+        title is found).
+    """
+    title = _DECISION_TITLE.search(head)
+    return _title_date(head, title.end()) if title is not None else None
 
 
 def _subject(block: str, case_end: int) -> str:

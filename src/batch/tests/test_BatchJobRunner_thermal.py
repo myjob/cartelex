@@ -15,7 +15,13 @@ from unittest import mock
 
 from batch import BatchJobRunner as runner_module
 from batch.BatchJobRunner import EXIT_CODE_THERMAL_ABORT, BatchJobRunner
-from config.ollama_health_gate import HealthCheckResult, ThermalAbort, ThermalReading
+from config.ollama_health_gate import (
+    HealthCheckResult,
+    OllamaHealthGate,
+    ProbeUnavailable,
+    ThermalAbort,
+    ThermalReading,
+)
 from config.settings import settings
 
 _CELEX_IDS = ["CELEX-A", "CELEX-B", "CELEX-C", "CELEX-D", "CELEX-E"]
@@ -200,6 +206,36 @@ class TestThermalAbortHandling(unittest.TestCase):
         code = self._run(gate)
 
         self.assertEqual(code, EXIT_CODE_THERMAL_ABORT)
+        self.assertEqual(self.fixture.processed, [])
+        self.assertEqual(self.fixture.resume_files()[0].read_text().split(), _CELEX_IDS)
+
+    def test_broken_probe_stops_the_run_before_it_starts(self) -> None:
+        """A refused SSH probe aborts the pre-flight at once (20261117 stall).
+
+        A real gate, not a mock: the stall was the gate serving its whole
+        cooldown budget for a failure that waiting cannot fix.
+        """
+        sleeps: list[float] = []
+
+        def refused() -> str:
+            raise ProbeUnavailable("Permission denied (publickey,password)")
+
+        gate = OllamaHealthGate(
+            ping_fn=lambda: True,
+            probe_fn=refused,
+            sleep_fn=sleeps.append,
+            alert_fn=lambda *a: None,
+            clock_controller=mock.MagicMock(),
+        )
+        with (
+            mock.patch.object(settings, "THERMAL_GATE_ENABLED", True),
+            mock.patch.object(settings, "THERMAL_GATE_STRICT", True),
+            mock.patch.object(settings, "THERMAL_MAX_COOLDOWN_CYCLES", 5),
+        ):
+            code = self._run(gate)
+
+        self.assertEqual(code, EXIT_CODE_THERMAL_ABORT)
+        self.assertEqual(sleeps, [])
         self.assertEqual(self.fixture.processed, [])
         self.assertEqual(self.fixture.resume_files()[0].read_text().split(), _CELEX_IDS)
 

@@ -5999,9 +5999,13 @@ select * from celex_facts.facts
 where 1=1
 -- and celex_id in ('39780_3528_6','CELEX-31976D0915','CCELEX-31989D0408')
 -- and name like '%decision%'
+and name like '%service%'
 and name = 'case_commission_decision'
 and not(value_md in ('True','False','NA'))
 
+
+
+-- delete from celex_facts.facts where 1=1 and name like '%service%'
 
 ------------
 -- rare values
@@ -6011,4 +6015,28 @@ where name = 'case_commission_decision'
 GROUP BY value_md
 ORDER BY n ASC
 LIMIT 50;
+
+select * from celex_facts.facts
+where 1=1
+-- and celex_id in ('39780_3528_6','CELEX-31976D0915','CCELEX-31989D0408')
+-- and name like '%decision%'
+and name like '%summary%'
+
+
+select * from celex_facts.fact_ingestion_audit_trail_vw
+where 1=1
+and target_fact_name like '%summary%'
+
+
+select * from celex_facts.facts
+where 1=1
+and celex_id = 'CELEX-31978D0163'
+
+
+
+select * from celex_facts.fact_ingestion_audit_trail_vw
+where 1=1
+and celex_id = 'CELEX-31978D0163'
+order by inserted_update_at desc 
+
 

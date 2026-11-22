@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "celex-facts"
-version = "0.2.1"
+version = "0.2.0"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README.md"
@@ -20,13 +20,13 @@ classifiers = [
 # `gpu` / `cpu` extra below, so each lock is compiled against the matching
 # PyTorch index. Regenerate all three with:
 #     .venv/bin/pip-compile --extra=gpu \
-#         --extra-index-url=https://download.pytorch.org/whl/cu126 \
+#         --extra-index-url=https://download.pytorch.org/whl/cu130 \
 #         --output-file=requirements.txt pyproject.toml
 #     .venv/bin/pip-compile --extra=cpu \
 #         --extra-index-url=https://download.pytorch.org/whl/cpu \
 #         --output-file=requirements-cpu.txt pyproject.toml
 #     .venv/bin/pip-compile --extra=dev --extra=gpu \
-#         --extra-index-url=https://download.pytorch.org/whl/cu126 \
+#         --extra-index-url=https://download.pytorch.org/whl/cu130 \
 #         --output-file=requirements-dev.txt pyproject.toml
 #     .venv/bin/pip-compile --output-file=requirements-ui.txt pyproject.toml
 #
@@ -42,7 +42,7 @@ classifiers = [
 # seed it first so only torch moves:
 #     cp requirements.txt requirements-cpu.txt   # then run the --extra=cpu command
 # The two locks must stay identical apart from torch and the nvidia-*/triton
-# packages that only the cu126 build pulls in.
+# packages that only the cu130 build pulls in.
 dependencies = [
     # --- LLM / extraction ---------------------------------------------------
     "dspy>=3.1.3,<4",
@@ -112,16 +112,19 @@ dependencies = [
 # Torch build selection -- exactly one of these belongs in any given lock.
 # The `==` pins are the only ones left in this file, and they are deliberate.
 #
-# Plain `torch` on PyPI is now the CUDA 13 build, which dropped Pascal (sm_6x);
-# the workstation GPU is sm_61, so that build loads but every kernel launch
-# fails. The `+cu126` wheel carries sm_50..sm_90 and lives only on the PyTorch
-# index, so requirements.txt is compiled with
-#   --extra-index-url https://download.pytorch.org/whl/cu126
-# A range does not work here: with both indexes visible the resolver picks
-# PyPI's plain 2.13.0 over 2.13.0+cu126.
+# The workstation GPU is an RTX 5070 (Blackwell, sm_120) on driver 580, which
+# runs CUDA <= 13.0. The `+cu130` wheel carries sm_75..sm_120; the former
+# `+cu126` pin stops at sm_90, so on this card every kernel launch failed with
+# cudaErrorNoKernelImageForDevice and the reranker fell back to CPU (it was
+# chosen for the previous sm_61 GTX 1060, which CUDA 13 no longer supports).
+# Do not move to cu132 without a driver >= the CUDA 13.2 minimum. The wheel
+# lives only on the PyTorch index, so requirements.txt is compiled with
+#   --extra-index-url https://download.pytorch.org/whl/cu130
+# A range does not work here: with both indexes visible the resolver may pick
+# PyPI's plain 2.13.0 over the explicitly selected local-version build.
 #
 # `cpu` exists for hosts with no GPU (and no nvidia-container-toolkit). The
-# +cu126 wheels do run on CPU, they just drag ~4.8GB of nvidia-*-cu12 CUDA
+# +cu130 wheels do run on CPU, they just drag several GB of nvidia-* CUDA
 # libraries that are never loaded there; requirements-cpu.txt drops them and
 # takes the backend image from ~8.25GB to ~3.5GB. See docker-compose.cpu.yml.
 #
@@ -133,7 +136,7 @@ dependencies = [
 # drag in the wrong (PyPI CUDA-13) torch on its own, and there is no reason to
 # install one without the other -- nothing else in the tree imports either.
 # Omitting both extras yields the FlashRank-only tree in requirements-ui.txt.
-gpu = ["torch==2.13.0+cu126", "sentence-transformers>=5.6,<6"]
+gpu = ["torch==2.13.0+cu130", "sentence-transformers>=5.6,<6"]
 cpu = ["torch==2.13.0+cpu", "sentence-transformers>=5.6,<6"]
 dev = [
     "build>=1.4,<2",

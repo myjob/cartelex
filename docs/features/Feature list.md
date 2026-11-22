@@ -1,4 +1,7 @@
 # epics
+#vLLM
+#finetune
+#golden_set 
 #corp_index #corp_index_translate #corp_detail_microservice
 #entity_graph
 #knowledge_qa
@@ -8,7 +11,10 @@
 #rclone_GDrive
 
 # features
-- [ ] Main_main_pipeline
+- [ ]  **vLLM on an NVIDIA DGX Spark**
+- [ ] **6. Fine-tune a smaller model (moderate effort, accuracy can be equal or better).** Now to your actual question. You're in an unusually good position for distillation. Your pipeline has already produced facts across ~740 documents, and those facts passed a hard verification gate. That's a large training set of verified (chunk, output) pairs, far more than the ~50 examples MIPROv2 works from. A LoRA fine-tune of a Qwen3-4B or 8B on those pairs gives you  A model that knows your schema and taxonomy without few-shot demos, so prompts drop from ~1.5K to ~500 tokens.
+- [x] #golden_set feature 20261115: human index to facts reconciliation: `batch.Main_recon_human_index` compares columns Z, AD, AO and firms of the case index workbook with the extracted facts into `celex_facts.human_index_recon`, see [human_index2facts_recon](../human_index2facts_recon.md). Code and tests done; table not yet created and loaded (run book on top of ISSUES.md).
+- [x] Main_main_pipeline 20261108: `batch.Main_Main_Pipeline`, see [Design Main_Main_Pipeline](../Design%20Main_Main_Pipeline.md)
 - [x] #doc_download feature 20261025: translate service for non-EN decision documents: decisions without an EN version are downloaded in the original language (mostly old OCR-scanned PDFs, typically DE/FR); after MinerU, translate the markdown to EN before the ingestion batches run; set `language_translated` in master_doc_descriptors.json and document_registry. `src/pipelines/translate/` is still empty.
 - [ ] #doc_download feature 20261025: post-MinerU language decision: for decisions whose candidate PDF URLs carry no language marker (ec.europa.eu dec_docs, db-comp.eu; ~370 decisions in filtered_final_manifest.xlsx), detect the language on the MinerU markdown, pick the EN candidate as the decision's document if one exists, otherwise route the original to the translate service.
 - [x] fact extractor language of doc chunks

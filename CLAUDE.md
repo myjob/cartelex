@@ -7,8 +7,8 @@ dont worry about the Obsidian vault in the project but use it as knowledge:
 - user may edit docs and source during your activities -- only raise any updates if they cause conflicts with your work
 
 ## infrastructure
-- any inference task goes either on the remote Ollama server deployed on NVIDIA Spark DGX or any configured external LLM -- never on the local GeForce GPU with small memory and outdated driver support
-- GeForce GPU can be used for cross ranker such as BGE rather than CPU in Docker and local runtime.
+- any inference task goes either on the remote Ollama server deployed on NVIDIA Spark DGX or any configured external LLM -- never on the local GeForce GPU (RTX 5070, sm_120, 12 GB, driver 580 / CUDA 13.0 -- too small for the LLMs)
+- GeForce GPU can be used for cross ranker such as BGE rather than CPU in Docker and local runtime. It needs `torch==2.13.0+cu130` (pinned in `requirements.txt`); `+cu126` has no sm_120 kernels.
 
 ## File Access
 Anything under these folders may be read and written by the Claude agent without asking:

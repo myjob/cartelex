@@ -225,19 +225,21 @@ class NaceCodeSignature(dspy.Signature):
 
 
 class CaseSummaryChapters(BaseModel):
-    """Chapters of a case summary; each names the context facts it draws from.
+    """The chapters of a case summary the LLM writes; each names its source facts.
 
-    The source fact names must stay in step with the ``context_facts`` list of
-    the ``case_summary`` entry in ``FACT_EXTRACTOR.yaml``.
+    Only the generated and synthesis chapters of ``case_summary_layout.CHAPTERS``:
+    the chapters that are copies of a fact (cartel period, fines, commissioner,
+    ...) are rendered by code, never by the LLM (ISSUES #355). The source fact
+    names must stay in step with ``CHAPTERS`` and with the ``context_facts`` of
+    ``case_summary`` in ``FACT_EXTRACTOR.yaml``.
     """
 
-    celex_case_id: str = Field(description="CELEX and CASE ID of the case, from the 'celex_case_id' fact")
     case_title: str = Field(
         description="Title of the case from the 'case_title' fact, cut the leading and trailing and  brackets if present; replace the comma with em dash "
     )
-    overview: str = Field(description="Overview of the case")
+    overview: str = Field(description="Overview of the case, from all the facts in the context")
     industry: str = Field(
-        description="Industry context, from the 'companies_industry', 'products' and 'services' facts"
+        description="Industry context, from the 'companies_industry' and 'products' facts (products covers goods and services)"
     )
     oecd_nace: str = Field(
         description="OECD & NACE classifications, from the 'OECD_sector', 'NACE_group_code' and 'NACE_class_code' facts"
@@ -252,13 +254,6 @@ class CaseSummaryChapters(BaseModel):
         description=(
             "Relevant market: geography ('market_geographical', 'market_outside_eu'), "
             "structure ('market_oligopoly') and turbulence ('market_turbulence')"
-        )
-    )
-    cartel_period: str = Field(
-        description=(
-            "Cartel period start and end date. "
-            "MUST be taken verbatim from the 'cartel_period' fact if present in the context. "
-            "Do not derive or infer this value from other sources."
         )
     )
     key_timeline: str = Field(
@@ -283,9 +278,6 @@ class CaseSummaryChapters(BaseModel):
             "and 'infringement_subcategory_vertical_restraints' facts"
         )
     )
-    infringement_gravity: str = Field(
-        description="Gravity of the infringement; MUST be taken verbatim from the 'infringement_gravity' fact if present in the context."
-    )
     exemption: str = Field(
         description="Exemption sought or granted, from the 'exemption_case' and 'exemption_applicants' facts. Preserve markdown lists if present."
     )
@@ -295,18 +287,8 @@ class CaseSummaryChapters(BaseModel):
             "'leniency_applicants', 'leniency_granted' and 'leniency_rejected' facts. Preserve markdown lists and tables if present."
         )
     )
-    fines: str = Field(
-        description="Fines imposed, from the 'fines' fact. CRITICAL: You must exactly preserve any markdown tables from the context."
-    )
     remedies: str = Field(
         description="Remedies and orders to terminate the infringement, from the 'decision_remedies' fact"
-    )
-    company_recidivism: str = Field(description="Companies with prior infringement history (recidivism). MUST be taken verbatim from the 'company_recidivism' fact if present in the context. ")
-    case_commission_info_request: str = Field(description="commission requested info; MUST be taken verbatim from the 'case_commission_info_request' fact if present in the context. ")
-    case_commission_no_action: str = Field(description="commission has taken no action; MUST be taken verbatim from the 'case_commission_no_action' fact if present in the context. ")
-    case_commission_decision: str = Field(description="commission has taken a decision; MUST be taken verbatim from the 'case_commission_decision' fact if present in the context. ")
-    commissioner: str = Field(
-        description="Commissioner who signed the decision; MUST be taken verbatim from the 'case_commissioner' fact if present in the context."
     )
     courts: str = Field(
         description="Courts involved and their rulings, from the 'is_court_involved' and 'court_list' facts. Preserve markdown tables if present."
@@ -317,7 +299,7 @@ class CaseSummaryChapters(BaseModel):
             "'case_is_landmark_in_book', 'case_infringement_type_book' and 'case_infringement_book' facts"
         )
     )
-    outcome: str = Field(description="Outcome of the case")
+    outcome: str = Field(description="Outcome of the case, from all the facts in the context")
 
     @model_validator(mode="before")
     @classmethod
@@ -329,7 +311,7 @@ class CaseSummaryChapters(BaseModel):
         runs before field-type validation and joins any list with newlines so
         that Pydantic's ``str`` type check always succeeds.
 
-        With 25 chapters the LLM also drops one now and then (observed:
+        With 16 chapters the LLM still drops one now and then (observed:
         ``remedies`` on 39824_6567_14 with qwen3-coder:30b), which used to fail
         the whole summary. An omitted chapter becomes ``'NA'`` -- the value the
         signature prescribes for a chapter without facts -- and is logged. The
@@ -380,6 +362,56 @@ class FactCaseTitleSignature(dspy.Signature):
 
     context = dspy.InputField(desc="The document text (first page of the case).")
     output: FactCaseTitleOutput = dspy.OutputField(desc="The extracted case title row.")
+
+
+class NaceClassPick(BaseModel):
+    nace_class_code: str = Field(
+        description="The chosen NACE class code exactly as listed among the candidates, e.g. '51.21'."
+    )
+
+
+class NaceClassPickSignature(dspy.Signature):
+    """
+    Choose the NACE Rev. 2.1 class describing the economic activity of the market
+    concerned by an EU competition decision. NACE classifies activities: goods
+    map to the activity producing them (manufacturing), services to the activity
+    providing them (transport, finance, wholesale, ...). Pick exactly one of the
+    candidates.
+    """
+
+    case_title = dspy.InputField(desc="Case id and title of the decision; may be empty.")
+    products = dspy.InputField(desc="Goods or services concerned by the infringement.")
+    candidates = dspy.InputField(
+        desc="Candidate NACE classes, one per line as 'code: title (group: group title)'."
+    )
+    output: NaceClassPick = dspy.OutputField(desc="The single best fitting candidate.")
+
+class FactFromTitleSignature(dspy.Signature):
+    """
+    Infer a fact from the title of an EU competition decision when the decision
+    text yielded nothing. A product is any good OR service traded on the
+    relevant product market, in the sense of the CPA/NACE classifications.
+    Titles usually name that market, either as goods ('Industrial bags',
+    'Car glass', 'Gas insulated switchgear') or as services ('Airfreight' ->
+    'air freight services', 'Euro Interest Rate Derivatives').
+    When the title names only a company (e.g. 'MasterCard II'), return the
+    goods or services that company is known to provide on the market concerned
+    (e.g. 'card payment scheme services'). Ignore case numbers and procedural
+    words such as 'amendment' or 'breach of seal'. Return an empty
+    extracted_facts list if neither a market nor a company is named.
+    """
+
+    case_title = dspy.InputField(desc="The stored case id and title of the decision.")
+    target_fact_name = dspy.InputField(
+        desc="The data category to infer from the title (e.g. 'products')."
+    )
+    schema_description = dspy.InputField(
+        desc="Use STRICTLY EXCLUSIVELY these exact keys for each dict (e.g. 'products'). Do NOT add any extra keys."
+    )
+    question = dspy.InputField(desc="The original extraction question for the fact.")
+    output: ExtractionResult = dspy.OutputField(
+        desc="Structured result with one dict per value named in the title, or an empty extracted_facts list."
+    )
 
 
 # --- HeidelTime Event Extraction ---
@@ -844,6 +876,20 @@ class RetrievalStep(BaseModel):
         ),
     )
     rationale: str = Field(description="Why this step is needed for answering the question.")
+
+    @model_validator(mode="before")
+    @classmethod
+    def _fill_unused_query(cls, values: Any) -> Any:
+        """Accept a ``case_facts`` step without ``query``: the tool never reads it.
+
+        ``case_facts`` looks a case up by ``case_id`` alone, and the planner LLM
+        sometimes leaves the query out for it, which used to fail the whole
+        plan. The field stays required in the JSON schema the LLM sees; only
+        this tool's omission is filled, every other tool still needs a query.
+        """
+        if isinstance(values, dict) and values.get("tool") == "case_facts" and values.get("query") is None:
+            return {**values, "query": ""}
+        return values
 
 
 class RetrievalPlan(BaseModel):

@@ -28,6 +28,19 @@ def _lexical_overlap(query: str, passage: str) -> float:
     return len(query_terms & passage_terms) / len(query_terms)
 
 
+class FakeTransformerModule:
+    """Stand-in for the transformers module a CrossEncoder wraps (``.model``)."""
+
+    def __init__(self):
+        # Every dtype the reranker casts the weights to, in order.
+        self.cast_dtypes: list[torch.dtype] = []
+
+    def to(self, dtype):
+        """Record the cast and return self, mirroring ``nn.Module.to``."""
+        self.cast_dtypes.append(dtype)
+        return self
+
+
 class FakeCrossEncoder:
     """Stand-in for sentence-transformers CrossEncoder at the model boundary."""
 
@@ -35,6 +48,7 @@ class FakeCrossEncoder:
         # Accept model_name_or_path, max_length, cache_folder, activation_fn, ...
         self.init_args = args
         self.init_kwargs = kwargs
+        self.model = FakeTransformerModule()
         # One entry per predict() call, so a test can assert what the reranker
         # forwards (batch_size in particular) without patching the method.
         self.predict_kwargs: list[dict] = []
@@ -743,3 +757,92 @@ class TestBgeRerankerOfflineResolution(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestBgeRerankerDtype(unittest.TestCase):
+    """RERANKER_DTYPE: float16 on CUDA under "auto", float32 on CPU always."""
+
+    def setUp(self):
+        from extract.rag.ranker.bge_reranker import BgeReranker
+
+        self.reranker_cls = BgeReranker
+
+    def _build(self, **kwargs):
+        with patch("extract.rag.ranker.bge_reranker.CrossEncoder", FakeCrossEncoder):
+            return self.reranker_cls(**kwargs)
+
+    def test_auto_on_cuda_casts_to_float16(self):
+        ranker = self._build(device="cuda", dtype="auto")
+        self.assertEqual(ranker.dtype, "float16")
+        self.assertEqual(ranker.model.model.cast_dtypes, [torch.float16])
+
+    def test_auto_on_cpu_stays_float32_without_cast(self):
+        ranker = self._build(device="cpu", dtype="auto")
+        self.assertEqual(ranker.dtype, "float32")
+        self.assertEqual(ranker.model.model.cast_dtypes, [])
+
+    def test_explicit_bfloat16_on_cuda(self):
+        ranker = self._build(device="cuda", dtype="bfloat16")
+        self.assertEqual(ranker.dtype, "bfloat16")
+        self.assertEqual(ranker.model.model.cast_dtypes, [torch.bfloat16])
+
+    def test_explicit_float32_on_cuda_is_not_cast(self):
+        ranker = self._build(device="cuda", dtype="float32")
+        self.assertEqual(ranker.dtype, "float32")
+        self.assertEqual(ranker.model.model.cast_dtypes, [])
+
+    def test_half_precision_is_ignored_on_cpu(self):
+        ranker = self._build(device="cpu", dtype="float16")
+        self.assertEqual(ranker.dtype, "float32")
+        self.assertEqual(ranker.model.model.cast_dtypes, [])
+
+    def test_dtype_name_is_case_insensitive(self):
+        self.assertEqual(self._build(device="cuda", dtype=" Float16 ").dtype, "float16")
+
+    def test_unknown_dtype_raises(self):
+        with self.assertRaises(ValueError):
+            self._build(device="cuda", dtype="int8")
+
+    def test_dtype_defaults_to_settings(self):
+        with patch("extract.rag.ranker.bge_reranker.settings.RERANKER_DTYPE", "bfloat16"):
+            self.assertEqual(self._build(device="cuda").dtype, "bfloat16")
+
+    def test_cast_precedes_probe_so_half_failure_falls_back_to_cpu(self):
+        """A card that cannot run float16 must fail in the probe, then use CPU."""
+        attempted_devices: list[str | None] = []
+        factory = _cross_encoder_failing_on(
+            "cuda",
+            CUDA_CAPABILITY_ERROR,
+            at="predict",
+            attempted_devices=attempted_devices,
+        )
+        with patch("extract.rag.ranker.bge_reranker.CrossEncoder", factory):
+            ranker = self.reranker_cls(device="cuda", dtype="auto")
+
+        self.assertEqual(attempted_devices, ["cuda", "cpu"])
+        self.assertEqual(ranker.dtype, "float32")
+        self.assertEqual(ranker.model.model.cast_dtypes, [])
+
+    def test_runtime_downgrade_resets_dtype_to_float32(self):
+        attempted_devices: list[str | None] = []
+        factory = _cross_encoder_failing_after_probe(
+            "cuda",
+            torch.OutOfMemoryError("CUDA out of memory. Tried to allocate 232.00 MiB"),
+            attempted_devices=attempted_devices,
+        )
+        chunk = ChunkVo(
+            id="c1",
+            celex_id="32003D0570",
+            chunk="wholesale network access",
+            origin="test_mock",
+            similarity=0.5,
+            doc_pos=1,
+        )
+        with patch("extract.rag.ranker.bge_reranker.CrossEncoder", factory):
+            ranker = self.reranker_cls(device="cuda", dtype="auto")
+            self.assertEqual(ranker.dtype, "float16")
+            ranker.rank_chunkvo("wholesale network access", [chunk])
+
+        self.assertEqual(ranker.resolved_device, "cpu")
+        self.assertEqual(ranker.dtype, "float32")
+        self.assertEqual(ranker.model.model.cast_dtypes, [])

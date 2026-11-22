@@ -5,6 +5,7 @@ Run with:
     PYTHONPATH=src .venv/bin/python -m pytest \
         src/pipelines/rag/pgvector/tests/test_fact_repository.py -v
 """
+import datetime
 import json
 import uuid
 import unittest
@@ -478,3 +479,115 @@ class TestUpsertFactDocumentLineage(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestUpsertFactValueTimestamp(unittest.TestCase):
+    """``facts.created_at`` records the last value change, not the last write."""
+
+    _STAMP = datetime.datetime(2026, 1, 1)
+
+    def _survivor(self) -> MagicMock:
+        return MagicMock(id=uuid.uuid4(), value_md="md", value_json="[]", created_at=self._STAMP)
+
+    def test_unchanged_value_keeps_created_at(self) -> None:
+        survivor = self._survivor()
+        repo, _, _ = _repo(rows=[survivor], column_present=False)
+        repo.upsert_fact("C1", "fines", "md", "[]")
+        self.assertEqual(survivor.created_at, self._STAMP)
+
+    def test_changed_value_bumps_created_at(self) -> None:
+        survivor = self._survivor()
+        repo, _, _ = _repo(rows=[survivor], column_present=False)
+        repo.upsert_fact("C1", "fines", "md2", "[]")
+        self.assertGreater(survivor.created_at, self._STAMP)
+
+    def test_changed_json_only_bumps_created_at(self) -> None:
+        survivor = self._survivor()
+        repo, _, _ = _repo(rows=[survivor], column_present=False)
+        repo.upsert_fact("C1", "fines", "md", '[{"value": "md"}]')
+        self.assertGreater(survivor.created_at, self._STAMP)
+
+    def test_unchanged_value_still_writes_references(self) -> None:
+        survivor = self._survivor()
+        repo, _, _ = _repo(rows=[survivor], column_present=False)
+        repo.upsert_fact("C1", "fines", "md", "[]", references_doc_json={"chunks": [1]})
+        self.assertEqual(survivor.references_doc_json, {"chunks": [1]})
+
+
+class _TxEngine:
+    """Engine stand-in handing out one connection whose transaction is rolled back."""
+
+    def __init__(self, conn: object) -> None:
+        self._conn = conn
+
+    def connect(self):
+        from contextlib import nullcontext
+
+        return nullcontext(self._conn)
+
+
+class TestCrossDocumentStalenessLive(unittest.TestCase):
+    """An unchanged re-extraction must end cross-document staleness (no LLM loop)."""
+
+    def setUp(self) -> None:
+        try:
+            self.engine = make_engine()
+            self.conn = self.engine.connect()
+        except Exception as exc:  # noqa: BLE001
+            raise unittest.SkipTest(f"database unreachable: {exc}") from exc
+        self.tx = self.conn.begin()
+        self.repo = FactRepository.__new__(FactRepository)
+        self.repo.engine = _TxEngine(self.conn)
+
+    def tearDown(self) -> None:
+        self.tx.rollback()
+        self.conn.close()
+        self.engine.dispose()
+
+    def _fact(self, celex: str, name: str, at: datetime.datetime) -> uuid.UUID:
+        fact_id = uuid.uuid4()
+        self.conn.execute(
+            text("""INSERT INTO celex_facts.facts (id, celex_id, name, value_md, value_json, created_at)
+                    VALUES (:id, :c, :n, 'v', '[]', :at)"""),
+            {"id": fact_id, "c": celex, "n": name, "at": at},
+        )
+        return fact_id
+
+    def _link(self, fact_id: uuid.UUID, source_fact_id: uuid.UUID) -> None:
+        source_id = uuid.uuid4()
+        self.conn.execute(
+            text("""INSERT INTO celex_facts.fact_source_registry (source_id, source_type, source_fact_id)
+                    VALUES (:s, 'fact', :f)"""),
+            {"s": source_id, "f": source_fact_id},
+        )
+        self.conn.execute(
+            text("""INSERT INTO celex_facts.fact_source_link (fact_id, source_id, extraction_method)
+                    VALUES (:f, :s, 'test')"""),
+            {"f": fact_id, "s": source_id},
+        )
+
+    def _attempt(self, celex: str, name: str, at: datetime.datetime, success: bool) -> None:
+        self.conn.execute(
+            text("""INSERT INTO celex_facts.fact_ingestion_audit_trail (celex_id, target_fact_name, success, created_at)
+                    VALUES (:c, :n, :s, :at)"""),
+            {"c": celex, "n": name, "s": success, "at": at},
+        )
+
+    def _setup_pair(self) -> None:
+        dependent = self._fact("TEST-XDOC-A", "cartel_period", datetime.datetime(2026, 1, 1))
+        source = self._fact("TEST-XDOC-B", "cartel_period", datetime.datetime(2026, 2, 1))
+        self._link(dependent, source)
+
+    def test_newer_source_is_reported(self) -> None:
+        self._setup_pair()
+        self.assertEqual(self.repo.select_newer_cross_document_sources("TEST-XDOC-A", "cartel_period"), ["TEST-XDOC-B"])
+
+    def test_unchanged_reextraction_after_source_change_ends_staleness(self) -> None:
+        self._setup_pair()
+        self._attempt("TEST-XDOC-A", "cartel_period", datetime.datetime(2026, 3, 1), success=True)
+        self.assertEqual(self.repo.select_newer_cross_document_sources("TEST-XDOC-A", "cartel_period"), [])
+
+    def test_failed_reextraction_keeps_staleness(self) -> None:
+        self._setup_pair()
+        self._attempt("TEST-XDOC-A", "cartel_period", datetime.datetime(2026, 3, 1), success=False)
+        self.assertEqual(self.repo.select_newer_cross_document_sources("TEST-XDOC-A", "cartel_period"), ["TEST-XDOC-B"])

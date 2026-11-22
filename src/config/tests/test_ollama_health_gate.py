@@ -290,6 +290,42 @@ class TestUnreadableTemperature(_QuietTestCase):
         self.assertIn("no sensor", result.reason)
 
 
+class TestUnrecoverableProbe(_QuietTestCase):
+    """A probe that cannot be read stops the run at once, never cools down."""
+
+    def test_unreadable_probe_aborts_without_cooldown(self) -> None:
+        """A refused SSH key is not cured by waiting (the 20261117 stall)."""
+        harness = _GateHarness([])
+        harness.probe_fn = mock.Mock(side_effect=ProbeUnavailable("Permission denied (publickey)"))
+        with _pinned(THERMAL_GATE_STRICT=True, THERMAL_MAX_COOLDOWN_CYCLES=5):
+            with self.assertRaises(ThermalAbort) as caught:
+                harness.build().check_or_wait()
+
+        self.assertEqual(harness.sleeps, [])
+        self.assertEqual(harness.alerts, [])
+        self.assertFalse(caught.exception.result.recoverable)
+        self.assertIn("--no-thermal-gate", caught.exception.result.reason)
+
+    def test_bad_payload_aborts_without_cooldown(self) -> None:
+        """A non-JSON answer is a broken probe, not a hot box."""
+        harness = _GateHarness(["bash: python3: command not found"])
+        with _pinned(THERMAL_GATE_STRICT=True):
+            with self.assertRaises(ThermalAbort):
+                harness.build().check_or_wait()
+
+        self.assertEqual(harness.sleeps, [])
+
+    def test_heat_and_dead_server_stay_recoverable(self) -> None:
+        """Only probe failures skip the cooldowns."""
+        hot = _GateHarness([_payload(95.0)])
+        with _pinned():
+            self.assertTrue(hot.build().read().recoverable)
+        dead = _GateHarness([_payload(40.0)])
+        dead.ping = False
+        with _pinned():
+            self.assertTrue(dead.build().read().recoverable)
+
+
 class TestCooldownAndAbort(_QuietTestCase):
     """The throttle-then-stop behaviour that protects the box."""
 
